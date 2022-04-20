@@ -154,7 +154,7 @@ const configure = {
   
            for(let i = 0; i < allowed_values.values.length; i++) { 
              if(typeof(allowed_values.values[i]) === 'object') {
-              if(JSON.stringify(allowed_values.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLocaleLowerCase().trim()) { 
+              if(JSON.stringify(allowed_values.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
                 match = true;
                 break;
               }
