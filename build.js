@@ -2,9 +2,9 @@
 /*
   Author: Alexander Eatman 
   Year: 2022
-  Description: Checks if the return values of functions matches a regular expression, input type and input value each or seperately
+  Description: 
+  Checks if return values match regular expressions, input types and input values each or seperately
   version 1
-  version 2 will have a scanner.
 
   @param {single_file_to_test}: one file to test that you choose. 
   @param {test_all}: whether to test all files or not. 
