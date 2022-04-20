@@ -5,7 +5,7 @@
   Description: Checks if the return values of functions matches a regular expression, input type and input value each or seperately
 
   @param {configure}: the only thing the dev needs to worry about. 
-  @param {directories}: the files you wish to search functions for
+  @param {directories}: the files you wish to search functions for add to functions folder
   @param {find}: find function, create file if file and function do not exist
   @param {scan}: scans for files which starting with the inside and compares with the outside.
   @param {presets}: when building files, decide whether you want to overwrite the original 
@@ -78,7 +78,9 @@ const configure = {
         developer_input.allowed_values, 
         developer_input.regex_set, 
         developer_input.function_called, 
-        single_file_to_test
+        single_file_to_test, 
+        developer_input.function_name, 
+        developer_input.directory
       );
       
     break;
@@ -100,7 +102,9 @@ const configure = {
             developer_input.allowed_values, 
             developer_input.regex_set, 
             developer_input.function_called, 
-            `function_index_return_tests-${i}`
+            `/functions/function_index_return_tests-${i}`,
+            developer_input.function_name, 
+            developer_input.directory
           );
           
           i++;
@@ -132,7 +136,7 @@ const configure = {
     check tests
   */
           
-  function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name) {
+  function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, directory) {
   
     for(let i = 0; i < tests.length; i++) { 
   
@@ -259,6 +263,9 @@ const configure = {
       }
   
       if(error_count > 0) { 
+        err_object.function_name = function_name;
+        err_object.directory = directory;
+        err_object.file_name = file_name
         error_sets.push(err_object);
       }
   
