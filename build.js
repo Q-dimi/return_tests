@@ -43,9 +43,42 @@ const configure = {
   }
   
   var file = require('file-system');
-  
+  var all_files = ``;
+  var all_functions = [];
+
+  find();
+  scan();
+
   function find() { 
-    //find and append to end if it does not exist... (access, iterate W get type and clone then make file with fname and directory)
+
+    for(let i = 0; i < configure.directories.length; i++) { 
+      file.readFile(configure.directories[i], 'utf8', function(err, data) { 
+        if(err) { 
+          console.log('There was an error reading this document');
+        } else { 
+          all_files += data.trim();
+        } 
+      });
+
+      //yeah, im not really sure. ill have to figure out something or else just get rid of this part and let the developer insert files manually which would probably be better
+      var current_function_string = '';
+      var bracket_count_left = 0;
+      var bracket_count_right = 0;
+      var regular_functions = all_files.split('function');
+      var arrow_functions = all_files.split('=>');
+
+      for(let i = 0; i < regular_functions.length; i++) { 
+
+      }
+
+      for(let i = 0; i < arrow_functions.length; i++) { 
+
+      }
+
+      var create = new Function();
+
+    }
+
   } 
   
   function scan() {
@@ -53,14 +86,14 @@ const configure = {
    }
   
   /*
-    @param {developer_input}: developers input data ***
-    @param {tests}: array of objects to run tests ***
-    @param {allowed_types}: allowed return types ***
-    @param {allowed_values}: allowed return values ***
-    @param {regex_set}: allowed regular expressions ***
-    @param {function_called}: function passed from client with parameters passed via dev ***
+    @param {developer_input}: imported data
+    @param {tests}: array of objects to run tests
+    @param {allowed_types}: allowed return types
+    @param {allowed_values}: allowed return values
+    @param {regex_set}: allowed regular expressions
+    @param {function_called}: function passed 
     @param {test_all}: boolean deciding ro test one or all file
-    @param {single_file_to_test}: If test all is off, . 
+    @param {single_file_to_test}: file developer chooses to test 
   */
   
   const test_all = configure.test_all;

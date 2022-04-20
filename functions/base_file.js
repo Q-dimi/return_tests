@@ -16,37 +16,24 @@
 
 module.exports.developer_input =  { 
 
-    tests: [  
-      { index_of_set: 1, a: 2, b: 5 },
-      { index_of_set: 2, a: 7, b: 5},
-      { index_of_set: 3, a: 'hellow', b: 5},
-      { index_of_set: 4, a: 2, b: 5 },
-      { index_of_set: 5, a: 2, b: 3 }
-    ],
+    tests: [],
       
     allowed_types: { 
       on: true, 
-      values: ['number', 'BigInt'] 
+      values: [] 
     },  
       
     allowed_values: { 
       on: true, 
-      values: [7, 12] 
+      values: [] 
     },
       
     regex_set: { 
-      on: false, 
+      on: true, 
       values: [] 
     }, 
       
-    function_called: 
-       function (a, b) {
-        try { 
-          return a + b; 
-        } catch(err) {
-          return err; 
-        } 
-      },
+    function_called: function() {},
 
     function_type: null,
     
