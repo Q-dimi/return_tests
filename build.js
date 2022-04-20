@@ -50,19 +50,16 @@ const configure = {
       
     case false: 
       
-      const developer_input = require(single_file_to_test);
-      
-      const tests = developer_input.tests;
-      
-      const allowed_types = developer_input.allowed_types; 
-      
-      const allowed_values = developer_input.allowed_values; 
-      
-      const regex_set = developer_input.regex_set; 
-      
-      const function_called = developer_input.function_called;
-      
-      run_tests(tests, allowed_types, allowed_values, regex_set, function_called, single_file_to_test);
+      var developer_input = require(single_file_to_test);
+                              
+      run_tests(
+        developer_input.tests, 
+        developer_input.allowed_types, 
+        developer_input.allowed_values, 
+        developer_input.regex_set, 
+        developer_input.function_called, 
+        single_file_to_test
+      );
       
     break;
       
@@ -75,7 +72,7 @@ const configure = {
         
         try { 
           
-          const developer_input = require(`/function_index_return_tests-${i}`);
+          var developer_input = require(`/function_index_return_tests-${i}`);
           
           run_tests(
             developer_input.tests, 
