@@ -8,7 +8,7 @@
 
   @param {single_file_to_test}: one file to test that you choose. 
   @param {test_all}: whether to test all files or not. 
-  @param {modules}: if all files, get all files and test them. 
+  @param {modules}: all the files which have a function to test. 
 
   */
 
