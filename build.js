@@ -111,7 +111,6 @@ const configure = {
   */
   
   var error_sets = [];
-  var error_text = '';
   
   /*
     check tests
