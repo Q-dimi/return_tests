@@ -70,16 +70,20 @@ const configure = {
 
           var developer_input = require(configure.modules[i]);
 
-          run_tests(
-            developer_input.tests, 
-            developer_input.allowed_types, 
-            developer_input.allowed_values, 
-            developer_input.regex_set, 
-            developer_input.function_called, 
-            configure.modules[i],
-            developer_input.function_name, 
-            developer_input.directory
-          );
+          if(developer_input.run_all === true) {
+
+            run_tests(
+              developer_input.tests, 
+              developer_input.allowed_types, 
+              developer_input.allowed_values, 
+              developer_input.regex_set, 
+              developer_input.function_called, 
+              configure.modules[i],
+              developer_input.function_name, 
+              developer_input.directory
+            );
+            
+          }
 
         }
           
