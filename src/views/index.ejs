@@ -14,10 +14,10 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">function name</th>
-            <th scope="col">Function file</th>
-            <th scope="col">package file</th>
-            <th scope="col">index in error set</th>
+            <th scope="col">Function Name</th>
+            <th scope="col">Function File</th>
+            <th scope="col">Package File</th>
+            <th scope="col">Index In Error Set</th>
             <th scope="col">View Errors</th>
           </tr>
         </thead>
@@ -28,11 +28,30 @@
             <th><%= error_set[i].directory === null || error_set[i].directory === undefined ? 'not set' : error_set[i].directory %></th>
             <th><%= error_set[i].file_name === null || error_set[i].file_name=== undefined ? 'not set' : error_set[i].file_name %></th>
             <th><%= error_set[i].index_of_error_set === null || error_set[i].index_of_error_set === undefined ? 'not set' : error_set[i].index_of_error_set %></th>
-            <td class = 'click_me' style = 'cursor: pointer; text-decoration: underline' value = '<%=JSON.stringify(error_set[i])%>'>View</td>
+            <td class = 'click_me' id = 'identity-<%=i%>' style = 'cursor: pointer; text-decoration: underline' data-json = '<%=JSON.stringify(error_set[i])%>'>View</td>
           </tr>
           <% } %>
         </tbody>
       </table>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
   </body>
   <script>
   </script>

@@ -1,9 +1,8 @@
 
 /*
-  Description: Checks if return values match regular expressions, input types and input values each or seperately
-  @param {single_file_to_test}: one file to test that you choose. 
+  @param {single_function_to_test}: one file to test that you choose. 
   @param {test_all}: whether to test all files or not. 
-  @param {modules}: all the files which have a function to test. 
+  @param {all_functions_to_test}: all the files which have a function to test. 
 */
 
 const configure = { 
@@ -155,7 +154,7 @@ const configure = {
   
            for(let i = 0; i < allowed_values.values.length; i++) { 
              if(typeof(allowed_values.values[i]) === 'object') {
-              if(JSON.stringify(allowed_values.values[i]).trim() === JSON.stringify(return_value).trim()) { 
+              if(JSON.stringify(allowed_values.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLocaleLowerCase().trim()) { 
                 match = true;
                 break;
               }
@@ -218,11 +217,17 @@ const configure = {
       }
   
       if(error_count > 0) { 
+
         err_object.function_name = function_name;
+
         err_object.directory = directory;
+
         err_object.file_name = file_name;
+
         err_object.index_of_error_set = tests[i].index_of_set ? tests[i].index_of_set : 'index not found';
+
         error_sets.push(err_object);
+
       }
   
     }
@@ -246,6 +251,9 @@ const configure = {
     export the error set
   */
 
-  console.log(JSON.stringify(error_sets).split('}').join('\n')); /*888888888888*/
+  for(let i = 0; i < error_sets.length; i++) { 
+    console.log(JSON.stringify(error_sets[i]) + '\n \n \n');
+  }
+
   module.exports = error_sets;
   
