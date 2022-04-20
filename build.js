@@ -8,11 +8,11 @@
 
 const configure = { 
 
-    single_file_to_test: './functions/example.js',
-
     test_all: false,
 
-    modules: [
+    single_function_to_test: './functions/example.js',
+
+    all_functions_to_test: [
       './functions/example.js',
       './functions/example.js',
       './functions/example.js',
@@ -32,21 +32,16 @@ const configure = {
     @param {allowed_values}: allowed return values
     @param {regex_set}: allowed regular expressions
     @param {function_called}: function passed 
-    @param {test_all}: boolean deciding ro test one or all file
-    @param {single_file_to_test}: file developer chooses to test 
     @param {error_sets}: exported set of objects that did not pass test
   */
   
-  const test_all = configure.test_all;
-  const single_file_to_test = configure.single_file_to_test;
   var error_sets = [];
 
-  
-  switch(test_all) { 
+  switch(configure.test_all) { 
       
     case false: 
       
-      var developer_input = require(single_file_to_test);
+      var developer_input = require(configure.single_function_to_test);
                               
       run_tests(
         developer_input.tests, 
@@ -54,7 +49,7 @@ const configure = {
         developer_input.allowed_values, 
         developer_input.regex_set, 
         developer_input.function_called, 
-        single_file_to_test, 
+        configure.single_function_to_test, 
         developer_input.function_name, 
         developer_input.directory
       );
@@ -63,9 +58,9 @@ const configure = {
       
     case true:
     
-        for(let i = 0; i < configure.modules.length; i++) { 
+        for(let i = 0; i < configure.all_functions_to_test.length; i++) { 
 
-          var developer_input = require(configure.modules[i]);
+          var developer_input = require(configure.all_functions_to_test[i]);
 
           if(developer_input.run_all === true) {
 
@@ -75,7 +70,7 @@ const configure = {
               developer_input.allowed_values, 
               developer_input.regex_set, 
               developer_input.function_called, 
-              configure.modules[i],
+              configure.all_functions_to_test[i],
               developer_input.function_name, 
               developer_input.directory
             );
@@ -236,7 +231,7 @@ const configure = {
   
   /*
     @param {regular_expression}: regular expression being tested
-    @param {total}: the value being tested against
+    @param {return_value}: the value being tested against
   */
   
   function test(regular_expression, return_value) { 
@@ -251,6 +246,6 @@ const configure = {
     export the error set
   */
 
-  console.log(JSON.stringify(error_sets)); /*888888888888*/
+  console.log(JSON.stringify(error_sets).split('}').join('\n')); /*888888888888*/
   module.exports.errors = error_sets;
   

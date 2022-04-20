@@ -61,7 +61,7 @@ module.exports = {
       other_possible_directories: []
     },
   
-    run_all: false,
+    run_all: true,
       
     updated_function_if_match_in_fname_and_directory: null, 
       
