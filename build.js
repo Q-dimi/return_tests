@@ -265,7 +265,8 @@ const configure = {
       if(error_count > 0) { 
         err_object.function_name = function_name;
         err_object.directory = directory;
-        err_object.file_name = file_name
+        err_object.file_name = file_name;
+        err_object.index_of_error_set = tests[i].index_of_set ? tests[i].index_of_set : 'index not found';
         error_sets.push(err_object);
       }
   
