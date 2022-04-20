@@ -54,7 +54,7 @@ module.exports.developer_input =  {
     time_created: null,
     
     still_exists: { 
-      stil_exists: true,
+      still_exists: true,
       other_possible_directories: []
     },
   
