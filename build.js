@@ -34,10 +34,13 @@ const configure = {
     @param {function_called}: function passed 
     @param {test_all}: boolean deciding ro test one or all file
     @param {single_file_to_test}: file developer chooses to test 
+    @param {error_sets}: exported set of objects that did not pass test
   */
   
   const test_all = configure.test_all;
   const single_file_to_test = configure.single_file_to_test;
+  var error_sets = [];
+
   
   switch(test_all) { 
       
@@ -88,12 +91,6 @@ const configure = {
       console.log(`error: test_all must be true or false`);
   
   }
-  
-  /*
-    @param {error_sets}: exported set of objects that did not pass test
-  */
-  
-  var error_sets = [];
   
   /*
     check tests
