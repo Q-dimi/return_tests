@@ -8,7 +8,5 @@
   },
   "author": "Alexander Eatman",
   "license": "ISC",
-  "dependencies": {
-    "file-system": "^2.2.2"
-  }
+  "dependencies": {}
 }

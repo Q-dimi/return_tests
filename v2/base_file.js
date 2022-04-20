@@ -12,6 +12,7 @@
   @param {still_exists}: whether the function in that file exists and whether it should be created again. Determined by @param {scan} in build.js
   @param {run_all}: when running tests for all files, run_all is checked and if false does not run. it true runs file
   @param {updated_function_if_no_match}: if scan finds function, make sure the function matches the function_called . if not, push the updated file function here.
+  this is for version two... a copy of this will be made and pushed to a new file with a function.
 */
 
 module.exports.developer_input =  { 
