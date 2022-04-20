@@ -22,14 +22,14 @@ const configure = {
     preset_tests: { values: [], overwrite_original: false }, 
   }
   
-  const fs = require('fs');
+  var file = require('file-system');
   
   function find() { 
     //find and append to end if it does not exist
   } 
   
   function scan() {
-    //scan and updatw
+    //scan and update
    }
   
   /*
@@ -39,8 +39,7 @@ const configure = {
     @param {allowed_values}: allowed return values ***
     @param {regex_set}: allowed regular expressions ***
     @param {function_called}: function passed from client with parameters passed via dev ***
-    @param {test_all}: finds the file with all attached functions and iterates and runs each. Otherwise, tests the single file you decide
-    @param {all_files_to_test}: iterates and pushes each files object to an array which is looped over and passed into the run_test function. 
+    @param {test_all}: boolean deciding ro test one or all file
     @param {single_file_to_test}: If test all is off, . 
   */
   
@@ -264,7 +263,7 @@ const configure = {
   }
   
   /*
-    export the error text and error set
+    export the error set
   */
   
   module.exports.errors = error_sets;

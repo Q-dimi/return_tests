@@ -16,11 +16,11 @@
 module.exports.developer_input =  { 
 
     tests: [  
-      {a: 2, b: 5},
-      {a: 7, b: 5},
-      {a: 'hellow', b: 5},
-      {a: 2, b: 5},
-      {a: 2, b: 3}
+      { index_of_set: 1, a: 2, b: 5 },
+      { index_of_set: 2, a: 7, b: 5},
+      { index_of_set: 3, a: 'hellow', b: 5},
+      { index_of_set: 4, a: 2, b: 5 },
+      { index_of_set: 5, a: 2, b: 3 }
     ],
       
     allowed_types: { 
@@ -63,3 +63,5 @@ module.exports.developer_input =  {
     updated_function_if_match_in_fname_and_directory: null, 
       
   }
+
+
