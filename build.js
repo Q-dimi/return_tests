@@ -45,7 +45,7 @@ const configure = {
   var file = require('file-system');
   
   function find() { 
-    //find and append to end if it does not exist
+    //find and append to end if it does not exist... (access, iterate W get type and clone then make file with fname and directory)
   } 
   
   function scan() {
@@ -86,6 +86,8 @@ const configure = {
     break;
       
     case true:
+
+      //instead of iterating use fs or glob and just go through every file with a custom name. will be fname and directory
       
       var found = true;
       var i = 1;
