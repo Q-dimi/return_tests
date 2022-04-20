@@ -1,32 +1,26 @@
 
 /*
-  Author: Alex Eatman 
-  Year: 2022
   Description: Checks if return values match regular expressions, input types and input values each or seperately
-  version 1
-  v2 will have scanner and append functions to files
-
   @param {single_file_to_test}: one file to test that you choose. 
   @param {test_all}: whether to test all files or not. 
   @param {modules}: all the files which have a function to test. 
-
-  */
+*/
 
 const configure = { 
 
-    single_file_to_test: '/functions/example.js',
+    single_file_to_test: './functions/example.js',
 
     test_all: false,
 
     modules: [
-      '/functions/example.js',
-      '/functions/example.js',
-      '/functions/example.js',
-      '/functions/example.js',
-      '/functions/example.js',
-      '/functions/example.js',
-      '/functions/example.js',
-      '/functions/example.js',
+      './functions/example.js',
+      './functions/example.js',
+      './functions/example.js',
+      './functions/example.js',
+      './functions/example.js',
+      './functions/example.js',
+      './functions/example.js',
+      './functions/example.js',
     ],
 
   }
@@ -96,7 +90,7 @@ const configure = {
   }
   
   /*
-    @param {error_set}: exported set of objects that did not pass test
+    @param {error_sets}: exported set of objects that did not pass test
   */
   
   var error_sets = [];
