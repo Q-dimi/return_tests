@@ -1,9 +1,8 @@
 
 /*
-  Author: Alexander Eatman 
+  Author: Alex Eatman 
   Year: 2022
-  Description: 
-  Checks if return values match regular expressions, input types and input values each or seperately
+  Description: Checks if return values match regular expressions, input types and input values each or seperately
   version 1
 
   @param {single_file_to_test}: one file to test that you choose. 
@@ -93,7 +92,6 @@ const configure = {
   
   /*
     @param {error_set}: exported set of objects that did not pass test
-    @param {error_text}: error text exported
   */
   
   var error_sets = [];
@@ -257,6 +255,6 @@ const configure = {
     export the error set
   */
 
-  console.log(error_sets); /*888888888888*/
+  console.log(JSON.stringify(error_sets)); /*888888888888*/
   module.exports.errors = error_sets;
   
