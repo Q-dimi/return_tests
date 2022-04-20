@@ -247,5 +247,5 @@ const configure = {
   */
 
   console.log(JSON.stringify(error_sets).split('}').join('\n')); /*888888888888*/
-  module.exports.errors = error_sets;
+  module.exports = error_sets;
   

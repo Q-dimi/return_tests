@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Error Sets</title>
+    <meta name="description" content="Error Sets">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">function name</th>
+            <th scope="col">Function file</th>
+            <th scope="col">package file</th>
+            <th scope="col">index in error set</th>
+            <th scope="col">View Errors</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < error_set.length; i++) { %>
+          <tr>
+            <th><%= error_set[i].function_name === null || error_set[i].function_name === undefined ? 'not set' : error_set[i].function_name %></th>
+            <th><%= error_set[i].directory === null || error_set[i].directory === undefined ? 'not set' : error_set[i].directory %></th>
+            <th><%= error_set[i].file_name === null || error_set[i].file_name=== undefined ? 'not set' : error_set[i].file_name %></th>
+            <th><%= error_set[i].index_of_error_set === null || error_set[i].index_of_error_set === undefined ? 'not set' : error_set[i].index_of_error_set %></th>
+            <td class = 'click_me' style = 'cursor: pointer; text-decoration: underline' value = '<%=JSON.stringify(error_set[i])%>'>View</td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+  </body>
+  <script>
+  </script>
+</html>
