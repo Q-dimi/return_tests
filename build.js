@@ -2,6 +2,7 @@
 /*
   Author: Alexander Eatman 
   Year: 2022
+  Description: Checks if the return values of functions matches a regular expression, input type and input value each or seperately
 
   @param {configure}: the only thing the dev needs to worry about. 
   @param {directories}: the files you wish to search functions for
@@ -12,8 +13,11 @@
 */
 
 const configure = { 
+
     single_file_to_test: '/functions/example.js',
+
     test_all: false,
+
     directories: [
       `/test_directories/direcrory_1/file_1.js`,
       `/test_directories/direcrory_1/file_2.js`,
@@ -25,11 +29,17 @@ const configure = {
       `/test_directories/direcrory_3/file_2.js`,
       `/test_directories/direcrory_3/file_3.js`
     ],
+
     preset_regex: { on: true, values: [], overwrite_original: false },
+
     preset_allowed_values: { on: true, values: [], overwrite_original: false },
+
     preset_allowed_types: { on: true, values: [], overwrite_original: false },
+
     preset_run_all: { value: false, overwrite_original: false }, 
+
     preset_tests: { values: [], overwrite_original: false }, 
+
   }
   
   var file = require('file-system');
