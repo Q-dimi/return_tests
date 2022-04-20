@@ -14,7 +14,7 @@
 const configure = { 
     single_file_to_test: '/functions/example.js',
     test_all: false,
-    directories: [`/direcrory_1.js`, `/directory_2.js`, `/directory_3.js`],
+    directories: [`test_directories/direcrory_1/file_1.js`, `/test_directories/direcrory_1/file_2.js`, `/test_directories/direcrory_1/file_3.js`],
     preset_regex: { on: true, values: [], overwrite_original: false },
     preset_allowed_values: { on: true, values: [], overwrite_original: false },
     preset_allowed_types: { on: true, values: [], overwrite_original: false },
