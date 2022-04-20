@@ -50,17 +50,21 @@ const configure = {
     case false: 
       
       var developer_input = require(single_file_to_test);
+
+      if(developer_input.run_all === true) {
                               
-      run_tests(
-        developer_input.tests, 
-        developer_input.allowed_types, 
-        developer_input.allowed_values, 
-        developer_input.regex_set, 
-        developer_input.function_called, 
-        single_file_to_test, 
-        developer_input.function_name, 
-        developer_input.directory
-      );
+        run_tests(
+          developer_input.tests, 
+          developer_input.allowed_types, 
+          developer_input.allowed_values, 
+          developer_input.regex_set, 
+          developer_input.function_called, 
+          single_file_to_test, 
+          developer_input.function_name, 
+          developer_input.directory
+        );
+
+      }
       
     break;
       
@@ -82,7 +86,7 @@ const configure = {
               developer_input.function_name, 
               developer_input.directory
             );
-            
+
           }
 
         }

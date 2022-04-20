@@ -14,7 +14,7 @@
   @param {updated_function_if_no_match}: if scan finds function, make sure the function matches the function_called . if not, push the updated file function here.
 */
 
-module.exports.developer_input =  { 
+module.exports = { 
 
     tests: [  
       { index_of_set: 1, a: 2, b: 5 },
