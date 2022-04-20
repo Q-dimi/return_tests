@@ -56,7 +56,6 @@
     let click_me = document.getElementsByClassName('click_me');
     for(let i = 0; i < click_me.length; i++) { click_me[i].onclick = function() { open_modal(i); } }
     function open_modal(i) { 
-      alert(i);
       var element = document.getElementById(`identity-${i}`);
       var json_string = element.dataset.json;
       json_string = JSON.parse(json_string);
