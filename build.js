@@ -72,7 +72,7 @@ const configure = {
         
         try { 
           
-          var developer_input = require(`/function_index_return_tests-${i}`);
+          var developer_input = require(`/functions/function_index_return_tests-${i}`);
           
           run_tests(
             developer_input.tests, 
