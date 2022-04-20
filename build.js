@@ -265,6 +265,7 @@ const configure = {
   /*
     export the error set
   */
-  
+
+  console.log(error_sets); /*888888888888*/
   module.exports.errors = error_sets;
   
