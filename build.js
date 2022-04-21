@@ -17,6 +17,18 @@ const configure = {
       './functions/example3.js',
     ],
 
+    scan_and_create_files: { 
+      run: false, 
+      push_to_all_functions_to_test: false 
+    }
+
+  }
+
+  if(configure.scan_and_create_files.run === true) { 
+    var file_list = require('./scan.js');
+    if(configure.scan_and_create_files.push_to_all_functions_to_test === true) { 
+      configure.all_functions_to_test.push(file_list);
+    }
   }
   
   /*
@@ -34,19 +46,27 @@ const configure = {
   switch(configure.test_all) { 
       
     case false: 
+
+        try {
       
-        var developer_input = require(configure.single_function_to_test);
-                                
-        run_tests(
-          developer_input.tests, 
-          developer_input.allowed_types, 
-          developer_input.allowed_values, 
-          developer_input.regex_set, 
-          developer_input.function_called, 
-          configure.single_function_to_test, 
-          developer_input.function_name, 
-          developer_input.directory
-        );
+          var developer_input = require(configure.single_function_to_test);
+                                  
+          run_tests(
+            developer_input.tests, 
+            developer_input.allowed_types, 
+            developer_input.allowed_values, 
+            developer_input.regex_set, 
+            developer_input.function_called, 
+            configure.single_function_to_test, 
+            developer_input.function_name, 
+            developer_input.directory
+          );
+
+        } catch(err) { 
+
+          console.log(err.message);
+
+        }
       
     break;
       
@@ -54,20 +74,28 @@ const configure = {
     
         for(let i = 0; i < configure.all_functions_to_test.length; i++) { 
 
-          var developer_input = require(configure.all_functions_to_test[i]);
+          try {
 
-          if(developer_input.run_all === true) {
+            var developer_input = require(configure.all_functions_to_test[i]);
 
-            run_tests(
-              developer_input.tests, 
-              developer_input.allowed_types, 
-              developer_input.allowed_values, 
-              developer_input.regex_set, 
-              developer_input.function_called, 
-              configure.all_functions_to_test[i],
-              developer_input.function_name, 
-              developer_input.directory
-            );
+            if(developer_input.run_all === true) {
+
+              run_tests(
+                developer_input.tests, 
+                developer_input.allowed_types, 
+                developer_input.allowed_values, 
+                developer_input.regex_set, 
+                developer_input.function_called, 
+                configure.all_functions_to_test[i],
+                developer_input.function_name, 
+                developer_input.directory
+              );
+
+            }
+
+          } catch(err) { 
+
+            console.log(err.message);
 
           }
 
@@ -92,13 +120,15 @@ const configure = {
       var params = [];
   
       for (const [key, value] of Object.entries(tests[i])) {
-       if(key === 'index_of_set') continue;
+       if(key === 'index_of_set' || key === 'unit') continue;
        params.push(value);
       }
   
       var return_value = function_called(...params);
       var err_object = tests[i];
       var error_count = 0;
+
+      //first check unit sweet and if true, test on sweet else if check on this else, both off...
   
       if(allowed_types.on === true) {
   
@@ -117,6 +147,8 @@ const configure = {
         }
   
       }
+
+      //first check unit_sweet then check this
   
       if(allowed_values.on === true) {
   
@@ -178,6 +210,8 @@ const configure = {
          }
   
       }
+
+      //first check unit_sweet then check this
     
       if(regex_set.on === true) {
 

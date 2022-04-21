@@ -12,16 +12,17 @@
   @param {still_exists}: whether the function in that file exists and whether it should be created again. Determined by @param {scan} in build.js
   @param {run_all}: when running tests for all files, run_all is checked and if false does not run. it true runs file
   @param {updated_function_if_no_match}: if scan finds function, make sure the function matches the function_called . if not, push the updated file function here.
+  //to run a unit test
 */
 
 module.exports = { 
 
     tests: [  
-      { index_of_set: 1, a: 2, b: 5, c: 77 }, //add the index in allowed values on the end as an expected value... if exists... direct access below array
-      { index_of_set: 2, a: 7, b: 5}, //unit_on: false, unit_allowed_type:, unit allowed_value, unit_allowed_regex
-      { index_of_set: 3, a: 'hellow', b: 5},
-      { index_of_set: 4, a: 2, b: 5 },
-      { index_of_set: 5, a: 2, b: 3 }
+      { unit: {}, index_of_set: 1, a: 2, b: 5, c: 77 },
+      { unit: {}, index_of_set: 2, a: 7, b: 5},
+      { unit: {}, index_of_set: 3, a: 'hellow', b: 5},
+      { unit: {}, index_of_set: 4, a: 2, b: 5 },
+      { unit: {}, index_of_set: 5, a: 2, b: 3 }
     ],
       
     allowed_types: { 

@@ -17,8 +17,8 @@
 module.exports = { 
 
     tests: [  
-      { index_of_set: 1, a: 2, b: 5 },
-      { index_of_set: 1, a: 2, b: 6 }
+      { unit: {}, index_of_set: 1, a: 2, b: 5 },
+      { unit: {}, index_of_set: 1, a: 2, b: 6 }
     ],
       
     allowed_types: { 
