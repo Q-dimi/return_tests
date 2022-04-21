@@ -18,7 +18,7 @@ module.exports = {
 
     tests: [  
       { index_of_set: 1, a: 2, b: 5, c: 77 }, //add the index in allowed values on the end as an expected value... if exists... direct access below array
-      { index_of_set: 2, a: 7, b: 5},
+      { index_of_set: 2, a: 7, b: 5}, //unit_on: false, unit_allowed_type:, unit allowed_value, unit_allowed_regex
       { index_of_set: 3, a: 'hellow', b: 5},
       { index_of_set: 4, a: 2, b: 5 },
       { index_of_set: 5, a: 2, b: 3 }
