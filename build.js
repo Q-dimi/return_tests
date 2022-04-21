@@ -125,7 +125,6 @@ const configure = {
           typeof(return_value) === 'BigInt' || 
           typeof(return_value) === 'string' ||  
           typeof(return_value) === 'undefined' ||  
-          typeof(return_value) === 'null' ||
           typeof(return_value) === 'boolean'
         ) {
   
@@ -173,16 +172,16 @@ const configure = {
          } else { 
   
            console.log(`
-            error: the only allowed types are number, BigInt, string, boolean, undefined, null and object
+            error: the only allowed types are number, BigInt, string, boolean, undefined and object
            `);
   
          }
   
       }
-  
-      var regex_pass = false;
-  
+    
       if(regex_set.on === true) {
+
+        var regex_pass = false;
   
         for(let i = 0; i < regex_set.values.length; i++) { 
   
