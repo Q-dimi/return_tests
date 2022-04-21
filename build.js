@@ -26,8 +26,8 @@ const configure = {
 
   if(configure.scan_and_create_files.run === true) { 
     var file_list = require('./scan.js');
-    if(configure.scan_and_create_files.push_to_all_functions_to_test === true) { 
-      configure.all_functions_to_test.push(file_list);
+    if(configure.scan_and_create_files.push_to_all_functions_to_test === true) {
+      configure.all_functions_to_test = configure.all_functions_to_test.concat(file_list);
     }
   }
   
