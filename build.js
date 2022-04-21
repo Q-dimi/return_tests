@@ -130,8 +130,8 @@ const configure = {
 
       var allowed_types_unit_or_single = (
         typeof(tests[i].unit.allowed_types) !== 'undefined' && tests[i].unit.allowed_types.on === true ?
-        { test: 'unit', v: tests[i].unit.allowed_types.values } : allowed_types.on === true ?
-        { test: 'single', v: allowed_types.values } : 
+        { test: 'unit', v: tests[i].unit.allowed_types } : allowed_types.on === true ?
+        { test: 'single', v: allowed_types } : 
         { test: 'off' }
       );
   
@@ -155,8 +155,8 @@ const configure = {
 
       var allowed_values_unit_or_single = (
         typeof(tests[i].unit.allowed_values) !== 'undefined' && tests[i].unit.allowed_values.on === true ? 
-        { test: 'unit', v: tests[i].unit.allowed_values.values } : allowed_values.on === true ? 
-        { test: 'single', v: allowed_values.values } : 
+        { test: 'unit', v: tests[i].unit.allowed_values } : allowed_values.on === true ? 
+        { test: 'single', v: allowed_values } : 
         { test: 'off' }
       );
   
@@ -223,8 +223,8 @@ const configure = {
 
       var allowed_regex_unit_or_single = (
         typeof(tests[i].unit.regex_set) !== 'undefined' && tests[i].unit.regex_set.on === true ? 
-        { test: 'unit', v: tests[i].unit.regex_set.values } : regex_set.on === true ? 
-        { test: 'single', v: regex_set.values } : 
+        { test: 'unit', v: tests[i].unit.regex_set } : regex_set.on === true ? 
+        { test: 'single', v: regex_set } : 
         { test: 'off' }
       );
     
