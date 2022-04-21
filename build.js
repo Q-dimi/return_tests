@@ -128,11 +128,16 @@ const configure = {
       var err_object = tests[i];
       var error_count = 0;
 
-      //first check unit sweet and if true, test on sweet else if check on this else, both off...
+      var allowed_types_unit_or_single = (
+        tests[i].unit.allowed_types.on === true ?
+        'unit' : allowed_types.on === true ?
+        'single' : 
+        'off'
+      );
   
-      if(allowed_types.on === true) {
+      if(allowed_types.on === true) { //single or unit
   
-        if(allowed_types.values.includes(typeof(return_value)) !== true) {
+        if(allowed_types.values.includes(typeof(return_value)) !== true) { //single or unit v
   
           err_object.error_type = true;
   
@@ -148,9 +153,14 @@ const configure = {
   
       }
 
-      //first check unit_sweet then check this
+      var allowed_values_unit_or_single = (
+        tests[i].unit.allowed_values.on === true ? 
+        'unit' : allowed_values.on === true ? 
+        'single' : 
+        'off'
+      );
   
-      if(allowed_values.on === true) {
+      if(allowed_values.on === true) { //single or unit
   
         if(
           typeof(return_value) === 'number' || 
@@ -160,7 +170,7 @@ const configure = {
           typeof(return_value) === 'boolean'
         ) {
   
-          if(allowed_values.values.includes(return_value) !== true) { 
+          if(allowed_values.values.includes(return_value) !== true) {  //single or unit v
   
             err_object.error_value = true;
   
@@ -178,9 +188,9 @@ const configure = {
   
            var match = false;
   
-           for(let i = 0; i < allowed_values.values.length; i++) { 
-             if(typeof(allowed_values.values[i]) === 'object') {
-              if(JSON.stringify(allowed_values.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
+           for(let i = 0; i < allowed_values.values.length; i++) { //single or unit v
+             if(typeof(allowed_values.values[i]) === 'object') { //single or unit v
+              if(JSON.stringify(allowed_values.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { //single or unit
                 match = true;
                 break;
               }
@@ -211,15 +221,20 @@ const configure = {
   
       }
 
-      //first check unit_sweet then check this
+      var allowed_regex_unit_or_single = (
+        tests[i].unit.regex_set.on === true ? 
+        'unit' : allowed_regex_set.on === true ? 
+        'single' : 
+        'off'
+      );
     
-      if(regex_set.on === true) {
+      if(regex_set.on === true) { //single or unit 
 
         var regex_pass = false;
   
-        for(let i = 0; i < regex_set.values.length; i++) { 
+        for(let i = 0; i < regex_set.values.length; i++) {  //single or unit v
   
-          var test_regex = test(regex_set.values[i], return_value);
+          var test_regex = test(regex_set.values[i], return_value); //single or unit v
   
           if(test_regex !== true) { 
   
@@ -230,7 +245,7 @@ const configure = {
   
             err_object[`error_regex_message-${i}`] = `The value returned does not pass`;
   
-            err_object[`error_regex_regular_expression-${i}`] = regex_set.values[i];
+            err_object[`error_regex_regular_expression-${i}`] = regex_set.values[i]; //single or unit v
   
             err_object[`error_regex_return_value-${i}`] = return_value;
   
