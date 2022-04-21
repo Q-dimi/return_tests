@@ -170,7 +170,7 @@ const configure = {
         (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
         (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number')
       ) {
-        console.log(`(tests) need to be defined as an object with object (unit: object) and (index_of_set: index) ${i} - ${tests[i].index_of_set}`);
+        console.log(`(tests) need to be defined as an object with object (unit: object) and (index_of_set: index) ${i}: ${typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found'}`);
         continue;
       }
   
