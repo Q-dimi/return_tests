@@ -17,7 +17,7 @@
 module.exports = { 
 
     tests: [  
-      { index_of_set: 1, a: 2, b: 5, c: 77 },
+      { index_of_set: 1, a: 2, b: 5 },
       { index_of_set: 2, a: 7, b: 5},
       { index_of_set: 3, a: 'hellow', b: 5},
       { index_of_set: 4, a: 2, b: 5 },
