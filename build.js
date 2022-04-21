@@ -117,7 +117,7 @@ const configure = {
 
     var init_errors = {};
 
-    if(typeof(tests) !== 'object') {
+    if((typeof(tests) !== 'object') || (typeof(tests) === 'object' && typeof(tests[0].unit) !== 'object') || (typeof(tests) === 'object' && typeof(tests[0].index_of_set) !== 'number')) {
       init_errors.tests = '(tests) need to be defined as an array with object (unit: object) and (index_of_set: index)';
     }
 
