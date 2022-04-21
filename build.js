@@ -115,7 +115,48 @@ const configure = {
           
   function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, directory) {
 
-    //make sure these are all set before looping...
+    var init_errors = {};
+
+    if(typeof(tests) !== 'undefined' && Array.isArray(tests) !== true) {
+      init_errors.tests = 'Tests need to be defined as an array';
+    }
+
+    if(typeof(allowed_types) !== 'undefined' && Array.isArray(tests) !== true) {
+      init_errors.tests = 'Tests need to be defined as an array';
+    }
+
+    if(typeof(allowed_values) !== 'undefined' && Array.isArray(tests) !== true) {
+      init_errors.tests = 'Tests need to be defined as an array';
+    }
+
+    if(typeof(regex_set) !== 'undefined' && Array.isArray(tests) !== true) {
+      init_errors.tests = 'Tests need to be defined as an array';
+    }
+
+    if(typeof(function_called) !== 'undefined' && Array.isArray(tests) !== true) {
+      init_errors.tests = 'Tests need to be defined as an array';
+    }
+
+    if(typeof(file_name) !== 'undefined' && Array.isArray(tests) !== true) {
+      init_errors.tests = 'Tests need to be defined as an array';
+    }
+
+    if(typeof(function_name) !== 'undefined' && Array.isArray(tests) !== true) {
+      init_errors.tests = 'Tests need to be defined as an array';
+    }
+
+    if(typeof(directory) !== 'undefined' && Array.isArray(tests) !== true) {
+      init_errors.tests = 'Tests need to be defined as an array';
+    }
+
+    var size = Object.keys(init_errors).length;
+
+    if(size > 0) { 
+      for (const [key, value] of Object.entries(init_errors)) {
+        console.log(`${key}: ${value}`);
+       }    
+       return;
+    }
   
     for(let i = 0; i < tests.length; i++) { 
   
