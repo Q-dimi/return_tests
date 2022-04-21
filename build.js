@@ -40,18 +40,18 @@ const configure = {
       
     case false: 
       
-      var developer_input = require(configure.single_function_to_test);
-                              
-      run_tests(
-        developer_input.tests, 
-        developer_input.allowed_types, 
-        developer_input.allowed_values, 
-        developer_input.regex_set, 
-        developer_input.function_called, 
-        configure.single_function_to_test, 
-        developer_input.function_name, 
-        developer_input.directory
-      );
+        var developer_input = require(configure.single_function_to_test);
+                                
+        run_tests(
+          developer_input.tests, 
+          developer_input.allowed_types, 
+          developer_input.allowed_values, 
+          developer_input.regex_set, 
+          developer_input.function_called, 
+          configure.single_function_to_test, 
+          developer_input.function_name, 
+          developer_input.directory
+        );
       
     break;
       
