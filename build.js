@@ -7,19 +7,14 @@
 
 const configure = { 
 
-    test_all: false,
+    test_all: true,
 
-    single_function_to_test: './functions/example.js',
+    single_function_to_test: './functions/example2.js',
 
     all_functions_to_test: [
-      './functions/example.js',
-      './functions/example.js',
-      './functions/example.js',
-      './functions/example.js',
-      './functions/example.js',
-      './functions/example.js',
-      './functions/example.js',
-      './functions/example.js',
+      './functions/example1.js',
+      './functions/example2.js',
+      './functions/example3.js',
     ],
 
   }
@@ -252,7 +247,7 @@ const configure = {
   */
 
   for(let i = 0; i < error_sets.length; i++) { 
-    console.log(JSON.stringify(error_sets[i]) + '\n \n \n');
+    console.log(JSON.stringify(error_sets[i]) + '\n \n');
   }
 
   module.exports = error_sets;

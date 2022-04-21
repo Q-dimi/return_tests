@@ -17,21 +17,18 @@
 module.exports = { 
 
     tests: [  
-      { index_of_set: 1, a: 2, b: 5, c: { a: 2, b: 4 } },
-      { index_of_set: 2, a: 7, b: 5, c: 'awesome man' },
-      { index_of_set: 3, a: 'hellow', b: 5, c: 'cool sauce'},
-      { index_of_set: 4, a: 2, b: 5,  j: { d: 7, d: 88 } },
-      { index_of_set: 5, a: 2, b: 3, f: 66 }
+      { index_of_set: 1, a: 'hello world', b: 'wow man' },
+      { index_of_set: 2, a: 9},
     ],
       
     allowed_types: { 
-      on: true, 
+      on: false, 
       values: ['number', 'BigInt'] 
     },  
       
     allowed_values: { 
       on: true, 
-      values: [7, 12] 
+      values: [7, 12, 'hello world'] 
     },
       
     regex_set: { 
@@ -40,8 +37,12 @@ module.exports = {
     }, 
       
     function_called: 
-       function (a, b) {
-        return 'hello world';
+       function (a) {
+        try {
+          return a;
+        } catch(err) { 
+          return err.message;
+        }
       },
 
     function_type: null,
