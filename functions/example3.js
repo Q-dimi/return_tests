@@ -12,13 +12,15 @@
   @param {still_exists}: whether the function in that file exists and whether it should be created again. Determined by @param {scan} in build.js
   @param {run_all}: when running tests for all files, run_all is checked and if false does not run. it true runs file
   @param {updated_function_if_no_match}: if scan finds function, make sure the function matches the function_called . if not, push the updated file function here.
+  @param {unit}: must be defined. takes three params which are objects with the same names as allowed_types, allowed_values, regex_set...same thing
+  @param {index_of_set}: the index of the error set
 */
 
 module.exports = { 
 
     tests: [  
       { unit: {}, index_of_set: 1, a: 2, b: 5 },
-      { unit: {}, index_of_set: 1, a: 2, b: 6 }
+      { unit: {}, index_of_set: 2, a: 2, b: 6 }
     ],
       
     allowed_types: { 

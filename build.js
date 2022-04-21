@@ -129,13 +129,11 @@ const configure = {
       var error_count = 0;
 
       var allowed_types_unit_or_single = (
-        tests[i].unit.allowed_types.on === true ?
-        'unit' : allowed_types.on === true ?
-        'single' : 
-        'off'
+        typeof(tests[i].unit.allowed_types) !== 'undefined' && tests[i].unit.allowed_types.on === true ?
+        { test: 'unit', v: tests[i].unit.allowed_types.values } : allowed_types.on === true ?
+        { test: 'single', v: allowed_types.values } : 
+        { test: 'off' }
       );
-
-      console.log(allowed_types_unit_or_single);
   
       if(allowed_types.on === true) { //single or unit
   
@@ -156,10 +154,10 @@ const configure = {
       }
 
       var allowed_values_unit_or_single = (
-        tests[i].unit.allowed_values.on === true ? 
-        'unit' : allowed_values.on === true ? 
-        'single' : 
-        'off'
+        typeof(tests[i].unit.allowed_values) !== 'undefined' && tests[i].unit.allowed_values.on === true ? 
+        { test: 'unit', v: tests[i].unit.allowed_values.values } : allowed_values.on === true ? 
+        { test: 'single', v: allowed_values.values } : 
+        { test: 'off' }
       );
   
       if(allowed_values.on === true) { //single or unit
@@ -224,10 +222,10 @@ const configure = {
       }
 
       var allowed_regex_unit_or_single = (
-        tests[i].unit.regex_set.on === true ? 
-        'unit' : allowed_regex_set.on === true ? 
-        'single' : 
-        'off'
+        typeof(tests[i].unit.regex_set) !== 'undefined' && tests[i].unit.regex_set.on === true ? 
+        { test: 'unit', v: tests[i].unit.regex_set.values } : regex_set.on === true ? 
+        { test: 'single', v: regex_set.values } : 
+        { test: 'off' }
       );
     
       if(regex_set.on === true) { //single or unit 
@@ -269,7 +267,7 @@ const configure = {
 
         err_object.file_name = file_name;
 
-        err_object.index_of_error_set = tests[i].index_of_set ? tests[i].index_of_set : 'index not found';
+        err_object.index_of_error_set = typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found';
 
         error_sets.push(err_object);
 
