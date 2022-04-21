@@ -117,7 +117,7 @@ const configure = {
 
     var init_errors = {};
 
-    if((typeof(tests) !== 'object') || (typeof(tests) === 'object' && typeof(tests[0].unit) !== 'object') || (typeof(tests) === 'object' && typeof(tests[0].index_of_set) !== 'number')) {
+    if((typeof(tests) !== 'object') || Array.isArray(tests) === false) {
       init_errors.tests = '(tests) need to be defined as an array with object (unit: object) and (index_of_set: index)';
     }
 
@@ -153,8 +153,8 @@ const configure = {
 
     if(size > 0) { 
 
-      console.log(`Directory of Error: ${directory}`);
-      
+      console.log(`Directory of Error: ${directory} ---------------------------------- /n`);
+
       for (const [key, value] of Object.entries(init_errors)) {
         console.log(`${key}: ${value} /n`);
        }    
@@ -164,6 +164,15 @@ const configure = {
     }
   
     for(let i = 0; i < tests.length; i++) { 
+
+      if(
+        (typeof(tests[i]) !== 'object') || 
+        (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
+        (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number')
+      ) {
+        console.log(`(tests) need to be defined as an object with object (unit: object) and (index_of_set: index) ${i} - ${tests[i].index_of_set}`);
+        continue;
+      }
   
       var params = [];
   
