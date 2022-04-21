@@ -6,9 +6,6 @@
 
   <li style = 'margin-bottom: 10px'>functions/example.js: Your function testing file.</li>
 
-  <li style = 'margin-bottom: 10px'>If you would like to see the data on your screen, cd into src and type npm start in your terminal. Then go to localhost:3000. You must have node installed. If you do not have node installed run node build.js.</li>
+  <li style = 'margin-bottom: 10px'>If you would like to see the data on your screen, cd into src and type npm start in your terminal. Then go to localhost:3000. You must have node installed. If you do not have node installed run node build.js to see the result in your console. See src/public/images for what you will see.</li>
 
 </ul>
-
-<img src = '/public/images/errors.PNG'>
-<img src = '/public/images/errors2.PNG'>
