@@ -133,7 +133,7 @@ const configure = {
       init_errors.regex_set = '(regex_set) must be an object with parameters (on: boolean) and (values: array)';
     }
 
-    if(typeof(function_called) !== 'object') {
+    if(typeof(function_called) !== 'function') {
       init_errors.function_called = '(function_called) must be a function';
     }
 
