@@ -153,6 +153,8 @@ const configure = {
 
     if(size > 0) { 
 
+      console.log(`Directory of Error: ${directory}`);
+      
       for (const [key, value] of Object.entries(init_errors)) {
         console.log(`${key}: ${value} /n`);
        }    
