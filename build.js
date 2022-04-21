@@ -132,7 +132,7 @@ const configure = {
         typeof(tests[i].unit.allowed_types) !== 'undefined' && tests[i].unit.allowed_types.on === true ?
         { on: true, test: 'unit', v: tests[i].unit.allowed_types } : allowed_types.on === true ?
         { on: true, test: 'single', v: allowed_types } : 
-        { on: true, test: 'off' }
+        { on: false, test: 'off' }
       );
   
       if(allowed_types.on === true) { //was allowed_types.on === true
@@ -157,7 +157,7 @@ const configure = {
         typeof(tests[i].unit.allowed_values) !== 'undefined' && tests[i].unit.allowed_values.on === true ? 
         { on: true, test: 'unit', v: tests[i].unit.allowed_values } : allowed_values.on === true ? 
         { on: true, test: 'single', v: allowed_values } : 
-        { on: true, test: 'off' }
+        { on: false, test: 'off' }
       );
   
       if(allowed_values.on === true) { //was allowed_values.on === true
@@ -225,7 +225,7 @@ const configure = {
         typeof(tests[i].unit.regex_set) !== 'undefined' && tests[i].unit.regex_set.on === true ? 
         { on: true, test: 'unit', v: tests[i].unit.regex_set } : regex_set.on === true ? 
         { on: true, test: 'single', v: regex_set } : 
-        { on: true, test: 'off' }
+        { on: false, test: 'off' }
       );
     
       if(regex_set.on === true) { //was regex_set.on === true
