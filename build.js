@@ -138,15 +138,15 @@ const configure = {
     }
 
     if(typeof(file_name) !== 'object' && typeof(file_name) !== 'string') {
-      init_errors.file_name = 'file_name must be null or a string';
+      init_errors.file_name = '(file_name) must be null or a string';
     }
 
     if(typeof(function_name) !== 'object' && typeof(function_name) !== 'string') {
-      init_errors.tests = '(function_name) must be null or a string';
+      init_errors.function_name = '(function_name) must be null or a string';
     }
 
     if(typeof(directory) !== 'object' && typeof(directory) !== 'string') {
-      init_errors.tests = '(directory) must be null or a string';
+      init_errors.directory = '(directory) must be null or a string';
     }
 
     var size = Object.keys(init_errors).length;
