@@ -117,36 +117,36 @@ const configure = {
 
     var init_errors = {};
 
-    if(typeof(tests) === 'undefined' || Array.isArray(tests) !== true) {
-      init_errors.tests = 'Tests need to be defined as an array';
+    if(typeof(tests) !== 'object') {
+      init_errors.tests = '(tests) need to be defined as an array with object (unit: object) and (index_of_set: index)';
     }
 
-    if(typeof(allowed_types) === 'undefined' || Array.isArray(tests) !== true) {
-      init_errors.tests = 'Tests need to be defined as an array';
+    if(typeof(allowed_types) !== 'object') {
+      init_errors.allowed_types = '(allowed_types) must be an object with paramters (on: boolean) and (values: array)';
     }
 
-    if(typeof(allowed_values) === 'undefined' || Array.isArray(tests) !== true) {
-      init_errors.tests = 'Tests need to be defined as an array';
+    if(typeof(allowed_values) !== 'object') {
+      init_errors.allowed_values = '(allowed_values) must be an object with parameters (on: boolean) and (values: array)';
     }
 
-    if(typeof(regex_set) === 'undefined' || Array.isArray(tests) !== true) {
-      init_errors.tests = 'Tests need to be defined as an array';
+    if(typeof(regex_set) !== 'object') {
+      init_errors.regex_set = '(regex_set) must be an object with parameters (on: boolean) and (values: array)';
     }
 
-    if(typeof(function_called) === 'undefined' || Array.isArray(tests) !== true) {
-      init_errors.tests = 'Tests need to be defined as an array';
+    if(typeof(function_called) !== 'object') {
+      init_errors.function_called = '(function_called) must be a function';
     }
 
-    if(typeof(file_name) === 'undefined' || Array.isArray(tests) !== true) {
-      init_errors.tests = 'Tests need to be defined as an array';
+    if(typeof(file_name) !== 'object' && typeof(file_name) !== 'string') {
+      init_errors.file_name = 'file_name must be null or a string';
     }
 
-    if(typeof(function_name) === 'undefined' || Array.isArray(tests) !== true) {
-      init_errors.tests = 'Tests need to be defined as an array';
+    if(typeof(function_name) !== 'object' && typeof(function_name) !== 'string') {
+      init_errors.tests = '(function_name) must be null or a string';
     }
 
-    if(typeof(directory) === 'undefined' || Array.isArray(tests) !== true) {
-      init_errors.tests = 'Tests need to be defined as an array';
+    if(typeof(directory) !== 'object' && typeof(directory) !== 'string') {
+      init_errors.tests = '(directory) must be null or a string';
     }
 
     var size = Object.keys(init_errors).length;
@@ -154,7 +154,7 @@ const configure = {
     if(size > 0) { 
 
       for (const [key, value] of Object.entries(init_errors)) {
-        console.log(`${key}: ${value}`);
+        console.log(`${key}: ${value} /n`);
        }    
 
        return;
