@@ -110,7 +110,7 @@ const configure = {
   }
   
   /*
-    check tests
+    check tests... index_of_set and unit need to be checked for undefined as well...
   */
           
   function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, directory) {
@@ -134,6 +134,8 @@ const configure = {
         'single' : 
         'off'
       );
+
+      console.log(allowed_types_unit_or_single);
   
       if(allowed_types.on === true) { //single or unit
   
@@ -190,7 +192,7 @@ const configure = {
   
            for(let i = 0; i < allowed_values.values.length; i++) { //single or unit v
              if(typeof(allowed_values.values[i]) === 'object') { //single or unit v
-              if(JSON.stringify(allowed_values.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { //single or unit
+              if(JSON.stringify(allowed_values.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { //single or unit v
                 match = true;
                 break;
               }
