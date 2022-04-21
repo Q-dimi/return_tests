@@ -117,45 +117,48 @@ const configure = {
 
     var init_errors = {};
 
-    if(typeof(tests) !== 'undefined' && Array.isArray(tests) !== true) {
+    if(typeof(tests) === 'undefined' || Array.isArray(tests) !== true) {
       init_errors.tests = 'Tests need to be defined as an array';
     }
 
-    if(typeof(allowed_types) !== 'undefined' && Array.isArray(tests) !== true) {
+    if(typeof(allowed_types) === 'undefined' || Array.isArray(tests) !== true) {
       init_errors.tests = 'Tests need to be defined as an array';
     }
 
-    if(typeof(allowed_values) !== 'undefined' && Array.isArray(tests) !== true) {
+    if(typeof(allowed_values) === 'undefined' || Array.isArray(tests) !== true) {
       init_errors.tests = 'Tests need to be defined as an array';
     }
 
-    if(typeof(regex_set) !== 'undefined' && Array.isArray(tests) !== true) {
+    if(typeof(regex_set) === 'undefined' || Array.isArray(tests) !== true) {
       init_errors.tests = 'Tests need to be defined as an array';
     }
 
-    if(typeof(function_called) !== 'undefined' && Array.isArray(tests) !== true) {
+    if(typeof(function_called) === 'undefined' || Array.isArray(tests) !== true) {
       init_errors.tests = 'Tests need to be defined as an array';
     }
 
-    if(typeof(file_name) !== 'undefined' && Array.isArray(tests) !== true) {
+    if(typeof(file_name) === 'undefined' || Array.isArray(tests) !== true) {
       init_errors.tests = 'Tests need to be defined as an array';
     }
 
-    if(typeof(function_name) !== 'undefined' && Array.isArray(tests) !== true) {
+    if(typeof(function_name) === 'undefined' || Array.isArray(tests) !== true) {
       init_errors.tests = 'Tests need to be defined as an array';
     }
 
-    if(typeof(directory) !== 'undefined' && Array.isArray(tests) !== true) {
+    if(typeof(directory) === 'undefined' || Array.isArray(tests) !== true) {
       init_errors.tests = 'Tests need to be defined as an array';
     }
 
     var size = Object.keys(init_errors).length;
 
     if(size > 0) { 
+
       for (const [key, value] of Object.entries(init_errors)) {
         console.log(`${key}: ${value}`);
        }    
+
        return;
+
     }
   
     for(let i = 0; i < tests.length; i++) { 
