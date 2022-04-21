@@ -15,7 +15,7 @@
   @param {unit}: must be defined. takes three params which are objects with the same names as allowed_types, allowed_values, regex_set...same thing
   @param {index_of_set}: the index of the error set
 
-  ***one row with unit as object and index_of_set as number must be initialized to pass tests
+  ***unit as object and index_of_set as number must be initialized to pass tests
   
 */
 
