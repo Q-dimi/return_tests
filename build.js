@@ -114,6 +114,8 @@ const configure = {
   */
           
   function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, directory) {
+
+    //make sure these are all set before looping...
   
     for(let i = 0; i < tests.length; i++) { 
   
