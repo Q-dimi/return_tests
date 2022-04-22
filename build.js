@@ -5,7 +5,7 @@
   @param {all_functions_to_test: array}: all the files which have a function to test. 
   @param {scan_and_create_files: object}: scan files for functions and create files with those functions and push those to db
   @param {db: object}: database insertion and pull. 
-  //should i have one file and just pull all the functions from the database in an array.... i dont know... did not want to but.
+  //just pull the functions and put them in all_functions_to_test
 */
 
 const configure = { 
@@ -14,24 +14,18 @@ const configure = {
 
     test_all: true,
 
-    single_function_to_test: './functions/example2.js',
+    selected_set_to_test: [], //check box and push on server side as selected set... then click run and run these...
 
-    all_functions_to_test: [
+    single_function_to_test: './functions/example2.js', //delete
+
+    all_functions_to_test: [ //delete
       './functions/example1.js',
       './functions/example2.js',
       './functions/example3.js',
     ],
 
-    scan_and_create_files: { 
-      run: false, 
-      push_to_all_functions_to_test: false,
-      directories: [],
-      files: []
-    },
-
     db: { 
       file_pull_config: { file: "./src/routes/pull_config", on: false },
-      file_push_functions: { file: "./src/routes/push_functions", on: false },
       file_push_errors: { file: "./src/routes/push_errors", on: false },
     }
 
@@ -51,21 +45,11 @@ const configure = {
 
       configure.all_functions_to_test = response.all_functions_to_test; 
 
-      configure.scan_and_create_files.run = response.scan_and_create_files.run;
-
-      configure.push_to_all_functions_to_test = response.scan_and_create_files.push_to_all_functions_to_test;
-
-      configure.directories = response.scan_and_create_files.directories;
-
-      configure.scan_and_create_files.files = response.scan_and_create_files.files;
+      configure.all_functions_to_test = response.all_functions_to_test; 
 
       configure.db.file_pull_config.file = response.db.file_pull_config.file;
 
       configure.db.file_pull_config.on = response.db.file_pull_config.on;
-
-      configure.db.file_push_functions.file = response.db.file_push_functions.file;
-
-      configure.db.file_push_functions.on = response.db.file_push_functions.on;
 
       configure.db.file_push_errors.file = response.db.file_push_errors.file;
 
@@ -78,42 +62,7 @@ const configure = {
     });
 
   }
-
-  if(configure.scan_and_create_files.run === true) { 
-
-    exports.directories = configure.scan_and_create_files.directories;
-    exports.files = configure.scan_and_create_files.files;
-
-    var file_list = require('./scan.js');
-
-    if(configure.scan_and_create_files.push_to_all_functions_to_test === true) {
-
-      configure.all_functions_to_test = configure.all_functions_to_test.concat(file_list); 
-
-      if(configure.db.file_push_functions.on === true) { 
-
-          fetch(`${configure.db.file_push_functions.file}?data=${JSON.stringify(file_list)}`)
-
-          .then((data) => data.text())
-
-          .then((response) => {
-
-            if(Array.isArray(JSON.parse(response))) {
-              configure.all_functions_to_test = JSON.parse(response);
-              return;
-            }
-
-          }).catch(err => { 
-
-            console.log(err);
-
-          });
-
-      }
-
-    }
-
-  }
+  
   
   /*
     @param {developer_input: object}: imported data
@@ -134,6 +83,8 @@ const configure = {
       case false: 
 
           try {
+
+            //run selcted set...
         
             var developer_input = require(configure.single_function_to_test);
                                     
@@ -157,6 +108,8 @@ const configure = {
       break;
         
       case true:
+
+          //run selected set
       
           for(let i = 0; i < configure.all_functions_to_test.length; i++) { 
 
