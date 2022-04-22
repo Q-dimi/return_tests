@@ -1,6 +1,6 @@
-# Return Tests!
+# npm return_tests
 
-Tests if a functions return value matches a regular expression, data type and data value each or seperately. npm return_tests
+Tests if a functions return value matches a regular expression, data type and data value each or seperately.
 
 # Files
 
@@ -37,29 +37,21 @@ const configure = {
 
   all_functions_to_test: [
     "./functions/example1.js",
-
     "./functions/example2.js",
-
     "./functions/example3.js",
   ],
 
   scan_and_create_files: {
     run: false,
-
     push_to_all_functions_to_test: false,
-
     directories: [],
-
     files: [],
   },
 
   db: {
     on: false,
-
     file_pull_config: "./src/routes/pull_config",
-
     file_push_functions: "./src/routes/push_functions",
-
     file_push_errors: "./src/routes/push_errors",
   },
 };
@@ -109,6 +101,7 @@ Go to '/functions' folder and you will see some examples of how your functions a
 @param {description: string}: description of the function
 
 @param {index: number}: index of file
+
 ***unit as object and index_of_set as number must be initialized to pass tests
 
 */
@@ -116,31 +109,24 @@ Go to '/functions' folder and you will see some examples of how your functions a
 module.exports = {
   tests: [
     { unit: {}, index_of_set: 1, a: 2, b: 5, c: 77 },
-
     { unit: {}, index_of_set: 2, a: 7, b: 5 },
-
     { unit: {}, index_of_set: 3, a: "hellow", b: 5 },
-
     { unit: {}, index_of_set: 4, a: 2, b: 5 },
-
     { unit: {}, index_of_set: 5, a: 2, b: 3 },
   ],
 
   allowed_types: {
     on: true,
-
     values: ["number", "BigInt"],
   },
 
   allowed_values: {
     on: true,
-
     values: [7, 12],
   },
 
   regex_set: {
     on: false,
-
     values: [],
   },
 
@@ -162,7 +148,6 @@ module.exports = {
 
   still_exists: {
     still_exists: true,
-
     other_possible_directories: [],
   },
 
@@ -173,9 +158,7 @@ module.exports = {
   developers_assigned: [
     {
       name: null,
-
       email: null,
-
       phone: null,
     },
   ],
@@ -192,4 +175,4 @@ module.exports = {
 
 ## The end
 
-For you to get this to work, type npm return_tests and visit the src directory and run npm start and go to the 4 files listed at the top!
+For you to get this to work, type npm return_tests and visit the ''src' directory and run npm start and go to the 4 files listed at the top!
