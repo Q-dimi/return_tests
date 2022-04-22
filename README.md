@@ -1,10 +1,10 @@
-# npm return_tests
+# npm return tests
 
-Tests if a functions return value matches a regular expression, data type and data value each or seperately. Go to src folder and type npm start then go to localhost:3000 to see all the errors for each of the functions tested. Functions can be found in the '/functions' directory. Please copy the format in the example files. The configure object in build.js provides the functions you would like to test.
+Tests if a functions return value matches a regular expression, data type and data value.
 
 ## How To Configure
 
-Inside 'build.js', you will see a config object at the top. The directions are plain. Just add the directories of the functions you would like to test.
+Inside 'build.js', you will see a config object at the top. The directions are plain. Just add the directory names of the functions you would like to test from the functions folder.
 
 ```js
 const configure = {
@@ -18,7 +18,7 @@ const configure = {
 
 ## Where your functions which need testing live
 
-Go to '/functions' folder and you will see some examples of how your functions are formatted. Just create a new file in that folder with the same format as the examples and add the file name to configure.all_functions_to_test inside of build.js.
+Go to '/functions' folder and you will see some examples of how your functions are formatted. Just create a new file in that folder with the same format as the examples.
 
 ```js
 module.exports = {
@@ -83,3 +83,7 @@ module.exports = {
   index: 1,
 };
 ```
+
+# Get started
+
+Go to src folder and type npm start then go to localhost:3000 to see all the errors for each of the functions you have listed in the build.js config object.
