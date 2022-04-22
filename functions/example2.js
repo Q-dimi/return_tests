@@ -81,7 +81,9 @@ module.exports = {
 
     client_hit: null,
 
-    description: 'this function...'
+    description: 'this function...',
+
+    index: 2
       
   }
 

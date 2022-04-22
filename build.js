@@ -4,7 +4,7 @@
   @param {test_all}: whether to test all files or not. 
   @param {all_functions_to_test}: all the files which have a function to test. 
 
-  tcp on server side update or refresh ...i learned the seperation from urbisci and lo sasso... oooooo alexandaa ooooo
+  tcp on server side update or refresh ...i learned the seperation from urbisci and lo sasso... oooooo alexandaa ooooo https://youtu.be/0EUqqSQdsrM?t=1813
 
 */
 
@@ -236,8 +236,15 @@ const configure = {
         (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
         (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number')
       ) {
-        console.log(`(tests) need to be defined as an object with object (unit: object) and (index_of_set: index) ${i}: ${typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found'}`);
+
+        console.log(`
+          (tests) need to be defined as an object with object
+          (unit: object) and (index_of_set: index)
+          ${i}: ${typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found'}
+        `);
+
         continue;
+
       }
   
       var params = [];
