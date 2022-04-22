@@ -5,11 +5,6 @@
   @param {all_functions_to_test}: all the files which have a function to test. 
   @param {scan_and_create_files}: scan files for functions and create files with those functions and push those to db
   @param {db}: database insertion and pull. 
-
-
-  tcp on server side update or refresh https://youtu.be/1fpNs9qLOhs
-  //on the back end create a function that updates the functions from the file list...
-
 */
 
 const configure = { 
@@ -287,9 +282,9 @@ const configure = {
         { on: false, test: 'off' }
       );
   
-      if(allowed_types_unit_or_single.on === true) { //was allowed_types.on === true
+      if(allowed_types_unit_or_single.on === true) {
   
-        if(allowed_types_unit_or_single.v.values.includes(typeof(return_value)) !== true) { //was allowed_types.values.includes(typeof(return_value)) !== true
+        if(allowed_types_unit_or_single.v.values.includes(typeof(return_value)) !== true) {
   
           err_object.error_type = true;
   
@@ -312,7 +307,7 @@ const configure = {
         { on: false, test: 'off' }
       );
   
-      if(allowed_values_unit_or_single.on === true) { //was allowed_values.on === true
+      if(allowed_values_unit_or_single.on === true) {
   
         if(
           typeof(return_value) === 'number' || 
@@ -322,7 +317,7 @@ const configure = {
           typeof(return_value) === 'boolean'
         ) {
   
-          if(allowed_values_unit_or_single.v.values.includes(return_value) !== true) {  //was allowed_values.values.includes(return_value) !== true
+          if(allowed_values_unit_or_single.v.values.includes(return_value) !== true) {  
   
             err_object.error_value = true;
   
@@ -340,9 +335,9 @@ const configure = {
   
            var match = false;
   
-           for(let i = 0; i < allowed_values_unit_or_single.v.values.length; i++) { //was allowed_values.values.length
-             if(typeof(allowed_values_unit_or_single.v.values[i]) === 'object') { //was allowed_values.values[i]
-              if(JSON.stringify(allowed_values_unit_or_single.v.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { //was allowed_values.values[i]
+           for(let i = 0; i < allowed_values_unit_or_single.v.values.length; i++) { 
+             if(typeof(allowed_values_unit_or_single.v.values[i]) === 'object') { 
+              if(JSON.stringify(allowed_values_unit_or_single.v.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
                 match = true;
                 break;
               }
@@ -380,13 +375,13 @@ const configure = {
         { on: false, test: 'off' }
       );
     
-      if(allowed_regex_unit_or_single.on === true) { //was regex_set.on === true
+      if(allowed_regex_unit_or_single.on === true) {
 
         var regex_pass = false;
   
-        for(let i = 0; i < allowed_regex_unit_or_single.v.values.length; i++) {  //was regex_set.values.length
+        for(let i = 0; i < allowed_regex_unit_or_single.v.values.length; i++) {  
   
-          var test_regex = test(allowed_regex_unit_or_single.v.values[i], return_value); //was regex_set.values[i]
+          var test_regex = test(allowed_regex_unit_or_single.v.values[i], return_value); 
   
           if(test_regex !== true) { 
   
@@ -397,7 +392,7 @@ const configure = {
   
             err_object[`error_regex_message-${i}`] = `The value returned does not pass`;
   
-            err_object[`error_regex_regular_expression-${i}`] = allowed_regex_unit_or_single.v.values[i]; //was regex_set.values[i]
+            err_object[`error_regex_regular_expression-${i}`] = allowed_regex_unit_or_single.v.values[i];
   
             err_object[`error_regex_return_value-${i}`] = return_value;
   
@@ -420,8 +415,6 @@ const configure = {
         err_object.file_name = file_name;
 
         err_object.index_of_error_set = typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found';
-
-        //pass back allowed everything for both in here...
 
         error_sets.push(err_object);
 
