@@ -1,52 +1,17 @@
 
 /*
-  @param {single_function_to_test: string}: one file to test that you choose. 
-  @param {test_all: boolean}: whether to test all files or not. 
-  @param {all_functions_to_test: array}: all the files which have a function to test. 
-  @param {scan_and_create_files: object}: scan files for functions and create files with those functions and push those to db
-  @param {db: object}: database insertion and pull. 
+  @param {all_functions_to_test: array}: insert the functions you would like to test
 */
-
-const axios = require('axios');
 
 const configure = { 
 
-    fail_on_config: true,
-
     all_functions_to_test: [
-      './examples/example1.js',
-      './examples/example2.js',
-      './examples/example3.js',
+      './functions/example1.js',
+      './functions/example2.js',
+      './functions/example3.js',
     ],
 
-    db: { 
-      pull_functions: { file: "./src/routes/pull_config" },
-    }
-
   }
-
-  /*
-    pull functions from database and stick in all_functions_to_test (not sure why this isnt working)
-  */
-
-  const sendGetRequest = async () => {
-    try {
-      const resp = await axios.get(`${configure.db.pull_functions.file}`);
-      resp = JSON.parse(resp);
-      configure.all_functions_to_test = resp;
-      return true;
-    } catch (err) {
-      const message = await err.message;
-      console.log(message);
-      configure.fail_on_config = true;
-      return false;
-    }
-  }
-
-  (async () => {
-    const response = await sendGetRequest();
-    console.log(response);
-  })();
 
   /*
     @param {developer_input: object}: imported data
@@ -59,37 +24,29 @@ const configure = {
   */
 
   var error_sets = [];
-
-  if(configure.fail_on_config === false) {
           
-    for(let i = 0; i < configure.all_functions_to_test.length; i++) {
+  for(let i = 0; i < configure.all_functions_to_test.length; i++) {
 
-      try {
+    try {
 
-        var developer_input = require(configure.all_functions_to_test[i]); //just point to functions to test and get rid of this...
+      var developer_input = require(configure.all_functions_to_test[i]); 
 
-        run_tests(
-          developer_input.tests, 
-          developer_input.allowed_types, 
-          developer_input.allowed_values, 
-          developer_input.regex_set, 
-          developer_input.function_called, 
-          configure.all_functions_to_test[i],
-          developer_input.function_name, 
-          developer_input.directory
-        );
+      run_tests(
+        developer_input.tests, 
+        developer_input.allowed_types, 
+        developer_input.allowed_values, 
+        developer_input.regex_set, 
+        developer_input.function_called, 
+        configure.all_functions_to_test[i],
+        developer_input.function_name, 
+        developer_input.directory
+      );
 
-      } catch(err) {
+    } catch(err) {
 
-          console.log(err.message);
-
-      }
+      console.log(err.message);
 
     }
-
-  } else { 
-
-    console.log('configuration failuire, please see build.js fetch method');
 
   }
             
@@ -350,14 +307,6 @@ const configure = {
     /*
       export the error set
     */
-
-    for(let i = 0; i < error_sets.length; i++) { 
-      console.log(JSON.stringify(error_sets[i]) + '\n \n');
-    }
-
-    if(error_sets.length === 0) { 
-      error_sets.push({error: 'error in config or no file chosen'});
-    }
 
     exports.errors = error_sets;
 

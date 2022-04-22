@@ -9,7 +9,6 @@
   "author": "Alexander Eatman",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
     "node-fetch": "^3.2.3"
   }
 }

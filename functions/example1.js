@@ -10,8 +10,6 @@
   @param {function_name: string}: name of the function in the directory you got it from.
   @param {time_created: string}: the time the file was created.
   @param {still_exists: object}: whether the function in that file exists and whether it should be created again. Determined by @param {scan} in build.js
-  @param {run_all: boolean}: when running tests for all files, run_all is checked and if false does not run. it true runs file
-  @param {updated_function_if_no_match: function}: if scan finds function, make sure the function matches the function_called . if not, push the updated file function here.
   @param {unit: object}: must be defined. takes three params which are objects with the same names as allowed_types, allowed_values, regex_set...same thing
   @param {index_of_set: number}: the index of the error set
   @param {developers: array}: the developers assigned
@@ -71,11 +69,7 @@ module.exports = {
       still_exists: true,
       other_possible_directories: []
     },
-  
-    run_all: true,
-      
-    updated_function_if_match_in_fname_and_directory: null, 
-
+        
     developers_assigned: [{ 
       name: null,
       email: null,
