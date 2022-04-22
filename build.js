@@ -1,10 +1,10 @@
 
 /*
-  @param {single_function_to_test}: one file to test that you choose. 
-  @param {test_all}: whether to test all files or not. 
-  @param {all_functions_to_test}: all the files which have a function to test. 
-  @param {scan_and_create_files}: scan files for functions and create files with those functions and push those to db
-  @param {db}: database insertion and pull. 
+  @param {single_function_to_test: string}: one file to test that you choose. 
+  @param {test_all: boolean}: whether to test all files or not. 
+  @param {all_functions_to_test: array}: all the files which have a function to test. 
+  @param {scan_and_create_files: object}: scan files for functions and create files with those functions and push those to db
+  @param {db: object}: database insertion and pull. 
 */
 
 const configure = { 
@@ -113,13 +113,13 @@ const configure = {
   }
   
   /*
-    @param {developer_input}: imported data
-    @param {tests}: array of objects to run tests
-    @param {allowed_types}: allowed return types
-    @param {allowed_values}: allowed return values
-    @param {regex_set}: allowed regular expressions
-    @param {function_called}: function passed 
-    @param {error_sets}: exported set of objects that did not pass test
+    @param {developer_input: object}: imported data
+    @param {tests: array}: array of objects to run tests
+    @param {allowed_types: object}: allowed return types
+    @param {allowed_values: object}: allowed return values
+    @param {regex_set: object}: allowed regular expressions
+    @param {function_called: function}: function passed 
+    @param {error_sets: array}: exported set of objects that did not pass test
   */
   
   var error_sets = [];
@@ -432,8 +432,8 @@ const configure = {
   }
   
   /*
-    @param {regular_expression}: regular expression being tested
-    @param {return_value}: the value being tested against
+    @param {regular_expression: string}: regular expression being tested
+    @param {return_value: BigInt, number, string, undefined, null, object, undefined, boolean}: the value being tested against
   */
   
   function test(regular_expression, return_value) { 
