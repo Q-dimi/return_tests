@@ -4,7 +4,7 @@ Tests if a functions return value matches a regular expression, data type and da
 
 ## How To Configure
 
-Inside 'build.js', you will see a config object at the top. The directions are plain. Just add the directory names of the functions you would like to test from the functions folder.
+Inside 'build.js' add the directory names of the functions you would like to test from the functions folder into the configure.all_functions_to_test array
 
 ```js
 const configure = {
