@@ -4,7 +4,7 @@
   @param {test_all}: whether to test all files or not. 
   @param {all_functions_to_test}: all the files which have a function to test. 
 
-  tcp on server side update or refresh ...i learned the seperation from urbisci and lo sasso... oooooo alexandaa ooooo https://youtu.be/0EUqqSQdsrM?t=1813
+  tcp on server side update or refresh ...https://youtu.be/0EUqqSQdsrM?t=1813 (SULLY HERE ring ring ring ring ring ring ring.... ehh emm knuckles crack. sorry lizard, thats my job. you had a great run and you will be marked down in history and i will too)
 
 */
 
@@ -71,8 +71,6 @@ const configure = {
 
     if(configure.scan_and_create_files.push_to_all_functions_to_test === true) {
 
-      configure.all_functions_to_test = configure.all_functions_to_test.concat(file_list); //dont need...
-
       if(configure.db.on === true) { 
 
           fetch(`${file_push_errors}?data=${JSON.stringify(file_list)}`)
@@ -83,7 +81,12 @@ const configure = {
 
             if(JSON.parse(response) === Array.isArray(response)) {
               configure.all_functions_to_test = JSON.parse(response);
+              return;
             }
+
+            console.log(response);
+
+            configure.all_functions_to_test = configure.all_functions_to_test.concat(file_list);  // /:-{FAIL}
 
           }).catch(err => { 
 
@@ -187,7 +190,10 @@ const configure = {
       init_errors.tests = '(tests) need to be defined as an array with object (unit: object) and (index_of_set: index)';
     }
 
-    if((typeof(allowed_types) !== 'object') || (typeof(allowed_types) === 'object' && typeof(allowed_types.on) !== 'boolean')) {
+    if(
+      (typeof(allowed_types) !== 'object') || 
+      (typeof(allowed_types) === 'object' && typeof(allowed_types.on) !== 'boolean') || 
+      (typeof(allowed_types) === 'object' && typeof(allowed_types.values) !== 'object' && Array.isArray(allowed_types.values) === false)) {
       init_errors.allowed_types = '(allowed_types) must be an object with paramters (on: boolean) and (values: array)';
     }
 
@@ -219,7 +225,7 @@ const configure = {
 
     if(size > 0) { 
 
-      console.log(`Directory of Error: ${directory} ---------------------------------- /n`);
+      console.log(`Directory of Error: ${typeof(directory) !== 'undefined' ? directory : 'undefined'} ---------------------------------- /n`);
 
       for (const [key, value] of Object.entries(init_errors)) {
         console.log(`${key}: ${value} /n`);
