@@ -6,10 +6,10 @@ Tests if a functions return value matches a regular expression, data type and da
 
 Go to '/src' file and run npm start. There are four files which are 'live_errors', 'config', 'db_errors', 'db_functions.'
 
-- live_errors: all the errors which are currently live in one or all files/
-- config: The configuration object properties in build.js (see below)
-- db_errors: All the errors pushed to the database that when resolved via live_errors, can be resolved by clicking resolve
-- db_functions: all the functions that are being tested with their current config properties in '/functions'
+- Express view: live_errors: all the errors which are currently live
+- Express view: config: The configuration object properties in build.js (see below)
+- Express view: db_errors: All the errors pushed to the database that when resolved via live_errors, can be resolved by clicking resolve
+- Express view: db_functions: all the functions that are being tested with their current config properties in '/functions'
 
 ## How To Configure
 
