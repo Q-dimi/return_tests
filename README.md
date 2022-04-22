@@ -1,247 +1,195 @@
-<h1>How to Use</h1>
-<p>Application that takes in input for your function and checks if the output matches certain types in allowed_types, values in allowed_values and regular expressions in regex_set.</p>
+# Return Tests!
 
-<ul>
+Tests if a functions return value matches a regular expression, data type and data value each or seperately. npm return_tests
 
-  <li style = 'margin-bottom: 10px'>Go to 'build.js' file and See Configure Object at the top of script. Make it your own.</li>
+# Files
 
-  <li style = 'margin-bottom: 10px'>'functions/example.js' is your function testing file. Add more files to check different functions.</li>
+Go to '/src' file and run npm start. There are four files which are 'live_errors', 'config', 'db_errors', 'db_functions.'
 
-  <li style = 'margin-bottom: 10px'>If you would like to see the data on your screen, cd into src and type npm start in your terminal. Then go to localhost:3000. You must have node installed. See src/public/images for what you will see. If you do not want to run the application run node build.js instead. </li>
+- live_errors: all the errors which are currently live in one or all files/
+- config: The configuration object properties in build.js (see below)
+- db_errors: All the errors pushed to the database that when resolved via live_errors, can be resolved by clicking resolve
+- db_functions: all the functions that are being tested with their current config properties in '/functions'
 
-</ul>
+## How To Configure
 
----
-
-**Advertisement :)**
-
-- **[pica](https://nodeca.github.io/pica/demo/)** - high quality and fast image
-  resize in browser.
-- **[babelfish](https://github.com/nodeca/babelfish/)** - developer friendly
-  i18n with plurals support and easy syntax.
-
-You will like those projects!
-
----
-
-# h1 Heading 8-)
-
-## h2 Heading
-
-### h3 Heading
-
-#### h4 Heading
-
-##### h5 Heading
-
-###### h6 Heading
-
-## Horizontal Rules
-
----
-
----
-
----
-
-## Typographic replacements
-
-Enable typographer option to see result.
-
-(c) (C) (r) (R) (tm) (TM) (p) (P) +-
-
-test.. test... test..... test?..... test!....
-
-!!!!!! ???? ,, -- ---
-
-"Smartypants, double quotes" and 'single quotes'
-
-## Emphasis
-
-**This is bold text**
-
-**This is bold text**
-
-_This is italic text_
-
-_This is italic text_
-
-~~Strikethrough~~
-
-## Blockquotes
-
-> Blockquotes can also be nested...
->
-> > ...by using additional greater-than signs right next to each other...
-> >
-> > > ...or with spaces between arrows.
-
-## Lists
-
-Unordered
-
-- Create a list by starting a line with `+`, `-`, or `*`
-- Sub-lists are made by indenting 2 spaces:
-  - Marker character change forces new list start:
-    - Ac tristique libero volutpat at
-    * Facilisis in pretium nisl aliquet
-    - Nulla volutpat aliquam velit
-- Very easy!
-
-Ordered
-
-1. Lorem ipsum dolor sit amet
-2. Consectetur adipiscing elit
-3. Integer molestie lorem at massa
-
-4. You can use sequential numbers...
-5. ...or keep all the numbers as `1.`
-
-Start numbering with offset:
-
-57. foo
-1. bar
-
-## Code
-
-Inline `code`
-
-Indented code
-
-    // Some comments
-    line 1 of code
-    line 2 of code
-    line 3 of code
-
-Block code "fences"
-
-```
-Sample text here...
-```
-
-Syntax highlighting
+Inside 'build.js', you will see a config object at the top. The directions are plain. Change the object how you wish in this file or change it via the config express view file in '/src' only if your db is set up in 'db.js'. The config object in build.js is listed as...
 
 ```js
-var foo = function (bar) {
-  return bar++;
-};
+/*
 
-console.log(foo(5));
+@param {single_function_to_test: string}: one file to test that you choose.
+
+@param {test_all: boolean}: whether to test all files or not.
+
+@param {all_functions_to_test: array}: all the files which have a function to test.
+
+@param {scan_and_create_files: object}: scan files for functions and create files with those functions and push those to db
+
+@param {db: object}: database for config, pushing errors and pushing obect functions to db.
+
+*/
+
+const configure = {
+  test_all: true,
+
+  single_function_to_test: "./functions/example2.js",
+
+  all_functions_to_test: [
+    "./functions/example1.js",
+
+    "./functions/example2.js",
+
+    "./functions/example3.js",
+  ],
+
+  scan_and_create_files: {
+    run: false,
+
+    push_to_all_functions_to_test: false,
+
+    directories: [],
+
+    files: [],
+  },
+
+  db: {
+    on: false,
+
+    file_pull_config: "./src/routes/pull_config",
+
+    file_push_functions: "./src/routes/push_functions",
+
+    file_push_errors: "./src/routes/push_errors",
+  },
+};
 ```
 
-## Tables
+## Where your functions which need testing live
 
-| Option | Description                                                               |
-| ------ | ------------------------------------------------------------------------- |
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default.    |
-| ext    | extension to be used for dest files.                                      |
+Go to '/functions' folder and you will see some examples of how your functions are formatted. Each file represents a single function and is listed as...
 
-Right aligned columns
+```js
+/*
 
-| Option |                                                               Description |
-| -----: | ------------------------------------------------------------------------: |
-|   data | path to data files to supply the data that will be passed into templates. |
-| engine |    engine to be used for processing templates. Handlebars is the default. |
-|    ext |                                      extension to be used for dest files. |
+@param {tests: array}: test sets passed in as parameters
 
-## Links
+@param {allowed_types: object}: types allowed to be returned
 
-[link text](http://dev.nodeca.com)
+@param {allowed_values: object}: values allowed to be returned
 
-[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+@param {regex_set: object}: if return value matches all in the regex set (could just use this)
 
-Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
+@param {function_called: function}: function created by programmer that is checked via tests. Each file gets its own function.
 
-## Images
+@param {function_type: string}: regular or arrow function
 
-![Minion](https://octodex.github.com/images/minion.png)
-![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+@param {directory: string}: directory name where the function lives.
 
-Like links, Images also have a footnote style syntax
+@param {function_name: string}: name of the function in the directory you got it from.
 
-![Alt text][id]
+@param {time_created: string}: the time the file was created.
 
-With a reference later in the document defining the URL location:
+@param {still_exists: object}: whether the function in that file exists and whether it should be created again. Determined by @param {scan} in build.js
 
-[id]: https://octodex.github.com/images/dojocat.jpg "The Dojocat"
+@param {run_all: boolean}: when running tests for all files, run_all is checked and if false does not run. it true runs file
 
-## Plugins
+@param {updated_function_if_no_match: function}: if scan finds function, make sure the function matches the function_called . if not, push the updated file function here.
 
-The killer feature of `markdown-it` is very effective support of
-[syntax plugins](https://www.npmjs.org/browse/keyword/markdown-it-plugin).
+@param {unit: object}: must be defined. takes three params which are objects with the same names as allowed_types, allowed_values, regex_set...same thing
 
-### [Emojies](https://github.com/markdown-it/markdown-it-emoji)
+@param {index_of_set: number}: the index of the error set
 
-> Classic markup: :wink: :crush: :cry: :tear: :laughing: :yum:
->
-> Shortcuts (emoticons): :-) :-( 8-) ;)
+@param {developers: array}: the developers assigned
 
-see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.
+@param {end_point_hit: string}: end point hit
 
-### [Subscript](https://github.com/markdown-it/markdown-it-sub) / [Superscript](https://github.com/markdown-it/markdown-it-sup)
+@param {client_hit: string}: client_hit
 
-- 19^th^
-- H~2~O
+@param {description: string}: description of the function
 
-### [\<ins>](https://github.com/markdown-it/markdown-it-ins)
+@param {index: number}: index of file
+***unit as object and index_of_set as number must be initialized to pass tests
 
-++Inserted text++
+*/
 
-### [\<mark>](https://github.com/markdown-it/markdown-it-mark)
+module.exports = {
+  tests: [
+    { unit: {}, index_of_set: 1, a: 2, b: 5, c: 77 },
 
-==Marked text==
+    { unit: {}, index_of_set: 2, a: 7, b: 5 },
 
-### [Footnotes](https://github.com/markdown-it/markdown-it-footnote)
+    { unit: {}, index_of_set: 3, a: "hellow", b: 5 },
 
-Footnote 1 link[^first].
+    { unit: {}, index_of_set: 4, a: 2, b: 5 },
 
-Footnote 2 link[^second].
+    { unit: {}, index_of_set: 5, a: 2, b: 3 },
+  ],
 
-Inline footnote^[Text of inline footnote] definition.
+  allowed_types: {
+    on: true,
 
-Duplicated footnote reference[^second].
+    values: ["number", "BigInt"],
+  },
 
-[^first]: Footnote **can have markup**
+  allowed_values: {
+    on: true,
 
-    and multiple paragraphs.
+    values: [7, 12],
+  },
 
-[^second]: Footnote text.
+  regex_set: {
+    on: false,
 
-### [Definition lists](https://github.com/markdown-it/markdown-it-deflist)
+    values: [],
+  },
 
-Term 1
+  function_called: function (a, b) {
+    try {
+      return a + b;
+    } catch (err) {
+      return err;
+    }
+  },
 
-: Definition 1
-with lazy continuation.
+  function_type: null,
 
-Term 2 with _inline markup_
+  directory: null,
 
-: Definition 2
+  function_name: null,
 
-        { some code, part of Definition 2 }
+  time_created: null,
 
-    Third paragraph of definition 2.
+  still_exists: {
+    still_exists: true,
 
-_Compact style:_
+    other_possible_directories: [],
+  },
 
-Term 1
-~ Definition 1
+  run_all: true,
 
-Term 2
-~ Definition 2a
-~ Definition 2b
+  updated_function_if_match_in_fname_and_directory: null,
 
-### [Abbreviations](https://github.com/markdown-it/markdown-it-abbr)
+  developers_assigned: [
+    {
+      name: null,
 
-This is HTML abbreviation example.
+      email: null,
 
-It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
+      phone: null,
+    },
+  ],
 
-\*[HTML]: Hyper Text Markup Language
+  end_point_hit: null,
 
-### [Custom containers](https://github.com/markdown-it/markdown-it-container)
+  client_hit: null,
 
-::: warning
-_here be dragons_
-:::
+  description: "this function...",
+
+  index: 1,
+};
+```
+
+## The end
+
+For you to get this to work, type npm return_tests and visit the src directory and run npm start and go to the 4 files listed at the top!
