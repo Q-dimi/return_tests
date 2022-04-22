@@ -10,6 +10,8 @@
 
 const configure = { 
 
+    execute: true,
+
     test_all: true,
 
     single_function_to_test: './functions/example2.js',
@@ -125,71 +127,75 @@ const configure = {
   
   var error_sets = [];
 
-  switch(configure.test_all) { 
-      
-    case false: 
+  if(configure.execute === true) {
 
-        try {
-      
-          var developer_input = require(configure.single_function_to_test);
-                                  
-          run_tests(
-            developer_input.tests, 
-            developer_input.allowed_types, 
-            developer_input.allowed_values, 
-            developer_input.regex_set, 
-            developer_input.function_called, 
-            configure.single_function_to_test, 
-            developer_input.function_name, 
-            developer_input.directory
-          );
-
-        } catch(err) { 
-
-          console.log(err.message);
-
-        }
-      
-    break;
-      
-    case true:
-    
-        for(let i = 0; i < configure.all_functions_to_test.length; i++) { 
+    switch(configure.test_all) { 
+        
+      case false: 
 
           try {
-
-            var developer_input = require(configure.all_functions_to_test[i]);
-
-            if(developer_input.run_all === true) {
-
-              run_tests(
-                developer_input.tests, 
-                developer_input.allowed_types, 
-                developer_input.allowed_values, 
-                developer_input.regex_set, 
-                developer_input.function_called, 
-                configure.all_functions_to_test[i],
-                developer_input.function_name, 
-                developer_input.directory
-              );
-
-            }
+        
+            var developer_input = require(configure.single_function_to_test);
+                                    
+            run_tests(
+              developer_input.tests, 
+              developer_input.allowed_types, 
+              developer_input.allowed_values, 
+              developer_input.regex_set, 
+              developer_input.function_called, 
+              configure.single_function_to_test, 
+              developer_input.function_name, 
+              developer_input.directory
+            );
 
           } catch(err) { 
 
             console.log(err.message);
 
           }
+        
+      break;
+        
+      case true:
+      
+          for(let i = 0; i < configure.all_functions_to_test.length; i++) { 
 
-        }
-          
-    break;
-      
-    default: 
-      
-      console.log(`error: test_all must be true or false`);
-  
-  }
+            try {
+
+              var developer_input = require(configure.all_functions_to_test[i]);
+
+              if(developer_input.run_all === true) {
+
+                run_tests(
+                  developer_input.tests, 
+                  developer_input.allowed_types, 
+                  developer_input.allowed_values, 
+                  developer_input.regex_set, 
+                  developer_input.function_called, 
+                  configure.all_functions_to_test[i],
+                  developer_input.function_name, 
+                  developer_input.directory
+                );
+
+              }
+
+            } catch(err) { 
+
+              console.log(err.message);
+
+            }
+
+          }
+            
+      break;
+        
+      default: 
+        
+        console.log(`error: test_all must be true or false`);
+    
+    }
+
+}
   
   /*
     check tests...
@@ -444,28 +450,32 @@ const configure = {
       return err.message;
     } 
   }
-  
-  /*
-    export the error set
-  */
 
-  for(let i = 0; i < error_sets.length; i++) { 
-    console.log(JSON.stringify(error_sets[i]) + '\n \n');
-  }
+  if(configure.execute === true) {
 
-  /*
-    push error set to db 
-  */
+    /*
+      export the error set
+    */
 
-  if(configure.db.file_push_errors.on === true) {
-    fetch(`${configure.db.file_push_errors.file}?data=${JSON.stringify(error_sets)}`)
-    .then((data) => data.text())
-    .then((response) => {
-      console.log(response);
-    }).catch(err => { 
-      console.log(err);
-    });
-  }
+    for(let i = 0; i < error_sets.length; i++) { 
+      console.log(JSON.stringify(error_sets[i]) + '\n \n');
+    }
 
-  exports.errors = error_sets;
+    /*
+      push error set to db 
+    */
+
+    if(configure.db.file_push_errors.on === true) {
+      fetch(`${configure.db.file_push_errors.file}?data=${JSON.stringify(error_sets)}`)
+      .then((data) => data.text())
+      .then((response) => {
+        console.log(response);
+      }).catch(err => { 
+        console.log(err);
+      });
+    }
+
+    exports.errors = error_sets;
+
+}
   
