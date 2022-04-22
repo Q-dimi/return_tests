@@ -1,6 +1,6 @@
-# npm return_tests
+# npm i return_tests
 
-Tests if a functions return value matches a regular expression, data type and data value. https://www.npmjs.com/package/return_tests
+Tests if a functions return value matches a regular expression, data type and data value.
 
 ## How To Configure
 
