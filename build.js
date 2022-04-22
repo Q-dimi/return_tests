@@ -5,65 +5,44 @@
   @param {all_functions_to_test: array}: all the files which have a function to test. 
   @param {scan_and_create_files: object}: scan files for functions and create files with those functions and push those to db
   @param {db: object}: database insertion and pull. 
-  //just pull the functions and put them in all_functions_to_test
 */
+
+const axios = require('axios');
 
 const configure = { 
 
-    execute: true,
+    fail_on_config: false,
 
-    test_all: true,
-
-    selected_set_to_test: [], //check box and push on server side as selected set... then click run and run these... (12 functions selected clickto view vs view all)
-
-    single_function_to_test: './functions/example2.js', //delete
-
-    all_functions_to_test: [ //delete
+    all_functions_to_test: [
       './functions/example1.js',
       './functions/example2.js',
       './functions/example3.js',
     ],
 
     db: { 
-      file_pull_config: { file: "./src/routes/pull_config", on: false },
-      file_push_errors: { file: "./src/routes/push_errors", on: false },
+      pull_functions: { file: "./src/routes/pull_config" },
     }
 
   }
 
-  if(configure.db.file_pull_config.on === true) { 
+  /*
+    pull functions from database and stick in all_functions_to_test (not sure why this isnt working)
+  */
 
-    fetch(`${configure.db.file_pull_config.file}`)
-
-    .then((data) => data.text())
-
-    .then((response) => {
-
+  async function get_config() {
+    await axios.get(`${configure.db.pull_functions.file}`)
+    .then(response => {
+      console.log(response);
       response = JSON.parse(response);
-
-      configure.test_all = response.test_all;
-
-      configure.all_functions_to_test = response.all_functions_to_test; 
-
-      configure.all_functions_to_test = response.all_functions_to_test; 
-
-      configure.db.file_pull_config.file = response.db.file_pull_config.file;
-
-      configure.db.file_pull_config.on = response.db.file_pull_config.on;
-
-      configure.db.file_push_errors.file = response.db.file_push_errors.file;
-
-      configure.db.file_push_errors.on = response.db.file_push_errors.on;
-
-    }).catch(err => { 
-
-      console.log(err);
-
+      configure.all_functions_to_test = response.all_functions_to_test;
+    }).catch(err => {
+      console.log(err.message);
+      configure.fail_on_config = true;
     });
-
   }
-  
-  
+
+  get_config();
+
   /*
     @param {developer_input: object}: imported data
     @param {tests: array}: array of objects to run tests
@@ -73,83 +52,42 @@ const configure = {
     @param {function_called: function}: function passed 
     @param {error_sets: array}: exported set of objects that did not pass test
   */
+
+  if(configure.fail_on_config === false) {
   
-  var error_sets = [];
-
-  if(configure.execute === true) {
-
-    switch(configure.test_all) { 
+    var error_sets = [];
         
-      case false: 
+    for(let i = 0; i < configure.all_functions_to_test.length; i++) {
 
-          try {
+      try {
 
-            //run selcted set...
-        
-            var developer_input = require(configure.single_function_to_test);
-                                    
-            run_tests(
-              developer_input.tests, 
-              developer_input.allowed_types, 
-              developer_input.allowed_values, 
-              developer_input.regex_set, 
-              developer_input.function_called, 
-              configure.single_function_to_test, 
-              developer_input.function_name, 
-              developer_input.directory
-            );
+        var developer_input = require(configure.all_functions_to_test[i]); //just point to functions to test and get rid of this...
 
-          } catch(err) { 
+        run_tests(
+          developer_input.tests, 
+          developer_input.allowed_types, 
+          developer_input.allowed_values, 
+          developer_input.regex_set, 
+          developer_input.function_called, 
+          configure.all_functions_to_test[i],
+          developer_input.function_name, 
+          developer_input.directory
+        );
 
-            console.log(err.message);
+      } catch(err) {
 
-          }
-        
-      break;
-        
-      case true:
+          console.log(err.message);
 
-          //run selected set
-      
-          for(let i = 0; i < configure.all_functions_to_test.length; i++) { 
+      }
 
-            try {
-
-              var developer_input = require(configure.all_functions_to_test[i]);
-
-              if(developer_input.run_all === true) {
-
-                run_tests(
-                  developer_input.tests, 
-                  developer_input.allowed_types, 
-                  developer_input.allowed_values, 
-                  developer_input.regex_set, 
-                  developer_input.function_called, 
-                  configure.all_functions_to_test[i],
-                  developer_input.function_name, 
-                  developer_input.directory
-                );
-
-              }
-
-            } catch(err) { 
-
-              console.log(err.message);
-
-            }
-
-          }
-            
-      break;
-        
-      default: 
-        
-        console.log(`error: test_all must be true or false`);
-    
     }
 
-}
-  
+  } else { 
+
+    console.log('configuration failuire, please see build.js fetch method');
+
+  }
+            
   /*
     check tests...
   */
@@ -203,7 +141,7 @@ const configure = {
 
     if(size > 0) { 
 
-      console.log(`Directory of Error: ${typeof(directory) !== 'undefined' ? directory : 'undefined'} ---------------------------------- /n`);
+      console.log(`Directory of Error: ${typeof(directory) !== 'undefined' ? directory : 'undefined'} ---------------- /n`);
 
       for (const [key, value] of Object.entries(init_errors)) {
         console.log(`${key}: ${value} /n`);
@@ -404,8 +342,6 @@ const configure = {
     } 
   }
 
-  if(configure.execute === true) {
-
     /*
       export the error set
     */
@@ -414,21 +350,10 @@ const configure = {
       console.log(JSON.stringify(error_sets[i]) + '\n \n');
     }
 
-    /*
-      push error set to db 
-    */
-
-    if(configure.db.file_push_errors.on === true) {
-      fetch(`${configure.db.file_push_errors.file}?data=${JSON.stringify(error_sets)}`)
-      .then((data) => data.text())
-      .then((response) => {
-        console.log(response);
-      }).catch(err => { 
-        console.log(err);
-      });
+    if(error_sets.length === 0) { 
+      error_sets.push({error: 'error in config or no file chosen'});
     }
 
     exports.errors = error_sets;
 
-}
   
