@@ -95,7 +95,7 @@ const configure = {
 
           .then((response) => {
 
-            if(JSON.parse(response) === Array.isArray(response)) {
+            if(Array.isArray(JSON.parse(response))) {
               configure.all_functions_to_test = JSON.parse(response);
               return;
             }
