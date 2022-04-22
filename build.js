@@ -3,6 +3,9 @@
   @param {single_function_to_test}: one file to test that you choose. 
   @param {test_all}: whether to test all files or not. 
   @param {all_functions_to_test}: all the files which have a function to test. 
+  @param {scan_and_create_files}: scan files for functions and create files with those functions and push those to db
+  @param {db}: database insertion and pull. 
+
 
   tcp on server side update or refresh https://youtu.be/1fpNs9qLOhs
   //on the back end create a function that updates the functions from the file list...
@@ -29,7 +32,8 @@ const configure = {
     db: { 
       on: false, 
       file_pull_config: './src/routes/pull_config',
-      file_push_errors: './src/routes/push_errors',
+      file_push_functions: './src/routes/push_functions',
+      file_push_errors: './src/routes/push_errors'
     }
 
   }
@@ -56,7 +60,7 @@ const configure = {
 
       configure.db.file_pull_config = response.db.file_pull_config;
 
-      configure.db.file_push_errors = response.db.file_push_errors;
+      configure.db.file_push_functions = response.db.file_push_functions;
 
     }).catch(err => { 
 
@@ -74,7 +78,7 @@ const configure = {
 
       if(configure.db.on === true) { 
 
-          fetch(`${file_push_errors}?data=${JSON.stringify(file_list)}`)
+          fetch(`${file_push_functions}?data=${JSON.stringify(file_list)}`)
 
           .then((data) => data.text())
 
@@ -440,6 +444,18 @@ const configure = {
   for(let i = 0; i < error_sets.length; i++) { 
     console.log(JSON.stringify(error_sets[i]) + '\n \n');
   }
+
+  /*
+    push error set to db (past errors shown in another file) (present errors in main) resolved button in database file. index will just be current errors that you compare against pushed in db
+  */
+
+  fetch(`${file_push_errors}?data=${JSON.stringify(error_sets)}`)
+  .then((data) => data.text())
+  .then((response) => {
+    console.log(response);
+  }).catch(err => { 
+    console.log(err);
+  });
 
   module.exports = error_sets;
   
