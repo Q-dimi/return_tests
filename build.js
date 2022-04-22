@@ -198,21 +198,21 @@ const configure = {
     if(
       (typeof(allowed_types) !== 'object') || 
       (typeof(allowed_types) === 'object' && typeof(allowed_types.on) !== 'boolean') || 
-      (typeof(allowed_types) === 'object' && typeof(allowed_types.values) !== 'object' && Array.isArray(allowed_types.values) === false)) {
+      (typeof(allowed_types) === 'object' && (typeof(allowed_types.values) !== 'object' || Array.isArray(allowed_types.values) === false))) {
       init_errors.allowed_types = '(allowed_types) must be an object with paramters (on: boolean) and (values: array)';
     }
 
     if(
       (typeof(allowed_values) !== 'object') || 
       (typeof(allowed_values) === 'object' && typeof(allowed_values.on) !== 'boolean') || 
-      (typeof(allowed_values) === 'object' && typeof(allowed_values.values) !== 'object' && Array.isArray(allowed_values.values) === false)) {
+      (typeof(allowed_values) === 'object' && (typeof(allowed_values.values) !== 'object' || Array.isArray(allowed_values.values) === false))) {
       init_errors.allowed_values = '(allowed_values) must be an object with parameters (on: boolean) and (values: array)';
     }
 
     if(
       (typeof(regex_set) !== 'object') || 
       (typeof(regex_set) === 'object' && typeof(regex_set.on) !== 'boolean') || 
-      (typeof(regex_set) === 'object' && typeof(regex_set.values) !== 'object' && Array.isArray(regex_set.values) === false)) {
+      (typeof(regex_set) === 'object' && (typeof(regex_set.values) !== 'object' || Array.isArray(regex_set.values) === false))) {
       init_errors.regex_set = '(regex_set) must be an object with parameters (on: boolean) and (values: array)';
     }
 
@@ -276,7 +276,7 @@ const configure = {
       var error_count = 0;
 
       var allowed_types_unit_or_single = (
-        typeof(tests[i].unit.allowed_types) !== 'undefined' && tests[i].unit.allowed_types.on === true ?
+        typeof(tests[i].unit.allowed_types) !== 'undefined' && tests[i].unit.allowed_types.on === true && Array.isArray(tests[i].unit.allowed_types.values) ?
         { on: true, test: 'unit', v: tests[i].unit.allowed_types } : allowed_types.on === true ?
         { on: true, test: 'single', v: allowed_types } : 
         { on: false, test: 'off' }
@@ -301,7 +301,7 @@ const configure = {
       }
 
       var allowed_values_unit_or_single = (
-        typeof(tests[i].unit.allowed_values) !== 'undefined' && tests[i].unit.allowed_values.on === true ? 
+        typeof(tests[i].unit.allowed_values) !== 'undefined' && tests[i].unit.allowed_values.on === true && Array.isArray(tests[i].unit.allowed_values.values) ? 
         { on: true, test: 'unit', v: tests[i].unit.allowed_values } : allowed_values.on === true ? 
         { on: true, test: 'single', v: allowed_values } : 
         { on: false, test: 'off' }
@@ -369,7 +369,7 @@ const configure = {
       }
 
       var allowed_regex_unit_or_single = (
-        typeof(tests[i].unit.regex_set) !== 'undefined' && tests[i].unit.regex_set.on === true ? 
+        typeof(tests[i].unit.regex_set) !== 'undefined' && tests[i].unit.regex_set.on === true && Array.isArray(tests[i].unit.regex_set.values) ? 
         { on: true, test: 'unit', v: tests[i].unit.regex_set } : regex_set.on === true ? 
         { on: true, test: 'single', v: regex_set } : 
         { on: false, test: 'off' }
@@ -446,16 +446,18 @@ const configure = {
   }
 
   /*
-    push error set to db (past errors shown in another file) (present errors in main) resolved button in database file. index will just be current errors that you compare against pushed in db
+    push error set to db (past errors shown in another file) (present errors in main) resolved button in database file. index will just be current errors that you compare against pushed in db. only push for unique errors. if the same error then dont push it... just check db on server.
   */
 
-  fetch(`${file_push_errors}?data=${JSON.stringify(error_sets)}`)
-  .then((data) => data.text())
-  .then((response) => {
-    console.log(response);
-  }).catch(err => { 
-    console.log(err);
-  });
+  if(configure.db.on) {
+    fetch(`${file_push_errors}?data=${JSON.stringify(error_sets)}`)
+    .then((data) => data.text())
+    .then((response) => {
+      console.log(response);
+    }).catch(err => { 
+      console.log(err);
+    });
+  }
 
   module.exports = error_sets;
   
