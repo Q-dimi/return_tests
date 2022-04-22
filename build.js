@@ -52,7 +52,7 @@ const configure = {
 
       configure.push_to_all_functions_to_test = response.scan_and_create_files.push_to_all_functions_to_test;
 
-      configure.directories = response.scan_and_create_files.direcories;
+      configure.directories = response.scan_and_create_files.directories;
 
       configure.scan_and_create_files.files = response.scan_and_create_files.files;
 
