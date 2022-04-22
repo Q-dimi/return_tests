@@ -5,6 +5,7 @@
   @param {all_functions_to_test}: all the files which have a function to test. 
 
   tcp on server side update or refresh https://youtu.be/1fpNs9qLOhs
+  //on the back end create a function that updates the functions from the file list...
 
 */
 
@@ -59,7 +60,7 @@ const configure = {
 
     }).catch(err => { 
 
-        console.log(err);
+      console.log(err);
 
     });
 
@@ -86,11 +87,11 @@ const configure = {
 
             console.log(response);
 
-            configure.all_functions_to_test = configure.all_functions_to_test.concat(file_list);  // /:-{FAIL}
+            configure.all_functions_to_test = configure.all_functions_to_test.concat(file_list);  // :-{FAIL}
 
           }).catch(err => { 
 
-              console.log(err);
+            console.log(err);
 
           });
 
@@ -197,11 +198,17 @@ const configure = {
       init_errors.allowed_types = '(allowed_types) must be an object with paramters (on: boolean) and (values: array)';
     }
 
-    if(typeof(allowed_values) !== 'object') {
+    if(
+      (typeof(allowed_values) !== 'object') || 
+      (typeof(allowed_values) === 'object' && typeof(allowed_values.on) !== 'boolean') || 
+      (typeof(allowed_values) === 'object' && typeof(allowed_values.values) !== 'object' && Array.isArray(allowed_values.values) === false)) {
       init_errors.allowed_values = '(allowed_values) must be an object with parameters (on: boolean) and (values: array)';
     }
 
-    if(typeof(regex_set) !== 'object') {
+    if(
+      (typeof(regex_set) !== 'object') || 
+      (typeof(regex_set) === 'object' && typeof(regex_set.on) !== 'boolean') || 
+      (typeof(regex_set) === 'object' && typeof(regex_set.values) !== 'object' && Array.isArray(regex_set.values) === false)) {
       init_errors.regex_set = '(regex_set) must be an object with parameters (on: boolean) and (values: array)';
     }
 

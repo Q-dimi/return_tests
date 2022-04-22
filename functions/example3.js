@@ -18,6 +18,7 @@
   @param {end_point_hit}: end point hit
   @param {client_hit}: client_hit
   @param {description}: description of the function
+  @param {index}: index of file
 
 
   ***unit as object and index_of_set as number must be initialized to pass tests
