@@ -3,7 +3,7 @@ var errors = require('../../build.js');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-  res.render('index', { error_set: errors });
+  res.render('index', { error_set: errors.errors });
 });
 
 module.exports = router;

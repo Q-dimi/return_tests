@@ -26,7 +26,8 @@ const configure = {
 
     scan_and_create_files: { 
       run: false, 
-      push_to_all_functions_to_test: false 
+      push_to_all_functions_to_test: false,
+      directories: []
     },
 
     db: { 
@@ -56,6 +57,8 @@ const configure = {
 
       configure.push_to_all_functions_to_test = response.scan_and_create_files.push_to_all_functions_to_test;
 
+      configure.directories = response.scan_and_create_files.direcories;
+
       configure.db.on = response.db.on;
 
       configure.db.file_pull_config = response.db.file_pull_config;
@@ -69,6 +72,8 @@ const configure = {
     });
 
   }
+
+  exports.directories = configure.scan_and_create_files.directories;
 
   if(configure.scan_and_create_files.run === true) { 
 
@@ -448,7 +453,7 @@ const configure = {
   }
 
   /*
-    push error set to db (past errors shown in another file) (present errors in main) resolved button in database file. index will just be current errors that you compare against pushed in db. only push for unique errors. if the same error then dont push it... just check db on server.
+    push error set to db 
   */
 
   if(configure.db.on) {
@@ -461,5 +466,5 @@ const configure = {
     });
   }
 
-  module.exports = error_sets;
+  exports.errors = error_sets;
   
