@@ -1,6 +1,8 @@
 
 /*
   @param {all_functions_to_test: array}: insert the functions you would like to test
+  @ recommend naking a fetch request to your database or storing a set of values somewhere for all functions to test
+
 */
 
 const configure = { 
