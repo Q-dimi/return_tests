@@ -3,6 +3,9 @@
   @param {single_function_to_test}: one file to test that you choose. 
   @param {test_all}: whether to test all files or not. 
   @param {all_functions_to_test}: all the files which have a function to test. 
+
+  tcp on server side update or refresh ...i learned the seperation from urbisci and lo sasso... oooooo alexandaa ooooo
+
 */
 
 const configure = { 
@@ -20,15 +23,78 @@ const configure = {
     scan_and_create_files: { 
       run: false, 
       push_to_all_functions_to_test: false 
+    },
+
+    db: { 
+      on: false, 
+      file_pull_config: './src/routes/pull_config',
+      file_push_errors: './src/routes/push_errors',
     }
 
   }
 
+  if(configure.db.on === true) { 
+
+    fetch(`${file_pull_config}`)
+
+    .then((data) => data.text())
+
+    .then((response) => {
+
+      response = JSON.parse(response);
+
+      configure.test_all = response.test_all;
+
+      configure.all_functions_to_test = response.all_functions_to_test; 
+
+      configure.scan_and_create_files.run = response.scan_and_create_files.run;
+
+      configure.push_to_all_functions_to_test = response.scan_and_create_files.push_to_all_functions_to_test;
+
+      configure.db.on = response.db.on;
+
+      configure.db.file_pull_config = response.db.file_pull_config;
+
+      configure.db.file_push_errors = response.db.file_push_errors;
+
+    }).catch(err => { 
+
+        console.log(err);
+
+    });
+
+  }
+
   if(configure.scan_and_create_files.run === true) { 
+
     var file_list = require('./scan.js');
+
     if(configure.scan_and_create_files.push_to_all_functions_to_test === true) {
-      configure.all_functions_to_test = configure.all_functions_to_test.concat(file_list);
+
+      configure.all_functions_to_test = configure.all_functions_to_test.concat(file_list); //dont need...
+
+      if(configure.db.on === true) { 
+
+          fetch(`${file_push_errors}?data=${JSON.stringify(file_list)}`)
+
+          .then((data) => data.text())
+
+          .then((response) => {
+
+            if(JSON.parse(response) === Array.isArray(response)) {
+              configure.all_functions_to_test = JSON.parse(response);
+            }
+
+          }).catch(err => { 
+
+              console.log(err);
+
+          });
+
+      }
+
     }
+
   }
   
   /*
@@ -121,7 +187,7 @@ const configure = {
       init_errors.tests = '(tests) need to be defined as an array with object (unit: object) and (index_of_set: index)';
     }
 
-    if(typeof(allowed_types) !== 'object') {
+    if((typeof(allowed_types) !== 'object') || (typeof(allowed_types) === 'object' && typeof(allowed_types.on) !== 'boolean')) {
       init_errors.allowed_types = '(allowed_types) must be an object with paramters (on: boolean) and (values: array)';
     }
 
@@ -178,7 +244,7 @@ const configure = {
   
       for (const [key, value] of Object.entries(tests[i])) {
        if(key === 'index_of_set' || key === 'unit') continue;
-       params.push(value);
+        params.push(value);
       }
   
       var return_value = function_called(...params);
