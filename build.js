@@ -22,7 +22,8 @@ const configure = {
     scan_and_create_files: { 
       run: false, 
       push_to_all_functions_to_test: false,
-      directories: []
+      directories: [],
+      files: []
     },
 
     db: { 
@@ -68,10 +69,11 @@ const configure = {
 
   }
 
-  exports.directories = configure.scan_and_create_files.directories;
-
   if(configure.scan_and_create_files.run === true) { 
 
+    exports.directories = configure.scan_and_create_files.directories;
+    exports.files = configure.scan_and_create_files.files;
+    
     var file_list = require('./scan.js');
 
     if(configure.scan_and_create_files.push_to_all_functions_to_test === true) {
