@@ -14,6 +14,11 @@
   @param {updated_function_if_no_match}: if scan finds function, make sure the function matches the function_called . if not, push the updated file function here.
   @param {unit}: must be defined. takes three params which are objects with the same names as allowed_types, allowed_values, regex_set...same thing
   @param {index_of_set}: the index of the error set
+  @param {developers}: the developers assigned
+  @param {end_point_hit}: end point hit
+  @param {client_hit}: client_hit
+  @param {description}: description of the function
+
 
   ***unit as object and index_of_set as number must be initialized to pass tests
 
@@ -66,6 +71,18 @@ module.exports = {
     run_all: true,
       
     updated_function_if_match_in_fname_and_directory: null, 
+
+    developers_assigned: [{ 
+      name: null,
+      email: null,
+      phone: null
+    }],
+
+    end_point_hit: null,
+
+    client_hit: null,
+
+    description: 'this function...'
       
   }
 
