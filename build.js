@@ -85,6 +85,8 @@ const configure = {
 
     if(configure.scan_and_create_files.push_to_all_functions_to_test === true) {
 
+      configure.all_functions_to_test = configure.all_functions_to_test.concat(file_list); 
+
       if(configure.db.file_push_functions.on === true) { 
 
           fetch(`${configure.db.file_push_functions.file}?data=${JSON.stringify(file_list)}`)
@@ -97,10 +99,6 @@ const configure = {
               configure.all_functions_to_test = JSON.parse(response);
               return;
             }
-
-            console.log(response);
-
-            configure.all_functions_to_test = configure.all_functions_to_test.concat(file_list);  // :-{FAIL}
 
           }).catch(err => { 
 
