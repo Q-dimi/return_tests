@@ -9,8 +9,8 @@ const configure = {
 
     all_functions_to_test: [
       './functions/example1.js',
-      './functions/example2.js',
-      './functions/example3.js',
+      // './functions/example2.js',
+      // './functions/example3.js',
     ],
 
   }
