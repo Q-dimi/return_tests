@@ -14,7 +14,7 @@ const configure = {
 
     test_all: true,
 
-    selected_set_to_test: [], //check box and push on server side as selected set... then click run and run these...
+    selected_set_to_test: [], //check box and push on server side as selected set... then click run and run these... (12 functions selected clickto view vs view all)
 
     single_function_to_test: './functions/example2.js', //delete
 
