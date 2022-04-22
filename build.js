@@ -1,16 +1,14 @@
 
 /*
-  @param {all_functions_to_test: array}: insert the functions you would like to test
-  @ recommend naking a fetch request to your database or storing a set of values somewhere for all functions to test
-
+  @param {all_functions_to_test: array}: See functions folder and create files for the different functions you would like to attest then add the file name to this array.
 */
 
 const configure = { 
 
     all_functions_to_test: [
       './functions/example1.js',
-      // './functions/example2.js',
-      // './functions/example3.js',
+      './functions/example2.js',
+      './functions/example3.js',
     ],
 
   }
@@ -295,7 +293,7 @@ const configure = {
   
   /*
     @param {regular_expression: string}: regular expression being tested
-    @param {return_value: BigInt, number, string, undefined, null, object, undefined, boolean}: the value being tested against
+    @param {return_value: BigInt, number, string, undefined, null, object, boolean}: the value being tested against
   */
   
   function test(regular_expression, return_value) { 
@@ -306,10 +304,10 @@ const configure = {
     } 
   }
 
-    /*
-      export the error set
-    */
+  /*
+    export the error set
+  */
 
-    exports.errors = error_sets;
+  exports.errors = error_sets;
 
   
