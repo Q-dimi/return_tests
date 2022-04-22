@@ -5,7 +5,7 @@
   @param {all_functions_to_test: array}: all the files which have a function to test. 
   @param {scan_and_create_files: object}: scan files for functions and create files with those functions and push those to db
   @param {db: object}: database insertion and pull. 
-  David Dillon, your request has been input. We will create the functions on the back end.
+  //should i have one file and just pull all the functions from the database in an array.... i dont know... did not want to but.
 */
 
 const configure = { 
