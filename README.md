@@ -6,9 +6,9 @@ Tests if a functions return value matches a regular expression, data type and da
 
 Go to '/src' file and run npm start. There are four files which are 'live_errors', 'config', 'db_errors', 'db_functions.'
 
-- Express view: live_errors: all the errors which are currently live
-- Express view: config: The configuration object properties in build.js (see below)
-- Express view: db_errors: All the errors pushed to the database that when resolved via live_errors, can be resolved by clicking resolve
+- Express view - live_errors: all the errors which are currently live
+- Express view - config: The configuration object properties in build.js (see below)
+- Express view - db_errors: All the errors pushed to the database that when resolved via live_errors, can be resolved by clicking resolve
 - Express view: db_functions: all the functions that are being tested with their current config properties in '/functions'
 
 ## How To Configure
@@ -50,9 +50,9 @@ const configure = {
 
   db: {
     on: false,
-    file_pull_config: "./src/routes/pull_config",
-    file_push_functions: "./src/routes/push_functions",
-    file_push_errors: "./src/routes/push_errors",
+    file_pull_config: { file: "./src/routes/pull_config", on: false },
+    file_push_functions: { file: "./src/routes/push_functions", on: false },
+    file_push_errors: { file: "./src/routes/push_errors", on: false },
   },
 };
 ```

@@ -27,17 +27,16 @@ const configure = {
     },
 
     db: { 
-      on: false, 
-      file_pull_config: './src/routes/pull_config',
-      file_push_functions: './src/routes/push_functions',
-      file_push_errors: './src/routes/push_errors'
+      file_pull_config: { file: "./src/routes/pull_config", on: false },
+      file_push_functions: { file: "./src/routes/push_functions", on: false },
+      file_push_errors: { file: "./src/routes/push_errors", on: false },
     }
 
   }
 
-  if(configure.db.on === true) { 
+  if(configure.db.file_pull_config.on === true) { 
 
-    fetch(`${file_pull_config}`)
+    fetch(`${configure.db.file_pull_config.file}`)
 
     .then((data) => data.text())
 
@@ -55,11 +54,19 @@ const configure = {
 
       configure.directories = response.scan_and_create_files.direcories;
 
-      configure.db.on = response.db.on;
+      configure.scan_and_create_files.files = response.scan_and_create_files.files;
 
-      configure.db.file_pull_config = response.db.file_pull_config;
+      configure.db.file_pull_config.file = response.db.file_pull_config.file;
 
-      configure.db.file_push_functions = response.db.file_push_functions;
+      configure.db.file_pull_config.on = response.db.file_pull_config.on;
+
+      configure.db.file_push_functions.file = response.db.file_push_functions.file;
+
+      configure.db.file_push_functions.on = response.db.file_push_functions.on;
+
+      configure.db.file_push_errors.file = response.db.file_push_errors.file;
+
+      configure.db.file_push_errors.on = response.db.file_push_errors.on;
 
     }).catch(err => { 
 
@@ -73,14 +80,14 @@ const configure = {
 
     exports.directories = configure.scan_and_create_files.directories;
     exports.files = configure.scan_and_create_files.files;
-    
+
     var file_list = require('./scan.js');
 
     if(configure.scan_and_create_files.push_to_all_functions_to_test === true) {
 
-      if(configure.db.on === true) { 
+      if(configure.db.file_push_functions.on === true) { 
 
-          fetch(`${file_push_functions}?data=${JSON.stringify(file_list)}`)
+          fetch(`${configure.db.file_push_functions.file}?data=${JSON.stringify(file_list)}`)
 
           .then((data) => data.text())
 
@@ -451,8 +458,8 @@ const configure = {
     push error set to db 
   */
 
-  if(configure.db.on) {
-    fetch(`${file_push_errors}?data=${JSON.stringify(error_sets)}`)
+  if(configure.db.file_push_errors.on === true) {
+    fetch(`${configure.db.file_push_errors.file}?data=${JSON.stringify(error_sets)}`)
     .then((data) => data.text())
     .then((response) => {
       console.log(response);
