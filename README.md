@@ -4,48 +4,37 @@ Tests if a functions return value matches a regular expression, data type and da
 
 # Files
 
-Go to '/src' file and run npm start. There are four files which are 'live_errors', 'config', 'db_errors', 'db_functions.'
+Go to '/src' file and run npm start. There are four files which are 'live_eindexrrors', 'db_functions', 'create_function', 'edit_function', 'view_working_set.'
 
-- Express view - live_errors: all the errors which are currently live
-- Express view - config: The configuration object properties in build.js (see below)
-- Express view - db_errors: All the errors pushed to the database that when resolved via live_errors, can be resolved by clicking resolve
+- Express view - index: all the errors which are currently live. click on run to run errors for set selected.
 - Express view: db_functions: all the functions that are being tested with their current config properties in '/functions'
+- Express view: create_function: create a function on the back end with the params in examples folder
+- Express view: edit_function: edit your function on your back end
+- Express view: view_working_set: view the working set you are on
 
 ## How To Configure
 
-Inside 'build.js', you will see a config object at the top. The directions are plain. Change the object how you wish in this file or change it via the config express view file in '/src' only if your db is set up in 'db.js'. The config object in build.js is listed as...
+Inside 'build.js', you will see a config object at the top. The directions are plain. Change the object file for the directory you want to hit. There is already one set for you. The config object in build.js is listed as...
 
 ```js
 const configure = {
-  test_all: true,
-
-  single_function_to_test: "./functions/example2.js",
+  fail_on_config: true,
 
   all_functions_to_test: [
-    "./functions/example1.js",
-    "./functions/example2.js",
-    "./functions/example3.js",
+    "./examples/example1.js",
+    "./examples/example2.js",
+    "./examples/example3.js",
   ],
 
-  scan_and_create_files: {
-    run: false,
-    push_to_all_functions_to_test: false,
-    directories: [],
-    files: [],
-  },
-
   db: {
-    on: false,
-    file_pull_config: { file: "./src/routes/pull_config", on: false },
-    file_push_functions: { file: "./src/routes/push_functions", on: false },
-    file_push_errors: { file: "./src/routes/push_errors", on: false },
+    pull_functions: { file: "./src/routes/pull_config" },
   },
 };
 ```
 
 ## Where your functions which need testing live
 
-Go to '/functions' folder and you will see some examples of how your functions are formatted. Each file represents a single function and is listed as...
+Go to '/examples' folder and you will see some examples of how your functions are formatted. Each function is created on the back end.
 
 ```js
 module.exports = {
@@ -117,4 +106,4 @@ module.exports = {
 
 ## The end
 
-For you to get this to work, type npm return_tests and visit the ''src' directory and run npm start and go to the 4 files listed at the top!
+For you to get this to work, type npm return_tests and visit the ''src' directory and run npm start and go to localhost:3000

@@ -11,12 +11,12 @@ const axios = require('axios');
 
 const configure = { 
 
-    fail_on_config: false,
+    fail_on_config: true,
 
     all_functions_to_test: [
-      './functions/example1.js',
-      './functions/example2.js',
-      './functions/example3.js',
+      './examples/example1.js',
+      './examples/example2.js',
+      './examples/example3.js',
     ],
 
     db: { 
@@ -29,19 +29,24 @@ const configure = {
     pull functions from database and stick in all_functions_to_test (not sure why this isnt working)
   */
 
-  async function get_config() {
-    await axios.get(`${configure.db.pull_functions.file}`)
-    .then(response => {
-      console.log(response);
-      response = JSON.parse(response);
-      configure.all_functions_to_test = response.all_functions_to_test;
-    }).catch(err => {
-      console.log(err.message);
+  const sendGetRequest = async () => {
+    try {
+      const resp = await axios.get(`${configure.db.pull_functions.file}`);
+      resp = JSON.parse(resp);
+      configure.all_functions_to_test = resp;
+      return true;
+    } catch (err) {
+      const message = await err.message;
+      console.log(message);
       configure.fail_on_config = true;
-    });
+      return false;
+    }
   }
 
-  get_config();
+  (async () => {
+    const response = await sendGetRequest();
+    console.log(response);
+  })();
 
   /*
     @param {developer_input: object}: imported data
@@ -53,10 +58,10 @@ const configure = {
     @param {error_sets: array}: exported set of objects that did not pass test
   */
 
+  var error_sets = [];
+
   if(configure.fail_on_config === false) {
-  
-    var error_sets = [];
-        
+          
     for(let i = 0; i < configure.all_functions_to_test.length; i++) {
 
       try {
