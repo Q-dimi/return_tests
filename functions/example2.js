@@ -35,7 +35,7 @@ module.exports = {
     },  
       
     allowed_values: { 
-      on: true, 
+      on: false, 
       values: [7, 12, 'hello world'] 
     },
       
