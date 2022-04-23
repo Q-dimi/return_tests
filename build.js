@@ -92,7 +92,7 @@ const configure = {
   }
 
   /*
-    The array of objects returned
+    The array of objects returned (rewrie this with a fixed set... dont do the random thing... makes things weird... if you have to just create a copy with a diferent type at each index)
   */
 
   function arrays_returned(multiply_and_returned_set) {
