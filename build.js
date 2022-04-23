@@ -134,7 +134,7 @@ const configure = {
       var params = [];
   
       for (const [key, value] of Object.entries(tests[i])) {
-       if(key === 'index_of_set' || key === 'unit') continue;
+       if(key === 'index_of_set' || key === 'unit' || key === 'function_called') continue;
         params.push(value);
       }
   
