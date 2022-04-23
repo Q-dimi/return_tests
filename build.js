@@ -131,7 +131,7 @@ const configure = {
     for(let i = 0; i < amount_of_parameters; i++) { 
 
       var p_index = Math.floor(Math.random() * allowed_random_parameters.length);
-      var current_parameter = allowed_random_parameters[p_index];
+      var current_parameter = allowed_random_parameters[p_index]; //allowed at x, allowed at y allowed at... fix the ordering of the params... dont just pass in a random one dumbass
 
       if(current_parameter === 'string') { 
         params[`test-param-string-${i}`] = create_random_inner_param_string();
