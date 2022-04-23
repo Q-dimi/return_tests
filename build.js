@@ -1,6 +1,6 @@
 
 /*
-  @param {all_functions_to_test: array}: See functions folder and create files for the different functions you would like to attest then add the file name to this array.
+  @param {all_functions_to_test: array}: See functions folder and create files for the different functions you would like to test then add the file name to this array. One file represents one or many functions.
 */
 
 const configure = { 
