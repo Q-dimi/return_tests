@@ -90,11 +90,31 @@ const configure = {
   */
 
   function arrays_returned(multiply_and_returned_set) {
+
     var allowed_random_parameters = multiply_and_returned_set.randomized.allowed_random_parameters;
     var parameter_amount = multiply_and_returned_set.randomized.parameter_amount;
-    var parameter_order = multiply_and_returned_set.randomized.parameter_order;
     var multiply_amount = multiply_and_returned_set.randomized.multiply_amount;
+
     var returned_set = [];
+
+    for(let i = 0; i < multiply_amount; i++) { 
+      var p_a_index = Math.floor(Math.random() * parameter_amount.length);
+      var amount_of_parameters = parameter_amount[p_a_index];
+      returned_set.push(create_single_randomized_object(
+        multiply_and_returned_set,
+        allowed_random_parameters,
+        parameter_amount[amount_of_parameters], 
+      ));
+    }
+
+  }
+
+  /*
+    creates and returns a single randomized object
+  */
+
+  function create_single_randomized_object(attach_here, allowed_random_parameters, amount_of_parameters) { 
+    console.log('create the random parameters and attach and return the random object');
   }
             
   /*
