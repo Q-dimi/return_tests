@@ -1,7 +1,7 @@
 
 /*
   @param {tests: array}: test sets
-  @param {allowed_types: object}: allowed types returned
+  @param {allowed_types: object}: allowed types returned  ... BigInt, number, string, object, undefined, boolean
   @param {allowed_values: object}: allowed values returned
   @param {regex_set: object}: regular expressions that must be passed
   @param {function_called: function}: your function

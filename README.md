@@ -1,6 +1,6 @@
 # return_tests
 
-Tests if a functions return value matches a regular expression, data type and data value. Type 'npm i return_tests' to get started.
+Tests if a functions return value matches a regular expression, data type and data value.
 
 ## How To Configure
 
@@ -86,4 +86,4 @@ module.exports = {
 
 # Get started
 
-Go to src folder and type npm start then go to localhost:3000 to see all the errors for each of the functions you have listed in the build.js config object.
+Type 'npm i return_tests' to get started. and go to src folder and type npm start then go to localhost:3000 to see all the errors for each of the example functions you have listed in the build.js config object. Then you can add your own functions!
