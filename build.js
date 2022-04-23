@@ -107,6 +107,8 @@ const configure = {
       ));
     }
 
+    return returned_set;
+
   }
 
   /*
