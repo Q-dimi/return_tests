@@ -1,6 +1,6 @@
 {
   "name": "return_tests",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "package that tests the return values of functions",
   "main": "build.js",
   "scripts": {
@@ -8,9 +8,7 @@
   },
   "author": "Alexander Eatman",
   "license": "ISC",
-  "dependencies": {
-    "node-fetch": "^3.2.3"
-  },
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/Q-dimi/return_tests.git"

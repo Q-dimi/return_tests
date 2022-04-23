@@ -300,7 +300,7 @@ const configure = {
     try {
       return new RegExp(regular_expression).test(return_value);
     } catch(err) { 
-      return err.message;
+      return false;
     } 
   }
 

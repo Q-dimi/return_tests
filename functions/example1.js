@@ -10,7 +10,7 @@
   @param {function_name: string}: name of function
   @param {time_created: string}: time created
   @param {still_exists: object}: If the function exists
-  @param {unit: object}: The first test if set to true. If not set, falls back. If that is false, no test.
+  @param {unit: object}: unit objects are tested first if set to true. If not set or false, falls back to the below three objects.
   @param {index_of_set: number}: Error ser index
   @param {developers: array}: the developers assigned
   @param {end_point_hit: string}: end point hit
