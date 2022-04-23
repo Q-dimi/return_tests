@@ -125,36 +125,37 @@ const configure = {
       var current_parameter = allowed_random_parameters[p_index];
 
       if(current_parameter === 'string') { 
-        //create random param and push to params...
+        params[`test-param-string-${i}`] = create_random_inner_param_string(); //require
       }
 
       if(current_parameter === 'number') { 
-
+        params[`test-param-number-${i}`] = create_random_inner_param_number();
       }
 
       if(current_parameter === 'BigInt') { 
-
+        params[`test-param-BigInt-${i}`] = create_random_inner_param_BigInt();
       }
 
       if(current_parameter === 'object') { 
-
+        params[`test-param-object-${i}`] = create_random_inner_param_object();
       }
 
       if(current_parameter === 'undefined') { 
-
+        params[`test-param-undefined-${i}`] = undefined;
       }
 
       if(current_parameter === 'boolean') { 
-
+        params[`test-param-boolean-${i}`] = create_random_inner_param_boolean();
       }
 
     }
 
     attach_here.params = params;
+
     return attach_here;
 
   }
-            
+
   /*
     check tests...
   */
@@ -383,7 +384,7 @@ const configure = {
 
         err_object.function_name = function_name; // turnary
 
-        err_object.directory = directory; // turnary
+        err_object.directory = function_directory; // turnary because of single tests vs fall back...
 
         err_object.file_name = file_name; // turnary
 
