@@ -146,11 +146,11 @@ const configure = {
       }
 
       if(current_parameter === 'object') { 
-        params[`test-param-object-${i}`] = create_random_inner_param_object(attach_here.randomized.type_of_object); // (string, number, both) - p count
+        params[`test-param-object-${i}`] = create_random_inner_param_object(attach_here.randomized.when_obj_passed); // (string, number, both) - p count
       }
 
       if(current_parameter === 'array') { 
-        params[`test-param-array-${i}`] = create_random_inner_param_array(attach_here.randomized.type_of_array); //(string, number, both) - p count
+        params[`test-param-array-${i}`] = create_random_inner_param_array(attach_here.randomized.when_arr_passed); //(string, number, both) - p count
       }
 
       if(current_parameter === 'undefined') { 
