@@ -4,7 +4,7 @@ Tests if a functions return value matches a regular expression, data type and da
 
 ## How To Configure
 
-Inside 'build.js', add file names to the configure.all_functions_to_test array. The file names come from the '/functions' folder. Each added is a function or set of different functions tested dependent on config in the file.
+Inside 'build.js', add file names to the configure.all_functions_to_test array. The file names come from the '/functions' folder. Each added is a single function or set of different functions tested dependent on config in the file.
 
 ```js
 const configure = {

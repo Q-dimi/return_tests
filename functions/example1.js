@@ -10,7 +10,7 @@
   @param {unit: object}: unit objects are tested first if set to true. If not set or false, falls back to the below three objects.
   @param {index_of_set: number}: Error ser index
   @param {function_description: string}: description of the function
-  @param {function_set: array of functions}: array of different functions you can stick in tests 
+  @param {function_set: array of functions}: array of different functions you can stick in tests. multiply on this and stick this in function_called. Create a set of different functions and then run it through a multiplier where a different set of params is attahced to each one.
   @param {shared_index: number}: when multiplying out on one function. Taking that and making many object with different parameters.  
 
 */
@@ -19,11 +19,11 @@
 module.exports = { 
 
     tests: [  
-      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } } }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, shared_index: 1, a: 2, b: 5, c: 77 },
-      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } } }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 2, shared_index: 1, a: 2, b: 5, c: 77 },
-      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } } }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 3, shared_index: 2, a: 'hello world', b: 5, c: 77 },
-      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } } }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 4, shared_index: 4, a: 2, b: 5, c: 77 },
-      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } } }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 5, shared_index:2, a: 2, b: 5, c: 77 }
+      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, a: 2, b: 5, c: 77 },
+      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 2, a: 2, b: 5, c: 77 },
+      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 3, a: 'hello world', b: 5, c: 77 },
+      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 4, a: 2, b: 5, c: 77 },
+      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 5, a: 2, b: 5, c: 77 }
     ],
       
     allowed_types: { 
@@ -57,7 +57,7 @@ module.exports = {
     function_description: 'this function...',
 
     function_set: [
-      {function_called: '', name: 'hello'}
+      { function_called: '',  function_name: '', function_directory: '', function_description: '', on: false, function: function() {}, shared_index: 0}
     ]
       
   }

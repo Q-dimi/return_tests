@@ -136,7 +136,7 @@ const configure = {
         params.push(value);
       }
 
-      function_called = typeof(tests[i].function_called) !== 'undefined' && tests[i].function_called.on === true ? tests[i].function_called.function : function_called;
+      function_called = typeof(tests[i].function_called) === 'object' && tests[i].function_called.on === true && typeof(tests[i].function_called.function) === 'function' ? tests[i].function_called.function : function_called;
   
       var return_value = function_called(...params);
       var err_object = tests[i];
@@ -275,11 +275,13 @@ const configure = {
   
       if(error_count > 0) { 
 
-        err_object.function_name = function_name;
+        err_object.function_name = function_name; // turnary
 
-        err_object.directory = directory;
+        err_object.directory = directory; // turnary
 
-        err_object.file_name = file_name;
+        err_object.file_name = file_name; // turnary
+
+        //add the rest of the stuff and make sure to seperate on client
 
         err_object.index_of_error_set = typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found';
 
