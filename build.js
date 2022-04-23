@@ -86,10 +86,14 @@ const configure = {
   }
 
   /*
-    The arrays returned
+    The array of objects returned
   */
 
-  function arrays_returned(multiply_and_returned_set) { 
+  function arrays_returned(multiply_and_returned_set) {
+    var allowed_random_parameters = multiply_and_returned_set.randomized.allowed_random_parameters;
+    var parameter_amount = multiply_and_returned_set.randomized.parameter_amount;
+    var parameter_order = multiply_and_returned_set.randomized.parameter_order;
+    var multiply_amount = multiply_and_returned_set.randomized.multiply_amount;
     var returned_set = [];
   }
             
