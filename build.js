@@ -29,6 +29,10 @@ const configure = {
 
       var developer_input = require(configure.all_functions_to_test[i]); 
 
+      if(developer_input.replace_tests_with_multiplied_on_load === true) { 
+        developer_input.tests = multiply_function_set(developer_input.function_set_multiplied, developer_input.tests, configure.all_functions_to_test[i]);
+      }
+
       run_tests(
         developer_input.tests, 
         developer_input.allowed_types, 
@@ -37,7 +41,7 @@ const configure = {
         developer_input.function_called, 
         configure.all_functions_to_test[i],
         developer_input.function_name, 
-        developer_input.directory
+        developer_input.function_directory
       );
 
     } catch(err) {
@@ -46,6 +50,41 @@ const configure = {
 
     }
 
+  }
+
+  /*
+    replace the original tests with the multiplied function_set if set to true. replace tests with new array
+  */
+
+  function multiply_function_set(multiply_function_set, original_tests, folder) { 
+
+    var new_tests_array = [];
+
+    try { 
+
+      for(let i = 0; i < multiply_function_set.length; i++) { 
+        new_tests_array = new_tests_array.concat(arrays_returned(multiply_function_set[i]));
+      }
+
+    } catch(err) { 
+
+      console.log(`
+        error: multplying did not work on index ${i} - 
+        please see function_set_multiplied in folder: ${folder}`
+      );
+
+      return original_tests;
+
+    }
+
+  }
+
+  /*
+    The arrays returned for the set multipled pushed to new_tests_array
+  */
+
+  function arrays_returned(multiply_and_returned_set) { 
+    var returned_set = [];
   }
             
   /*

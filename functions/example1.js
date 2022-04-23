@@ -56,6 +56,8 @@ module.exports = {
 
     function_description: 'this function...',
 
+    replace_tests_with_multiplied_on_load: false,
+
     function_set_multiplied: [
       { randomized: { allowed_random_parameters: ['string', 'object', 'number'], parameter_amount: [2, 5, 'random'], multiply_amount: 17 }, function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, a: 2, b: 5, c: 77 },
     ]
