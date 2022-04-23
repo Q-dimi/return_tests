@@ -130,8 +130,10 @@ const configure = {
 
     for(let i = 0; i < amount_of_parameters; i++) { 
 
+      //f this... going to just create a fixed amount of types in the set and get rid of random types passed... just make it simple...
+
       var p_index = Math.floor(Math.random() * allowed_random_parameters.length);
-      var current_parameter = allowed_random_parameters[p_index]; //allowed at x, allowed at y allowed at... fix the ordering of the params... dont just pass in a random one dumbass
+      var current_parameter = attach_here.randomized.focucus_params_index_type.override_random === true ? attach_here.randomized.focucus_params_index_type.fixed_params[i] : allowed_random_parameters[p_index]; 
 
       if(current_parameter === 'string') { 
         params[`test-param-string-${i}`] = create_random_inner_param_string();
