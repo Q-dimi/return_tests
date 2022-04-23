@@ -103,7 +103,7 @@ const configure = {
       returned_set.push(create_single_randomized_object(
         multiply_and_returned_set,
         allowed_random_parameters,
-        parameter_amount[amount_of_parameters], 
+        amount_of_parameters, 
       ));
     }
 
@@ -116,7 +116,43 @@ const configure = {
   */
 
   function create_single_randomized_object(attach_here, allowed_random_parameters, amount_of_parameters) { 
-    console.log('create the random parameters and attach and return the random object');
+
+    var params = {};
+
+    for(let i = 0; i < amount_of_parameters; i++) { 
+
+      var p_index = Math.floor(Math.random() * allowed_random_parameters.length);
+      var current_parameter = allowed_random_parameters[p_index];
+
+      if(current_parameter === 'string') { 
+        //create random param and push to params...
+      }
+
+      if(current_parameter === 'number') { 
+
+      }
+
+      if(current_parameter === 'BigInt') { 
+
+      }
+
+      if(current_parameter === 'object') { 
+
+      }
+
+      if(current_parameter === 'undefined') { 
+
+      }
+
+      if(current_parameter === 'boolean') { 
+
+      }
+
+    }
+
+    attach_here.params = params;
+    return attach_here;
+
   }
             
   /*
