@@ -30,13 +30,11 @@ const configure = {
       var developer_input = require(configure.all_functions_to_test[i]); 
 
       if(developer_input.replace_tests_with_multiplied_on_load === true) { 
-
         developer_input.tests = multiply_function_set(
           developer_input.function_set_multiplied, 
           developer_input.tests, 
           configure.all_functions_to_test[i]
         );
-
       }
 
       run_tests(
@@ -59,7 +57,7 @@ const configure = {
   }
 
   /*
-    multiply on multipl_amount
+    multiply on multiply_amount
   */
 
   function multiply_function_set(multiply_function_set, original_tests, folder) { 
@@ -71,6 +69,8 @@ const configure = {
       for(let i = 0; i < multiply_function_set.length; i++) { 
         new_tests_array = new_tests_array.concat(arrays_returned(multiply_function_set[i]));
       }
+
+      return new_tests_array;
 
     } catch(err) { 
 
