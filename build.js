@@ -31,7 +31,7 @@ const configure = {
 
       if(developer_input.replace_tests_with_multiplied_on_load === true) { 
         developer_input.tests = multiply_function_set(
-          developer_input.function_set_multiplied, 
+          developer_input.db === true ? fetch_content(developer_input.db.file_path) : developer_input.function_set_multiplied, 
           developer_input.tests, 
           configure.all_functions_to_test[i]
         );
@@ -55,6 +55,12 @@ const configure = {
     }
 
   }
+
+  /*
+    if not using file info, fetch from db...return sets and eval string
+  */
+
+  function fetch_content() {}
 
   /*
     multiply on multiply_amount
@@ -144,7 +150,7 @@ const configure = {
       }
 
       if(current_parameter === 'array') { 
-        params[`test-param-array-${i}`] = create_random_inner_param_array(type_of_array, levels_deep); //randomized on levels deep or not (string, number, both)
+        params[`test-param-array-${i}`] = create_random_inner_param_array(type_of_array); //(string, number, both)
       }
 
       if(current_parameter === 'undefined') { 
@@ -169,7 +175,6 @@ const configure = {
   function create_random_inner_param_object()  {}
   function create_random_inner_param_array()   {}
   function create_random_inner_param_boolean() {}
-
 
   /*
     check tests...
