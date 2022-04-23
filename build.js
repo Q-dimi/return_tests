@@ -146,11 +146,11 @@ const configure = {
       }
 
       if(current_parameter === 'object') { 
-        params[`test-param-object-${i}`] = create_random_inner_param_object(type_of_object, levels_deep); //randomized on levels deep or not (string, number, both)
+        params[`test-param-object-${i}`] = create_random_inner_param_object(attach_here.randomized.type_of_object); // (string, number, both) - p count
       }
 
       if(current_parameter === 'array') { 
-        params[`test-param-array-${i}`] = create_random_inner_param_array(type_of_array); //(string, number, both)
+        params[`test-param-array-${i}`] = create_random_inner_param_array(attach_here.randomized.type_of_array); //(string, number, both) - p count
       }
 
       if(current_parameter === 'undefined') { 
@@ -169,12 +169,12 @@ const configure = {
 
   }
 
-  function create_random_inner_param_string()  {}
-  function create_random_inner_param_number()  {}
-  function create_random_inner_param_BigInt()  {}
-  function create_random_inner_param_object()  {}
-  function create_random_inner_param_array()   {}
-  function create_random_inner_param_boolean() {}
+  function create_random_inner_param_string()  { return require('./random/string');  }
+  function create_random_inner_param_number()  { return require('./random/number');;  }
+  function create_random_inner_param_BigInt()  { return require('./random/BigInt');  }
+  function create_random_inner_param_object()  { return require('./random/object');  }
+  function create_random_inner_param_array()   { return require('./random/array');  }
+  function create_random_inner_param_boolean() { return require('./random/boolean'); }
 
   /*
     check tests...

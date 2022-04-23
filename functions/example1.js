@@ -65,7 +65,7 @@ module.exports = {
     },
 
     function_set_multiplied: [
-      { randomized: { allowed_random_parameters: ['number', 'string', 'object'], obj_params: { arr: '' }, parameter_amount: [2, 5], multiply_amount: 17 }, function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, parameters: { a: 2, b: 5, c: 77 } },
+      { randomized: { allowed_random_parameters: ['number', 'string', 'object'], when_obj_passed: {}, when_arr_passed: {}, parameter_amount: [2, 5], multiply_amount: 17 }, function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, parameters: { a: 2, b: 5, c: 77 } },
     ]
       
   }
