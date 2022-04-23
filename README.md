@@ -18,7 +18,7 @@ const configure = {
 
 ## Where your functions live
 
-Go to the '/functions' folder and see how the functions are formatted. Create a new file in that folder with the same format as the examples. The function placed in function_called will be the one that is tested.
+Go to the '/functions' folder and see how the functions are formatted. Create a new file in that folder with the same format as the examples. The function placed in function_called will be the function that is tested in that file.
 
 ```js
     tests: [
