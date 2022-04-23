@@ -4,21 +4,21 @@ Tests if a functions return value matches a regular expression, data type and da
 
 ## How To Configure
 
-Inside 'build.js' add the directory names of the functions you would like to test from the functions folder into the configure.all_functions_to_test array
+Inside 'build.js', add files names to configure.all_functions_to_test. The file names come from the functions folder. Each file you add will be a function that you test.
 
 ```js
 const configure = {
   all_functions_to_test: [
-    "./examples/example1.js",
-    "./examples/example2.js",
-    "./examples/example3.js",
+    "./functions/example1.js",
+    "./functions/example2.js",
+    "./functions/example3.js",
   ],
 };
 ```
 
-## Where your functions which need testing live
+## Where your functions live
 
-Go to '/functions' folder and you will see some examples of how your functions are formatted. Just create a new file in that folder with the same format as the examples.
+Go to the '/functions' folder and you will see some examples of how your functions are formatted. Create a new file in that folder with the same format as the examples. The function you place in function_called will be the one that is tested.
 
 ```js
     tests: [
@@ -84,4 +84,4 @@ Go to '/functions' folder and you will see some examples of how your functions a
 
 # Get started
 
-Type 'npm i return_tests' to get started and go to src folder and type npm start then go to localhost:3000 to see all the errors for each of the example functions you have listed in the build.js config object. Then you can add your own functions!
+Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions!
