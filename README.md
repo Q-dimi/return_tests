@@ -22,4 +22,4 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 
 # Get started
 
-Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions! FUNC YOU!
+Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions! FUNC YOU! KAAAAYYYYYYY-TRAAAAAAAIIIIIIN IIIIII SEEEEEEEE YOUUUUUUUUUU... [:{}]
