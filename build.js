@@ -98,13 +98,16 @@ const configure = {
     var returned_set = [];
 
     for(let i = 0; i < multiply_amount; i++) { 
+
       var p_a_index = Math.floor(Math.random() * parameter_amount.length);
       var amount_of_parameters = parameter_amount[p_a_index];
+
       returned_set.push(create_single_randomized_object(
         multiply_and_returned_set,
         allowed_random_parameters,
         amount_of_parameters, 
       ));
+
     }
 
     return returned_set;
@@ -125,7 +128,7 @@ const configure = {
       var current_parameter = allowed_random_parameters[p_index];
 
       if(current_parameter === 'string') { 
-        params[`test-param-string-${i}`] = create_random_inner_param_string(); //require
+        params[`test-param-string-${i}`] = create_random_inner_param_string();
       }
 
       if(current_parameter === 'number') { 
@@ -137,7 +140,11 @@ const configure = {
       }
 
       if(current_parameter === 'object') { 
-        params[`test-param-object-${i}`] = create_random_inner_param_object();
+        params[`test-param-object-${i}`] = create_random_inner_param_object(type_of_object, levels_deep); //randomized on levels deep or not (string, number, both)
+      }
+
+      if(current_parameter === 'array') { 
+        params[`test-param-array-${i}`] = create_random_inner_param_array(type_of_array, levels_deep); //randomized on levels deep or not (string, number, both)
       }
 
       if(current_parameter === 'undefined') { 
@@ -155,6 +162,14 @@ const configure = {
     return attach_here;
 
   }
+
+  function create_random_inner_param_string()  {}
+  function create_random_inner_param_number()  {}
+  function create_random_inner_param_BigInt()  {}
+  function create_random_inner_param_object()  {}
+  function create_random_inner_param_array()   {}
+  function create_random_inner_param_boolean() {}
+
 
   /*
     check tests...
