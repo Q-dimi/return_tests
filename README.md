@@ -21,69 +21,67 @@ const configure = {
 Go to '/functions' folder and you will see some examples of how your functions are formatted. Just create a new file in that folder with the same format as the examples.
 
 ```js
-module.exports = {
-  tests: [
-    { unit: {}, index_of_set: 1, a: 2, b: 5, c: 77 },
-    { unit: {}, index_of_set: 2, a: 7, b: 5 },
-    { unit: {}, index_of_set: 3, a: "hellow", b: 5 },
-    { unit: {}, index_of_set: 4, a: 2, b: 5 },
-    { unit: {}, index_of_set: 5, a: 2, b: 3 },
-  ],
+    tests: [
+      { unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, a: 2, b: 5, c: 77 },
+      { unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 2, a: 2, b: 5, c: 77 },
+      { unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 3, a: 'hello world', b: 5, c: 77 },
+      { unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 4, a: 2, b: 5, c: 77 },
+      { unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 5, a: 2, b: 5, c: 77 }
+    ],
 
-  allowed_types: {
-    on: true,
-    values: ["number", "BigInt"],
-  },
+    allowed_types: {
+      on: false,
+      values: ['number', 'BigInt']
+    },
 
-  allowed_values: {
-    on: true,
-    values: [7, 12],
-  },
+    allowed_values: {
+      on: false,
+      values: [7, 12]
+    },
 
-  regex_set: {
-    on: false,
-    values: [],
-  },
+    regex_set: {
+      on: false,
+      values: []
+    },
 
-  function_called: function (a, b) {
-    try {
-      return a + b;
-    } catch (err) {
-      return err;
-    }
-  },
+    function_called:
+       function (a, b) {
+        try {
+          return a + b;
+        } catch(err) {
+          return err;
+        }
+      },
 
-  function_type: null,
+    function_type: null,
 
-  directory: null,
+    directory: null,
 
-  function_name: null,
+    function_name: null,
 
-  time_created: null,
+    time_created: null,
 
-  still_exists: {
-    still_exists: true,
-    other_possible_directories: [],
-  },
+    still_exists: {
+      still_exists: true,
+      other_possible_directories: []
+    },
 
-  developers_assigned: [
-    {
+    developers_assigned: [{
       name: null,
       email: null,
-      phone: null,
-    },
-  ],
+      phone: null
+    }],
 
-  end_point_hit: null,
+    end_point_hit: null,
 
-  client_hit: null,
+    client_hit: null,
 
-  description: "this function...",
+    description: 'this function...',
 
-  index: 1,
+    index: 1
 };
 ```
 
 # Get started
 
-Type 'npm i return_tests' to get started. and go to src folder and type npm start then go to localhost:3000 to see all the errors for each of the example functions you have listed in the build.js config object. Then you can add your own functions!
+Type 'npm i return_tests' to get started and go to src folder and type npm start then go to localhost:3000 to see all the errors for each of the example functions you have listed in the build.js config object. Then you can add your own functions!
