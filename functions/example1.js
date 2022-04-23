@@ -10,7 +10,7 @@
   @param {unit: object}: unit objects are tested first if set to true. If not set or false, falls back to the below three objects.
   @param {index_of_set: number}: Error ser index
   @param {function_description: string}: description of the function
-  @param {function_set: array of functions}: array of different functions you can stick in tests. multiply on this and stick this in function_called. Create a set of different functions and then run it through a multiplier where a different set of params is attahced to each one.
+  @param {function_set_multiplied: array of functions}: Multiply each function with different parameters and stick in tests. Recreates what is in tests now.
   @param {shared_index: number}: when multiplying out on one function. Taking that and making many object with different parameters.  
 
 */
@@ -56,8 +56,8 @@ module.exports = {
 
     function_description: 'this function...',
 
-    function_set: [
-      { function_called: '',  function_name: '', function_directory: '', function_description: '', on: false, function: function() {}, shared_index: 0}
+    function_set_multiplied: [
+      { randomized: { allowed_random_parameters: ['string', 'object', 'number'], parameter_amount: [2, 5, 'random'], multiply_amount: 17 }, function_called: { on: true, function_name: '', function_directory: '', function_description: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, a: 2, b: 5, c: 77 },
     ]
       
   }
