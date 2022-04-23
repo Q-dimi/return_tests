@@ -4,7 +4,7 @@ Tests if a functions return value matches a regular expression, data type and da
 
 ## How To Configure
 
-Inside 'build.js', add files names to configure.all_functions_to_test. The file names come from the functions folder. Each file you add will be a function that you test.
+Inside 'build.js', add file names to the configure.all_functions_to_test array. The file names come from the '/functions' folder. Each added is a function tested.
 
 ```js
 const configure = {
@@ -18,7 +18,7 @@ const configure = {
 
 ## Where your functions live
 
-Go to the '/functions' folder and you will see some examples of how your functions are formatted. Create a new file in that folder with the same format as the examples. The function you place in function_called will be the one that is tested.
+Go to the '/functions' folder and see how the functions are formatted. Create a new file in that folder with the same format as the examples. The function placed in function_called will be the one that is tested.
 
 ```js
     tests: [
@@ -84,4 +84,4 @@ Go to the '/functions' folder and you will see some examples of how your functio
 
 # Get started
 
-Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions!
+Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions! FUNC YOU!
