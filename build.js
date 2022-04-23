@@ -180,8 +180,7 @@ const configure = {
   
       var params = [];
   
-      for (const [key, value] of Object.entries(tests[i])) {
-       if(key === 'index_of_set' || key === 'unit' || key === 'function_called') continue;
+      for (const [key, value] of Object.entries(tests[i].parameters)) {
         params.push(value);
       }
 
