@@ -60,7 +60,7 @@ const configure = {
     if not using file info, fetch from db...return sets and eval string
   */
 
-  function fetch_content() {}
+  function fetch_content(file_path) { }
 
   /*
     multiply on multiply_amount
