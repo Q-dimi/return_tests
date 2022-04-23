@@ -7,8 +7,6 @@ const configure = {
 
     all_functions_to_test: [
       './functions/example1.js',
-      './functions/example2.js',
-      './functions/example3.js',
     ],
 
   }
@@ -137,6 +135,8 @@ const configure = {
        if(key === 'index_of_set' || key === 'unit' || key === 'function_called') continue;
         params.push(value);
       }
+
+      function_called = typeof(tests[i].function_called) !== 'undefined' && tests[i].function_called.on === true ? tests[i].function_called.function : function_called;
   
       var return_value = function_called(...params);
       var err_object = tests[i];
