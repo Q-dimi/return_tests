@@ -18,8 +18,8 @@ const configure = {
 
 ## Where your functions live
 
-Go to the '/functions' folder and see how the functions are formatted. Create a new file in that folder with the same format as the examples. The function placed in function_called will be the function that is tested in that file. If not that one, add one or more to the object with a shared index to test.
+Go to the '/functions' folder and see how the functions are formatted. Create a new file in that folder with the same format as the examples. The single function placed in function_called will be the function that is tested in that file unless you decide that you want the function within the set in the array to be tested instead via the on parameter in function_called. Soon there will be a multiplier that will automate the creation of the test parameters for you. Also, there will be a video demo for how all this works.
 
 # Get started
 
-Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions! FUNC YOU! KAAAAYYYYYYY-TRAAAAAAAIIIIIIN IIIIII SEEEEEEEE YOUUUUUUUUUU... [:{}]
+Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions!
