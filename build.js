@@ -213,6 +213,7 @@ const configure = {
 
       try {
 
+        //just pass in tests and start with the top portion, continue and finish...
         if(!main_or_fallback_errors(
           tests, tests[i].unit.allowed_types, tests[i].unit.allowed_values, 
           tests[i].unit.regex_set,tests[i].function_called.function, file_name, 
@@ -472,6 +473,8 @@ const configure = {
     if(typeof(base_param_names) !== 'object' && typeof(base_param_names) !== 'string') {
       init_errors.base_param_names = '(base_param_names) must be null or a string';
     }
+
+
 
     var size = Object.keys(init_errors).length;
 
