@@ -4,7 +4,7 @@ Tests if a functions return value matches a regular expression, data type and da
 
 ## How To Configure
 
-Inside 'build.js', add file names to the configure.all_functions_to_test array. The file names come from the '/functions' folder. Each added is a single function or set of different functions tested dependent on config in the file.
+Inside 'build.js', add file names to the configure.all_functions_to_test array. The file names come from the '/functions' folder. Each added file is the representation of a set of functions that need testing.
 
 ```js
 const configure = {
@@ -18,7 +18,7 @@ const configure = {
 
 ## Where your functions live
 
-Go to the '/functions' folder and see how the functions are formatted. Create a new file in that folder with the same format as the examples. The single function placed in function_called will be the function that is tested in that file unless you decide that you want the function within the set in the array to be tested instead via the on parameter in function_called. Soon there will be a multiplier that will automate the creation of the test parameters for you. Also, there will be a video demo for how all this works.
+Go to the '/functions' folder and see how the functions are formatted. Create a new file in that folder with the same format as the examples. The file you create is a supposed to represent all the functions in a directory in your application.
 
 # Get started
 

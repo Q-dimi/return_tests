@@ -32,7 +32,7 @@ const configure = {
 
       if(developer_input.replace_tests_with_multiplied_on_load === true) { 
         developer_input.tests = multiply_function_set(
-          developer_input.db === true ? fetch_content(developer_input.db.file_path) : developer_input.function_set_multiplied,
+          developer_input.function_set_multiplied,
           developer_input.tests, 
           configure.all_files_to_test[i]
         );
@@ -50,12 +50,6 @@ const configure = {
     }
 
   }
-
-  /*
-    fetch from database (1 column stringified)
-  */
-
-  function fetch_content(file_path) { }
 
   /*
     multiply on multiply_amount
@@ -95,12 +89,10 @@ const configure = {
     var returned_set = [];
 
     for(let i = 0; i < multiply_and_returned_set.randomized.parameters.multiply_amount; i++) { 
-
       returned_set.push(create_single_randomized_object(
         multiply_and_returned_set,
         multiply_and_returned_set.randomized.parameters,
       ));
-
     }
 
     return returned_set;
@@ -180,7 +172,7 @@ const configure = {
   }
 
   function create_random_inner_param_string()  { 
-    //between 2 and 50 characters unless defined
+    //jjjjjjjjjjjjjjjjjjjj
   }
 
   function create_random_inner_param_number()  { 
@@ -236,17 +228,11 @@ const configure = {
       try {
 
         if(!main_or_fallback_errors(
-          tests[i].unit.allowed_types, 
-          tests[i].unit.allowed_values, 
-          tests[i].unit.regex_set, 
-          tests[i].function_called.function, 
-          file_name, 
-          tests[i].function_called.function_name, 
-          tests[i].function_called.function_directory, 
-          tests[i].function_called.function_description, 
-          tests[i].function_called.base_param_names,
-          tests[i].function_called.shared_index, 
-          tests[i].function_called.on
+          tests[i].unit.allowed_types, tests[i].unit.allowed_values, 
+          tests[i].unit.regex_set, tests[i].function_called.function, 
+          file_name, tests[i].function_called.function_name, 
+          tests[i].function_called.function_directory, tests[i].function_called.function_description, 
+          tests[i].function_called.base_param_names,tests[i].function_called.shared_index, tests[i].function_called.on
         )) { 
 
           console.log(`
@@ -260,8 +246,8 @@ const configure = {
       } catch(err) { 
 
           console.log(`
-            error: could not run
-            check on main ${err.message} ${i} ${file_name}
+            error: could not errors
+            ${err.message} - ${i} - ${file_name} - ${tests[i].index_of_set}
           `);
 
           continue;
