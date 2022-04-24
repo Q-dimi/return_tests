@@ -65,6 +65,8 @@ const configure = {
         new_tests_array = new_tests_array.concat(arrays_returned(multiply_function_set[i]));
       }
 
+      console.log(new_tests_array);
+
       return new_tests_array;
 
     } catch(err) { 
@@ -172,27 +174,27 @@ const configure = {
   }
 
   function create_random_inner_param_string()  { 
-    //jjjjjjjjjjjjjjjjjjjj
+    return Math.random().toString(50).replace(/[^a-z]+/g, '');
   }
 
   function create_random_inner_param_number()  { 
-    //between 2 and 50 characters unless defined
+    return Math.floor(Math.random() * 100000);
   }
 
   function create_random_inner_param_BigInt()  { 
-    //between 2 and 50 characters unless defined
+    return Math.floor(Math.random() * 999999999999999999999);
   }
 
   function create_random_inner_param_object(config_and_build)  {
-    //iterate and apply
+    return { awesoe: 'fdfdf' }
   }
 
   function create_random_inner_param_array(config_and_build)   { 
-    //iterate and apply
+    return [2,3,3,4,'sdsds','sdsd'];
   }
 
   function create_random_inner_param_boolean() { 
-    //random on 2
+    return Boolean(Math.floor(Math.random() * 2));
   }
 
   /*
@@ -228,11 +230,15 @@ const configure = {
       try {
 
         if(!main_or_fallback_errors(
-          tests[i].unit.allowed_types, tests[i].unit.allowed_values, 
-          tests[i].unit.regex_set, tests[i].function_called.function, 
+          tests[i].unit.allowed_types,
+          tests[i].unit.allowed_values, 
+          tests[i].unit.regex_set, 
+          tests[i].function_called.function, 
           file_name, tests[i].function_called.function_name, 
-          tests[i].function_called.function_directory, tests[i].function_called.function_description, 
-          tests[i].function_called.base_param_names,tests[i].function_called.shared_index, tests[i].function_called.on
+          tests[i].function_called.function_directory, 
+          tests[i].function_called.function_description, 
+          tests[i].function_called.base_param_names,
+          tests[i].function_called.on
         )) { 
 
           console.log(`
@@ -390,8 +396,7 @@ const configure = {
         additional_info.function_called = tests[i].function_called.function;
         additional_info.file_name = file_name;
         additional_info.parameters = tests[i].parameters;
-        additional_info.parameters = tests[i].function_called.shared_index;
-        additional_info.parameters = tests[i].index_of_set;
+        additional_info.index_of_set = tests[i].index_of_set;
 
         finalized_error_object.error_value = error_value;
         finalized_error_object.error_type = error_type;
@@ -413,7 +418,7 @@ const configure = {
   function main_or_fallback_errors(
     allowed_types, allowed_values, regex_set, 
     function_called, file_name, function_name, function_directory, 
-    function_description, base_param_names, shared_index, on
+    function_description, base_param_names, on
   ) { 
 
     var init_errors = {};
@@ -463,10 +468,6 @@ const configure = {
       init_errors.base_param_names = '(base_param_names) must be null or a string';
     }
 
-    if(typeof(shared_index) !== 'object' && typeof(shared_index) !== 'number') {
-      init_errors.shared_index = '(shared_index) must be a number';
-    }
-
     if(typeof(on) !== 'boolean') {
       init_errors.on = '(on) must be a boolean';
     }
@@ -474,8 +475,6 @@ const configure = {
     var size = Object.keys(init_errors).length;
 
     if(size > 0) { 
-
-      console.log(`Error Main or Fallback: ${type_fallback_or_main} --- Directory of Error: ${typeof(function_directory) !== 'undefined' ? function_directory : 'undefined'} ---------------- /n`);
 
       for (const [key, value] of Object.entries(init_errors)) {
         console.log(`${key}: ${value} /n`);
@@ -505,8 +504,6 @@ const configure = {
   /*
     export the error set
   */
-
-  console.log(JSON.stringify(error_sets));
 
   exports.errors = error_sets;
   exports.execution_errors = error_in_execution;

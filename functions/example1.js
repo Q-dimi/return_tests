@@ -11,26 +11,24 @@
   @param {index_of_set: number}: Error ser index
   @param {function_description: string}: description of the function
   @param {function_set_multiplied: array of functions}: Multiply each function with different parameters and stick in tests. Recreates what is in tests now.
-  @param {shared_index: number}: when multiplying out on one function. Taking that and making many object with different parameters.  
-  @param {db: pull from db or not}: If you want you can add a database to this and pull in values from the database in build.js and stick them in tests
+  @ if you want you can add a database to this and pull in values from the database in build.js and stick them in tests
 */
 
 
 module.exports = { 
 
     tests: [  
-      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: true, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, parameters: { a: 2, b: 6, c: 77 } },
-      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 2, parameters: { a: 2, b: 5, c: 77 } },
-      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 3, parameters: { a: 2, b: 5, c: 77 } },
-      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 4, parameters: { a: 2, b: 5, c: 77 } },
-      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 5, parameters: { a: 2, b: 5, c: 77 } }
+      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }  }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: true, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, parameters: { a: 2, b: 6, c: 77 } },
+      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 2, parameters: { a: 2, b: 5, c: 77 } },
+      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 3, parameters: { a: 2, b: 5, c: 77 } },
+      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 4, parameters: { a: 2, b: 5, c: 77 } },
+      { function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, }, unit: { allowed_types: { on: false, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 5, parameters: { a: 2, b: 5, c: 77 } }
     ],
 
     replace_tests_with_multiplied_on_load: false,
 
     function_set_multiplied: [
-      //add some more config on this...
-      { randomized: { parameters: ['number', 'string', 'object'], when_obj_passed: {}, when_arr_passed: {}, multiply_amount: 17 }, function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1 }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, parameters: { a: 2, b: 5, c: 77 } },
+      { randomized: { parameters: ['number', 'string', 'object'], when_obj_passed: {}, when_arr_passed: {}, multiply_amount: 17 }, function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } } }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, parameters: { a: 2, b: 5, c: 77 } },
     ]
       
   }
