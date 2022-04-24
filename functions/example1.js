@@ -65,7 +65,6 @@ module.exports = {
     },
 
     function_set_multiplied: [
-      //create a param index focus and set to a percentage compared with the randoms... if focus more than x%, create random at at that focus... else jsut go with the random params
       { randomized: { parameters: ['number', 'string', 'object'], when_obj_passed: {}, when_arr_passed: {}, multiply_amount: 17 }, function_called: { on: true, function_name: '', function_directory: '', function_description: '', base_param_names: '', function: function (a, b) { try { return a + b; } catch(err) { return err; } }, shared_index: 1, }, unit: { allowed_types: { on: true, values: ['number', 'BigInt'] }, allowed_values: { on: false, values: [7, 12] }, regex_set: { on: false, values: [] } }, index_of_set: 1, parameters: { a: 2, b: 5, c: 77 } },
     ]
       

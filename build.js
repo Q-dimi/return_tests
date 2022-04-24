@@ -1,6 +1,6 @@
 
 /*
-  @param {all_functions_to_test: array}: See functions folder and create files for the different functions you would like to test then add the file name to this array. One file represents one or many functions.
+  @param {all_functions_to_test: array}: Functions stored in each folder.
 */
 
 const configure = { 
@@ -57,7 +57,7 @@ const configure = {
   }
 
   /*
-    if not using file info, fetch from db...return sets and eval string
+    fetch from database
   */
 
   function fetch_content(file_path) { }
@@ -105,7 +105,7 @@ const configure = {
         multiply_and_returned_set,
         multiply_and_returned_set.randomized.parameters,
       ));
-
+      
     }
 
     return returned_set;
