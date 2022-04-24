@@ -236,7 +236,7 @@ const configure = {
         error check on fallback ${i} - ${file_name}
       `);
 
-        return;
+      return;
 
       };
 
@@ -328,10 +328,7 @@ const configure = {
       }
   
       var return_value = function_called(...params);
-      var err_object = tests[i];
       var error_count = 0;
-
-      //determine to run checks on main or fallback for allowed types (i can get rid of this turnary i think now)
 
       var allowed_types_unit_or_single = ( 
         typeof(tests[i].unit.allowed_types) !== 'undefined' && tests[i].unit.allowed_types.on === true && Array.isArray(tests[i].unit.allowed_types.values) ?
@@ -339,20 +336,18 @@ const configure = {
         { on: true, test: 'single', v: allowed_types } : 
         { on: false, test: 'off' }
       );
+
+      var error_type = {};
   
       if(allowed_types_unit_or_single.on === true) {
   
         if(allowed_types_unit_or_single.v.values.includes(typeof(return_value)) !== true) {
+    
+          error_type.message = `The value returned is not within the allowed types.`;
+  
+          error_type.return_type =  typeof(return_value);
 
-          error_type = {}; //build this
-  
-          err_object.error_type = true;
-  
-          err_object.error_type_message = `The value returned is not within the allowed types.`;
-  
-          err_object.error_type_rtype = typeof(return_value);
-  
-          err_object.error_type_value = return_value;
+          error_type.return_value =  return_value;
   
           error_count++;
   
@@ -360,14 +355,14 @@ const configure = {
   
       }
 
-      //determine to run checks on main or fallback for allowed values (i can get rid of this turnary i think now)
-
       var allowed_values_unit_or_single = ( //check main on these
         typeof(tests[i].unit.allowed_values) !== 'undefined' && tests[i].unit.allowed_values.on === true && Array.isArray(tests[i].unit.allowed_values.values) ? 
         { on: true, test: 'unit', v: tests[i].unit.allowed_values } : allowed_values.on === true ? 
         { on: true, test: 'single', v: allowed_values } : 
         { on: false, test: 'off' }
       );
+
+      var error_value = {}; 
   
       if(allowed_values_unit_or_single.on === true) {
   
@@ -380,16 +375,12 @@ const configure = {
         ) {
   
           if(allowed_values_unit_or_single.v.values.includes(return_value) !== true) {  
-
-            error_value = {}; //build this
+    
+            error_value.message = `The value returned is not within the allowed values.`;
   
-            err_object.error_value = true;
+            error_value.return_value = return_value;
   
-            err_object.error_value_message = `The value returned is not within the allowed values.`;
-  
-            err_object.error_value_rvalue = return_value;
-  
-            err_object.error_value_type = typeof(return_value);
+            error_value.return_type =  typeof(return_value);;
   
             error_count++;
   
@@ -409,18 +400,14 @@ const configure = {
            }
   
            if(match === false) { 
-
-              error_value = {}; //build this
+    
+            error_value.message = `The value returned is not within the allowed values.`;
   
-              err_object.error_value = true;
+            error_value.return_value = return_value;
   
-              err_object.error_value_message = `The value returned is not within the allowed values.`;
+            error_value.return_type =  typeof(return_value);;
   
-              err_object.error_value_rvalue = return_value;
-  
-              err_object.error_value_type = typeof(return_value);
-  
-              error_count++;
+            error_count++;
   
            }
   
@@ -434,18 +421,16 @@ const configure = {
   
       }
 
-      //determine to run checks on main or fallback for the regex set (i can get rid of this turnary i think now)
-
       var allowed_regex_unit_or_single = (
         typeof(tests[i].unit.regex_set) !== 'undefined' && tests[i].unit.regex_set.on === true && Array.isArray(tests[i].unit.regex_set.values) ? 
         { on: true, test: 'unit', v: tests[i].unit.regex_set } : regex_set.on === true ? 
         { on: true, test: 'single', v: regex_set } : 
         { on: false, test: 'off' }
       );
+
+      var error_rejex = {};
     
       if(allowed_regex_unit_or_single.on === true) {
-
-        var regex_pass = false;
   
         for(let i = 0; i < allowed_regex_unit_or_single.v.values.length; i++) {  
   
@@ -453,20 +438,12 @@ const configure = {
   
           if(test_regex !== true) { 
   
-            if(regex_pass === false) { 
-              error_rejex = {}; //build this
-              err_object.error_regex = true;
-              regex_pass = true; 
-            };
+            error_rejex[`message-${i}`] = `The value returned does not pass`;
   
-            err_object[`error_regex_message-${i}`] = `The value returned does not pass`;
+            error_rejex[`regular_expression-${i}`] = allowed_regex_unit_or_single.v.values[i];
   
-            err_object[`error_regex_regular_expression-${i}`] = allowed_regex_unit_or_single.v.values[i];
-  
-            err_object[`error_regex_return_value-${i}`] = return_value;
-  
-            err_object[`error_regex_returned_rejex-${i}`] = test_regex;
-  
+            error_rejex[`return_value-${i}`] = return_value;
+    
             error_count++;
   
           }
@@ -474,16 +451,15 @@ const configure = {
         }
   
       }
-
-      //pass in the error object at the defined index if there is one and attach additional information about the function
   
-      if(error_count > 0) { //fix this
+      if(error_count > 0) { 
 
-        var additional_info = {}; //build below into this
+        var finalized_error_object = {};
+        var addiitional_info = tests[i];
+        var additional_info_fallback_function = {}; 
+        var additional_info_main_function = {}; 
 
         if(main_or_fallback === 'fallback') { 
-
-          var additional_info_fallback_function = {}; //build this
 
           err_object.function_name = function_name; 
 
@@ -493,13 +469,7 @@ const configure = {
 
           err_object.base_param_names = base_param_names;
 
-          //file name
-
-          //pass testing info
-
         } else { 
-
-          var additional_info_main_function = {}; //build this
 
           err_object.function_name = tests[i].function_called.function_name;
 
@@ -509,18 +479,15 @@ const configure = {
 
           err_object.base_param_names = tests[i].function_called.base_param_names;
 
-          //file name
-
-          //pass testing info
-
         }
 
-        //just put everything in the two above... get rid of the below
+        finalized_error_object.error_value = error_value;
+        finalized_error_object.error_type = error_type;
+        finalized_error_object.error_rejex = error_rejex;
+        finalized_error_object.additional_info_fallback_function = additional_info_fallback_function;
+        finalized_error_object.additional_info_main_function = additional_info_main_function;
 
-        err_object.index_of_error_set = typeof(tests[i].index_of_set) !== 'undefined' ?
-        tests[i].index_of_set : 'index not found';
-
-        error_sets.push(err_object);
+        error_sets.push(finalized_error_object);
 
       }
   
