@@ -1,6 +1,7 @@
 
 /*
   @param {all_functions_to_test: array}: Functions stored in each folder.
+  //GOING TO GET RID OF THE FALLBACK AND JUST USE THE ARRAY OF OBJECTS. WILL MAKE THINGS EASIER...
 */
 
 const configure = { 
@@ -119,16 +120,17 @@ const configure = {
     creates and returns a single randomized object
   */
 
-  var if_random_or_not_in_selected = [
-    create_random_inner_param_string(), create_random_inner_param_number(),
-    create_random_inner_param_BigInt(),create_random_inner_param_object(attach_here.randomized.when_obj_passed),
-    create_random_inner_param_array(attach_here.randomized.when_arr_passed), undefined, 
-    create_random_inner_param_boolean()
-  ];
 
   function create_single_randomized_object(attach_here, allowed_random_parameters) { 
 
     var params = {};
+
+    var if_random_or_not_in_selected = [
+      create_random_inner_param_string(), create_random_inner_param_number(),
+      create_random_inner_param_BigInt(), create_random_inner_param_object(attach_here.randomized.when_obj_passed),
+      create_random_inner_param_array(attach_here.randomized.when_arr_passed), undefined, 
+      create_random_inner_param_boolean()
+    ];
 
     for(let i = 0; i < allowed_random_parameters.length; i++) { 
 
@@ -262,6 +264,8 @@ const configure = {
   
     for(let i = 0; i < tests.length; i++) { 
 
+      //just make sure everything is defined for what it is supposed to be... so use main errors here...
+
       if(
         (typeof(tests[i]) !== 'object') || 
         (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
@@ -321,7 +325,7 @@ const configure = {
         } catch(err) { 
 
             console.log(`
-              error: could not run error
+              error: could not run
               check on main ${err.message} ${i} ${file_name}`
             );
 
@@ -633,6 +637,8 @@ const configure = {
   /*
     export the error set
   */
+
+  console.log(JSON.stringify(error_sets));
 
   exports.errors = error_sets;
   exports.execution_errors = error_in_execution;
