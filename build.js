@@ -22,7 +22,6 @@ const configure = {
   */
 
   var error_sets = [];
-  var error_in_execution = [];
           
   for(let i = 0; i < configure.all_files_to_test.length; i++) {
 
@@ -64,8 +63,6 @@ const configure = {
       for(let i = 0; i < multiply_function_set.length; i++) { 
         new_tests_array = new_tests_array.concat(arrays_returned(multiply_function_set[i]));
       }
-
-      console.log(new_tests_array);
 
       return new_tests_array;
 
@@ -178,10 +175,12 @@ const configure = {
   }
 
   function create_random_inner_param_number()  { 
+    //decimal or
     return Math.floor(Math.random() * 100000);
   }
 
   function create_random_inner_param_BigInt()  { 
+    //decimal or
     return Math.floor(Math.random() * 999999999999999999999);
   }
 
@@ -506,6 +505,5 @@ const configure = {
   */
 
   exports.errors = error_sets;
-  exports.execution_errors = error_in_execution;
 
   
