@@ -213,7 +213,11 @@ const configure = {
     check tests... 
   */
           
-  function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, function_directory, function_description, base_param_names, type_of_error_check = 'fallback') {
+  function run_tests(
+    tests, allowed_types, allowed_values, regex_set, 
+    function_called, file_name, function_name, function_directory, 
+    function_description, base_param_names, type_of_error_check = 'fallback'
+  ) {
 
     try {
 
@@ -449,19 +453,21 @@ const configure = {
       if(error_count > 0) { 
 
         var finalized_error_object = {};
-        var addiitional_info = tests[i];
+        var addiitional_info_on_current_index = tests[i];
         var additional_info_fallback_function = {}; 
         var additional_info_main_function = {}; 
 
         if(main_or_fallback === 'fallback') { 
 
-          err_object.function_name = function_name; 
+          additional_info_fallback_function.function_name = function_name;
 
-          err_object.function_directory = function_directory; 
+          additional_info_fallback_function.function_directory = function_directory;
 
-          err_object.function_description = function_description;
+          additional_info_fallback_function.function_description = function_description;
 
-          err_object.base_param_names = base_param_names;
+          additional_info_fallback_function.base_param_names = base_param_names;
+
+          //add additional on tests 
 
         } else { 
 
@@ -472,6 +478,8 @@ const configure = {
           err_object.function.function_description = tests[i].function_called.function_description;
 
           err_object.base_param_names = tests[i].function_called.base_param_names;
+
+          //add additional on tests
 
         }
 
@@ -493,7 +501,11 @@ const configure = {
     Testing the input of main and fallback errors (running errors twice on tests in some cases)
   */
 
-  function main_or_fallback_errors(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, function_directory, function_description, base_param_names, type_fallback_or_main) { 
+  function main_or_fallback_errors(
+    tests, allowed_types, allowed_values, regex_set, 
+    function_called, file_name, function_name, function_directory, 
+    function_description, base_param_names, type_fallback_or_main
+  ) { 
 
     var init_errors = {};
 
