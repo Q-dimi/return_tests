@@ -351,13 +351,6 @@ const configure = {
   
       }
 
-      var allowed_regex_unit_or_single = (
-        typeof(tests[i].unit.regex_set) !== 'undefined' && tests[i].unit.regex_set.on === true && Array.isArray(tests[i].unit.regex_set.values) ? 
-        { on: true, test: 'unit', v: tests[i].unit.regex_set } : regex_set.on === true ? 
-        { on: true, test: 'single', v: regex_set } : 
-        { on: false, test: 'off' }
-      );
-
       var error_rejex = {};
     
       if(tests[i].unit.regex_set.on === true) {
@@ -383,8 +376,10 @@ const configure = {
       }
   
       if(error_count > 0) { 
+
         var finalized_error_object = {};
         var additional_info = {};
+
         additional_info.function_name = tests[i].function_called.function_name;
         additional_info.function_directory = tests[i].function_called.function_directory;
         additional_info.function_description = tests[i].function_called.function_description;
@@ -397,11 +392,14 @@ const configure = {
         additional_info.parameters = tests[i].parameters;
         additional_info.parameters = tests[i].function_called.shared_index;
         additional_info.parameters = tests[i].index_of_set;
+
         finalized_error_object.error_value = error_value;
         finalized_error_object.error_type = error_type;
         finalized_error_object.error_rejex = error_rejex;
         finalized_error_object.additional_info = additional_info;
+
         error_sets.push(finalized_error_object);
+
       }
   
     }
