@@ -217,15 +217,17 @@ const configure = {
         (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number') ||
         (typeof(tests[i]) === 'object' && typeof(tests[i].parameters) !== 'object') ||
         (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) !== 'object') ||
-        (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) === 'object' && typeof(tests[i].function_called.allowed_types) !== 'object') ||
-        (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) === 'object' && typeof(tests[i].function_called.allowed_values) !== 'object') ||
-        (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) === 'object' && typeof(tests[i].function_called.regex_set) !== 'object') 
+        (typeof(tests[i]) === 'object' && typeof(tests[i].unit) === 'object' && typeof(tests[i].unit.allowed_types) !== 'object') ||
+        (typeof(tests[i]) === 'object' && typeof(tests[i].unit) === 'object' && typeof(tests[i].unit.allowed_values) !== 'object') ||
+        (typeof(tests[i]) === 'object' && typeof(tests[i].unit) === 'object' && typeof(tests[i].unit.regex_set) !== 'object') 
       ) {
   
-        console.log(`(tests[i]) needs to be defined as an object with object
-        (unit: object), (index_of_set: index), (parameters: object), (function_called: object)
-        with allowed_values, allowed_types and regex set OBJECTS inside of the unit object...
-        each object must be with the apporopriate values in the README (last level definition for undefined to pass)`);
+        console.log(`
+          (tests[i]) needs to be defined as an object with object
+          (unit: object), (index_of_set: index), (parameters: object), (function_called: object)
+          with allowed_values, allowed_types and regex set OBJECTS inside of the unit object...
+          each object must be with the apporopriate values in the README (last level definition for undefined to pass)
+        `);
 
         continue;
   
@@ -248,8 +250,8 @@ const configure = {
         )) { 
 
           console.log(`
-            error: index ${i} on main check ${file_name}`
-          );
+            error: index ${i} on main check ${file_name}
+          `);
 
           continue;
 
@@ -259,8 +261,8 @@ const configure = {
 
           console.log(`
             error: could not run
-            check on main ${err.message} ${i} ${file_name}`
-          );
+            check on main ${err.message} ${i} ${file_name}
+          `);
 
           continue;
 
