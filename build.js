@@ -241,6 +241,8 @@ const configure = {
   
     for(let i = 0; i < tests.length; i++) { 
 
+      //testing if unit and index of set ar set in the current array... they must be in order to run main or fallback 
+
       if(
         (typeof(tests[i]) !== 'object') || 
         (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
@@ -256,6 +258,8 @@ const configure = {
         continue;
 
       }
+
+      //define type of function whether main or fallback. If main rn errors again. Invoke function with parameters
   
       var params = [];
   
@@ -265,7 +269,6 @@ const configure = {
 
       var main_or_fallback = 'main';
 
-      //clean this dont need it anymore just run main....
       typeof(tests[i].function_called) === 'object' && 
       tests[i].function_called.on === true && 
       typeof(tests[i].function_called.function) === 'function' ?
@@ -316,7 +319,9 @@ const configure = {
       var err_object = tests[i];
       var error_count = 0;
 
-      var allowed_types_unit_or_single = ( //check main on these
+      //determine to run checks on main or fallback for allowed types (i can get rid of this turnary i think now)
+
+      var allowed_types_unit_or_single = ( 
         typeof(tests[i].unit.allowed_types) !== 'undefined' && tests[i].unit.allowed_types.on === true && Array.isArray(tests[i].unit.allowed_types.values) ?
         { on: true, test: 'unit', v: tests[i].unit.allowed_types } : allowed_types.on === true ?
         { on: true, test: 'single', v: allowed_types } : 
@@ -327,7 +332,7 @@ const configure = {
   
         if(allowed_types_unit_or_single.v.values.includes(typeof(return_value)) !== true) {
 
-          //couple into defined set
+          error_type = {}; //build this
   
           err_object.error_type = true;
   
@@ -342,6 +347,8 @@ const configure = {
         }
   
       }
+
+      //determine to run checks on main or fallback for allowed values (i can get rid of this turnary i think now)
 
       var allowed_values_unit_or_single = ( //check main on these
         typeof(tests[i].unit.allowed_values) !== 'undefined' && tests[i].unit.allowed_values.on === true && Array.isArray(tests[i].unit.allowed_values.values) ? 
@@ -362,7 +369,7 @@ const configure = {
   
           if(allowed_values_unit_or_single.v.values.includes(return_value) !== true) {  
 
-            //couple into defined set
+            error_value = {}; //build this
   
             err_object.error_value = true;
   
@@ -391,7 +398,7 @@ const configure = {
   
            if(match === false) { 
 
-              //couple into defined set
+              error_value = {}; //build this
   
               err_object.error_value = true;
   
@@ -415,7 +422,9 @@ const configure = {
   
       }
 
-      var allowed_regex_unit_or_single = ( //check main on these
+      //determine to run checks on main or fallback for the regex set (i can get rid of this turnary i think now)
+
+      var allowed_regex_unit_or_single = (
         typeof(tests[i].unit.regex_set) !== 'undefined' && tests[i].unit.regex_set.on === true && Array.isArray(tests[i].unit.regex_set.values) ? 
         { on: true, test: 'unit', v: tests[i].unit.regex_set } : regex_set.on === true ? 
         { on: true, test: 'single', v: regex_set } : 
@@ -433,7 +442,7 @@ const configure = {
           if(test_regex !== true) { 
   
             if(regex_pass === false) { 
-              //couple into defined set
+              error_rejex = {}; //build this
               err_object.error_regex = true;
               regex_pass = true; 
             };
@@ -453,8 +462,12 @@ const configure = {
         }
   
       }
+
+      //pass in the error object at the defined index if there is one and attach additional information about the function
   
       if(error_count > 0) { //fix this
+
+        var additional_info = {}; //build this
 
         if(main_or_fallback === 'fallback') { 
 
