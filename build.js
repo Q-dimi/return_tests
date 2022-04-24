@@ -1,7 +1,6 @@
 
 /*
   @param {all_functions_to_test: array}: Functions stored in each folder.
-  //GOING TO GET RID OF THE FALLBACK AND JUST USE THE ARRAY OF OBJECTS. WILL MAKE THINGS EASIER...
 */
 
 const configure = { 
@@ -205,7 +204,7 @@ const configure = {
   }
 
   /*
-    check tests...  GG F DAT S NIE 
+    check tests...
   */
           
   function run_tests(tests, file_name) {
@@ -215,17 +214,10 @@ const configure = {
       try {
 
         if(!main_or_fallback_errors(
-          tests, 
-          tests[i].unit.allowed_types, 
-          tests[i].unit.allowed_values, 
-          tests[i].unit.regex_set, 
-          tests[i].function_called.function, 
-          file_name, 
-          tests[i].function_called.function_name, 
-          tests[i].function_called.function_directory, 
-          tests[i].function_called.function_description, 
-          tests[i].function_called.base_param_names, 
-          main_or_fallback,
+          tests, tests[i].unit.allowed_types, tests[i].unit.allowed_values, 
+          tests[i].unit.regex_set,tests[i].function_called.function, file_name, 
+          tests[i].function_called.function_name, tests[i].function_called.function_directory, 
+          tests[i].function_called.function_description, tests[i].function_called.base_param_names, main_or_fallback,
         )) { 
 
           console.log(`
@@ -246,15 +238,15 @@ const configure = {
           continue;
 
       }
+
+      if(tests[i].function_called.on !== true) { 
+        continue;
+      }
   
       var params = [];
   
       for (const [key, value] of Object.entries(tests[i].parameters)) {
         params.push(value);
-      }
-
-      if(tests[i].function_called.on !== true) { 
-        continue;
       }
   
       var return_value;
