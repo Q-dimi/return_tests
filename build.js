@@ -31,7 +31,7 @@ const configure = {
 
       if(developer_input.replace_tests_with_multiplied_on_load === true) { 
         developer_input.tests = multiply_function_set(
-          developer_input.db === true ? fetch_content(developer_input.db.file_path) : developer_input.function_set_multiplied, 
+          developer_input.db === true ? fetch_content(developer_input.db.file_path) : developer_input.function_set_multiplied, //make sure returned value is in same format as original
           developer_input.tests, 
           configure.all_functions_to_test[i]
         );
@@ -45,7 +45,9 @@ const configure = {
         developer_input.function_called, 
         configure.all_functions_to_test[i],
         developer_input.function_name, 
-        developer_input.function_directory
+        developer_input.function_directory,
+        developer_input.function_description,
+        developer_input.base_param_names
       );
 
     } catch(err) {
@@ -105,7 +107,7 @@ const configure = {
         multiply_and_returned_set,
         multiply_and_returned_set.randomized.parameters,
       ));
-      
+
     }
 
     return returned_set;
@@ -197,10 +199,10 @@ const configure = {
   }
 
   /*
-    check tests...
+    check tests... (get rid of file name and fix som params passed in...)
   */
           
-  function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, directory) {
+  function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, function_directory, function_description, base_param_names) {
 
     var init_errors = {};
 
@@ -283,7 +285,9 @@ const configure = {
         params.push(value);
       }
 
-      function_called = typeof(tests[i].function_called) === 'object' && tests[i].function_called.on === true && typeof(tests[i].function_called.function) === 'function' ? tests[i].function_called.function : function_called;
+      var main_or_fallback = 'main';
+
+      typeof(tests[i].function_called) === 'object' && tests[i].function_called.on === true && typeof(tests[i].function_called.function) === 'function' ? (function_called = tests[i].function_called.function, main_or_fallback = 'main') : (function_called = function_called, main_or_fallback = 'fallback');
   
       var return_value = function_called(...params);
       var err_object = tests[i];
@@ -420,15 +424,33 @@ const configure = {
   
       }
   
-      if(error_count > 0) { 
+      if(error_count > 0) { //fix this
 
-        err_object.function_name = function_name; // turnary
+        if(main_or_fallback === 'fallback') { 
 
-        err_object.directory = function_directory; // turnary because of single tests vs fall back...
+          err_object.function_name = function_name; 
 
-        err_object.file_name = file_name; // turnary
+          err_object.function_directory = function_directory; 
 
-        //add the rest of the stuff and make sure to seperate on client
+          err_object.function_description = function_description;
+
+          err_object.base_param_names = base_param_names;
+
+          //pass testing info
+
+        } else { 
+
+          err_object.function_name = tests[i].function_called.function_name;
+
+          err_object.function_directory = tests[i].function_called.function_directory
+
+          err_object.function.function_description = tests[i].function_called.function_description;
+
+          err_object.base_param_names = tests[i].function_called.base_param_names;
+
+          //pass testing info
+
+        }
 
         err_object.index_of_error_set = typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found';
 
