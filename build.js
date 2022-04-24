@@ -216,13 +216,17 @@ const configure = {
         (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
         (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number') ||
         (typeof(tests[i]) === 'object' && typeof(tests[i].parameters) !== 'object') ||
-        (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) !== 'object')
+        (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) !== 'object') ||
+        (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) === 'object' && typeof(tests[i].function_called.allowed_types) !== 'object') ||
+        (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) === 'object' && typeof(tests[i].function_called.allowed_values) !== 'object') ||
+        (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) === 'object' && typeof(tests[i].function_called.regex_set) !== 'object') 
       ) {
   
         console.log(`(tests[i]) needs to be defined as an object with object
         (unit: object), (index_of_set: index), (parameters: object), (function_called: object)
-        each with the apporopriate values in the README (last level definition for undefined to pass)`);
-  
+        with allowed_values, allowed_types and regex set OBJECTS inside of the unit object...
+        each object must be with the apporopriate values in the README (last level definition for undefined to pass)`);
+
         continue;
   
       }
@@ -230,10 +234,17 @@ const configure = {
       try {
 
         if(!main_or_fallback_errors(
-          tests[i].unit.allowed_types, tests[i].unit.allowed_values, 
-          tests[i].unit.regex_set, tests[i].function_called.function, file_name, 
-          tests[i].function_called.function_name, tests[i].function_called.function_directory, 
-          tests[i].function_called.function_description, tests[i].function_called.base_param_names
+          tests[i].unit.allowed_types, 
+          tests[i].unit.allowed_values, 
+          tests[i].unit.regex_set, 
+          tests[i].function_called.function, 
+          file_name, 
+          tests[i].function_called.function_name, 
+          tests[i].function_called.function_directory, 
+          tests[i].function_called.function_description, 
+          tests[i].function_called.base_param_names,
+          tests[i].function_called.shared_index, 
+          tests[i].function_called.on
         )) { 
 
           console.log(`
@@ -414,7 +425,7 @@ const configure = {
   function main_or_fallback_errors(
     allowed_types, allowed_values, regex_set, 
     function_called, file_name, function_name, function_directory, 
-    function_description, base_param_names
+    function_description, base_param_names, shared_index, on
   ) { 
 
     var init_errors = {};
@@ -462,6 +473,14 @@ const configure = {
 
     if(typeof(base_param_names) !== 'object' && typeof(base_param_names) !== 'string') {
       init_errors.base_param_names = '(base_param_names) must be null or a string';
+    }
+
+    if(typeof(shared_index) !== 'object' && typeof(shared_index) !== 'number') {
+      init_errors.shared_index = '(shared_index) must be a number';
+    }
+
+    if(typeof(on) !== 'boolean') {
+      init_errors.on = '(on) must be a boolean';
     }
 
     var size = Object.keys(init_errors).length;
