@@ -260,12 +260,15 @@ const configure = {
       if(
         (typeof(tests[i]) !== 'object') || 
         (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
-        (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number')
+        (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number') ||
+        (typeof(tests[i]) === 'object' && typeof(tests[i].parameters) !== 'object') ||
+        (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) !== 'object')
       ) {
 
         console.log(`
-          (tests) need to be defined as an object with object
-          (unit: object) and (index_of_set: index)
+          (tests[i]) needs to be defined as an object with object
+          (unit: object), (index_of_set: index), (parameters: object), (function_called: object)
+          each with the apporopriate values in the README
           ${i}: ${typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found'}
         `);
 
@@ -281,10 +284,8 @@ const configure = {
 
       var main_or_fallback = 'main';
 
-      typeof(tests[i].function_called) === 'object' && 
-      tests[i].function_called.on === true && 
-      typeof(tests[i].function_called.function) === 'function' ?
-      (function_called = tests[i].function_called.function, main_or_fallback = 'main') :
+      tests[i].function_called.on === true && typeof(tests[i].function_called.function) === 'function' ? 
+      (function_called = tests[i].function_called.function, main_or_fallback = 'main') : 
       (function_called = function_called, main_or_fallback = 'fallback');
 
       if(main_or_fallback === 'main') { 
@@ -325,7 +326,14 @@ const configure = {
 
       }
   
-      var return_value = function_called(...params);
+      var return_value;
+
+      try{
+        return_value = function_called(...params);
+      } catch(err)  {
+        return_value = `error processing this fnction: ${err.message}`;
+      }
+
       var error_count = 0;
 
       var allowed_types_unit_or_single = ( 
