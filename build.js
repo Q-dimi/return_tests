@@ -204,7 +204,6 @@ const configure = {
   function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, function_directory, function_description, base_param_names, type_of_error_check = 'fallback') {
 
     try {
-
       if(!main_or_fallback_errors(
         tests, 
         allowed_types, 
@@ -218,14 +217,12 @@ const configure = {
         base_param_names, 
         type_of_error_check
       )) { 
+        console.log(`error: could not run error check on fallback ${err}`);
         return;
       };
-
     } catch(err) {
-
-      console.log(`error: could not run error check on fallback ${err}`);
-      return;
-
+        console.log(`error: could not run error check on fallback ${err}`);
+        return;
     }
   
     for(let i = 0; i < tests.length; i++) { 
@@ -259,7 +256,6 @@ const configure = {
       if(main_or_fallback === 'main') { 
 
         try {
-
           if(!main_or_fallback_errors(
             tests, 
             tests[i].unit.allowed_types, 
@@ -273,14 +269,12 @@ const configure = {
             tests[i].function_called.base_param_names, 
             main_or_fallback
           )) { 
+            console.log(`error: index ${i} on main check`);
             continue;
           };
-
         } catch(err) { 
-
-          console.log(`error: could not run error check on main ${err}`);
-          continue;
-
+            console.log(`error: could not run error check on main ${err}`);
+            continue;
         }
 
       }
