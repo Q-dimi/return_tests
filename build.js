@@ -243,8 +243,16 @@ const configure = {
       init_errors.function_name = '(function_name) must be null or a string';
     }
 
-    if(typeof(directory) !== 'object' && typeof(directory) !== 'string') {
-      init_errors.directory = '(directory) must be null or a string';
+    if(typeof(function_directory) !== 'object' && typeof(function_directory) !== 'string') {
+      init_errors.function_directory = '(function_directory) must be null or a string';
+    }
+
+    if(typeof(function_description) !== 'object' && typeof(function_description) !== 'string') {
+      init_errors.function_description = '(function_description) must be null or a string';
+    }
+
+    if(typeof(base_param_names) !== 'object' && typeof(base_param_names) !== 'string') {
+      init_errors.base_param_names = '(base_param_names) must be null or a string';
     }
 
     var size = Object.keys(init_errors).length;
@@ -293,7 +301,7 @@ const configure = {
       var err_object = tests[i];
       var error_count = 0;
 
-      var allowed_types_unit_or_single = (
+      var allowed_types_unit_or_single = ( //check main on these
         typeof(tests[i].unit.allowed_types) !== 'undefined' && tests[i].unit.allowed_types.on === true && Array.isArray(tests[i].unit.allowed_types.values) ?
         { on: true, test: 'unit', v: tests[i].unit.allowed_types } : allowed_types.on === true ?
         { on: true, test: 'single', v: allowed_types } : 
@@ -318,7 +326,7 @@ const configure = {
   
       }
 
-      var allowed_values_unit_or_single = (
+      var allowed_values_unit_or_single = ( //check main on these
         typeof(tests[i].unit.allowed_values) !== 'undefined' && tests[i].unit.allowed_values.on === true && Array.isArray(tests[i].unit.allowed_values.values) ? 
         { on: true, test: 'unit', v: tests[i].unit.allowed_values } : allowed_values.on === true ? 
         { on: true, test: 'single', v: allowed_values } : 
@@ -386,7 +394,7 @@ const configure = {
   
       }
 
-      var allowed_regex_unit_or_single = (
+      var allowed_regex_unit_or_single = ( //check main on these
         typeof(tests[i].unit.regex_set) !== 'undefined' && tests[i].unit.regex_set.on === true && Array.isArray(tests[i].unit.regex_set.values) ? 
         { on: true, test: 'unit', v: tests[i].unit.regex_set } : regex_set.on === true ? 
         { on: true, test: 'single', v: regex_set } : 
