@@ -60,7 +60,7 @@ const configure = {
   }
 
   /*
-    fetch from database
+    fetch from database (1 column stringified)
   */
 
   function fetch_content(file_path) { }
@@ -119,21 +119,16 @@ const configure = {
     creates and returns a single randomized object
   */
 
+  var if_random_or_not_in_selected = [
+    create_random_inner_param_string(), create_random_inner_param_number(),
+    create_random_inner_param_BigInt(),create_random_inner_param_object(attach_here.randomized.when_obj_passed),
+    create_random_inner_param_array(attach_here.randomized.when_arr_passed), undefined, 
+    create_random_inner_param_boolean()
+  ];
+
   function create_single_randomized_object(attach_here, allowed_random_parameters) { 
 
     var params = {};
-
-    var if_random_or_not_in_selected = [
-      create_random_inner_param_string(), 
-      create_random_inner_param_number(),
-      create_random_inner_param_BigInt(),
-      create_random_inner_param_object(attach_here.randomized.when_obj_passed),
-      create_random_inner_param_array(attach_here.randomized.when_arr_passed),
-      undefined, 
-      create_random_inner_param_boolean()
-    ];
-
-    var random_index  = Math.floor(Math.random() * if_random_or_not_in_selected.length);
 
     for(let i = 0; i < allowed_random_parameters.length; i++) { 
 
@@ -168,7 +163,7 @@ const configure = {
       }
 
       else if(current_parameter === 'random') { 
-        params[`test-param-random-${i}`] = if_random_or_not_in_selected[random_index];
+        params[`test-param-random-${i}`] = if_random_or_not_in_selected[Math.floor(Math.random() * if_random_or_not_in_selected.length)];
       }
 
       else { 
@@ -179,7 +174,7 @@ const configure = {
            defaulting to random.`
         );
 
-        params[`test-param-random-${i}`] = if_random_or_not_in_selected[random_index];
+        params[`test-param-random-${i}`] = if_random_or_not_in_selected[Math.floor(Math.random() * if_random_or_not_in_selected.length)];
 
       }
 
@@ -191,21 +186,27 @@ const configure = {
   }
 
   function create_random_inner_param_string()  { 
+    //between 2 and 50 characters unless defined
   }
 
   function create_random_inner_param_number()  { 
+    //between 2 and 50 characters unless defined
   }
 
   function create_random_inner_param_BigInt()  { 
+    //between 2 and 50 characters unless defined
   }
 
   function create_random_inner_param_object(config_and_build)  {
+    //iterate and apply
   }
 
   function create_random_inner_param_array(config_and_build)   { 
+    //iterate and apply
   }
 
   function create_random_inner_param_boolean() { 
+    //random on 2
   }
 
   /*
@@ -230,7 +231,7 @@ const configure = {
         type_of_error_check
       )) { 
 
-        console.log(`
+      console.log(`
         error: could not run 
         error check on fallback ${i} - ${file_name}
       `);
@@ -478,11 +479,11 @@ const configure = {
   
       if(error_count > 0) { //fix this
 
-        var additional_info = {}; //build this
+        var additional_info = {}; //build below into this
 
         if(main_or_fallback === 'fallback') { 
 
-          //couple into defined set
+          var additional_info_fallback_function = {}; //build this
 
           err_object.function_name = function_name; 
 
@@ -492,11 +493,13 @@ const configure = {
 
           err_object.base_param_names = base_param_names;
 
+          //file name
+
           //pass testing info
 
         } else { 
 
-          //couple into defined set
+          var additional_info_main_function = {}; //build this
 
           err_object.function_name = tests[i].function_called.function_name;
 
@@ -506,13 +509,16 @@ const configure = {
 
           err_object.base_param_names = tests[i].function_called.base_param_names;
 
+          //file name
+
           //pass testing info
 
         }
 
-        //file name
+        //just put everything in the two above... get rid of the below
 
-        err_object.index_of_error_set = typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found';
+        err_object.index_of_error_set = typeof(tests[i].index_of_set) !== 'undefined' ?
+        tests[i].index_of_set : 'index not found';
 
         error_sets.push(err_object);
 
