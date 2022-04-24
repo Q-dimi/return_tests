@@ -199,75 +199,26 @@ const configure = {
   }
 
   /*
-    check tests... (get rid of file name and fix som params passed in...)
+    check tests... (get rid of file name and fix som params passed in...) (if the fall back isnt good, get out cause it needs to be set... if fallback not set, check main.. if main not good, continue)
   */
           
-  function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, function_directory, function_description, base_param_names) {
+  function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, function_directory, function_description, base_param_names, type_of_error_check = 'fallback') {
 
-    var init_errors = {};
-
-    if((typeof(tests) !== 'object') || Array.isArray(tests) === false) {
-      init_errors.tests = '(tests) need to be defined as an array with object (unit: object) and (index_of_set: index)';
-    }
-
-    if(
-      (typeof(allowed_types) !== 'object') || 
-      (typeof(allowed_types) === 'object' && typeof(allowed_types.on) !== 'boolean') || 
-      (typeof(allowed_types) === 'object' && (typeof(allowed_types.values) !== 'object' || Array.isArray(allowed_types.values) === false))) {
-      init_errors.allowed_types = '(allowed_types) must be an object with paramters (on: boolean) and (values: array)';
-    }
-
-    if(
-      (typeof(allowed_values) !== 'object') || 
-      (typeof(allowed_values) === 'object' && typeof(allowed_values.on) !== 'boolean') || 
-      (typeof(allowed_values) === 'object' && (typeof(allowed_values.values) !== 'object' || Array.isArray(allowed_values.values) === false))) {
-      init_errors.allowed_values = '(allowed_values) must be an object with parameters (on: boolean) and (values: array)';
-    }
-
-    if(
-      (typeof(regex_set) !== 'object') || 
-      (typeof(regex_set) === 'object' && typeof(regex_set.on) !== 'boolean') || 
-      (typeof(regex_set) === 'object' && (typeof(regex_set.values) !== 'object' || Array.isArray(regex_set.values) === false))) {
-      init_errors.regex_set = '(regex_set) must be an object with parameters (on: boolean) and (values: array)';
-    }
-
-    if(typeof(function_called) !== 'function') {
-      init_errors.function_called = '(function_called) must be a function';
-    }
-
-    if(typeof(file_name) !== 'object' && typeof(file_name) !== 'string') {
-      init_errors.file_name = '(file_name) must be null or a string';
-    }
-
-    if(typeof(function_name) !== 'object' && typeof(function_name) !== 'string') {
-      init_errors.function_name = '(function_name) must be null or a string';
-    }
-
-    if(typeof(function_directory) !== 'object' && typeof(function_directory) !== 'string') {
-      init_errors.function_directory = '(function_directory) must be null or a string';
-    }
-
-    if(typeof(function_description) !== 'object' && typeof(function_description) !== 'string') {
-      init_errors.function_description = '(function_description) must be null or a string';
-    }
-
-    if(typeof(base_param_names) !== 'object' && typeof(base_param_names) !== 'string') {
-      init_errors.base_param_names = '(base_param_names) must be null or a string';
-    }
-
-    var size = Object.keys(init_errors).length;
-
-    if(size > 0) { 
-
-      console.log(`Directory of Error: ${typeof(directory) !== 'undefined' ? directory : 'undefined'} ---------------- /n`);
-
-      for (const [key, value] of Object.entries(init_errors)) {
-        console.log(`${key}: ${value} /n`);
-       }    
-
-       return;
-
-    }
+    if(!main_or_fallback_errors(
+      tests, 
+      allowed_types, 
+      allowed_values, 
+      regex_set, 
+      function_called, 
+      file_name, 
+      function_name, 
+      function_directory, 
+      function_description, 
+      base_param_names, 
+      type_of_error_check
+    )) { 
+      return;
+    };
   
     for(let i = 0; i < tests.length; i++) { 
 
@@ -296,6 +247,24 @@ const configure = {
       var main_or_fallback = 'main';
 
       typeof(tests[i].function_called) === 'object' && tests[i].function_called.on === true && typeof(tests[i].function_called.function) === 'function' ? (function_called = tests[i].function_called.function, main_or_fallback = 'main') : (function_called = function_called, main_or_fallback = 'fallback');
+
+      if(main_or_fallback === 'main') { 
+        if(!main_or_fallback_errors(
+          tests, 
+          tests[i].unit.allowed_types, 
+          tests[i].unit.allowed_values, 
+          tests[i].unit.regex_set, 
+          tests[i].function_called.function, 
+          file_name, 
+          tests[i].function_called.function_name, 
+          tests[i].function_called.function_directory, 
+          tests[i].function_called.function_description, 
+          tests[i].function_called.base_param_names, 
+          main_or_fallback
+        )) { 
+          continue;
+        };
+      }
   
       var return_value = function_called(...params);
       var err_object = tests[i];
@@ -460,6 +429,8 @@ const configure = {
 
         }
 
+        //file name
+
         err_object.index_of_error_set = typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found';
 
         error_sets.push(err_object);
@@ -468,6 +439,82 @@ const configure = {
   
     }
          
+  }
+
+  /*
+    Testing the input of main and fallback errors (running errors twice on tests in some cases)
+  */
+
+  function main_or_fallback_errors(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, function_directory, function_description, base_param_names, type_fallback_or_main) { 
+
+    var init_errors = {};
+
+    if((typeof(tests) !== 'object') || Array.isArray(tests) === false) {
+      init_errors.tests = '(tests) need to be defined as an array with object (unit: object) and (index_of_set: index)';
+    }
+    
+
+    if(
+      (typeof(allowed_types) !== 'object') || 
+      (typeof(allowed_types) === 'object' && typeof(allowed_types.on) !== 'boolean') || 
+      (typeof(allowed_types) === 'object' && (typeof(allowed_types.values) !== 'object' || Array.isArray(allowed_types.values) === false))) {
+      init_errors.allowed_types = '(allowed_types) must be an object with paramters (on: boolean) and (values: array)';
+    }
+
+    if(
+      (typeof(allowed_values) !== 'object') || 
+      (typeof(allowed_values) === 'object' && typeof(allowed_values.on) !== 'boolean') || 
+      (typeof(allowed_values) === 'object' && (typeof(allowed_values.values) !== 'object' || Array.isArray(allowed_values.values) === false))) {
+      init_errors.allowed_values = '(allowed_values) must be an object with parameters (on: boolean) and (values: array)';
+    }
+
+    if(
+      (typeof(regex_set) !== 'object') || 
+      (typeof(regex_set) === 'object' && typeof(regex_set.on) !== 'boolean') || 
+      (typeof(regex_set) === 'object' && (typeof(regex_set.values) !== 'object' || Array.isArray(regex_set.values) === false))) {
+      init_errors.regex_set = '(regex_set) must be an object with parameters (on: boolean) and (values: array)';
+    }
+
+    if(typeof(function_called) !== 'function') {
+      init_errors.function_called = '(function_called) must be a function';
+    }
+
+    if(typeof(file_name) !== 'object' && typeof(file_name) !== 'string') {
+      init_errors.file_name = '(file_name) must be null or a string';
+    }
+
+    if(typeof(function_name) !== 'object' && typeof(function_name) !== 'string') {
+      init_errors.function_name = '(function_name) must be null or a string';
+    }
+
+    if(typeof(function_directory) !== 'object' && typeof(function_directory) !== 'string') {
+      init_errors.function_directory = '(function_directory) must be null or a string';
+    }
+
+    if(typeof(function_description) !== 'object' && typeof(function_description) !== 'string') {
+      init_errors.function_description = '(function_description) must be null or a string';
+    }
+
+    if(typeof(base_param_names) !== 'object' && typeof(base_param_names) !== 'string') {
+      init_errors.base_param_names = '(base_param_names) must be null or a string';
+    }
+
+    var size = Object.keys(init_errors).length;
+
+    if(size > 0) { 
+
+      console.log(`Error Main or Fallback: ${type_fallback_or_main} --- Directory of Error: ${typeof(function_directory) !== 'undefined' ? function_directory : 'undefined'} ---------------- /n`);
+
+      for (const [key, value] of Object.entries(init_errors)) {
+        console.log(`${key}: ${value} /n`);
+       }    
+
+       return false;
+
+    }
+
+    return true;
+
   }
   
   /*
