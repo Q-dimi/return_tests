@@ -32,7 +32,7 @@ const configure = {
 
       if(developer_input.replace_tests_with_multiplied_on_load === true) { 
         developer_input.tests = multiply_function_set(
-          developer_input.db === true ? fetch_content(developer_input.db.file_path) : developer_input.function_set_multiplied, //make sure returned value is in same format as original
+          developer_input.db === true ? fetch_content(developer_input.db.file_path) : developer_input.function_set_multiplied,
           developer_input.tests, 
           configure.all_functions_to_test[i]
         );
@@ -453,42 +453,70 @@ const configure = {
       if(error_count > 0) { 
 
         var finalized_error_object = {};
-        var addiitional_info_on_current_index = tests[i];
-        var additional_info_fallback_function = {}; 
-        var additional_info_main_function = {}; 
+        var additional_info = {};
+
+        //script vs object index values
 
         if(main_or_fallback === 'fallback') { 
 
-          additional_info_fallback_function.function_name = function_name;
+          additional_info.function_name = function_name;
 
-          additional_info_fallback_function.function_directory = function_directory;
+          additional_info.function_directory = function_directory;
 
-          additional_info_fallback_function.function_description = function_description;
+          additional_info.function_description = function_description;
 
-          additional_info_fallback_function.base_param_names = base_param_names;
+          additional_info.base_param_names = base_param_names;
 
-          //add additional on tests 
+          additional_info.allowed_values = allowed_values;
+
+          additional_info.allowed_types = allowed_types;
+
+          additional_info.regex_set = regex_set;
+
+          additional_info.function_called = function_called;
+
+          additional_info.file_name = file_name;
+
+          additional_info.parameters = tests[i].parameters;
+
+          additional_info.parameters = tests[i].index_of_set;
+
+          additional_info.type_of_function = main_or_fallback;
 
         } else { 
 
-          err_object.function_name = tests[i].function_called.function_name;
+          additional_info.function_name = tests[i].function_called.function_name;
 
-          err_object.function_directory = tests[i].function_called.function_directory
+          additional_info.function_directory = tests[i].function_called.function_directory;
 
-          err_object.function.function_description = tests[i].function_called.function_description;
+          additional_info.function_description = tests[i].function_called.function_description;
 
-          err_object.base_param_names = tests[i].function_called.base_param_names;
+          additional_info.base_param_names = tests[i].function_called.base_param_names;
 
-          //add additional on tests
+          additional_info.allowed_values = tests[i].unit.allowed_values.values;
+
+          additional_info.allowed_types = tests[i].unit.allowed_types.values;
+
+          additional_info.regex_set = tests[i].unit.regex_set.values;
+
+          additional_info.function_called = tests[i].function_called.function;
+
+          additional_info.file_name = file_name;
+
+          additional_info.parameters = tests[i].parameters;
+
+          additional_info.parameters = tests[i].function_called.shared_index;
+
+          additional_info.parameters = tests[i].index_of_set;
+
+          additional_info.type_of_function = main_or_fallback;
 
         }
 
         finalized_error_object.error_value = error_value;
         finalized_error_object.error_type = error_type;
         finalized_error_object.error_rejex = error_rejex;
-        finalized_error_object.additional_info_fallback_function = additional_info_fallback_function;
-        finalized_error_object.additional_info_main_function = additional_info_main_function;
-
+        finalized_error_object.additional_info = additional_info;
         error_sets.push(finalized_error_object);
 
       }
