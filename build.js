@@ -204,6 +204,7 @@ const configure = {
   function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, function_directory, function_description, base_param_names, type_of_error_check = 'fallback') {
 
     try {
+
       if(!main_or_fallback_errors(
         tests, 
         allowed_types, 
@@ -217,12 +218,25 @@ const configure = {
         base_param_names, 
         type_of_error_check
       )) { 
-        console.log(`error: could not run error check on fallback ${err}`);
+
+        console.log(`
+        error: could not run 
+        error check on fallback ${i} - ${file_name}
+      `);
+
         return;
+
       };
+
     } catch(err) {
-        console.log(`error: could not run error check on fallback ${err}`);
-        return;
+
+      console.log(`
+        error: could not run error
+        check on fallback ${err.message}
+      `);
+
+      return;
+
     }
   
     for(let i = 0; i < tests.length; i++) { 
@@ -251,11 +265,17 @@ const configure = {
 
       var main_or_fallback = 'main';
 
-      typeof(tests[i].function_called) === 'object' && tests[i].function_called.on === true && typeof(tests[i].function_called.function) === 'function' ? (function_called = tests[i].function_called.function, main_or_fallback = 'main') : (function_called = function_called, main_or_fallback = 'fallback');
+      //clean this dont need it anymore just run main....
+      typeof(tests[i].function_called) === 'object' && 
+      tests[i].function_called.on === true && 
+      typeof(tests[i].function_called.function) === 'function' ?
+      (function_called = tests[i].function_called.function, main_or_fallback = 'main') :
+      (function_called = function_called, main_or_fallback = 'fallback');
 
       if(main_or_fallback === 'main') { 
 
         try {
+
           if(!main_or_fallback_errors(
             tests, 
             tests[i].unit.allowed_types, 
@@ -269,12 +289,25 @@ const configure = {
             tests[i].function_called.base_param_names, 
             main_or_fallback
           )) { 
-            console.log(`error: index ${i} on main check`);
-            continue;
+
+          console.log(`
+            error: index 
+            ${i} on main check ${file_name}`
+          );
+
+          continue;
+
           };
+
         } catch(err) { 
-            console.log(`error: could not run error check on main ${err}`);
-            continue;
+
+          console.log(`
+            error: could not run error
+            check on main ${err.message} ${i} ${file_name}`
+          );
+
+          continue;
+
         }
 
       }
@@ -293,6 +326,8 @@ const configure = {
       if(allowed_types_unit_or_single.on === true) {
   
         if(allowed_types_unit_or_single.v.values.includes(typeof(return_value)) !== true) {
+
+          //couple into defined set
   
           err_object.error_type = true;
   
@@ -326,6 +361,8 @@ const configure = {
         ) {
   
           if(allowed_values_unit_or_single.v.values.includes(return_value) !== true) {  
+
+            //couple into defined set
   
             err_object.error_value = true;
   
@@ -353,6 +390,8 @@ const configure = {
            }
   
            if(match === false) { 
+
+              //couple into defined set
   
               err_object.error_value = true;
   
@@ -394,6 +433,7 @@ const configure = {
           if(test_regex !== true) { 
   
             if(regex_pass === false) { 
+              //couple into defined set
               err_object.error_regex = true;
               regex_pass = true; 
             };
@@ -418,6 +458,8 @@ const configure = {
 
         if(main_or_fallback === 'fallback') { 
 
+          //couple into defined set
+
           err_object.function_name = function_name; 
 
           err_object.function_directory = function_directory; 
@@ -429,6 +471,8 @@ const configure = {
           //pass testing info
 
         } else { 
+
+          //couple into defined set
 
           err_object.function_name = tests[i].function_called.function_name;
 
