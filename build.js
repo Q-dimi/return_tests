@@ -1,11 +1,11 @@
 
 /*
-  @param {all_functions_to_test: array}: Functions stored in each folder.
+  @param {all_files_to_test: array}: Functions stored in each folder.
 */
 
 const configure = { 
 
-    all_functions_to_test: [
+    all_files_to_test: [
       './functions/example1.js',
     ],
 
@@ -24,23 +24,23 @@ const configure = {
   var error_sets = [];
   var error_in_execution = [];
           
-  for(let i = 0; i < configure.all_functions_to_test.length; i++) {
+  for(let i = 0; i < configure.all_files_to_test.length; i++) {
 
     try {
 
-      var developer_input = require(configure.all_functions_to_test[i]); // all files to test...
+      var developer_input = require(configure.all_files_to_test[i]); 
 
       if(developer_input.replace_tests_with_multiplied_on_load === true) { 
         developer_input.tests = multiply_function_set(
           developer_input.db === true ? fetch_content(developer_input.db.file_path) : developer_input.function_set_multiplied,
           developer_input.tests, 
-          configure.all_functions_to_test[i]
+          configure.all_files_to_test[i]
         );
       }
 
       run_tests(
         developer_input.tests, 
-        configure.all_functions_to_test[i],
+        configure.all_files_to_test[i],
       );
 
     } catch(err) {
@@ -211,14 +211,29 @@ const configure = {
   
     for(let i = 0; i < tests.length; i++) { 
 
+      if(
+        (typeof(tests[i]) !== 'object') || 
+        (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
+        (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number') ||
+        (typeof(tests[i]) === 'object' && typeof(tests[i].parameters) !== 'object') ||
+        (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) !== 'object')
+      ) {
+  
+        console.log(`(tests[i]) needs to be defined as an object with object
+        (unit: object), (index_of_set: index), (parameters: object), (function_called: object)
+        each with the apporopriate values in the README (last level definition for undefined to pass)`);
+  
+        continue;
+  
+      }
+
       try {
 
-        //just pass in tests and start with the top portion, continue and finish...
         if(!main_or_fallback_errors(
-          tests, tests[i].unit.allowed_types, tests[i].unit.allowed_values, 
-          tests[i].unit.regex_set,tests[i].function_called.function, file_name, 
+          tests[i].unit.allowed_types, tests[i].unit.allowed_values, 
+          tests[i].unit.regex_set, tests[i].function_called.function, file_name, 
           tests[i].function_called.function_name, tests[i].function_called.function_directory, 
-          tests[i].function_called.function_description, tests[i].function_called.base_param_names, main_or_fallback,
+          tests[i].function_called.function_description, tests[i].function_called.base_param_names
         )) { 
 
           console.log(`
@@ -277,13 +292,6 @@ const configure = {
         }
   
       }
-
-      var allowed_values_unit_or_single = ( //check main on these
-        typeof(tests[i].unit.allowed_values) !== 'undefined' && tests[i].unit.allowed_values.on === true && Array.isArray(tests[i].unit.allowed_values.values) ? 
-        { on: true, test: 'unit', v: tests[i].unit.allowed_values } : allowed_values.on === true ? 
-        { on: true, test: 'single', v: allowed_values } : 
-        { on: false, test: 'off' }
-      );
 
       var error_value = {}; 
   
@@ -404,30 +412,12 @@ const configure = {
   */
 
   function main_or_fallback_errors(
-    tests, allowed_types, allowed_values, regex_set, 
+    allowed_types, allowed_values, regex_set, 
     function_called, file_name, function_name, function_directory, 
-    function_description, base_param_names, type_fallback_or_main
+    function_description, base_param_names
   ) { 
 
     var init_errors = {};
-
-    if(
-      (typeof(tests[i]) !== 'object') || 
-      (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
-      (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number') ||
-      (typeof(tests[i]) === 'object' && typeof(tests[i].parameters) !== 'object') ||
-      (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) !== 'object')
-    ) {
-
-      init_errors.base_set  `(tests[i]) needs to be defined as an object with object
-      (unit: object), (index_of_set: index), (parameters: object), (function_called: object)
-      each with the apporopriate values in the README`;
-    
-    }
-
-    if((typeof(tests) !== 'object') || Array.isArray(tests) === false) {
-      init_errors.tests = '(tests) need to be defined as an array with object (unit: object) and (index_of_set: index)';
-    }
     
     if(
       (typeof(allowed_types) !== 'object') || 
@@ -473,8 +463,6 @@ const configure = {
     if(typeof(base_param_names) !== 'object' && typeof(base_param_names) !== 'string') {
       init_errors.base_param_names = '(base_param_names) must be null or a string';
     }
-
-
 
     var size = Object.keys(init_errors).length;
 
