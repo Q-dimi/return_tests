@@ -168,8 +168,7 @@ const configure = {
 
     }
 
-    attach_here.params = params;
-
+    attach_here.parameters = params;
     return attach_here;
 
   }
