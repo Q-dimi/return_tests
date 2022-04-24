@@ -181,6 +181,7 @@ const configure = {
     }
 
     attach_here.parameters = params;
+
     return attach_here;
 
   }
@@ -238,6 +239,8 @@ const configure = {
         console.log(`
           error: could not run 
           error check on fallback ${i} - ${file_name}
+          please make sure the fall back is set 
+          with the correct types. NOT IN ARRAY.
         `);
 
         return;
@@ -249,6 +252,8 @@ const configure = {
         console.log(`
           error: could not run error
           check on fallback ${err.message}
+          please make sure the fall back is set 
+          with the correct types. NOT IN ARRAY.
         `);
 
         return;
@@ -268,7 +273,7 @@ const configure = {
         console.log(`
           (tests[i]) needs to be defined as an object with object
           (unit: object), (index_of_set: index), (parameters: object), (function_called: object)
-          each with the apporopriate values in the README
+          each with the apporopriate values in the README regardless of where the function is executed
           ${i}: ${typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found'}
         `);
 
