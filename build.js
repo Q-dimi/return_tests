@@ -210,7 +210,7 @@ const configure = {
   }
 
   /*
-    check tests... (get rid of file name and fix som params passed in...) (if the fall back isnt good, get out cause it needs to be set... if fallback not chosen in loop, check main.. if main not good, continue)
+    check tests... 
   */
           
   function run_tests(tests, allowed_types, allowed_values, regex_set, function_called, file_name, function_name, function_directory, function_description, base_param_names, type_of_error_check = 'fallback') {
@@ -231,29 +231,27 @@ const configure = {
         type_of_error_check
       )) { 
 
-      console.log(`
-        error: could not run 
-        error check on fallback ${i} - ${file_name}
-      `);
+        console.log(`
+          error: could not run 
+          error check on fallback ${i} - ${file_name}
+        `);
 
-      return;
+        return;
 
       };
 
     } catch(err) {
 
-      console.log(`
-        error: could not run error
-        check on fallback ${err.message}
-      `);
+        console.log(`
+          error: could not run error
+          check on fallback ${err.message}
+        `);
 
-      return;
+        return;
 
     }
   
     for(let i = 0; i < tests.length; i++) { 
-
-      //testing if unit and index of set ar set in the current array... they must be in order to run main or fallback 
 
       if(
         (typeof(tests[i]) !== 'object') || 
@@ -270,8 +268,6 @@ const configure = {
         continue;
 
       }
-
-      //define type of function whether main or fallback. If main rn errors again. Invoke function with parameters
   
       var params = [];
   
@@ -296,32 +292,30 @@ const configure = {
             tests[i].unit.allowed_types, 
             tests[i].unit.allowed_values, 
             tests[i].unit.regex_set, 
-            tests[i].function_called.function, 
-            file_name, 
+            tests[i].function_called.function, file_name, 
             tests[i].function_called.function_name, 
             tests[i].function_called.function_directory, 
             tests[i].function_called.function_description, 
-            tests[i].function_called.base_param_names, 
-            main_or_fallback
+            tests[i].function_called.base_param_names, main_or_fallback
           )) { 
 
-          console.log(`
-            error: index 
-            ${i} on main check ${file_name}`
-          );
+            console.log(`
+              error: index 
+              ${i} on main check ${file_name}`
+            );
 
-          continue;
+            continue;
 
           };
 
         } catch(err) { 
 
-          console.log(`
-            error: could not run error
-            check on main ${err.message} ${i} ${file_name}`
-          );
+            console.log(`
+              error: could not run error
+              check on main ${err.message} ${i} ${file_name}`
+            );
 
-          continue;
+            continue;
 
         }
 
