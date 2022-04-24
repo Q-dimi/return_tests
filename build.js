@@ -92,26 +92,18 @@ const configure = {
   }
 
   /*
-    The array of objects returned (rewrie this with a fixed set... dont do the random thing... makes things weird... if you have to just create a copy with a diferent type at each index)
+    The array of objects returned 
   */
 
   function arrays_returned(multiply_and_returned_set) {
 
-    var allowed_random_parameters = multiply_and_returned_set.randomized.allowed_random_parameters;
-    var parameter_amount = multiply_and_returned_set.randomized.parameter_amount;
-    var multiply_amount = multiply_and_returned_set.randomized.multiply_amount;
-
     var returned_set = [];
 
-    for(let i = 0; i < multiply_amount; i++) { 
-
-      var p_a_index = Math.floor(Math.random() * parameter_amount.length);
-      var amount_of_parameters = parameter_amount[p_a_index];
+    for(let i = 0; i < multiply_and_returned_set.randomized.parameters.multiply_amount; i++) { 
 
       returned_set.push(create_single_randomized_object(
         multiply_and_returned_set,
-        allowed_random_parameters,
-        amount_of_parameters, 
+        multiply_and_returned_set.randomized.parameters,
       ));
 
     }
@@ -124,43 +116,52 @@ const configure = {
     creates and returns a single randomized object
   */
 
-  function create_single_randomized_object(attach_here, allowed_random_parameters, amount_of_parameters) { 
+  function create_single_randomized_object(attach_here, allowed_random_parameters) { 
 
     var params = {};
 
-    for(let i = 0; i < amount_of_parameters; i++) { 
+    for(let i = 0; i < allowed_random_parameters.length; i++) { 
 
-      //f this... going to just create a fixed amount of types in the set and get rid of random types passed... just make it simple...
-
-      var p_index = Math.floor(Math.random() * allowed_random_parameters.length);
-      var current_parameter = attach_here.randomized.focucus_params_index_type.override_random === true ? attach_here.randomized.focucus_params_index_type.fixed_params[i] : allowed_random_parameters[p_index]; 
+      var current_parameter = allowed_random_parameters[i]; 
 
       if(current_parameter === 'string') { 
         params[`test-param-string-${i}`] = create_random_inner_param_string();
       }
 
-      if(current_parameter === 'number') { 
+      else if(current_parameter === 'number') { 
         params[`test-param-number-${i}`] = create_random_inner_param_number();
       }
 
-      if(current_parameter === 'BigInt') { 
+      else if(current_parameter === 'BigInt') { 
         params[`test-param-BigInt-${i}`] = create_random_inner_param_BigInt();
       }
 
-      if(current_parameter === 'object') { 
+      else if(current_parameter === 'object') { 
         params[`test-param-object-${i}`] = create_random_inner_param_object(attach_here.randomized.when_obj_passed); // (string, number, both) - p count
       }
 
-      if(current_parameter === 'array') { 
+      else if(current_parameter === 'array') { 
         params[`test-param-array-${i}`] = create_random_inner_param_array(attach_here.randomized.when_arr_passed); //(string, number, both) - p count
       }
 
-      if(current_parameter === 'undefined') { 
+      else if(current_parameter === 'undefined') { 
         params[`test-param-undefined-${i}`] = undefined;
       }
 
-      if(current_parameter === 'boolean') { 
+      else if(current_parameter === 'boolean') { 
         params[`test-param-boolean-${i}`] = create_random_inner_param_boolean();
+      }
+
+      else { 
+
+        console.log(
+          `error: please pass in a string, number,
+           BigInt, object, array, undefined, or boolean. 
+           defaulting to number.`
+        );
+
+        params[`test-param-number-${i}`] = create_random_inner_param_number();
+
       }
 
     }
@@ -171,12 +172,29 @@ const configure = {
 
   }
 
-  function create_random_inner_param_string()  { return require('./random/string');  }
-  function create_random_inner_param_number()  { return require('./random/number');;  }
-  function create_random_inner_param_BigInt()  { return require('./random/BigInt');  }
-  function create_random_inner_param_object()  { return require('./random/object');  }
-  function create_random_inner_param_array()   { return require('./random/array');  }
-  function create_random_inner_param_boolean() { return require('./random/boolean'); }
+  function create_random_inner_param_string()  { 
+    return require('./random/string');  
+  }
+
+  function create_random_inner_param_number()  { 
+    return require('./random/number');  
+  }
+
+  function create_random_inner_param_BigInt()  { 
+    return require('./random/BigInt');  
+  }
+
+  function create_random_inner_param_object(config_and_build)  {
+     return require('./random/object');  
+  }
+
+  function create_random_inner_param_array(config_and_build)   { 
+    return require('./random/array');  
+  }
+
+  function create_random_inner_param_boolean() { 
+    return require('./random/boolean'); 
+  }
 
   /*
     check tests...
