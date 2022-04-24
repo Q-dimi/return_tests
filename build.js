@@ -29,7 +29,7 @@ const configure = {
 
     try {
 
-      var developer_input = require(configure.all_functions_to_test[i]); 
+      var developer_input = require(configure.all_functions_to_test[i]); // all files to test...
 
       if(developer_input.replace_tests_with_multiplied_on_load === true) { 
         developer_input.tests = multiply_function_set(
@@ -41,15 +41,7 @@ const configure = {
 
       run_tests(
         developer_input.tests, 
-        developer_input.allowed_types, 
-        developer_input.allowed_values, 
-        developer_input.regex_set, 
-        developer_input.function_called, 
         configure.all_functions_to_test[i],
-        developer_input.function_name, 
-        developer_input.function_directory,
-        developer_input.function_description,
-        developer_input.base_param_names
       );
 
     } catch(err) {
@@ -213,75 +205,45 @@ const configure = {
   }
 
   /*
-    check tests... 
+    check tests...  GG F DAT S NIE 
   */
           
-  function run_tests(
-    tests, allowed_types, allowed_values, regex_set, 
-    function_called, file_name, function_name, function_directory, 
-    function_description, base_param_names, type_of_error_check = 'fallback'
-  ) {
-
-    try {
-
-      if(!main_or_fallback_errors(
-        tests, 
-        allowed_types, 
-        allowed_values, 
-        regex_set, 
-        function_called, 
-        file_name, 
-        function_name, 
-        function_directory, 
-        function_description, 
-        base_param_names, 
-        type_of_error_check
-      )) { 
-
-        console.log(`
-          error: could not run 
-          error check on fallback ${i} - ${file_name}
-          please make sure the fall back is set 
-          with the correct types. NOT IN ARRAY.
-        `);
-
-        return;
-
-      };
-
-    } catch(err) {
-
-        console.log(`
-          error: could not run error
-          check on fallback ${err.message}
-          please make sure the fall back is set 
-          with the correct types. NOT IN ARRAY.
-        `);
-
-        return;
-
-    }
+  function run_tests(tests, file_name) {
   
     for(let i = 0; i < tests.length; i++) { 
 
-      //just make sure everything is defined for what it is supposed to be... so use main errors here...
+      try {
 
-      if(
-        (typeof(tests[i]) !== 'object') || 
-        (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
-        (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number') ||
-        (typeof(tests[i]) === 'object' && typeof(tests[i].parameters) !== 'object') ||
-        (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) !== 'object')
-      ) {
+        if(!main_or_fallback_errors(
+          tests, 
+          tests[i].unit.allowed_types, 
+          tests[i].unit.allowed_values, 
+          tests[i].unit.regex_set, 
+          tests[i].function_called.function, 
+          file_name, 
+          tests[i].function_called.function_name, 
+          tests[i].function_called.function_directory, 
+          tests[i].function_called.function_description, 
+          tests[i].function_called.base_param_names, 
+          main_or_fallback,
+        )) { 
 
-        console.log(`
-          (tests[i]) needs to be defined as an object with object
-          (unit: object), (index_of_set: index), (parameters: object), (function_called: object)
-          each with the apporopriate values in the README regardless of where the function is executed
-          ${i}: ${typeof(tests[i].index_of_set) !== 'undefined' ? tests[i].index_of_set : 'index not found'}
-        `);
+          console.log(`
+            error: index ${i} on main check ${file_name}`
+          );
 
-        continue;
+          continue;
+
+        };
+
+      } catch(err) { 
+
+          console.log(`
+            error: could not run
+            check on main ${err.message} ${i} ${file_name}`
+          );
+
+          continue;
 
       }
   
@@ -291,72 +253,25 @@ const configure = {
         params.push(value);
       }
 
-      var main_or_fallback = 'main';
-
-      tests[i].function_called.on === true && typeof(tests[i].function_called.function) === 'function' ? 
-      (function_called = tests[i].function_called.function, main_or_fallback = 'main') : 
-      (function_called = function_called, main_or_fallback = 'fallback');
-
-      if(main_or_fallback === 'main') { 
-
-        try {
-
-          if(!main_or_fallback_errors(
-            tests, 
-            tests[i].unit.allowed_types, 
-            tests[i].unit.allowed_values, 
-            tests[i].unit.regex_set, 
-            tests[i].function_called.function, file_name, 
-            tests[i].function_called.function_name, 
-            tests[i].function_called.function_directory, 
-            tests[i].function_called.function_description, 
-            tests[i].function_called.base_param_names, main_or_fallback
-          )) { 
-
-            console.log(`
-              error: index 
-              ${i} on main check ${file_name}`
-            );
-
-            continue;
-
-          };
-
-        } catch(err) { 
-
-            console.log(`
-              error: could not run
-              check on main ${err.message} ${i} ${file_name}`
-            );
-
-            continue;
-
-        }
-
+      if(tests[i].function_called.on !== true) { 
+        continue;
       }
   
       var return_value;
 
       try{
-        return_value = function_called(...params);
+        return_value = tests[i].function_called.function(...params);
       } catch(err)  {
-        return_value = `error processing this fnction: ${err.message}`;
+        return_value = `error processing this function: ${err.message}`;
       }
 
       var error_count = 0;
 
-      var allowed_types_unit_or_single = ( 
-        typeof(tests[i].unit.allowed_types) !== 'undefined' && tests[i].unit.allowed_types.on === true && Array.isArray(tests[i].unit.allowed_types.values) ?
-        { on: true, test: 'unit', v: tests[i].unit.allowed_types } : allowed_types.on === true ?
-        { on: true, test: 'single', v: allowed_types } : 
-        { on: false, test: 'off' }
-      );
-
       var error_type = {};
   
-      if(allowed_types_unit_or_single.on === true) {
+      if(tests[i].unit.allowed_types.on === true) {
   
-        if(allowed_types_unit_or_single.v.values.includes(typeof(return_value)) !== true) {
+        if(tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true) {
     
           error_type.message = `The value returned is not within the allowed types.`;
   
@@ -379,7 +294,7 @@ const configure = {
 
       var error_value = {}; 
   
-      if(allowed_values_unit_or_single.on === true) {
+      if(tests[i].unit.allowed_values.on === true) {
   
         if(
           typeof(return_value) === 'number' || 
@@ -389,7 +304,7 @@ const configure = {
           typeof(return_value) === 'boolean'
         ) {
   
-          if(allowed_values_unit_or_single.v.values.includes(return_value) !== true) {  
+          if(tests[i].unit.allowed_values.values.includes(return_value) !== true) {  
     
             error_value.message = `The value returned is not within the allowed values.`;
   
@@ -405,9 +320,9 @@ const configure = {
   
            var match = false;
   
-           for(let i = 0; i < allowed_values_unit_or_single.v.values.length; i++) { 
-             if(typeof(allowed_values_unit_or_single.v.values[i]) === 'object') { 
-              if(JSON.stringify(allowed_values_unit_or_single.v.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
+           for(let i = 0; i < tests[i].unit.allowed_values.values.length; i++) { 
+             if(typeof(tests[i].unit.allowed_values.values[i]) === 'object') { 
+              if(JSON.stringify(tests[i].unit.allowed_values.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
                 match = true;
                 break;
               }
@@ -445,17 +360,17 @@ const configure = {
 
       var error_rejex = {};
     
-      if(allowed_regex_unit_or_single.on === true) {
+      if(tests[i].unit.regex_set.on === true) {
   
-        for(let i = 0; i < allowed_regex_unit_or_single.v.values.length; i++) {  
+        for(let i = 0; i < tests[i].unit.regex_set.values.length; i++) {  
   
-          var test_regex = test(allowed_regex_unit_or_single.v.values[i], return_value); 
+          var test_regex = test(tests[i].unit.regex_set.values[i], return_value); 
   
           if(test_regex !== true) { 
   
             error_rejex[`message-${i}`] = `The value returned does not pass`;
   
-            error_rejex[`regular_expression-${i}`] = allowed_regex_unit_or_single.v.values[i];
+            error_rejex[`regular_expression-${i}`] = tests[i].unit.regex_set.values[i];
   
             error_rejex[`return_value-${i}`] = return_value;
     
@@ -468,74 +383,25 @@ const configure = {
       }
   
       if(error_count > 0) { 
-
         var finalized_error_object = {};
         var additional_info = {};
-
-        //script vs object index values
-
-        if(main_or_fallback === 'fallback') { 
-
-          additional_info.function_name = function_name;
-
-          additional_info.function_directory = function_directory;
-
-          additional_info.function_description = function_description;
-
-          additional_info.base_param_names = base_param_names;
-
-          additional_info.allowed_values = allowed_values;
-
-          additional_info.allowed_types = allowed_types;
-
-          additional_info.regex_set = regex_set;
-
-          additional_info.function_called = function_called;
-
-          additional_info.file_name = file_name;
-
-          additional_info.parameters = tests[i].parameters;
-
-          additional_info.parameters = tests[i].index_of_set;
-
-          additional_info.type_of_function = main_or_fallback;
-
-        } else { 
-
-          additional_info.function_name = tests[i].function_called.function_name;
-
-          additional_info.function_directory = tests[i].function_called.function_directory;
-
-          additional_info.function_description = tests[i].function_called.function_description;
-
-          additional_info.base_param_names = tests[i].function_called.base_param_names;
-
-          additional_info.allowed_values = tests[i].unit.allowed_values.values;
-
-          additional_info.allowed_types = tests[i].unit.allowed_types.values;
-
-          additional_info.regex_set = tests[i].unit.regex_set.values;
-
-          additional_info.function_called = tests[i].function_called.function;
-
-          additional_info.file_name = file_name;
-
-          additional_info.parameters = tests[i].parameters;
-
-          additional_info.parameters = tests[i].function_called.shared_index;
-
-          additional_info.parameters = tests[i].index_of_set;
-
-          additional_info.type_of_function = main_or_fallback;
-
-        }
-
+        additional_info.function_name = tests[i].function_called.function_name;
+        additional_info.function_directory = tests[i].function_called.function_directory;
+        additional_info.function_description = tests[i].function_called.function_description;
+        additional_info.base_param_names = tests[i].function_called.base_param_names;
+        additional_info.allowed_values = tests[i].unit.allowed_values.values;
+        additional_info.allowed_types = tests[i].unit.allowed_types.values;
+        additional_info.regex_set = tests[i].unit.regex_set.values;
+        additional_info.function_called = tests[i].function_called.function;
+        additional_info.file_name = file_name;
+        additional_info.parameters = tests[i].parameters;
+        additional_info.parameters = tests[i].function_called.shared_index;
+        additional_info.parameters = tests[i].index_of_set;
         finalized_error_object.error_value = error_value;
         finalized_error_object.error_type = error_type;
         finalized_error_object.error_rejex = error_rejex;
         finalized_error_object.additional_info = additional_info;
         error_sets.push(finalized_error_object);
-
       }
   
     }
@@ -553,6 +419,20 @@ const configure = {
   ) { 
 
     var init_errors = {};
+
+    if(
+      (typeof(tests[i]) !== 'object') || 
+      (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
+      (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number') ||
+      (typeof(tests[i]) === 'object' && typeof(tests[i].parameters) !== 'object') ||
+      (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) !== 'object')
+    ) {
+
+      init_errors.base_set  `(tests[i]) needs to be defined as an object with object
+      (unit: object), (index_of_set: index), (parameters: object), (function_called: object)
+      each with the apporopriate values in the README`;
+    
+    }
 
     if((typeof(tests) !== 'object') || Array.isArray(tests) === false) {
       init_errors.tests = '(tests) need to be defined as an array with object (unit: object) and (index_of_set: index)';
