@@ -22,6 +22,7 @@ const configure = {
   */
 
   var error_sets = [];
+  var error_in_execution = [];
           
   for(let i = 0; i < configure.all_functions_to_test.length; i++) {
 
@@ -122,6 +123,18 @@ const configure = {
 
     var params = {};
 
+    var if_random_or_not_in_selected = [
+      create_random_inner_param_string(), 
+      create_random_inner_param_number(),
+      create_random_inner_param_BigInt(),
+      create_random_inner_param_object(attach_here.randomized.when_obj_passed),
+      create_random_inner_param_array(attach_here.randomized.when_arr_passed),
+      undefined, 
+      create_random_inner_param_boolean()
+    ];
+
+    var random_index  = Math.floor(Math.random() * if_random_or_not_in_selected.length);
+
     for(let i = 0; i < allowed_random_parameters.length; i++) { 
 
       var current_parameter = allowed_random_parameters[i]; 
@@ -154,15 +167,19 @@ const configure = {
         params[`test-param-boolean-${i}`] = create_random_inner_param_boolean();
       }
 
+      else if(current_parameter === 'random') { 
+        params[`test-param-random-${i}`] = if_random_or_not_in_selected[random_index];
+      }
+
       else { 
 
         console.log(
           `error: please pass in a string, number,
            BigInt, object, array, undefined, or boolean. 
-           defaulting to number.`
+           defaulting to random.`
         );
 
-        params[`test-param-number-${i}`] = create_random_inner_param_number();
+        params[`test-param-random-${i}`] = if_random_or_not_in_selected[random_index];
 
       }
 
@@ -174,27 +191,21 @@ const configure = {
   }
 
   function create_random_inner_param_string()  { 
-    return require('./random/string');  
   }
 
   function create_random_inner_param_number()  { 
-    return require('./random/number');  
   }
 
   function create_random_inner_param_BigInt()  { 
-    return require('./random/BigInt');  
   }
 
   function create_random_inner_param_object(config_and_build)  {
-     return require('./random/object');  
   }
 
   function create_random_inner_param_array(config_and_build)   { 
-    return require('./random/array');  
   }
 
   function create_random_inner_param_boolean() { 
-    return require('./random/boolean'); 
   }
 
   /*
@@ -523,7 +534,6 @@ const configure = {
       init_errors.tests = '(tests) need to be defined as an array with object (unit: object) and (index_of_set: index)';
     }
     
-
     if(
       (typeof(allowed_types) !== 'object') || 
       (typeof(allowed_types) === 'object' && typeof(allowed_types.on) !== 'boolean') || 
@@ -605,5 +615,6 @@ const configure = {
   */
 
   exports.errors = error_sets;
+  exports.execution_errors = error_in_execution;
 
   
