@@ -123,6 +123,10 @@ const configure = {
         params[`test-param-boolean-${i}`] = create_random_inner_param_boolean();
       }
 
+      else if(current_parameter === 'null') { 
+        params[`test-param-null-${i}`] = null;
+      }
+
       else if(current_parameter === 'random') { 
         params[`test-param-random-${i}`] = if_random_or_not_in_selected[Math.floor(Math.random() * if_random_or_not_in_selected.length)];
       }
@@ -169,20 +173,28 @@ const configure = {
         o[`test-param-boolean-${i}`] = create_random_inner_param_string();
       }
 
-      if(config_and_build[i] === 'number') { 
+      else if(config_and_build[i] === 'number') { 
         o[`test-param-number-${i}`] = create_random_inner_param_number();
       }
 
-      if(config_and_build[i] === 'string') { 
+      else if(config_and_build[i] === 'string') { 
         o[`test-param-string-${i}`] = create_random_inner_param_string();
       }
 
-      if(config_and_build[i] === 'undefined') { 
+      else if(config_and_build[i] === 'undefined') { 
         o[`test-param-undefined-${i}`] = undefined;
       }
 
-      if(config_and_build[i] === 'BigInt') { 
+      else if(config_and_build[i] === 'null') { 
+        o[`test-param-null-${i}`] = null;
+      }
+
+      else if(config_and_build[i] === 'BigInt') { 
         o[`test-param-BigInt-${i}`] = create_random_inner_param_BigInt();
+      }
+
+      else { 
+        o[`test-param-undefined-${i}`] = null;
       }
 
     }
@@ -201,20 +213,28 @@ const configure = {
         a.push(create_random_inner_param_string());
       }
 
-      if(config_and_build[i] === 'number') { 
+      else if(config_and_build[i] === 'number') { 
         a.push(create_random_inner_param_number());
       }
 
-      if(config_and_build[i] === 'string') { 
+      else if(config_and_build[i] === 'string') { 
         a.push(create_random_inner_param_string());
       }
 
-      if(config_and_build[i] === 'undefined') { 
+      else if(config_and_build[i] === 'undefined') { 
         a.push(undefined);
       }
 
-      if(config_and_build[i] === 'BigInt') { 
+      else if(config_and_build[i] === 'null') { 
+        a.push(null);
+      }
+
+      else if(config_and_build[i] === 'BigInt') { 
         a.push(create_random_inner_param_BigInt());
+      } 
+
+      else { 
+        a.push(null);
       }
 
     }
@@ -451,6 +471,12 @@ const configure = {
 
         error_sets.push(finalized_error_object);
 
+      } else { 
+
+
+
+
+        
       }
   
     }

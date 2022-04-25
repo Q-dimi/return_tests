@@ -14,7 +14,7 @@ const configure = {
 
 ## Where your functions live
 
-Go to the '/functions' folder and see how the functions are formatted. Create a new file in that folder with the same format as the examples. The file you create is a supposed to represent all the functions in a directory in your application. Below are the parameters and the types allowed for each with a description.
+Go to the '/functions' folder and see how the functions are formatted. Create a new file in that folder with the same format as the examples. The file you create is a supposed to represent all the functions in a directory in your application. Below are the parameters and the types allowed for each with a description. base_file.js can be used as a template for each file created in the functions folder.
 
 - [ ] tests: array = the array of objects that cotains the function and tests for that function
 
@@ -68,4 +68,4 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 
 # Get started
 
-Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions! For your funtion to execute within the row, make sure function_called.on is set equal to true. For your function to multiply with random parameters, make sure function_called.on is true AND randomized.on is true. Make sue the amount of params in your function match the amount passed in via the parameters object.
+Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions! For your funtion to execute within the row, make sure function_called.on is set equal to true. For your function to multiply with random parameters, make sure function_called.on is true AND randomized.on is true. Make sure the amount of params in your function match the amount passed in via the parameters object.
