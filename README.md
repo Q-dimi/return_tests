@@ -18,9 +18,9 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 
 - [ ] tests: array = the array of objects that cotains the function and tests for that function
 
-- [ ] randomized.on = boolean: whether to multiply the object with random parameters
+- [ ] randomized.on boolean: = whether to multiply the object with random parameters
 
-- [ ] randomized.parameters = array: the type of parameters passed randomly
+- [ ] randomized.parameters array: = the type of parameters passed randomly
 
 - [ ] randomized.when_obj_passed: array = param types and length of object if passed (manual for deep objects)
 
@@ -52,20 +52,20 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 
 - [ ] unit.allowed_values: object: = the allowed values your return value must match
 
-- [ ] unit.allowed_values.on: boolean = whether to run allowed values check in execution
+- [ ] unit.allowed_values.on: boolean: = whether to run allowed values check in execution
 
-- [ ] unit.allowed_values.values: array = the values that must match the returned value from the function
+- [ ] unit.allowed_values.values: array: = the values that must match the returned value from the function
 
-- [ ] unit.regex_set: object = the regular expressions tested against
+- [ ] unit.regex_set: object: = the regular expressions tested against
 
-- [ ] unit.regex_set.on: boolean = whether to run the regular expressions check in execution
+- [ ] unit.regex_set.on: boolean: = whether to run the regular expressions check in execution
 
-- [ ] unit.regex_set.values: array = the regular expressions the return value gets checked against
+- [ ] unit.regex_set.values: array: = the regular expressions the return value gets checked against
 
-- [ ] index_of_set: integer = the index of the test. (when you multiply this becomes a shared index)
+- [ ] index_of_set: integer: = the index of the test. (when you multiply this becomes a shared index)
 
-- [ ] parameters: object = the parameters passed into the function
+- [ ] parameters: object: = the parameters passed into the function whether random or your own
 
 # Get started
 
-Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions!
+Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions! For your funtion to execute within the row, make sure function_called.on is set equal to true. For your function to multiply with random parameters, make sure function_called.on is true AND randomized.on is true. Make sue the amount of params in your function match the amount passed in via the parameters object.
