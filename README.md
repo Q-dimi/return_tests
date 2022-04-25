@@ -44,7 +44,7 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 - [ ] function_set_multiplied.randomized.parameters: array: the type of parameters passed randomly
 - [ ] function_set_multiplied.randomized.when_obj_passed: object: when an obj is passed, additional config
 - [ ] function_set_multiplied.randomized.when_arr_passed: object: when an array is passed, additional config
-- [ ] function_set_multiplied.randomized.multiply_amount: integer: the amount of times to multiply the function w/ random params
+- [ ] function_set_multiplied.randomized.multiply_amount: integer: the amount of times to multiply
 
 # Get started
 
