@@ -1,6 +1,7 @@
 # return_tests
 
-Tests if a functions return value matches a regular expression, data type and data value in the row of the set. https://www.npmjs.com/package/return_tests
+Need to check the return values of functions across your files? Try return_tests. It is fast, simple, easy to use and even has a UI for you so you don't have to write any code to view your errors.
+return_tests tests if a functions return value matches a regular expression, data type and data value.
 
 ## How To Configure
 
