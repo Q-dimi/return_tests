@@ -62,7 +62,6 @@
       document.getElementById('fill_me').innerHTML = '';
       $('#exampleModal').modal('toggle');
       for (const [key, value] of Object.entries(json_string)) {
-      var obj = JSON.parse(value)
        document.getElementById('fill_me').innerHTML += `
         ${key}: ${JSON.stringify(value)} <br><br>
        `;

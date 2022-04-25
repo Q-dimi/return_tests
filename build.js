@@ -85,10 +85,14 @@ const configure = {
     var params = {};
 
     var if_random_or_not_in_selected = [
-      create_random_inner_param_string(), create_random_inner_param_number(),
-      create_random_inner_param_BigInt(), create_random_inner_param_object(attach_here.randomized.when_obj_passed),
-      create_random_inner_param_array(attach_here.randomized.when_arr_passed), undefined, 
-      create_random_inner_param_boolean(), null
+      create_random_inner_param_string(), 
+      create_random_inner_param_number(),
+      create_random_inner_param_BigInt(), 
+      create_random_inner_param_object(attach_here.randomized.when_obj_passed),
+      create_random_inner_param_array(attach_here.randomized.when_arr_passed),
+      undefined, 
+      create_random_inner_param_boolean(), 
+      null
     ];
 
     for(let i = 0; i < attach_here.randomized.parameters.length; i++) { 
@@ -390,7 +394,6 @@ const configure = {
   
            for(let i = 0; i < tests[i].unit.allowed_values.values.length; i++) { 
              if(typeof(tests[i].unit.allowed_values.values[i]) === 'object') { 
-              //change this to isArray or object and iterate and match on values o index...
               if(JSON.stringify(tests[i].unit.allowed_values.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
                 match = true;
                 break;
