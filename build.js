@@ -22,6 +22,7 @@ const configure = {
   */
 
   var error_sets = [];
+  var multiplied_sets = [];
           
   for(let i = 0; i < configure.all_files_to_test.length; i++) {
 
@@ -46,8 +47,6 @@ const configure = {
   /*
     multiply on multiply_amount
   */
-
-  var multiplied_sets = [];
 
   function multiply_function_set(multiply_this_object, folder) { 
     try { 
