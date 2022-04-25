@@ -270,7 +270,12 @@ const configure = {
           tests[i].function_called.function_directory, 
           tests[i].function_called.function_description, 
           tests[i].function_called.base_param_names,
-          tests[i].function_called.on
+          tests[i].function_called.on, 
+          tests[i].randomized.on,
+          tests[i].randomized.parameters,
+          tests[i].randomized.when_obj_passed,
+          tests[i].randomized.when_arr_passed,
+          tests[i].randomized.multiply_amount,
         )) { 
 
           console.log(`
@@ -434,6 +439,7 @@ const configure = {
         additional_info.file_name = file_name;
         additional_info.parameters = tests[i].parameters;
         additional_info.index_of_set = tests[i].index_of_set;
+        additional_info.multiplied_set = recurse_multiplied;
 
         finalized_error_object.error_value = error_value;
         finalized_error_object.error_type = error_type;
@@ -453,18 +459,20 @@ const configure = {
   }
 
   /*
-    Testing the input of main and fallback errors (running errors twice on tests in some cases)
+    Testing errors on values on defined objects
   */
 
   function main_or_fallback_errors(
     allowed_types, allowed_values, regex_set, 
     function_called, file_name, function_name, function_directory, 
-    function_description, base_param_names, on
+    function_description, base_param_names, function_on, randomized_on,
+    randomized_parameters, randomized_when_obj_passed,
+    randomized_when_arr_passed, randomized_multiply_amount
   ) { 
 
     var init_errors = {};
     
-    if(
+    if( //can get rid of inisde check
       (typeof(allowed_types) !== 'object') || 
       (typeof(allowed_types) === 'object' && typeof(allowed_types.on) !== 'boolean') || 
       (typeof(allowed_types) === 'object' && (typeof(allowed_types.values) !== 'object' || Array.isArray(allowed_types.values) === false))) {
@@ -509,11 +517,15 @@ const configure = {
       init_errors.base_param_names = '(base_param_names) must be null or a string';
     }
 
-    if(typeof(on) !== 'boolean') {
-      init_errors.on = '(on) must be a boolean';
+    if(typeof(function_on) !== 'boolean') {
+      init_errors.function_on = '(function_on) must be a boolean';
     }
 
-    //add randomized value checks...
+    if(typeof(randomized_on) !== 'boolean') {
+      init_errors.randomized_on = '(randomized_on) must be a boolean';
+    }
+
+    //f im tired
 
     var size = Object.keys(init_errors).length;
 
