@@ -20,17 +20,17 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 
 - [ ] randomized.on boolean: = whether to multiply the object with random parameters
 
-- [ ] randomized.parameters array: = the type of parameters passed randomly
+- [ ] randomized.parameters array: = the type of parameters passed. Each index represents parameter location and type.
 
-- [ ] randomized.when_obj_passed: array = param types and length of object if passed (manual for deep objects)
+- [ ] randomized.when_obj_passed: array = if object passed in randomized.parameters, the params of object
 
-- [ ] randomized.when_arr_passed: object = param types and length of array if passed (manual for deep arrays)
+- [ ] randomized.when_arr_passed: object = if array passed in randomized.parameters, the params of array
 
-- [ ] randomized.multiply_amount: integer = the amount of times to multiply
+- [ ] randomized.multiply_amount: integer = the amount of times to multiply the function at index with random params
 
 - [ ] function_called: object = the object that contains the functions configuration
 
-- [ ] function_called.on: boolean = whether to skip this row or execute this row
+- [ ] function_called.on: boolean = whether to skip this row or execute this row function
 
 - [ ] function_called.function_name: string = the name of the function executed
 
@@ -65,6 +65,10 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 - [ ] index_of_set: integer: = the index of the test. (when you multiply this becomes a shared index)
 
 - [ ] parameters: object: = the parameters passed into the function whether random or your own
+
+# How it works
+
+An array of objects where each index represents a function to test. Every iteration, if function_called.on is true, will retrieve a return value from function_called.function and compare that value with the values in unit.allowed_values, unit.allowed_types and unit.regex_set.
 
 # Get started
 
