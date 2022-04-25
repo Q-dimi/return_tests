@@ -32,6 +32,7 @@ const configure = {
       run_tests(
         developer_input.tests, 
         configure.all_files_to_test[i],
+        false
       );
 
     } catch(err) {
@@ -50,12 +51,11 @@ const configure = {
 
   function multiply_function_set(multiply_this_object, folder) { 
     try { 
-      multiplied_sets = multiplied_sets.concat(arrays_returned(multiply_this_object, folder));
+      multiplied_sets = multiplied_sets.concat(arrays_returned(multiply_this_object));
     } catch(err) { 
       console.log(`
-        error: multplying did not work on index ${i} - 
-        please see function_set_multiplied in folder: ${folder}`
-      );
+        error: multplying did not work in ${folder}
+      `);
     }
   }
 
@@ -63,14 +63,13 @@ const configure = {
     The array of objects returned 
   */
 
-  function arrays_returned(multiply_this_object, folder) {
+  function arrays_returned(multiply_this_object) {
 
     var returned_set = [];
 
     for(let i = 0; i < multiply_this_object.randomized.parameters.multiply_amount; i++) { 
       returned_set.push(create_single_randomized_object(
-        multiply_this_object,
-        folder,
+        multiply_this_object
       ));
     }
 
@@ -82,7 +81,7 @@ const configure = {
     creates and returns a single randomized object
   */
 
-  function create_single_randomized_object(attach_here, folder) { 
+  function create_single_randomized_object(attach_here) { 
 
     var params = {};
 
@@ -144,7 +143,6 @@ const configure = {
     }
 
     attach_here.parameters = params;
-    attach_here.randomized.folder_name = folder;
 
     return attach_here;
 
@@ -234,7 +232,7 @@ const configure = {
     check tests...
   */
           
-  function run_tests(tests, file_name) {
+  function run_tests(tests, file_name, recurse_multiplied) {
   
     for(let i = 0; i < tests.length; i++) { 
 
@@ -447,6 +445,10 @@ const configure = {
       }
   
     }
+
+    if(recurse_multiplied === false) { 
+      run_tests(multiplied_sets, file_name, true);
+    }
          
   }
 
@@ -510,6 +512,8 @@ const configure = {
     if(typeof(on) !== 'boolean') {
       init_errors.on = '(on) must be a boolean';
     }
+
+    //add randomized value checks...
 
     var size = Object.keys(init_errors).length;
 
