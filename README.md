@@ -1,10 +1,10 @@
 # return_tests
 
-Tests if a functions return value matches a regular expression, data type and data value in the row of the set or in the object of the file.
+Tests if a functions return value matches a regular expression, data type and data value in the row of the set. https://www.npmjs.com/package/return_tests
 
 ## How To Configure
 
-Inside 'build.js', add file names to the configure.all_functions_to_test array. The file names come from the '/functions' folder. Each added file is the representation of a set of functions that need testing.
+Inside 'build.js', add file names to the configure.all_files_to_test array. The file names come from the '/functions' folder. Each added file is the representation of a set of functions that need testing within a file in your application.
 
 ```js
 const configure = {
@@ -14,7 +14,7 @@ const configure = {
 
 ## Where your functions live
 
-Go to the '/functions' folder and see how the functions are formatted. Create a new file in that folder with the same format as the examples. The file you create is a supposed to represent all the functions in a directory in your application. Below are the parameters and the types allowed for each. (shimple shimple doo doo doo shimple shimple doo doo doo)
+Go to the '/functions' folder and see how the functions are formatted. Create a new file in that folder with the same format as the examples. The file you create is a supposed to represent all the functions in a directory in your application. Below are the parameters and the types allowed for each.
 
 - [ ] tests: array = the array of objects that cotains the function and tests for that function
 
