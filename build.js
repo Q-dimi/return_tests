@@ -29,13 +29,12 @@ const configure = {
 
       var developer_input = require(configure.all_files_to_test[i]); 
 
-      if(developer_input.replace_tests_with_multiplied_on_load === true) { 
-        developer_input.tests = multiply_function_set(
-          developer_input.function_set_multiplied,
-          developer_input.tests, 
-          configure.all_files_to_test[i]
-        );
-      }
+      // if(developer_input.randomized.on === true) { 
+      //   developer_input.tests = multiply_function_set(
+      //     developer_input.tests,
+      //     configure.all_files_to_test[i]
+      //   );
+      // }
 
       run_tests(
         developer_input.tests, 
@@ -175,21 +174,75 @@ const configure = {
   }
 
   function create_random_inner_param_number()  { 
-    //decimal or
     return Math.floor(Math.random() * 100000);
   }
 
   function create_random_inner_param_BigInt()  { 
-    //decimal or
     return Math.floor(Math.random() * 999999999999999999999);
   }
 
   function create_random_inner_param_object(config_and_build)  {
-    return { awesoe: 'fdfdf' }
+
+    var o = {}
+
+    for(let i = 0; i < config_and_build.length; i++) { 
+
+      if(config_and_build[i] === 'boolean') { 
+        o[`test-param-boolean-${i}`] = create_random_inner_param_string();
+      }
+
+      if(config_and_build[i] === 'number') { 
+        o[`test-param-number-${i}`] = create_random_inner_param_number();
+      }
+
+      if(config_and_build[i] === 'string') { 
+        o[`test-param-string-${i}`] = create_random_inner_param_string();
+      }
+
+      if(config_and_build[i] === 'undefined') { 
+        o[`test-param-undefined-${i}`] = undefined;
+      }
+
+      if(config_and_build[i] === 'BigInt') { 
+        o[`test-param-BigInt-${i}`] = create_random_inner_param_BigInt();
+      }
+
+    }
+
+    return o;
+
   }
 
   function create_random_inner_param_array(config_and_build)   { 
-    return [2,3,3,4,'sdsds','sdsd'];
+
+    var a = [];
+
+    for(let i = 0; i < config_and_build.length; i++) { 
+
+      if(config_and_build[i] === 'boolean') { 
+        a.push(create_random_inner_param_string());
+      }
+
+      if(config_and_build[i] === 'number') { 
+        a.push(create_random_inner_param_number());
+      }
+
+      if(config_and_build[i] === 'string') { 
+        a.push(create_random_inner_param_string());
+      }
+
+      if(config_and_build[i] === 'undefined') { 
+        a.push(undefined);
+      }
+
+      if(config_and_build[i] === 'BigInt') { 
+        a.push(create_random_inner_param_BigInt());
+      }
+
+    }
+
+    return a;
+
   }
 
   function create_random_inner_param_boolean() { 

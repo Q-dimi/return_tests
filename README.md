@@ -22,6 +22,16 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 
 - [ ] tests: array: the array of objects that cotains the function and tests for that function
 
+- [ ] randomized.on: boolean: whether to multiply the object with random parameters
+
+- [ ] randomized.parameters: array: the type of parameters passed randomly
+
+- [ ] randomized.when_obj_passed: array: param types and length of object if passed (manual for deep objects)
+
+- [ ] randomized.when_arr_passed: object: param types and length of array if passed (manual for deep arrays)
+
+- [ ] randomized.multiply_amount: integer: the amount of times to multiply
+
 - [ ] function_called: object: the object that contains the functions configuration
 
 - [ ] function_called.on: boolean: whether to skip this row or execute this row
@@ -59,16 +69,6 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 - [ ] index_of_set: integer: the index of the test. (when you multiply this becomes a shared index)
 
 - [ ] parameters: object: the parameters passed into the function
-
-- [ ] function_set_multiplied: array: set of functions you will multiply each time with random parameters
-
-- [ ] function_set_multiplied.randomized.parameters: array: the type of parameters passed randomly
-
-- [ ] function_set_multiplied.randomized.when_obj_passed: object: when an obj is passed, additional config
-
-- [ ] function_set_multiplied.randomized.when_arr_passed: object: when an array is passed, additional config
-
-- [ ] function_set_multiplied.randomized.multiply_amount: integer: the amount of times to multiply
 
 # Get started
 
