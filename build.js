@@ -88,7 +88,7 @@ const configure = {
       create_random_inner_param_string(), create_random_inner_param_number(),
       create_random_inner_param_BigInt(), create_random_inner_param_object(attach_here.randomized.when_obj_passed),
       create_random_inner_param_array(attach_here.randomized.when_arr_passed), undefined, 
-      create_random_inner_param_boolean()
+      create_random_inner_param_boolean(), null
     ];
 
     for(let i = 0; i < attach_here.randomized.parameters.length; i++) { 
@@ -170,7 +170,7 @@ const configure = {
     for(let i = 0; i < config_and_build.length; i++) { 
 
       if(config_and_build[i] === 'boolean') { 
-        o[`test-param-boolean-${i}`] = create_random_inner_param_string();
+        o[`test-param-boolean-${i}`] = create_random_inner_param_boolean();
       }
 
       else if(config_and_build[i] === 'number') { 
@@ -194,7 +194,7 @@ const configure = {
       }
 
       else { 
-        o[`test-param-undefined-${i}`] = null;
+        o[`test-param-null-${i}`] = null;
       }
 
     }
@@ -210,7 +210,7 @@ const configure = {
     for(let i = 0; i < config_and_build.length; i++) { 
 
       if(config_and_build[i] === 'boolean') { 
-        a.push(create_random_inner_param_string());
+        a.push(create_random_inner_param_boolean());
       }
 
       else if(config_and_build[i] === 'number') { 
