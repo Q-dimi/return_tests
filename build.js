@@ -66,7 +66,7 @@ const configure = {
 
     var returned_set = [];
 
-    for(let i = 0; i < multiply_this_object.randomized.parameters.multiply_amount; i++) { 
+    for(let i = 0; i < multiply_this_object.randomized.multiply_amount; i++) { 
       returned_set.push(create_single_randomized_object(
         multiply_this_object
       ));
@@ -91,9 +91,9 @@ const configure = {
       create_random_inner_param_boolean()
     ];
 
-    for(let i = 0; i < attach_here.randomized.allowed_random_parameters.length; i++) { 
+    for(let i = 0; i < attach_here.randomized.parameters.length; i++) { 
 
-      var current_parameter = attach_here.randomized.allowed_random_parameters[i]; 
+      var current_parameter = attach_here.randomized.parameters[i]; 
 
       if(current_parameter === 'string') { 
         params[`test-param-string-${i}`] = create_random_inner_param_string();
@@ -108,11 +108,11 @@ const configure = {
       }
 
       else if(current_parameter === 'object') { 
-        params[`test-param-object-${i}`] = create_random_inner_param_object(attach_here.randomized.when_obj_passed); // (string, number, both) - p count
+        params[`test-param-object-${i}`] = create_random_inner_param_object(attach_here.randomized.when_obj_passed);
       }
 
       else if(current_parameter === 'array') { 
-        params[`test-param-array-${i}`] = create_random_inner_param_array(attach_here.randomized.when_arr_passed); //(string, number, both) - p count
+        params[`test-param-array-${i}`] = create_random_inner_param_array(attach_here.randomized.when_arr_passed);
       }
 
       else if(current_parameter === 'undefined') { 
@@ -142,13 +142,14 @@ const configure = {
     }
 
     attach_here.parameters = params;
-
+    attach_here.randomized.on = false;
+    console.log(attach_here);
     return attach_here;
 
   }
 
   function create_random_inner_param_string()  { 
-    return Math.random().toString(50).replace(/[^a-z]+/g, '');
+    return Math.random().toString(36).replace(/[^a-z]+/g, '');
   }
 
   function create_random_inner_param_number()  { 
@@ -249,7 +250,7 @@ const configure = {
   
         console.log(`
           (tests[i]) needs to be defined as an object with object
-          (unit: object), (index_of_set: index), (parameters: object), (function_called: object)
+          (unit: object), (index_of_set: index), (parameters: object), (function_called: object), (randomized: object)
           with allowed_values, allowed_types and regex set OBJECTS inside of the unit object...
           each object must be with the apporopriate values in the README (last level definition for undefined to pass)
         `);
@@ -265,7 +266,8 @@ const configure = {
           tests[i].unit.allowed_values, 
           tests[i].unit.regex_set, 
           tests[i].function_called.function, 
-          file_name, tests[i].function_called.function_name, 
+          file_name,
+          tests[i].function_called.function_name, 
           tests[i].function_called.function_directory, 
           tests[i].function_called.function_description, 
           tests[i].function_called.base_param_names,
@@ -471,23 +473,17 @@ const configure = {
 
     var init_errors = {};
     
-    if( //can get rid of inisde check
-      (typeof(allowed_types) !== 'object') || 
-      (typeof(allowed_types) === 'object' && typeof(allowed_types.on) !== 'boolean') || 
+    if((typeof(allowed_types) === 'object' && typeof(allowed_types.on) !== 'boolean') || 
       (typeof(allowed_types) === 'object' && (typeof(allowed_types.values) !== 'object' || Array.isArray(allowed_types.values) === false))) {
       init_errors.allowed_types = '(allowed_types) must be an object with paramters (on: boolean) and (values: array)';
     }
 
-    if(
-      (typeof(allowed_values) !== 'object') || 
-      (typeof(allowed_values) === 'object' && typeof(allowed_values.on) !== 'boolean') || 
+    if((typeof(allowed_values) === 'object' && typeof(allowed_values.on) !== 'boolean') || 
       (typeof(allowed_values) === 'object' && (typeof(allowed_values.values) !== 'object' || Array.isArray(allowed_values.values) === false))) {
       init_errors.allowed_values = '(allowed_values) must be an object with parameters (on: boolean) and (values: array)';
     }
 
-    if(
-      (typeof(regex_set) !== 'object') || 
-      (typeof(regex_set) === 'object' && typeof(regex_set.on) !== 'boolean') || 
+    if((typeof(regex_set) === 'object' && typeof(regex_set.on) !== 'boolean') || 
       (typeof(regex_set) === 'object' && (typeof(regex_set.values) !== 'object' || Array.isArray(regex_set.values) === false))) {
       init_errors.regex_set = '(regex_set) must be an object with parameters (on: boolean) and (values: array)';
     }
@@ -524,7 +520,21 @@ const configure = {
       init_errors.randomized_on = '(randomized_on) must be a boolean';
     }
 
-    //f im tired
+    if((typeof(randomized_parameters) !== 'object' || Array.isArray(randomized_parameters) === false)) {
+      init_errors.randomized_parameters = '(randomized_parameters) must be an array';
+    }
+
+    if((typeof(randomized_when_obj_passed) !== 'object' || Array.isArray(randomized_when_obj_passed) === false)) {
+      init_errors.randomized_when_obj_passed = '(randomized_when_obj_passed) must be an array';
+    }
+
+    if((typeof(randomized_when_arr_passed) !== 'object' || Array.isArray(randomized_when_arr_passed) === false)) {
+      init_errors.randomized_when_arr_passed = '(randomized_when_arr_passed) must be an array';
+    }
+
+    if(typeof(randomized_multiply_amount) !== 'number' && typeof(randomized_multiply_amount) !== 'object') {
+      init_errors.randomized_multiply_amount = '(randomized_multiply_amount) must be a number or null';
+    }
 
     var size = Object.keys(init_errors).length;
 
