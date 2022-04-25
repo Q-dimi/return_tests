@@ -20,13 +20,13 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 
 - [ ] randomized.on boolean: = whether to multiply the object with random parameters
 
-- [ ] randomized.parameters array: = the type of parameters passed. Each index represents parameter location and type.
+- [ ] randomized.parameters array: = parameters passed where each index represents parameter location and type.
 
 - [ ] randomized.when_obj_passed: array = if object passed in randomized.parameters, the params of object
 
 - [ ] randomized.when_arr_passed: object = if array passed in randomized.parameters, the params of array
 
-- [ ] randomized.multiply_amount: integer = the amount of times to multiply the function at index with random params
+- [ ] randomized.multiply_amount: integer = the amount of times to multiply the function with random params
 
 - [ ] function_called: object = the object that contains the functions configuration
 
