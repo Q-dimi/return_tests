@@ -143,7 +143,6 @@ const configure = {
 
     attach_here.parameters = params;
     attach_here.randomized.on = false;
-    console.log(attach_here);
     return attach_here;
 
   }
@@ -434,8 +433,11 @@ const configure = {
         additional_info.function_description = tests[i].function_called.function_description;
         additional_info.base_param_names = tests[i].function_called.base_param_names;
         additional_info.allowed_values = tests[i].unit.allowed_values.values;
+        additional_info.allowed_values_on = tests[i].unit.allowed_values.on;
         additional_info.allowed_types = tests[i].unit.allowed_types.values;
+        additional_info.allowed_types_on = tests[i].unit.allowed_types.on;
         additional_info.regex_set = tests[i].unit.regex_set.values;
+        additional_info.regex_set_on = tests[i].unit.regex_set.on;
         additional_info.function_called = tests[i].function_called.function;
         additional_info.file_name = file_name;
         additional_info.parameters = tests[i].parameters;
