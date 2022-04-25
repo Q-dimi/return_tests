@@ -44,7 +44,7 @@ module.exports = {
                 regex_set: {
                     on: false,
                     values: ['/123/', '/345/']
-                }
+                },
             },
 
             index_of_set: 1,
