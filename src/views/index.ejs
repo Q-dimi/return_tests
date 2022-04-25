@@ -24,10 +24,10 @@
         <tbody>
           <% for(var i=0; i < error_set.length; i++) { %>
           <tr>
-            <th><%= error_set[i].function_name === null || error_set[i].function_name === undefined ? 'not set' : error_set[i].function_name %></th>
-            <th><%= error_set[i].directory === null || error_set[i].directory === undefined ? 'not set' : error_set[i].directory %></th>
-            <th><%= error_set[i].file_name === null || error_set[i].file_name=== undefined ? 'not set' : error_set[i].file_name %></th>
-            <th><%= error_set[i].index_of_error_set === null || error_set[i].index_of_error_set === undefined ? 'not set' : error_set[i].index_of_error_set %></th>
+            <th><%= error_set[i].additional_info.function_name %></th>
+            <th><%= error_set[i].additional_info.function_directory %></th>
+            <th><%= error_set[i].additional_info.file_name %></th>
+            <th><%= error_set[i].additional_info.index_of_set  %></th>
             <td class = 'click_me' id = 'identity-<%=i%>' style = 'cursor: pointer; text-decoration: underline' data-json = '<%=JSON.stringify(error_set[i])%>'>View</td>
           </tr>
           <% } %>
