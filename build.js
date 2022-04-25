@@ -29,13 +29,6 @@ const configure = {
 
       var developer_input = require(configure.all_files_to_test[i]); 
 
-      // if(developer_input.randomized.on === true) { 
-      //   developer_input.tests = multiply_function_set(
-      //     developer_input.tests,
-      //     configure.all_files_to_test[i]
-      //   );
-      // }
-
       run_tests(
         developer_input.tests, 
         configure.all_files_to_test[i],
@@ -254,6 +247,13 @@ const configure = {
   */
           
   function run_tests(tests, file_name) {
+
+      // if(developer_input.randomized.on === true) { 
+      //   developer_input.tests = multiply_function_set(
+      //     developer_input.tests,
+      //     configure.all_files_to_test[i]
+      //   );
+      // }
   
     for(let i = 0; i < tests.length; i++) { 
 
