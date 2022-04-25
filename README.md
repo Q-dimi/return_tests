@@ -19,7 +19,7 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 
 - [ ] tests: array = the array of objects that contains the functions and tests for those functions
 
-- [ ] randomized.on boolean: = whether to multiply the object with random parameters
+- [ ] randomized.on boolean: = whether to multiply the object (create new objects with random params)
 
 - [ ] randomized.parameters array: = parameters passed where each index represents parameter location and type.
 
@@ -27,7 +27,7 @@ Go to the '/functions' folder and see how the functions are formatted. Create a 
 
 - [ ] randomized.when_arr_passed: object = if array passed in randomized.parameters, the params of array
 
-- [ ] randomized.multiply_amount: integer = the amount of times to multiply the function with random params
+- [ ] randomized.multiply_amount: integer = How many times to multiply row (create new objects with random params)
 
 - [ ] function_called: object = the object that contains the functions configuration
 
@@ -73,4 +73,4 @@ An array of objects where each index represents a function to test. Every iterat
 
 # Get started
 
-Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions! For your funtion to execute within the row, make sure function_called.on is set equal to true. For your function to multiply with random parameters, make sure function_called.on is true AND randomized.on is true. Make sure the amount of params in your function match the amount passed in via the parameters object.
+Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions! For your funtion to execute within the row, make sure function_called.on is set equal to true. For your function to multiply with random parameters, make sure function_called.on is true AND randomized.on is true.
