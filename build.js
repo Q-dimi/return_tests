@@ -46,43 +46,31 @@ const configure = {
     multiply on multiply_amount
   */
 
-  function multiply_function_set(multiply_function_set, original_tests, folder) { 
+  var multiplied_sets = [];
 
-    var new_tests_array = [];
-
+  function multiply_function_set(multiply_this_object, folder) { 
     try { 
-
-      for(let i = 0; i < multiply_function_set.length; i++) { 
-        new_tests_array = new_tests_array.concat(arrays_returned(multiply_function_set[i]));
-      }
-
-      return new_tests_array;
-
+      multiplied_sets = multiplied_sets.concat(arrays_returned(multiply_this_object, folder));
     } catch(err) { 
-
       console.log(`
         error: multplying did not work on index ${i} - 
         please see function_set_multiplied in folder: ${folder}`
       );
-
-      return original_tests;
-
     }
-
   }
 
   /*
     The array of objects returned 
   */
 
-  function arrays_returned(multiply_and_returned_set) {
+  function arrays_returned(multiply_this_object, folder) {
 
     var returned_set = [];
 
-    for(let i = 0; i < multiply_and_returned_set.randomized.parameters.multiply_amount; i++) { 
+    for(let i = 0; i < multiply_this_object.randomized.parameters.multiply_amount; i++) { 
       returned_set.push(create_single_randomized_object(
-        multiply_and_returned_set,
-        multiply_and_returned_set.randomized.parameters,
+        multiply_this_object,
+        folder,
       ));
     }
 
@@ -94,8 +82,7 @@ const configure = {
     creates and returns a single randomized object
   */
 
-
-  function create_single_randomized_object(attach_here, allowed_random_parameters) { 
+  function create_single_randomized_object(attach_here, folder) { 
 
     var params = {};
 
@@ -106,9 +93,9 @@ const configure = {
       create_random_inner_param_boolean()
     ];
 
-    for(let i = 0; i < allowed_random_parameters.length; i++) { 
+    for(let i = 0; i < attach_here.randomized.allowed_random_parameters.length; i++) { 
 
-      var current_parameter = allowed_random_parameters[i]; 
+      var current_parameter = attach_here.randomized.allowed_random_parameters[i]; 
 
       if(current_parameter === 'string') { 
         params[`test-param-string-${i}`] = create_random_inner_param_string();
@@ -157,6 +144,7 @@ const configure = {
     }
 
     attach_here.parameters = params;
+    attach_here.randomized.folder_name = folder;
 
     return attach_here;
 
@@ -247,19 +235,13 @@ const configure = {
   */
           
   function run_tests(tests, file_name) {
-
-      // if(developer_input.randomized.on === true) { 
-      //   developer_input.tests = multiply_function_set(
-      //     developer_input.tests,
-      //     configure.all_files_to_test[i]
-      //   );
-      // }
   
     for(let i = 0; i < tests.length; i++) { 
 
       if(
         (typeof(tests[i]) !== 'object') || 
         (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
+        (typeof(tests[i]) === 'object' && typeof(tests[i].randomized) !== 'object') || 
         (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number') ||
         (typeof(tests[i]) === 'object' && typeof(tests[i].parameters) !== 'object') ||
         (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) !== 'object') ||
@@ -313,6 +295,11 @@ const configure = {
       }
 
       if(tests[i].function_called.on !== true) { 
+        continue;
+      }
+
+      if(tests[i].randomized.on === true) { 
+        multiply_function_set(tests[i], file_name);
         continue;
       }
   
