@@ -447,7 +447,7 @@ const configure = {
 
         var finalized_error_object = {};
         var additional_info = {};
-
+      
         additional_info.function_name = tests[i].function_called.function_name;
         additional_info.function_directory = tests[i].function_called.function_directory;
         additional_info.function_description = tests[i].function_called.function_description;
@@ -471,12 +471,6 @@ const configure = {
 
         error_sets.push(finalized_error_object);
 
-      } else { 
-
-
-
-
-        
       }
   
     }
