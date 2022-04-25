@@ -54,7 +54,7 @@ const configure = {
       multiplied_sets = multiplied_sets.concat(arrays_returned(multiply_this_object));
     } catch(err) { 
       console.log(`
-        error: multplying did not work in ${folder}
+        error: multplying did not work in ${folder} - ${err.message}
       `);
     }
   }
