@@ -390,6 +390,7 @@ const configure = {
   
            for(let i = 0; i < tests[i].unit.allowed_values.values.length; i++) { 
              if(typeof(tests[i].unit.allowed_values.values[i]) === 'object') { 
+              //change this to isArray or object and iterate and match on values o index...
               if(JSON.stringify(tests[i].unit.allowed_values.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
                 match = true;
                 break;
