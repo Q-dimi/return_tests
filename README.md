@@ -1,7 +1,11 @@
 # return_tests
 
 Need to check the return values of functions across your files? Try return_tests. It is fast, simple, easy to use and even has a UI for you so you don't have to write any code to view your errors.
-return_tests tests if a functions return value matches a regular expression, data type and data value. const errors = require('/return_tests/build.js');
+return_tests tests if a functions return value matches a regular expression, data type and data value.
+
+```js
+const errors = require("return_tests");
+```
 
 ## How To Configure
 

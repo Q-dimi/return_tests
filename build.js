@@ -85,13 +85,13 @@ const configure = {
     var params = {};
 
     var if_random_or_not_in_selected = [
+      create_random_inner_param_object(attach_here.randomized.when_obj_passed),
+      create_random_inner_param_array(attach_here.randomized.when_arr_passed),
       create_random_inner_param_string(), 
       create_random_inner_param_number(),
       create_random_inner_param_BigInt(), 
-      create_random_inner_param_object(attach_here.randomized.when_obj_passed),
-      create_random_inner_param_array(attach_here.randomized.when_arr_passed),
-      undefined, 
       create_random_inner_param_boolean(), 
+      undefined, 
       null
     ];
 
@@ -151,6 +151,7 @@ const configure = {
 
     attach_here.parameters = params;
     attach_here.randomized.on = false;
+    
     return attach_here;
 
   }

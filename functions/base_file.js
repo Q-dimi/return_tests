@@ -67,7 +67,7 @@ module.exports = {
 
                     on: false,
 
-                    values: ['/123/', '/345/']
+                    values: [/[^a-z]+/, /[^a-z]+/]
 
                 },
 
