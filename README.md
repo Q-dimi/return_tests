@@ -77,4 +77,9 @@ An array of objects where each index represents a function to test. Every iterat
 
 # Get started
 
-Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions! For your funtion to execute within the row, make sure function_called.on is set equal to true. For your function to multiply with random parameters, make sure function_called.on is true AND randomized.on is true.
+Run 'npm i return_tests' in your application, then go to the '/src' folder and run npm start then go to localhost:3000 to see all the errors for each of the example functions listed in the build.js config object. Then you can add your own functions! For your funtion to execute within the row, make sure function_called.on is set equal to true. For your function to multiply with random parameters, make sure function_called.on is true AND randomized.on is true. For the best approach for testing your functions, set randomized_parameters on to true, and regex_set to true and turn off allowed_values and allowed_types...
+
+# errors
+
+If there are any errors in the code, please email johneatman446@gmail.com...
+
