@@ -273,7 +273,7 @@ const configure = {
       ) {
   
         console.log(`
-          (tests[i]) needs to be defined as an object with object
+          (tests-${i}) needs to be defined as an object with object
           (unit: object), (index_of_set: index), (parameters: object), (function_called: object), (randomized: object)
           with allowed_values, allowed_types and regex set OBJECTS inside of the unit object...
           each object must be with the apporopriate values in the README (last level definition for undefined to pass)
@@ -393,9 +393,9 @@ const configure = {
   
            var match = false;
   
-           for(let i = 0; i < tests[i].unit.allowed_values.values.length; i++) { 
-             if(typeof(tests[i].unit.allowed_values.values[i]) === 'object') { 
-              if(JSON.stringify(tests[i].unit.allowed_values.values[i]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
+           for(let j = 0; j < tests[i].unit.allowed_values.values.length; j++) { 
+             if(typeof(tests[i].unit.allowed_values.values[j]) === 'object') { 
+              if(JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
                 match = true;
                 break;
               }
@@ -428,17 +428,17 @@ const configure = {
     
       if(tests[i].unit.regex_set.on === true) {
   
-        for(let i = 0; i < tests[i].unit.regex_set.values.length; i++) {  
+        for(let j = 0; j < tests[i].unit.regex_set.values.length; j++) {  
   
-          var test_regex = test(tests[i].unit.regex_set.values[i], return_value); 
+          var test_regex = test(tests[i].unit.regex_set.values[j], return_value); 
   
           if(test_regex !== true) { 
   
-            error_rejex[`message-${i}`] = `The value returned does not pass`;
+            error_rejex[`message-${j}`] = `The value returned does not pass`;
   
-            error_rejex[`regular_expression-${i}`] = tests[i].unit.regex_set.values[i];
+            error_rejex[`regular_expression-${j}`] = tests[i].unit.regex_set.values[j];
   
-            error_rejex[`return_value-${i}`] = return_value;
+            error_rejex[`return_value-${j}`] = return_value;
     
             error_count++;
   
