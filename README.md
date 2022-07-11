@@ -1,4 +1,4 @@
-# return_tests
+# return_tests (BEING FIXED)
 
 Need to check the return values of functions across your files? Try return_tests. It is fast, simple, easy to use and even has a UI for you so you don't have to write any code to view your errors.
 return_tests tests if a functions return value matches a regular expression, data type and data value.
@@ -82,4 +82,3 @@ Run 'npm i return_tests' in your application, then go to the '/src' folder and r
 # errors
 
 If there are any errors in the code, please email johneatman446@gmail.com...
-

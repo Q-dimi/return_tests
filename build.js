@@ -1,4 +1,5 @@
-  
+  var generate_functions = require('./generate_functions');
+
   /*
     @param {error_sets: array}: exported set of objects that did not pass test
     @param {multiplied_sets: array}: if multiplying with random params, multiply this
@@ -208,7 +209,7 @@
           index: ${i} \n
           object tests needs to be defined as an object with object \n
           (unit: object), (index_of_set: index), (parameters: object), (function_called: object), (randomized: object) \n
-          each object must be with the apporopriate values in the README (last level definition for undefined to pass) \n
+          each object must be with the apporopriate values in the README (last level definition for undefined to pass)
         `);
       }
 
@@ -232,7 +233,7 @@
 
       if(check_inside_errors === false) { 
         throw new Error(`
-          index: ${i} /n 
+          index: ${i} \n 
           there was an error processing this set. One of the inner values of the functions 
         `);
       };
@@ -535,4 +536,5 @@
 
  module.exports = { 
   run: start_tests, 
+  generate: generate_functions
  } 
