@@ -11,7 +11,6 @@ return-tests tests if a functions return value matches a regular expression, dat
       parameters: [
         "number",
         "string",
-        "BigInt",
         "object",
         "array",
         "boolean",
@@ -20,23 +19,9 @@ return-tests tests if a functions return value matches a regular expression, dat
         "random",
       ],
 
-      when_obj_passed: [
-        "number",
-        "string",
-        "BigInt",
-        "undefined",
-        "null",
-        "boolean",
-      ],
+      when_obj_passed: ["number", "string", "undefined", "null", "boolean"],
 
-      when_arr_passed: [
-        "number",
-        "string",
-        "BigInt",
-        "undefined",
-        "null",
-        "boolean",
-      ],
+      when_arr_passed: ["number", "string", "undefined", "null", "boolean"],
 
       multiply_amount: 5,
     },
