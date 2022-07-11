@@ -1,3 +1,8 @@
+  
+  /*
+    @param {generate_functions: function}: if true, searches directories and writes to a file of all functions asked to test
+  */
+  
   var generate_functions = require('./generate_functions');
 
   /*
@@ -24,6 +29,11 @@
     multiplied_sets = multiplied_sets.concat(arrays_returned(multiply_this_object));
   }
 
+  /*
+    @param {multiply_this_object}: takes the object index and multiplies it each time with random parameters
+    @param {returned_set}: the array of objects under one index with random parameters
+  */
+
   function arrays_returned(multiply_this_object) {
 
     var returned_set = [];
@@ -39,7 +49,7 @@
   }
 
   /*
-    @param (attach_here) 
+    @param {attach_here} the new object with random parameters attached
   */
 
   function create_single_randomized_object(attach_here) { 
@@ -353,49 +363,13 @@
       }
   
       if(error_count > 0) { 
-
         var finalized_error_object = {};
-
-        var additional_info = {};
-      
-        additional_info.function_name = tests[i].function_called.name;
-
-        additional_info.function_directory = tests[i].function_called.directory;
-
-        additional_info.function_description = tests[i].function_called.description;
-
-        additional_info.function_param_names = tests[i].function_called.param_names;
-
-        additional_info.allowed_values = tests[i].unit.allowed_values.values;
-
-        additional_info.allowed_values_on = tests[i].unit.allowed_values.on;
-
-        additional_info.allowed_types = tests[i].unit.allowed_types.values;
-
-        additional_info.allowed_types_on = tests[i].unit.allowed_types.on;
-
-        additional_info.regex_set = tests[i].unit.regex_set.values;
-
-        additional_info.regex_set_on = tests[i].unit.regex_set.on;
-
-        additional_info.function_called = tests[i].function_called.function;
-
-        additional_info.parameters = tests[i].parameters;
-
-        additional_info.index_of_set = tests[i].index_of_set;
-
-        additional_info.multiplied_set = recurse_multiplied;
-
         finalized_error_object.error_value = error_value;
-
         finalized_error_object.error_type = error_type;
-
         finalized_error_object.error_rejex = error_rejex;
-
-        finalized_error_object.additional_info = additional_info;
-
+        finalized_error_object.additional_info = tests[i];
+        finalized_error_object.multiplied_set = recurse_multiplied ? 'on' : 'off';
         error_sets.push(finalized_error_object);
-
       }
   
     }
@@ -404,7 +378,7 @@
       run_tests(multiplied_sets, true);
     }
 
-    return error_sets
+    return error_sets;
          
   }
 
