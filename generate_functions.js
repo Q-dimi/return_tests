@@ -1,5 +1,2 @@
-function generate_functions() { 
-
-}
-
+function generate_functions() { }
 module.exports = generate_functions;
