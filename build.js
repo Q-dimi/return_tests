@@ -210,10 +210,11 @@ function run_tests(tests, recurse_multiplied) {
 
     if(
       (typeof(tests[i]) !== 'object') || 
-      (typeof(tests[i]) === 'object' && typeof(tests[i].unit) !== 'object') || 
-      (typeof(tests[i]) === 'object' && typeof(tests[i].randomized) !== 'object') || 
-      (typeof(tests[i]) === 'object' && typeof(tests[i].index_of_set) !== 'number') ||
-      (typeof(tests[i]) === 'object' && typeof(tests[i].function_called) !== 'object')
+      ((typeof(tests[i]) === 'object') &&
+      (typeof(tests[i].unit) !== 'object') || 
+      (typeof(tests[i].randomized) !== 'object') || 
+      (typeof(tests[i].index_of_set) !== 'number') ||
+      (typeof(tests[i].function_called) !== 'object'))
     ) {
       throw new Error(`
         index: ${i} \n
