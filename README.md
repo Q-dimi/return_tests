@@ -2,7 +2,7 @@
 
 return-tests tests if a functions return value matches a regular expression, data type and data value.
 
----js
+```js
 
 {
 randomized: {
@@ -44,4 +44,4 @@ values: [/[^a-z]+/, /[^a-z]+/]
 index_of_set: 1,
 }
 
----js
+```
