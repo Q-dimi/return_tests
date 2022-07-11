@@ -1,15 +1,11 @@
 
-/*
-  @param {all_files_to_test: array}: Functions stored in each folder.
-*/
+  /*
+    @param {all_files_to_test: array}: Functions stored in each folder.
+  */
 
-const configure = { 
-
-    all_files_to_test: [
-      './functions/example1.js',
-    ],
-
-  }
+  const test_files =  [
+    './functions/example1.js',
+  ];
 
   /*
     @param {developer_input: object}: imported data
@@ -23,22 +19,26 @@ const configure = {
 
   var error_sets = [];
   var multiplied_sets = [];
+
+  function start_tests() {
           
-  for(let i = 0; i < configure.all_files_to_test.length; i++) {
+    for(let i = 0; i < test_files.length; i++) {
 
-    try {
+      try {
 
-      var developer_input = require(configure.all_files_to_test[i]); 
+        var developer_input = require(test_files[i]); 
 
-      run_tests(
-        developer_input.tests, 
-        configure.all_files_to_test[i],
-        false
-      );
+        run_tests(
+          developer_input.tests, 
+          tests_files[i],
+          false
+        );
 
-    } catch(err) {
+      } catch(err) {
 
-      console.log(err.message);
+        console.log(err.message);
+
+      }
 
     }
 
@@ -89,7 +89,6 @@ const configure = {
       create_random_inner_param_array(attach_here.randomized.when_arr_passed),
       create_random_inner_param_string(), 
       create_random_inner_param_number(),
-      create_random_inner_param_BigInt(), 
       create_random_inner_param_boolean(), 
       undefined, 
       null
@@ -105,10 +104,6 @@ const configure = {
 
       else if(current_parameter === 'number') { 
         params[`test-param-number-${i}`] = create_random_inner_param_number();
-      }
-
-      else if(current_parameter === 'BigInt') { 
-        params[`test-param-BigInt-${i}`] = create_random_inner_param_BigInt();
       }
 
       else if(current_parameter === 'object') { 
@@ -136,15 +131,7 @@ const configure = {
       }
 
       else { 
-
-        console.log(
-          `error: please pass in a string, number,
-           BigInt, object, array, undefined, or boolean. 
-           defaulting to random.`
-        );
-
         params[`test-param-random-${i}`] = if_random_or_not_in_selected[Math.floor(Math.random() * if_random_or_not_in_selected.length)];
-
       }
 
     }
@@ -162,10 +149,6 @@ const configure = {
 
   function create_random_inner_param_number()  { 
     return Math.floor(Math.random() * 100000);
-  }
-
-  function create_random_inner_param_BigInt()  { 
-    return Math.floor(Math.random() * 999999999999999999999);
   }
 
   function create_random_inner_param_object(config_and_build)  {
@@ -192,10 +175,6 @@ const configure = {
 
       else if(config_and_build[i] === 'null') { 
         o[`test-param-null-${i}`] = null;
-      }
-
-      else if(config_and_build[i] === 'BigInt') { 
-        o[`test-param-BigInt-${i}`] = create_random_inner_param_BigInt();
       }
 
       else { 
@@ -234,10 +213,6 @@ const configure = {
         a.push(null);
       }
 
-      else if(config_and_build[i] === 'BigInt') { 
-        a.push(create_random_inner_param_BigInt());
-      } 
-
       else { 
         a.push(null);
       }
@@ -271,56 +246,41 @@ const configure = {
         (typeof(tests[i]) === 'object' && typeof(tests[i].unit) === 'object' && typeof(tests[i].unit.allowed_values) !== 'object') ||
         (typeof(tests[i]) === 'object' && typeof(tests[i].unit) === 'object' && typeof(tests[i].unit.regex_set) !== 'object') 
       ) {
-  
-        console.log(`
-          (tests-${i}) needs to be defined as an object with object
-          (unit: object), (index_of_set: index), (parameters: object), (function_called: object), (randomized: object)
-          with allowed_values, allowed_types and regex set OBJECTS inside of the unit object...
-          each object must be with the apporopriate values in the README (last level definition for undefined to pass)
+
+        throw new Error(`
+          index: ${i} \n
+          object tests needs to be defined as an object with object \n
+          (unit: object), (index_of_set: index), (parameters: object), (function_called: object), (randomized: object) \n
+          with allowed_values, allowed_types and regex set OBJECTS inside of the unit object... \n
+          each object must be with the apporopriate values in the README (last level definition for undefined to pass) \n
         `);
-
-        continue;
   
       }
 
-      try {
+      var check_inside_errors = main_or_fallback_errors(
+        tests[i].unit.allowed_types,
+        tests[i].unit.allowed_values, 
+        tests[i].unit.regex_set, 
+        tests[i].function_called.function, 
+        file_name,
+        tests[i].function_called.function_name, 
+        tests[i].function_called.function_directory, 
+        tests[i].function_called.function_description, 
+        tests[i].function_called.base_param_names,
+        tests[i].function_called.on, 
+        tests[i].randomized.on,
+        tests[i].randomized.parameters,
+        tests[i].randomized.when_obj_passed,
+        tests[i].randomized.when_arr_passed,
+        tests[i].randomized.multiply_amount,
+      ); 
 
-        if(!main_or_fallback_errors(
-          tests[i].unit.allowed_types,
-          tests[i].unit.allowed_values, 
-          tests[i].unit.regex_set, 
-          tests[i].function_called.function, 
-          file_name,
-          tests[i].function_called.function_name, 
-          tests[i].function_called.function_directory, 
-          tests[i].function_called.function_description, 
-          tests[i].function_called.base_param_names,
-          tests[i].function_called.on, 
-          tests[i].randomized.on,
-          tests[i].randomized.parameters,
-          tests[i].randomized.when_obj_passed,
-          tests[i].randomized.when_arr_passed,
-          tests[i].randomized.multiply_amount,
-        )) { 
-
-          console.log(`
-            error: index ${i} on main check ${file_name}
-          `);
-
-          continue;
-
-        };
-
-      } catch(err) { 
-
-          console.log(`
-            error: could not errors
-            ${err.message} - ${i} - ${file_name} - ${tests[i].index_of_set}
-          `);
-
-          continue;
-
-      }
+      if(check_inside_errors == false) { 
+        throw new Error(`
+          index: ${i} /n 
+          there was an error processing this set
+        `);
+      };
 
       if(tests[i].function_called.on !== true) { 
         continue;
@@ -331,38 +291,18 @@ const configure = {
         continue;
       }
   
-      var params = [];
-  
-      for (const [key, value] of Object.entries(tests[i].parameters)) {
-        params.push(value);
-      }
-  
-      var return_value;
-
-      try{
-        return_value = tests[i].function_called.function(...params);
-      } catch(err)  {
-        return_value = `error processing this function: ${err.message}`;
-      }
+      var return_value = tests[i].function_called.function(...tests[i].function_called.parameters);
 
       var error_count = 0;
 
       var error_type = {};
-  
       if(tests[i].unit.allowed_types.on === true) {
-  
         if(tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true) {
-    
           error_type.message = `The value returned is not within the allowed types.`;
-  
           error_type.return_type =  typeof(return_value);
-
           error_type.return_value =  return_value;
-  
           error_count++;
-  
         }
-  
       }
 
       var error_value = {}; 
@@ -371,28 +311,21 @@ const configure = {
   
         if(
           typeof(return_value) === 'number' || 
-          typeof(return_value) === 'BigInt' || 
           typeof(return_value) === 'string' ||  
           typeof(return_value) === 'undefined' ||  
           typeof(return_value) === 'boolean'
         ) {
   
           if(tests[i].unit.allowed_values.values.includes(return_value) !== true) {  
-    
             error_value.message = `The value returned is not within the allowed values.`;
-  
             error_value.return_value = return_value;
-  
             error_value.return_type =  typeof(return_value);;
-  
             error_count++;
-  
           }
   
          } else if(typeof(return_value) === 'object') { 
   
            var match = false;
-  
            for(let j = 0; j < tests[i].unit.allowed_values.values.length; j++) { 
              if(typeof(tests[i].unit.allowed_values.values[j]) === 'object') { 
               if(JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
@@ -403,21 +336,17 @@ const configure = {
            }
   
            if(match === false) { 
-    
             error_value.message = `The value returned is not within the allowed values.`;
-  
             error_value.return_value = return_value;
-  
             error_value.return_type =  typeof(return_value);;
-  
             error_count++;
-  
            }
   
          } else { 
   
-           console.log(`
-            error: the only allowed types are number, BigInt, string, boolean, undefined and object
+           throw new Error(`
+            index: ${i} \n
+            error: the only allowed types are number, string, boolean, undefined and object
            `);
   
          }
@@ -425,27 +354,16 @@ const configure = {
       }
 
       var error_rejex = {};
-    
       if(tests[i].unit.regex_set.on === true) {
-  
         for(let j = 0; j < tests[i].unit.regex_set.values.length; j++) {  
-  
           var test_regex = test(tests[i].unit.regex_set.values[j], return_value); 
-  
           if(test_regex !== true) { 
-  
             error_rejex[`message-${j}`] = `The value returned does not pass`;
-  
             error_rejex[`regular_expression-${j}`] = tests[i].unit.regex_set.values[j];
-  
             error_rejex[`return_value-${j}`] = return_value;
-    
             error_count++;
-  
           }
-  
         }
-  
       }
   
       if(error_count > 0) { 
@@ -483,6 +401,8 @@ const configure = {
     if(recurse_multiplied === false) { 
       run_tests(multiplied_sets, file_name, true);
     }
+
+    return error_sets
          
   }
 
@@ -519,7 +439,7 @@ const configure = {
       init_errors.function_called = '(function_called) must be a function';
     }
 
-    if(typeof(file_name) !== 'object' && typeof(file_name) !== 'string') {
+    if(((typeof(file_name) !== 'object') || (typeof(file_name) === 'object' && file_name !== null)) && typeof(file_name) !== 'string') {
       init_errors.file_name = '(file_name) must be null or a string';
     }
 
@@ -565,14 +485,8 @@ const configure = {
 
     var size = Object.keys(init_errors).length;
 
-    if(size > 0) { 
-
-      for (const [key, value] of Object.entries(init_errors)) {
-        console.log(`${key}: ${value} /n`);
-       }    
-
+    if(size > 0) {     
        return false;
-
     }
 
     return true;
@@ -581,7 +495,7 @@ const configure = {
   
   /*
     @param {regular_expression: string}: regular expression being tested
-    @param {return_value: BigInt, number, string, undefined, null, object, boolean}: the value being tested against
+    @param {return_value: number, string, undefined, null, object, boolean}: the value being tested against
   */
   
   function test(regular_expression, return_value) { 
@@ -596,6 +510,9 @@ const configure = {
     export the error set
   */
 
-  exports.errors = error_sets;
+ module.exports = { 
+  run: start_tests, 
+  files: test_files
+ }
 
   
