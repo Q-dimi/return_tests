@@ -257,27 +257,27 @@ function run_tests(tests, recurse_multiplied) {
       continue;
     }
 
+    var error_count = 0;
     var return_value = tests[i].function_called.function(...tests[i].function_called.parameters);
 
-    var error_count = 0;
+    /*
+      testing the error type of the return value
+    */
 
     var error_type = {};
 
     if(tests[i].unit.allowed_types.on === true) {
-
       if(tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true) {
-
         error_type.message = `The value returned is not within the allowed types.`;
-
         error_type.return_type =  typeof(return_value);
-
         error_type.return_value =  return_value;
-
         error_count++;
-
       }
-
     }
+
+    /*
+      testing the error value of the return value
+    */
 
     var error_value = {}; 
 
@@ -291,15 +291,10 @@ function run_tests(tests, recurse_multiplied) {
       ) {
 
         if(tests[i].unit.allowed_values.values.includes(return_value) !== true) { 
-
           error_value.message = `The value returned is not within the allowed values.`;
-
           error_value.return_value = return_value;
-
           error_value.return_type =  typeof(return_value);
-
           error_count++;
-
         }
 
         } else if(typeof(return_value) === 'object') { 
@@ -316,51 +311,44 @@ function run_tests(tests, recurse_multiplied) {
           }
 
           if(match === false) { 
-
-          error_value.message = `The value returned is not within the allowed values.`;
-
-          error_value.return_value = return_value;
-
-          error_value.return_type =  typeof(return_value);
-
-          error_count++;
-
+            error_value.message = `The value returned is not within the allowed values.`;
+            error_value.return_value = return_value;
+            error_value.return_type =  typeof(return_value);
+            error_count++;
           }
 
         } else { 
 
           throw new Error(`
-          index: ${i} \n
-          error: the only allowed types are number, string, boolean, undefined and object
+            index: ${i} \n
+            error: the only allowed types are number, string, boolean, undefined and object
           `);
 
         }
 
     }
 
+    /*
+      testing the regular expression of the return value
+    */
+
     var error_rejex = {};
 
     if(tests[i].unit.regex_set.on === true) {
-
       for(let j = 0; j < tests[i].unit.regex_set.values.length; j++) {  
-
         var test_regex = test(tests[i].unit.regex_set.values[j], return_value); 
-
         if(test_regex !== true) { 
-
           error_rejex[`message-${j}`] = `The value returned does not pass`;
-
           error_rejex[`regular_expression-${j}`] = tests[i].unit.regex_set.values[j];
-
           error_rejex[`return_value-${j}`] = return_value;
-
           error_count++;
-
         }
-
       }
-
     }
+
+    /*
+      pushining to error set
+    */
 
     if(error_count > 0) { 
       var finalized_error_object = {};

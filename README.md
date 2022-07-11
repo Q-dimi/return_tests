@@ -79,7 +79,6 @@ return-tests tests if a functions return value matches a regular expression, dat
 
       regex_set: {
         on: false,
-
         values: [/[^a-z]+/, /[^a-z]+/],
       },
     },

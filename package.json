@@ -12,5 +12,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Q-dimi/return_tests.git"
+  },
+  "README.md": {
+    "editor.formatOnSave": false
   }
 }
