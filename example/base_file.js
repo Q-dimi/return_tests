@@ -19,10 +19,10 @@ module.exports = {
 
             function_called: {
                 on: true,
-                function_name: 'your function name',
-                function_directory: 'directory where function lives',
-                function_description: 'function description',
-                base_param_names: 'parameter names in case random parameters are passed in',
+                name: 'your function name',
+                filepath: 'directory where function lives',
+                description: 'function description',
+                param_names: 'parameter names in case random parameters are passed in',
                 parameters: ['a', 'b'],
                 function: function(a, b) {
                     try {
