@@ -1,5 +1,6 @@
 
 /*
+  Copyright (c) 2022 Alexander Eatman
   @param {generate_functions: function}: if true, searches directories and writes to a file of all functions asked to test
 */
 
@@ -123,6 +124,10 @@
     return Math.floor(Math.random() * 100000);
   }
 
+  function create_random_inner_param_boolean() { 
+    return Boolean(Math.floor(Math.random() * 2));
+  }
+
   function create_random_inner_param_object(config_and_build)  {
 
     var o = {}
@@ -193,10 +198,6 @@
 
     return a;
 
-  }
-
-  function create_random_inner_param_boolean() { 
-    return Boolean(Math.floor(Math.random() * 2));
   }
 
 /*
@@ -345,7 +346,7 @@
       }
 
       /*
-        pushining to error set
+        pushing to error set
       */
 
       if(error_count > 0) { 
