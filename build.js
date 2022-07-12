@@ -30,13 +30,13 @@
 
     var returned_set = [];
 
-    for(let i = 0; i < randomized_object_configuration.multiply_amount; i++) { 
+    for(let i = 0; i < randomized_object_configuration.multiply_amount; i++) {
       returned_set.push(create_single_randomized_object(
-        randomized_object_configuration
+        randomized_object_configuration 
       ));
     }
 
-    return returned_set; // [[]] 
+    return returned_set; 
 
   }
 
@@ -107,6 +107,7 @@
 
   /*
     returns one of string, number, boolean, array or object
+    @param {config_and_build: object / array}: the typed object/array passed for building
   */    
 
   function create_random_inner_param_string()  { 
@@ -119,11 +120,7 @@
 
   function create_random_inner_param_boolean() { 
     return Boolean(Math.floor(Math.random() * 2));
-  }
-
-  /*
-    @param {config_and_build: object}: the typed object passed for building
-  */     
+  }  
 
   function create_random_inner_param_object(config_and_build)  {
 
@@ -159,11 +156,7 @@
 
     return o;
 
-  }
-
-  /*
-    @param {config_and_build: array}: the typed array passed for building
-  */     
+  } 
 
   function create_random_inner_param_array(config_and_build)   { 
 
@@ -420,23 +413,23 @@
           
   }
 
-/*
-  @param {allowed_types: object}: allowed return types
-  @param {allowed_values: object}: allowed return values
-  @param {regex_set: object}: allowed regular expressions
-  @param {function_: function}: function being tested
-  @param {function_name: string}: name of the function
-  @param {function_directory: string}: directory of the function
-  @param {function_description: string}: description of the function
-  @param {function_param_names: string}: parameter names of the function (not passed in)
-  @param {function_on: boolean}: whether to skip this function or test it
-  @param {function_paramters: array}: the original values of the parameters passed to the function
-  @param {randomized_on: boolean}: whether to multiply the index of object function with random parametrs or not
-  @param {randomized_parameters: array}: the parameter types listed in an array. accepted is undefined, null, object, array, number, string
-  @param {randomized_when_obj_passed: array}: if an object is passed to randmized_parameters, an object gets built with random values athat param index
-  @param {randomized_when_arr_passed: array}: if an array is passed to randmized_parameters, an array gets built with random values
-  @param {randomized_multiply_amount: number}: amount of times to multiply object index
-*/
+  /*
+    @param {allowed_types: object}: allowed return types
+    @param {allowed_values: object}: allowed return values
+    @param {regex_set: object}: allowed regular expressions
+    @param {function_: function}: function being tested
+    @param {function_name: string}: name of the function
+    @param {function_directory: string}: directory of the function
+    @param {function_description: string}: description of the function
+    @param {function_param_names: string}: parameter names of the function (not passed in)
+    @param {function_on: boolean}: whether to skip this function or test it
+    @param {function_paramters: array}: the original values of the parameters passed to the function
+    @param {randomized_on: boolean}: whether to multiply the index of object function with random parametrs or not
+    @param {randomized_parameters: array}: the parameter types listed in an array. accepted is undefined, null, object, array, number, string
+    @param {randomized_when_obj_passed: array}: if an object is passed to randmized_parameters, an object gets built with random values athat param index
+    @param {randomized_when_arr_passed: array}: if an array is passed to randmized_parameters, an array gets built with random values
+    @param {randomized_multiply_amount: number}: amount of times to multiply object index
+  */
 
   function main_or_fallback_errors(
     allowed_types, 
@@ -533,10 +526,10 @@
 
   }
 
-/*
-  @param {regular_expression: string}: regular expression being tested
-  @param {return_value: number, string, undefined, null, object, boolean}: the value being tested against
-*/
+  /*
+    @param {regular_expression: string}: regular expression being tested
+    @param {return_value: number, string, undefined, null, object, boolean}: the value being tested against
+  */
 
   function test(regular_expression, return_value) { 
     try {
@@ -546,9 +539,9 @@
     } 
   }
 
-/*
-  @run {function} the initial function
-*/
+  /*
+    @run {function} the initial function
+  */
 
   module.exports = { 
     run: start_tests, 
