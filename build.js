@@ -7,11 +7,9 @@
 
 /*
   @param {error_sets: array}: exported set of objects that did not pass test
-  @param {multiplied_sets: array}: if multiplying with random params, multiply this
 */
 
   var error_sets = [];
-  var multiplied_sets = [];
 
 /*
   @param {tests: array}: array of objects to run tests
@@ -36,9 +34,7 @@
       ));
     }
 
-    console.log(returned_set);
-
-    return returned_set; // [[]] -- forget about everything else (add number of params on this)
+    return returned_set; // [[]] 
 
   }
 
@@ -232,10 +228,10 @@
         tests[i].randomized.multiply_amount,
       ); 
 
-      if(check_inside_errors === false) { 
+      if(check_inside_errors.error === true) { 
         throw new Error(`
           index: ${i} \n 
-          error: there was an error processing this set
+          ${check_inside_errors.error_string}
         `);
       };
 
@@ -243,13 +239,25 @@
         continue;
       }
 
-      var error_count = 0;
+      /*
+        if multiplying, multiply and pass result to function_called.parameters
+      */
 
       if(tests[i].randomized.on === true) { 
         tests[i].function_called.parameters = multiply_function_set(tests[i].randomized);
       }
 
       for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
+
+        /*
+          error count per index on function_called.params
+        */
+
+        var error_count = 0;
+
+        /*
+          the return value of the function
+        */
 
         var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
 
@@ -412,76 +420,80 @@
     randomized_multiply_amount
   ) { 
 
-    var init_errors = {};
+    var init_errors = '';
     
     if(
       typeof(allowed_types.on) !== 'boolean' || ((typeof(allowed_types.values) !== 'object' || Array.isArray(allowed_types.values) === false))) {
-      init_errors.allowed_types = '(unit.allowed_types) must be an object with paramters (on: boolean) and (values: array)';
+      init_errors += '(unit.allowed_types) must be an object with paramters (on: boolean) and (values: array) \n';
     }
 
     if(typeof(allowed_values.on) !== 'boolean' || (typeof(allowed_values.values) !== 'object' || Array.isArray(allowed_values.values) === false)) {
-      init_errors.allowed_values = '(unit.allowed_values) must be an object with parameters (on: boolean) and (values: array)';
+      init_errors += '(unit.allowed_values) must be an object with parameters (on: boolean) and (values: array) \n';
     }
 
     if(typeof(regex_set.on) !== 'boolean' || (typeof(regex_set.values) !== 'object' || Array.isArray(regex_set.values) === false)) {
-      init_errors.regex_set = '(unit.regex_set) must be an object with parameters (on: boolean) and (values: array)';
+      init_errors += '(unit.regex_set) must be an object with parameters (on: boolean) and (values: array) \n';
     }
 
     if(typeof(function_) !== 'function') {
-      init_errors.function_ = '(function_called.function) must be a function';
+      init_errors += '(function_called.function) must be a function \n';
     }
 
     if(typeof(function_name) !== 'object' && typeof(function_name) !== 'string') {
-      init_errors.function_name = '(function_called.function_name) must be null or a string';
+      init_errors += '(function_called.function_name) must be null or a string \n';
     }
 
     if(typeof(function_directory) !== 'object' && typeof(function_directory) !== 'string') {
-      init_errors.function_directory = '(function_called.function_directory) must be null or a string';
+      init_errors += '(function_called.function_directory) must be null or a string \n';
     }
 
     if(typeof(function_description) !== 'object' && typeof(function_description) !== 'string') {
-      init_errors.function_description = '(function_called.function_description) must be null or a string';
+      init_errors += '(function_called.function_description) must be null or a string \n';
     }
 
     if(typeof(function_param_names) !== 'object' && typeof(function_param_names) !== 'string') {
-      init_errors.function_param_names = '(function_called.base_param_names) must be null or a string';
+      init_errors += '(function_called.base_param_names) must be null or a string \n';
     }
 
     if(typeof(function_on) !== 'boolean') {
-      init_errors.function_on = '(function_called.function_on) must be a boolean';
+      init_errors += '(function_called.function_on) must be a boolean \n';
     }
 
     if(typeof(function_parameters) !== 'object' || Array.isArray(function_parameters) === false) { 
-      init_errors.function_parameters = '(function_called.function_parameters) must be an array';
+      init_errors += '(function_called.function_parameters) must be an array \n';
     }
 
     if(typeof(randomized_on) !== 'boolean') {
-      init_errors.randomized_on = '(randomized.randomized_on) must be a boolean';
+      init_errors += '(randomized.randomized_on) must be a boolean \n';
     }
 
     if((typeof(randomized_parameters) !== 'object' || Array.isArray(randomized_parameters) === false)) {
-      init_errors.randomized_parameters = '(randomized.randomized_parameters) must be an array';
+      init_errors += '(randomized.randomized_parameters) must be an array \n';
     }
 
     if((typeof(randomized_when_obj_passed) !== 'object' || Array.isArray(randomized_when_obj_passed) === false)) {
-      init_errors.randomized_when_obj_passed = '(randomized.randomized_when_obj_passed) must be an array';
+      init_errors += '(randomized.randomized_when_obj_passed) must be an array \n';
     }
 
     if((typeof(randomized_when_arr_passed) !== 'object' || Array.isArray(randomized_when_arr_passed) === false)) {
-      init_errors.randomized_when_arr_passed = '(randomized.randomized_when_arr_passed) must be an array';
+      init_errors += '(randomized.randomized_when_arr_passed) must be an array \n';
     }
 
     if(typeof(randomized_multiply_amount) !== 'number' && typeof(randomized_multiply_amount) !== 'object') {
-      init_errors.randomized_multiply_amount = '(randomized.randomized_multiply_amount) must be a number or null';
+      init_errors += '(randomized.randomized_multiply_amount) must be a number or null \n';
     }
 
-    var size = Object.keys(init_errors).length;
-
-    if(size > 0) {     
-        return false;
+    if(init_errors.trim().length > 0) { 
+      return { 
+        error: true, 
+        error_string: init_errors
+      }
     }
 
-    return true;
+    return { 
+      error: false, 
+      error_string: init_errors
+    }
 
   }
 
