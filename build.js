@@ -44,7 +44,7 @@
       ));
     }
 
-    return returned_set;
+    return returned_set; // [[]] -- forget about everything else (add number of params on this)
 
   }
 
@@ -110,6 +110,9 @@
 
     attach_here.function_called.parameters = params;
     attach_here.randomized.on = false;
+
+    console.log('new function-----------------------------');
+    console.log(attach_here);
     
     return attach_here;
 
@@ -250,118 +253,111 @@
         continue;
       }
 
-      if(tests[i].randomized.on === true) { 
-        multiply_function_set(tests[i]);
-        continue;
-      }
-
       var error_count = 0;
-      var return_value = tests[i].function_called.function(...tests[i].function_called.parameters);
 
-      /*
-        testing the error type of the return value
-      */
-
-      var error_type = {};
-
-      if(tests[i].unit.allowed_types.on === true) {
-        if(tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true) {
-          error_type.message = `The value returned is not within the allowed types.`;
-          error_type.return_type =  typeof(return_value);
-          error_type.return_value =  return_value;
-          error_count++;
-        }
+      if(tests[i].randomized.on === true) { 
+        //tests[i].function_called.parameters = multiply_function_set(tests[i]); //add this in as a random parameters array of arrays and replace with tests[j].function_called.parameters
       }
 
-      /*
-        testing the error value of the return value
-      */
+      for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
 
-      var error_value = {}; 
+        var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
 
-      if(tests[i].unit.allowed_values.on === true) {
+        var error_type = {};
 
-        if(
-          typeof(return_value) === 'number' || 
-          typeof(return_value) === 'string' ||  
-          typeof(return_value) === 'undefined' ||  
-          typeof(return_value) === 'boolean'
-        ) {
-
-          if(tests[i].unit.allowed_values.values.includes(return_value) !== true) { 
-            error_value.message = `The value returned is not within the allowed values.`;
-            error_value.return_value = return_value;
-            error_value.return_type =  typeof(return_value);
+        if(tests[i].unit.allowed_types.on === true) {
+          if(tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true) {
+            error_type.message = `The value returned is not within the allowed types.`;
+            error_type.return_type =  typeof(return_value);
+            error_type.return_value =  return_value;
+            error_type.allowed_values = tests[i].unit.allowed_types.values;
             error_count++;
           }
+        }
 
-          } else if(typeof(return_value) === 'object') { 
+        var error_value = {}; 
 
-            var match = false;
+        if(tests[i].unit.allowed_values.on === true) {
 
-            for(let j = 0; j < tests[i].unit.allowed_values.values.length; j++) { 
-              if(typeof(tests[i].unit.allowed_values.values[j]) === 'object') { 
-              if(JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
-                match = true;
-                break;
-              }
-              }
-            }
+          if(
+            typeof(return_value) === 'number' || 
+            typeof(return_value) === 'string' ||  
+            typeof(return_value) === 'undefined' ||  
+            typeof(return_value) === 'boolean'
+          ) {
 
-            if(match === false) { 
-              error_value.message = `The value returned is not within the allowed values.`;
+            if(tests[i].unit.allowed_values.values.includes(return_value) !== true) { 
+              error_value.message = `The value returned is not within the allowed values. `;
               error_value.return_value = return_value;
               error_value.return_type =  typeof(return_value);
+              error_value.allowed_values = tests[i].unit.allowed_values.values;
               error_count++;
             }
 
-          } else { 
+            } else if(typeof(return_value) === 'object') { 
 
-            throw new Error(`
-              index: ${i} \n
-              error: the only allowed types are number, string, boolean, undefined and object
-            `);
+              var match = false;
 
-          }
+              for(let j = 0; j < tests[i].unit.allowed_values.values.length; j++) { 
+                if(typeof(tests[i].unit.allowed_values.values[j]) === 'object') { 
+                if(JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
+                  match = true;
+                  break;
+                }
+                }
+              }
 
-      }
+              if(match === false) { 
+                error_value.message = `The value returned is not within the allowed values.`;
+                error_value.return_value = return_value;
+                error_value.return_type =  typeof(return_value);
+                error_count++;
+              }
 
-      /*
-        testing the regular expression of the return value
-      */
+            } else { 
 
-      var error_rejex = {};
+              throw new Error(`
+                index: ${i} \n
+                error: the only allowed types are number, string, boolean, undefined and object
+              `);
 
-      if(tests[i].unit.regex_set.on === true) {
-        for(let j = 0; j < tests[i].unit.regex_set.values.length; j++) {  
-          var test_regex = test(tests[i].unit.regex_set.values[j], return_value); 
-          if(test_regex !== true) { 
-            error_rejex[`message-${j}`] = `The value returned does not pass`;
-            error_rejex[`regular_expression-${j}`] = tests[i].unit.regex_set.values[j];
-            error_rejex[`return_value-${j}`] = return_value;
-            error_count++;
+            }
+
+        }
+
+        var error_rejex = [];
+
+        if(tests[i].unit.regex_set.on === true) {
+          for(let k = 0; k < tests[i].unit.regex_set.values.length; k++) {  
+            var test_regex = test(tests[i].unit.regex_set.values[k], return_value); 
+            if(test_regex !== true) { 
+              error_rejex.push({ 
+                message: `The value returned does not pass`, 
+                regular_expression:  tests[i].unit.regex_set.values[k], 
+                return_value: return_value, 
+                expressions_tested: tests[i].unit.regex_set.values
+              });
+              error_count++;
+            }
           }
         }
+
+        /*
+          pushing to error set
+        */
+
+        if(error_count > 0) { 
+          var finalized_error_object = {};
+          finalized_error_object.error_value = error_value;
+          finalized_error_object.error_type = error_type;
+          finalized_error_object.error_rejex = error_rejex;
+          finalized_error_object.additional_info = tests[i];
+          finalized_error_object.multiplied_set = recurse_multiplied ? 'on' : 'off';
+          error_sets.push(finalized_error_object);
+        }
+
       }
 
-      /*
-        pushing to error set
-      */
-
-      if(error_count > 0) { 
-        var finalized_error_object = {};
-        finalized_error_object.error_value = error_value;
-        finalized_error_object.error_type = error_type;
-        finalized_error_object.error_rejex = error_rejex;
-        finalized_error_object.additional_info = tests[i];
-        finalized_error_object.multiplied_set = recurse_multiplied ? 'on' : 'off';
-        error_sets.push(finalized_error_object);
-      }
-
-    }
-
-    if(recurse_multiplied === false) { 
-      run_tests(multiplied_sets, true);
     }
 
     return error_sets;

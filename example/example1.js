@@ -3,9 +3,10 @@ var return_tests = require('../build');
 var functions = [
 
   { 
+
     randomized: { 
 
-      on: false, 
+      on: true, 
 
       parameters: ['number', 'number'], //string, null, undefined, boolean, object, number, random
 
@@ -29,7 +30,7 @@ var functions = [
 
       param_names: 'apple, sauce', 
 
-      parameters: [1, 10],
+      parameters: [[1, 10], [2, 3]],
 
       function: function (a, b) { //now test objects then multiply
         try { 
@@ -83,12 +84,10 @@ try {
   console.log(err.message)
 }
 
-console.log(errors);
-
 // for(let i = 0; i < errors.length; i++) { 
 //   console.log(errors[i]);
 // }
 
-//optionally generate 
+//optionally generate file
 //var find_and_append_functions = return_tests.generate_functions('./file_written_to', { folders: '', files: [] });
 //run tests
