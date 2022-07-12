@@ -54,7 +54,7 @@ function arrays_returned(multiply_this_object) {
 
 function create_single_randomized_object(attach_here) { 
 
-  var params = {};
+  var params = [];
 
   var if_random_or_not_in_selected = [
     create_random_inner_param_object(attach_here.randomized.when_obj_passed),
@@ -210,7 +210,6 @@ function run_tests(tests, recurse_multiplied) {
 
     if(
       typeof(tests[i]) !== 'object' || 
-      typeof(tests[i]) === 'object' &&
       typeof(tests[i].unit) !== 'object' || 
       typeof(tests[i].randomized) !== 'object' || 
       typeof(tests[i].index_of_set) !== 'number' ||
@@ -496,5 +495,3 @@ function test(regular_expression, return_value) {
 */
 
 module.exports = { run: start_tests, generate: generate_functions } 
-
-//vuaaaooouuuuu // vvv vvv vuaouuuuuuuu  jaaaaaaaaay jaaaaaaaaay noogie noogie noogie noogie
