@@ -287,7 +287,7 @@
         var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
 
         /*
-          error type test (one of the if statements will get executed)
+          error type test
         */
 
         var error_type = {};
@@ -373,16 +373,12 @@
 
             }
 
-            if(tests[i].unit.allowed_values.index_exact === true) { 
-
-              if(JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
-                error_value.message = `The value returned is not equal to the allowed values.`;
-                error_value.return_value = return_value;
-                error_value.return_type =  typeof(return_value);
-                error_value.allowed_values = tests[i].unit.allowed_values.values[j];
-                error_count++;
-              }
-              
+            if(tests[i].unit.allowed_values.index_exact === true && JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
+              error_value.message = `The value returned is not equal to the allowed values.`;
+              error_value.return_value = return_value;
+              error_value.return_type =  typeof(return_value);
+              error_value.allowed_values = tests[i].unit.allowed_values.values[j];
+              error_count++;
             }
 
           } else { 
