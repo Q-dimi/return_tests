@@ -341,7 +341,7 @@
         var error_rejex = [];
 
         if(tests[i].unit.regex_set.on === true) {
-          for(let k = 0; k < tests[i].unit.regex_set.values.length; k++) {  
+          for(let k = 0; k < tests[i].unit.regex_set.values.length; k++) { 
             var test_regex = test(tests[i].unit.regex_set.values[k], return_value); 
             if(test_regex !== true) { 
               error_rejex.push({ 
@@ -350,9 +350,12 @@
                 return_value: return_value, 
                 expressions_tested: tests[i].unit.regex_set.values
               });
-              error_count++;
             }
           }
+        }
+
+        if(error_rejex.length > 0) { 
+          error_count++;
         }
 
         /*
@@ -360,24 +363,15 @@
         */
 
         if(error_count > 0) { 
-
           var finalized_error_object = {};
-
           finalized_error_object.ev = error_value;
           finalized_error_object.et = error_type;
           finalized_error_object.er = error_rejex;
           finalized_error_object.pi = j;
           finalized_error_object.fi = i;
           finalized_error_object.info = tests[i];
-
-          if(typeof(index_set['function-'+i]) === 'undefined') { 
-            index_set['function-'+i] = [finalized_error_object];
-          } else { 
-            index_set['function-'+i].push(finalized_error_object);
-          }
-
           error_sets.push(finalized_error_object);
-
+          typeof(index_set['function-'+i]) === 'undefined' ? index_set['function-'+i] = [finalized_error_object] : index_set['function-'+i].push(finalized_error_object);
         }
 
       }

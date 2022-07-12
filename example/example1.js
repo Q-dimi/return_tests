@@ -4,7 +4,7 @@ var functions = [
 
   { 
 
-    randomized: { 
+    randomized: { //returns a [[]] passed to function_called.parameters
 
       on: true, 
 
