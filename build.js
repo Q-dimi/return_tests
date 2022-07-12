@@ -451,16 +451,15 @@
 
     var init_errors = '';
     
-    if(
-      typeof(allowed_types.on) !== 'boolean' || ((typeof(allowed_types.values) !== 'object' || Array.isArray(allowed_types.values) === false))) {
+    if(typeof(allowed_types.on) !== 'boolean' || (typeof(allowed_types.values) !== 'object' || Array.isArray(allowed_types.values) === false) || typeof(allowed_types.index_exact) !== 'boolean') {
       init_errors += '(unit.allowed_types) must be an object with paramters (on: boolean) and (values: array) \n';
     }
 
-    if(typeof(allowed_values.on) !== 'boolean' || (typeof(allowed_values.values) !== 'object' || Array.isArray(allowed_values.values) === false)) {
+    if(typeof(allowed_values.on) !== 'boolean' || (typeof(allowed_values.values) !== 'object' || Array.isArray(allowed_values.values) === false) || typeof(allowed_values.index_exact) !== 'boolean') {
       init_errors += '(unit.allowed_values) must be an object with parameters (on: boolean) and (values: array) \n';
     }
 
-    if(typeof(regex_set.on) !== 'boolean' || (typeof(regex_set.values) !== 'object' || Array.isArray(regex_set.values) === false)) {
+    if(typeof(regex_set.on) !== 'boolean' || (typeof(regex_set.values) !== 'object' || Array.isArray(regex_set.values) === false) || typeof(regex_set.index_exact) !== 'boolean') {
       init_errors += '(unit.regex_set) must be an object with parameters (on: boolean) and (values: array) \n';
     }
 
