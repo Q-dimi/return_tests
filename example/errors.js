@@ -67,9 +67,9 @@ var functions = [
 
         on: true, //whether to run this test
 
-        index_exact: true, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+        index_exact: false, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
 
-        values: ['number', 'string'] //one of the types that must be returned
+        values: ['string', 'number'] //one of the types that must be returned
 
       }, 
       
