@@ -44,7 +44,7 @@ var functions = [
 
       param_names: 'apple, sauce', //names of parameters
 
-      parameters: [[1, 10], [2, 9]], //set of parameters passed. each array is the parameters passed to function_called.function (tests will be executed for each set of parameters)
+      parameters: [[1, 6], [6, 7]], //set of parameters passed. each array is the parameters passed to function_called.function (tests will be executed for each set of parameters)
 
       function: function (a, b) { //your function (generate will append all functions in selected directories)
         try { 
@@ -65,7 +65,7 @@ var functions = [
 
       allowed_types: {  //the allowed types the function must return
 
-        on: true, //whether to run this test
+        on: false, //whether to run this test
 
         index_exact: false, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
 
@@ -75,9 +75,9 @@ var functions = [
       
       allowed_values: { //the allowed values the function must return
 
-        on: false, //whether to run this test in execution
+        on: true, //whether to run this test in execution
 
-        index_exact: false, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+        index_exact: true, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
 
         values: [7, 12] //one of the values the function must return
 

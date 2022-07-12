@@ -332,7 +332,10 @@
             return_value === null
           ) {
 
-            if(tests[i].unit.allowed_values.index_exact === false && tests[i].unit.allowed_values.values.includes(return_value) !== true) { 
+            if(
+              tests[i].unit.allowed_values.index_exact === false && 
+              tests[i].unit.allowed_values.values.includes(return_value) !== true
+            ) { 
               error_value.message = `The value returned is not within the allowed values. `;
               error_value.return_value = return_value;
               error_value.return_type =  typeof(return_value);
@@ -340,7 +343,10 @@
               error_count++;
             }
 
-            if(tests[i].unit.allowed_values.index_exact === true && tests[i].unit.allowed_values.values[j] !== return_value) { 
+            if(
+              tests[i].unit.allowed_values.index_exact === true && 
+              tests[i].unit.allowed_values.values[j] !== return_value
+            ) { 
               error_value.message = `The value returned is not equal to the allowed value. `;
               error_value.return_value = return_value;
               error_value.return_type =  typeof(return_value);
@@ -373,7 +379,10 @@
 
             }
 
-            if(tests[i].unit.allowed_values.index_exact === true && JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
+            if(
+              tests[i].unit.allowed_values.index_exact === true && 
+              JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()
+            ) { 
               error_value.message = `The value returned is not equal to the allowed values.`;
               error_value.return_value = return_value;
               error_value.return_type =  typeof(return_value);
