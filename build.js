@@ -335,7 +335,6 @@
       if(tests[i].unit.regex_set.on === true) {
         for(let j = 0; j < tests[i].unit.regex_set.values.length; j++) {  
           var test_regex = test(tests[i].unit.regex_set.values[j], return_value); 
-          console.log(test_regex);
           if(test_regex !== true) { 
             error_rejex[`message-${j}`] = `The value returned does not pass`;
             error_rejex[`regular_expression-${j}`] = tests[i].unit.regex_set.values[j];

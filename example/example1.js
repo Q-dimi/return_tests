@@ -4,44 +4,67 @@ var functions = [
 
   { 
     randomized: { 
+
       on: false, 
+
       parameters: ['number', 'number'], //string, null, undefined, boolean, object, number, random
+
       when_obj_passed: ['number', 'string'], //string, null, undefined, boolean, number
+
       when_arr_passed: ['number', 'string'], //string, null, undefined, boolean, number
+
       multiply_amount: 2
+
     },  
 
     function_called: {
+
       on: true, 
+
       name: 'apple', 
+
       filepath: '/sauce', 
+
       description: 'apple sauce', 
+
       param_names: 'apple, sauce', 
+
       parameters: [1, 10],
-      function: function (a, b) { 
+
+      function: function (a, b) { //now test objects then multiply
         try { 
           return a + b; 
         } catch(err) { 
           return err; 
         } 
       }
+
     }, 
     
     unit: { 
 
       allowed_types: { 
+
         on: false, 
+
         values: ['number'] 
+
       }, 
       
       allowed_values: { 
+
         on: false, 
+
         values: [7, 12] 
+
       }, 
       
       regex_set: { 
+
         on: true, 
+
         values: [/^([0-9])$/] 
+
       } 
     
     }, 
