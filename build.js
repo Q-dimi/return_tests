@@ -1,30 +1,30 @@
 
-/*
-  @param {generate_functions: function}: if true, searches directories and writes to a file of all functions asked to test
-*/
+  /*
+    @param {generate_functions: function}: if true, searches directories and writes to a file of all functions asked to test
+  */
 
   var generate_functions = require('./generate_functions');
 
-/*
-  @param {error_sets: array}: exported set of objects that did not pass test
-  @param {index_set: object: []}: errors at index
-*/
+  /*
+    @param {error_sets: array}: exported set of objects that did not pass test
+    @param {index_set: object: []}: errors at index
+  */
 
   var error_sets = [];
   var index_set = {};
 
-/*
-  @param {tests: array}: array of objects to run tests
-*/
+  /*
+    @param {tests: array}: array of objects to run tests
+  */
 
   function start_tests(tests) {   
     return run_tests(tests);
   }
 
-/*
-  @param {multiply_this_object}: takes the object index and multiplies it each time with random parameters
-  @param {returned_set}: the array of objects under one index with random parameters
-*/
+  /*
+    @param {multiply_this_object}: takes the object index and multiplies it each time with random parameters
+    @param {returned_set}: the array of objects under one index with random parameters
+  */
 
   function multiply_function_set(randomized_object_configuration) {
 
@@ -40,9 +40,9 @@
 
   }
 
-/*
-  @param {attach_here} the new object with random parameters attached
-*/
+  /*
+    @param {randomized_object_configuration} the randomized object at index
+  */
 
   function create_single_randomized_object(randomized_object_configuration) { 
 
@@ -104,6 +104,11 @@
 
   }
 
+
+  /*
+    returns one of string, number, boolean, array or object
+  */    
+
   function create_random_inner_param_string()  { 
     return Math.random().toString(36).replace(/[^a-z]+/g, '');
   }
@@ -115,6 +120,10 @@
   function create_random_inner_param_boolean() { 
     return Boolean(Math.floor(Math.random() * 2));
   }
+
+  /*
+    @param {config_and_build: object}: the typed object passed for building
+  */     
 
   function create_random_inner_param_object(config_and_build)  {
 
@@ -152,6 +161,10 @@
 
   }
 
+  /*
+    @param {config_and_build: array}: the typed array passed for building
+  */     
+
   function create_random_inner_param_array(config_and_build)   { 
 
     var a = [];
@@ -188,14 +201,21 @@
 
   }
 
-/*
-  @param {tests: array}: the array of tests
-  @param {recurse_multiplied: boolean}: when inital load of functions is over, runs multiplied_sets off true
-*/
+  /*
+    @param {tests: array}: the array of tests
+  */
         
   function run_tests(tests) {
 
+    /*
+      running through each test
+    */
+
     for(let i = 0; i < tests.length; i++) { 
+
+      /*
+        outside error check
+      */
 
       if(
         typeof(tests[i]) !== 'object' || 
@@ -209,6 +229,10 @@
           error: (unit: object), (index_of_set: number), (parameters: object), (function_called: object), (randomized: object) must be defined \n
         `);
       }
+
+      /*
+        inside error check
+      */
 
       var check_inside_errors = main_or_fallback_errors(
         tests[i].unit.allowed_types,
@@ -235,6 +259,10 @@
         `);
       };
 
+      /*
+        skip this function if off
+      */
+
       if(tests[i].function_called.on !== true) { 
         continue;
       }
@@ -247,10 +275,14 @@
         tests[i].function_called.parameters = multiply_function_set(tests[i].randomized);
       }
 
+      /*
+        iterting through function_called.parameters and getting and checking the return value on each set
+      */
+
       for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
 
         /*
-          error count per index on function_called.params
+          error count for [[params]]
         */
 
         var error_count = 0;
@@ -376,6 +408,10 @@
       }
 
     }
+
+    /*
+      return all errors and errors at index
+    */
 
     return { 
       all_errors: error_sets,
