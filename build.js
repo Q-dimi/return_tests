@@ -218,9 +218,7 @@ function run_tests(tests, recurse_multiplied) {
     ) {
       throw new Error(`
         index: ${i} \n
-        object tests needs to be defined as an object with object \n
-        (unit: object), (index_of_set: index), (parameters: object), (function_called: object), (randomized: object) \n
-        each object must be with the apporopriate values in the README (last level definition for undefined to pass)
+        error: (unit: object), (index_of_set: number), (parameters: object), (function_called: object), (randomized: object) must be defined \n
       `);
     }
 
@@ -245,7 +243,7 @@ function run_tests(tests, recurse_multiplied) {
     if(check_inside_errors === false) { 
       throw new Error(`
         index: ${i} \n 
-        there was an error processing this set. One of the inner values of the functions 
+        error: there was an error processing this set
       `);
     };
 
