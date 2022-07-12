@@ -7,9 +7,11 @@
 
 /*
   @param {error_sets: array}: exported set of objects that did not pass test
+  @param {index_set: object: []}: errors at index
 */
 
   var error_sets = [];
+  var index_set = {};
 
 /*
   @param {tests: array}: array of objects to run tests
@@ -192,8 +194,6 @@
 */
         
   function run_tests(tests) {
-
-    var index_set = {};
 
     for(let i = 0; i < tests.length; i++) { 
 
