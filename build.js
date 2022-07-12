@@ -263,6 +263,10 @@
 
         var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
 
+        /*
+          error type test
+        */
+
         var error_type = {};
 
         if(tests[i].unit.allowed_types.on === true) {
@@ -274,6 +278,10 @@
             error_count++;
           }
         }
+
+        /*
+          error value test
+        */
 
         var error_value = {}; 
 
@@ -298,9 +306,9 @@
 
               var match = false;
 
-              for(let j = 0; j < tests[i].unit.allowed_values.values.length; j++) { 
-                if(typeof(tests[i].unit.allowed_values.values[j]) === 'object') { 
-                if(JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
+              for(let k = 0; j < tests[i].unit.allowed_values.values.length; k++) { 
+                if(typeof(tests[i].unit.allowed_values.values[k]) === 'object') { 
+                if(JSON.stringify(tests[i].unit.allowed_values.values[k]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
                   match = true;
                   break;
                 }
@@ -325,6 +333,10 @@
 
         }
 
+        /*
+          regex test
+        */
+
         var error_rejex = [];
 
         if(tests[i].unit.regex_set.on === true) {
@@ -348,11 +360,12 @@
 
         if(error_count > 0) { 
           var finalized_error_object = {};
-          finalized_error_object.error_value = error_value;
-          finalized_error_object.error_type = error_type;
-          finalized_error_object.error_rejex = error_rejex;
-          finalized_error_object.additional_info = tests[i];
-          finalized_error_object.multiplied_set = recurse_multiplied ? 'on' : 'off';
+          finalized_error_object.ev = error_value;
+          finalized_error_object.et = error_type;
+          finalized_error_object.er = error_rejex;
+          finalized_error_object.pi = j;
+          finalized_error_object.fi = i;
+          finalized_error_object.info = tests[i];
           error_sets.push(finalized_error_object);
         }
 
