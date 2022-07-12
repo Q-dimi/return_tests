@@ -18,15 +18,7 @@
 */
 
   function start_tests(tests) {   
-    return run_tests(tests, false);
-  }
-
-/*
-  @param {multiply_this_object}: takes the object index and multiplies it each time with random parameters
-*/
-
-  function multiply_function_set(multiply_this_object) { 
-    multiplied_sets = multiplied_sets.concat(arrays_returned(multiply_this_object));
+    return run_tests(tests);
   }
 
 /*
@@ -34,15 +26,17 @@
   @param {returned_set}: the array of objects under one index with random parameters
 */
 
-  function arrays_returned(multiply_this_object) {
+  function multiply_function_set(randomized_object_configuration) {
 
     var returned_set = [];
 
-    for(let i = 0; i < multiply_this_object.randomized.multiply_amount; i++) { 
+    for(let i = 0; i < randomized_object_configuration.multiply_amount; i++) { 
       returned_set.push(create_single_randomized_object(
-        multiply_this_object
+        randomized_object_configuration
       ));
     }
+
+    console.log(returned_set);
 
     return returned_set; // [[]] -- forget about everything else (add number of params on this)
 
@@ -52,13 +46,13 @@
   @param {attach_here} the new object with random parameters attached
 */
 
-  function create_single_randomized_object(attach_here) { 
+  function create_single_randomized_object(randomized_object_configuration) { 
 
     var params = [];
 
     var if_random_or_not_in_selected = [
-      create_random_inner_param_object(attach_here.randomized.when_obj_passed),
-      create_random_inner_param_array(attach_here.randomized.when_arr_passed),
+      create_random_inner_param_object(randomized_object_configuration.when_obj_passed),
+      create_random_inner_param_array(randomized_object_configuration.when_arr_passed),
       create_random_inner_param_string(), 
       create_random_inner_param_number(),
       create_random_inner_param_boolean(), 
@@ -66,9 +60,9 @@
       null
     ];
 
-    for(let i = 0; i < attach_here.randomized.parameters.length; i++) { 
+    for(let i = 0; i < randomized_object_configuration.parameters.length; i++) { 
 
-      var current_parameter = attach_here.randomized.parameters[i]; 
+      var current_parameter = randomized_object_configuration.parameters[i]; 
 
       if(current_parameter === 'string') { 
         params.push(create_random_inner_param_string());
@@ -79,11 +73,11 @@
       }
 
       else if(current_parameter === 'object') { 
-        params.push(create_random_inner_param_object(attach_here.randomized.when_obj_passed));
+        params.push(create_random_inner_param_object(randomized_object_configuration.when_obj_passed));
       }
 
       else if(current_parameter === 'array') { 
-        params.push(create_random_inner_param_array(attach_here.randomized.when_arr_passed));
+        params.push(create_random_inner_param_array(randomized_object_configuration.when_arr_passed));
       }
 
       else if(current_parameter === 'undefined') { 
@@ -107,12 +101,6 @@
       }
 
     }
-
-    attach_here.function_called.parameters = params;
-    attach_here.randomized.on = false;
-
-    console.log('new function-----------------------------');
-    console.log(attach_here);
     
     return attach_here;
 
@@ -207,7 +195,7 @@
   @param {recurse_multiplied: boolean}: when inital load of functions is over, runs multiplied_sets off true
 */
         
-  function run_tests(tests, recurse_multiplied) {
+  function run_tests(tests) {
 
     for(let i = 0; i < tests.length; i++) { 
 
@@ -257,7 +245,7 @@
       var index_set = {};
 
       if(tests[i].randomized.on === true) { 
-        //tests[i].function_called.parameters = multiply_function_set(tests[i]); //add this in as a random parameters array of arrays and replace with tests[j].function_called.parameters
+        tests[i].function_called.parameters = multiply_function_set(tests[i].randomized);
       }
 
       for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
@@ -371,7 +359,9 @@
           finalized_error_object.fi = i;
           finalized_error_object.info = tests[i];
           error_sets.push(finalized_error_object);
-          typeof(index_set['function-'+i]) === 'undefined' ? index_set['function-'+i] = [finalized_error_object] : index_set['function-'+i].push(finalized_error_object);
+          typeof(index_set['function-'+i]) === 'undefined' ? 
+          index_set['function-'+i] = [finalized_error_object] : 
+          index_set['function-'+i].push(finalized_error_object);
         }
 
       }
