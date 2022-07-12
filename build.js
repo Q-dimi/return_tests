@@ -197,6 +197,8 @@
         
   function run_tests(tests) {
 
+    var index_set = {};
+
     for(let i = 0; i < tests.length; i++) { 
 
       if(
@@ -242,7 +244,6 @@
       }
 
       var error_count = 0;
-      var index_set = {};
 
       if(tests[i].randomized.on === true) { 
         tests[i].function_called.parameters = multiply_function_set(tests[i].randomized);
