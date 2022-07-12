@@ -209,12 +209,12 @@ function run_tests(tests, recurse_multiplied) {
   for(let i = 0; i < tests.length; i++) { 
 
     if(
-      (typeof(tests[i]) !== 'object') || 
-      ((typeof(tests[i]) === 'object') &&
-      (typeof(tests[i].unit) !== 'object') || 
-      (typeof(tests[i].randomized) !== 'object') || 
-      (typeof(tests[i].index_of_set) !== 'number') ||
-      (typeof(tests[i].function_called) !== 'object'))
+      typeof(tests[i]) !== 'object' || 
+      typeof(tests[i]) === 'object' &&
+      typeof(tests[i].unit) !== 'object' || 
+      typeof(tests[i].randomized) !== 'object' || 
+      typeof(tests[i].index_of_set) !== 'number' ||
+      typeof(tests[i].function_called) !== 'object'
     ) {
       throw new Error(`
         index: ${i} \n
@@ -496,3 +496,5 @@ function test(regular_expression, return_value) {
 */
 
 module.exports = { run: start_tests, generate: generate_functions } 
+
+//vuaaaooouuuuu // vvv vvv vuaouuuuuuuu  jaaaaaaaaay jaaaaaaaaay noogie noogie noogie noogie
