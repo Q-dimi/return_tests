@@ -1,5 +1,9 @@
 var return_tests = require('return_tests');
 
+/*
+  The functions you are passing to the run function. 
+*/
+
 var functions = [
 
   { 
@@ -61,11 +65,11 @@ var functions = [
 
       allowed_types: {  //the allowed types the function must return
 
-        on: false, //whether to run this test
+        on: true, //whether to run this test
 
-        index_exact: false, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+        index_exact: true, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
 
-        values: ['number'] //one of the types that must be returned
+        values: ['number', 'string'] //one of the types that must be returned
 
       }, 
       
@@ -79,9 +83,9 @@ var functions = [
 
       }, 
       
-      regex_set: { //the regular expressions the function must return
+      regex_set: { //the regular expressions the function must return (must pass all regular expressions or one)
 
-        on: true, //whether to run this test in execution
+        on: false, //whether to run this test in execution
 
         index_exact: false, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
 
@@ -90,8 +94,12 @@ var functions = [
       } 
     
     }, 
+
+    /*
+      index of the function (needed!)
+    */
     
-    index_of_set: 1 //index of the function (needed!)
+    index_of_set: 1 
   
   },
 

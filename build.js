@@ -293,12 +293,22 @@
         var error_type = {};
 
         if(tests[i].unit.allowed_types.on === true) {
-          if(tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true) {
-            error_type.message = `The value returned is not within the allowed types.`;
-            error_type.return_type =  typeof(return_value);
-            error_type.return_value =  return_value;
-            error_type.allowed_values = tests[i].unit.allowed_types.values;
-            error_count++;
+          if(tests[i].unit.allowed_types.index_exact == false) {
+            if(tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true) {
+              error_type.message = `The value returned is not within the allowed types.`;
+              error_type.return_type =  typeof(return_value);
+              error_type.return_value =  return_value;
+              error_type.allowed_values = tests[i].unit.allowed_types.values;
+              error_count++;
+            }
+          } else {
+            if(tests[i].unit.allowed_types.values[j] !== typeof(return_value)) { 
+              error_type.message = `The value returned is not within the allowed types.`;
+              error_type.return_type =  typeof(return_value);
+              error_type.return_value =  return_value;
+              error_type.allowed_values = typeof(tests[i].unit.allowed_types.values[j]) !== 'undefined' ? tests[i].unit.allowed_types.values[j] : 'not value set at this index';
+              error_count++;
+            }
           }
         }
 
