@@ -254,6 +254,7 @@
       }
 
       var error_count = 0;
+      var index_set = {};
 
       if(tests[i].randomized.on === true) { 
         //tests[i].function_called.parameters = multiply_function_set(tests[i]); //add this in as a random parameters array of arrays and replace with tests[j].function_called.parameters
@@ -359,21 +360,34 @@
         */
 
         if(error_count > 0) { 
+
           var finalized_error_object = {};
+
           finalized_error_object.ev = error_value;
           finalized_error_object.et = error_type;
           finalized_error_object.er = error_rejex;
           finalized_error_object.pi = j;
           finalized_error_object.fi = i;
           finalized_error_object.info = tests[i];
+
+          if(typeof(index_set['function-'+i]) === 'undefined') { 
+            index_set['function-'+i] = [finalized_error_object];
+          } else { 
+            index_set['function-'+i].push(finalized_error_object);
+          }
+
           error_sets.push(finalized_error_object);
+
         }
 
       }
 
     }
 
-    return error_sets;
+    return { 
+      all_errors: error_sets,
+      errors_at_index: index_set
+    }
           
   }
 
