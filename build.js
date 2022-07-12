@@ -287,7 +287,7 @@
         var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
 
         /*
-          error type test
+          error type test (one of the if statements will get executed)
         */
 
         var error_type = {};
@@ -309,7 +309,7 @@
           tests[i].unit.allowed_types.index_exact === true && 
           tests[i].unit.allowed_types.values[j] !== typeof(return_value)
         ) { 
-          error_type.message = `The value returned is not within the allowed types.`;
+          error_type.message = `The type returned is not equal to the allowed type.`;
           error_type.return_type =  typeof(return_value);
           error_type.return_value =  return_value;
           error_type.allowed_values = typeof(tests[i].unit.allowed_types.values[j]) !== 'undefined' ? tests[i].unit.allowed_types.values[j] : 'not value set at this index';
@@ -317,10 +317,10 @@
         }
 
         /*
-          error value test
+          error value test (test this)
         */
 
-        var error_value = {}; 
+        var error_value = {};
 
         if(tests[i].unit.allowed_values.on === true) {
 
@@ -328,10 +328,11 @@
             typeof(return_value) === 'number' || 
             typeof(return_value) === 'string' ||  
             typeof(return_value) === 'undefined' ||  
-            typeof(return_value) === 'boolean'
+            typeof(return_value) === 'boolean' ||
+            return_value === null
           ) {
 
-            if(tests[i].unit.allowed_values.values.includes(return_value) !== true) { 
+            if(tests[i].unit.allowed_values.index_exact === false && tests[i].unit.allowed_values.values.includes(return_value) !== true) { 
               error_value.message = `The value returned is not within the allowed values. `;
               error_value.return_value = return_value;
               error_value.return_type =  typeof(return_value);
@@ -339,16 +340,26 @@
               error_count++;
             }
 
-            } else if(typeof(return_value) === 'object') { 
+            if(tests[i].unit.allowed_values.index_exact === true && tests[i].unit.allowed_values.values[j] !== return_value) { 
+              error_value.message = `The value returned is not equal to the allowed value. `;
+              error_value.return_value = return_value;
+              error_value.return_type =  typeof(return_value);
+              error_value.allowed_values = tests[i].unit.allowed_values.values[j];
+              error_count++;
+            }
+
+          } else if(typeof(return_value) === 'object') { 
+
+            if(tests[i].unit.allowed_values.index_exact === false) {
 
               var match = false;
 
               for(let k = 0; j < tests[i].unit.allowed_values.values.length; k++) { 
                 if(typeof(tests[i].unit.allowed_values.values[k]) === 'object') { 
-                if(JSON.stringify(tests[i].unit.allowed_values.values[k]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
-                  match = true;
-                  break;
-                }
+                  if(JSON.stringify(tests[i].unit.allowed_values.values[k]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
+                    match = true;
+                    break;
+                  }
                 }
               }
 
@@ -356,17 +367,30 @@
                 error_value.message = `The value returned is not within the allowed values.`;
                 error_value.return_value = return_value;
                 error_value.return_type =  typeof(return_value);
+                error_value.allowed_values = tests[i].unit.allowed_values.values;
                 error_count++;
               }
 
-            } else { 
-
-              throw new Error(`
-                index: ${i} \n
-                error: the only allowed types are number, string, boolean, undefined and object
-              `);
-
             }
+
+            if(tests[i].unit.allowed_values.index_exact === true) { 
+              if(JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
+                error_value.message = `The value returned is not equal to the allowed values.`;
+                error_value.return_value = return_value;
+                error_value.return_type =  typeof(return_value);
+                error_value.allowed_values = tests[i].unit.allowed_values.values[j];
+                error_count++;
+              }
+            }
+
+          } else { 
+
+            throw new Error(`
+              index: ${i} \n
+              error: the only allowed types are number, string, boolean, undefined and object
+            `);
+
+          }
 
         }
 
