@@ -374,6 +374,7 @@
             }
 
             if(tests[i].unit.allowed_values.index_exact === true) { 
+
               if(JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
                 error_value.message = `The value returned is not equal to the allowed values.`;
                 error_value.return_value = return_value;
@@ -381,6 +382,7 @@
                 error_value.allowed_values = tests[i].unit.allowed_values.values[j];
                 error_count++;
               }
+              
             }
 
           } else { 
