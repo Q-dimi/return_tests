@@ -42,11 +42,11 @@ module.exports = [
       
       allowed_values: {
 
-        on: false,
+        on: true,
 
-        index_exact: false,
+        index_exact: true,
 
-        values: [12, 12]
+        values: [11, 12]
 
       }, 
       

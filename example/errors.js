@@ -9,4 +9,6 @@ try {
   console.log(err.message)
 }
 
-console.log(errors);
+for(let i = 0; i < errors.length; i++) { 
+  console.log(errors[i]);
+}
