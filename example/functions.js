@@ -52,7 +52,7 @@ module.exports = [
       
       regex_set: {
 
-        on: false,
+        on: true,
 
         index_exact: true,
 
