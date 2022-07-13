@@ -312,7 +312,7 @@
             error_type.message = `The type returned is not equal to the allowed type.`;
             error_type.return_type =  typeof(return_value);
             error_type.return_value =  return_value;
-            error_type.allowed_values = typeof(tests[i].unit.allowed_types.values[j]) !== 'undefined' ? tests[i].unit.allowed_types.values[j] : 'not value set at this index';
+            error_type.allowed_values = tests[i].unit.allowed_types.values[j];
             error_count++;
           }
 
@@ -326,10 +326,7 @@
 
         if(tests[i].unit.allowed_values.on === true) {
 
-          if(
-            return_value === null ||
-            typeof(return_value) !== 'object'
-          ) {
+          if(return_value === null || typeof(return_value) !== 'object') {
 
             if(
               tests[i].unit.allowed_values.index_exact === false && 
@@ -407,17 +404,33 @@
         var error_rejex = [];
 
         if(tests[i].unit.regex_set.on === true) {
-          for(let k = 0; k < tests[i].unit.regex_set.values.length; k++) { 
-            var test_regex = test(tests[i].unit.regex_set.values[k], return_value); 
+
+          if(tests[i].unit.regex_set.index_exact === false) {
+            for(let k = 0; k < tests[i].unit.regex_set.values.length; k++) { 
+              var test_regex = test(tests[i].unit.regex_set.values[k], return_value); 
+              if(test_regex !== true) { 
+                error_rejex.push({ 
+                  message: `The value returned does not pass all regular expressions`, 
+                  regular_expression:  tests[i].unit.regex_set.values[k], 
+                  return_value: return_value, 
+                  expressions_tested: tests[i].unit.regex_set.values
+                });
+              }
+            }
+          }
+
+          if(tests[i].unit.regex_set.index_exact === true) { 
+            var test_regex = test(tests[i].unit.regex_set.values[j], return_value); 
             if(test_regex !== true) { 
               error_rejex.push({ 
-                message: `The value returned does not pass`, 
-                regular_expression:  tests[i].unit.regex_set.values[k], 
+                message: `The value returned does not pass the one regular expression`, 
+                regular_expression:  tests[i].unit.regex_set.values[j], 
                 return_value: return_value, 
-                expressions_tested: tests[i].unit.regex_set.values
+                expressions_tested: tests[i].unit.regex_set.values[j]
               });
             }
           }
+
         }
 
         if(error_rejex.length > 0) { 

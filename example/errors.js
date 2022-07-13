@@ -44,12 +44,11 @@ var functions = [
 
       param_names: 'apple, sauce', //names of parameters
 
-      parameters: [[1, 6], [6, 7]], //set of parameters passed. each array is the parameters passed to function_called.function (tests will be executed for each set of parameters)
+      parameters: [[1, 6], [6, 1]], //set of parameters passed. each array is the parameters passed to function_called.function (tests will be executed for each set of parameters)
 
       function: function (a, b) { //your function (generate will append all functions in selected directories)
         try { 
-          return {a:'1'};
-          // return a + b; 
+          return a + b; 
         } catch(err) { 
           return err; 
         } 
@@ -76,7 +75,7 @@ var functions = [
       
       allowed_values: { //the allowed values the function must return
 
-        on: true, //whether to run this test in execution
+        on: false, //whether to run this test in execution
 
         index_exact: true, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
 
@@ -86,11 +85,11 @@ var functions = [
       
       regex_set: { //the regular expressions the function must return (must pass all regular expressions or one)
 
-        on: false, //whether to run this test in execution
+        on: true, //whether to run this test in execution
 
-        index_exact: false, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+        index_exact: true, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
 
-        values: [/^([0-9])$/] //regular expression being tested against for each returned value 
+        values: [/^([0-9])$/, /^([0-9])$/] //regular expression being tested against for each returned value 
 
       } 
     
