@@ -8,8 +8,8 @@ module.exports = [
       standard test example. 
       compares unit.allowed_values.values array 
       with function_called.parameters array (return values)
-      AT each index. Every test case must match one specific 
-      index in unit.allowed_values.values
+      AT each index. Return value from function_called.parameters[i]
+      must match unit.allowed_values.values[i]. 
     */
 
     function_called: {
@@ -24,7 +24,7 @@ module.exports = [
 
       param_names: 'apple, sauce',
 
-      parameters: [[2, 12], [30, 2], [3, 23], [22, 22]],
+      parameters: [[2, 12], [30, 2], [3, 23], [22, 22]], //each return value at index must match below
 
       function: function (a, b) {
         try { 
@@ -38,23 +38,23 @@ module.exports = [
     
     unit: { 
 
-      allowed_types: {
-
-        on: false,
-
-        index_exact: true,
-
-        values: ['string', 'number']
-
-      }, 
-      
       allowed_values: {
 
         on: true,
 
         index_exact: true,
 
-        values: [11, 12, 'hello world', 44]
+        values: [11, 12, 'hello world', 44] //each index must match above
+
+      }, 
+
+      allowed_types: {
+
+        on: false,
+
+        index_exact: false,
+
+        values: []
 
       }, 
       
@@ -62,9 +62,9 @@ module.exports = [
 
         on: false,
 
-        index_exact: true,
+        index_exact: false,
 
-        values: [/^([0-9])$/, /^([0-9])$/]
+        values: []
 
       } 
     
