@@ -16,7 +16,7 @@ module.exports = [
 
       param_names: 'apple, sauce',
 
-      parameters: [[2, 10], [10, 2]],
+      parameters: [[2, 12], [30, 2]],
 
       function: function (a, b) {
         try { 
@@ -44,7 +44,7 @@ module.exports = [
 
         on: true,
 
-        index_exact: true,
+        index_exact: false,
 
         values: [11, 12]
 
