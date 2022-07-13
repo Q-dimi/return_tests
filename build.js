@@ -275,10 +275,7 @@
 
         if(tests[i].unit.allowed_types.on === true) {
 
-          if(
-            tests[i].unit.allowed_types.index_exact === false && 
-            tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true
-          ) { 
+          if(tests[i].unit.allowed_types.index_exact === false && tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true) { 
             error_type.message = `The value returned is not within the allowed types.`;
             error_type.return_type =  typeof(return_value);
             error_type.return_value =  return_value;
@@ -286,10 +283,7 @@
             error_count++;
           }
 
-          if(
-            tests[i].unit.allowed_types.index_exact === true && 
-            tests[i].unit.allowed_types.values[j] !== typeof(return_value)
-          ) { 
+          if(tests[i].unit.allowed_types.index_exact === true && tests[i].unit.allowed_types.values[j] !== typeof(return_value)) { 
             error_type.message = `The type returned is not equal to the allowed type.`;
             error_type.return_type =  typeof(return_value);
             error_type.return_value =  return_value;
@@ -305,10 +299,7 @@
 
           if(return_value === null || typeof(return_value) !== 'object') {
 
-            if(
-              tests[i].unit.allowed_values.index_exact === false && 
-              tests[i].unit.allowed_values.values.includes(return_value) !== true
-            ) { 
+            if(tests[i].unit.allowed_values.index_exact === false && tests[i].unit.allowed_values.values.includes(return_value) !== true) { 
               error_value.message = `The value returned is not within the allowed values. `;
               error_value.return_value = return_value;
               error_value.return_type =  typeof(return_value);
@@ -316,10 +307,7 @@
               error_count++;
             }
 
-            if(
-              tests[i].unit.allowed_values.index_exact === true && 
-              tests[i].unit.allowed_values.values[j] !== return_value
-            ) { 
+            if(tests[i].unit.allowed_values.index_exact === true && tests[i].unit.allowed_values.values[j] !== return_value) { 
               error_value.message = `The value returned is not equal to the allowed value. `;
               error_value.return_value = return_value;
               error_value.return_type =  typeof(return_value);
@@ -354,10 +342,7 @@
 
             }
 
-            if(
-              tests[i].unit.allowed_values.index_exact === true && 
-              JSON.stringify(tests[i].unit.allowed_values.values[j]) !== JSON.stringify(return_value)
-            ) { 
+            if(tests[i].unit.allowed_values.index_exact === true && JSON.stringify(tests[i].unit.allowed_values.values[j]) !== JSON.stringify(return_value)) { 
               error_value.message = `The value returned is not equal to the allowed values.`;
               error_value.return_value = return_value;
               error_value.return_type =  typeof(return_value);
@@ -466,15 +451,30 @@
 
     var init_errors = '';
     
-    if(typeof(allowed_types) !== 'object' || typeof(allowed_types.on) !== 'boolean' || (typeof(allowed_types.values) !== 'object' || Array.isArray(allowed_types.values) === false) || typeof(allowed_types.index_exact) !== 'boolean') {
+    if(
+      typeof(allowed_types) !== 'object' || 
+      typeof(allowed_types.on) !== 'boolean' || 
+      (typeof(allowed_types.values) !== 'object' || Array.isArray(allowed_types.values) === false) || 
+      typeof(allowed_types.index_exact) !== 'boolean'
+    ) {
       init_errors += '(unit.allowed_types) must be an object with paramters (on: boolean) and (values: array) \n';
     }
 
-    if(typeof(allowed_values) !== 'object' || typeof(allowed_values.on) !== 'boolean' || (typeof(allowed_values.values) !== 'object' || Array.isArray(allowed_values.values) === false) || typeof(allowed_values.index_exact) !== 'boolean') {
+    if(
+      typeof(allowed_values) !== 'object' || 
+      typeof(allowed_values.on) !== 'boolean' || 
+      (typeof(allowed_values.values) !== 'object' || Array.isArray(allowed_values.values) === false) || 
+      typeof(allowed_values.index_exact) !== 'boolean'
+    ) {
       init_errors += '(unit.allowed_values) must be an object with parameters (on: boolean) and (values: array) \n';
     }
 
-    if(typeof(regex_set) !== 'object' || typeof(regex_set.on) !== 'boolean' || (typeof(regex_set.values) !== 'object' || Array.isArray(regex_set.values) === false) || typeof(regex_set.index_exact) !== 'boolean') {
+    if(
+      typeof(regex_set) !== 'object' || 
+      typeof(regex_set.on) !== 'boolean' || 
+      (typeof(regex_set.values) !== 'object' || Array.isArray(regex_set.values) === false) || 
+      typeof(regex_set.index_exact) !== 'boolean'
+    ) {
       init_errors += '(unit.regex_set) must be an object with parameters (on: boolean) and (values: array) \n';
     }
 
