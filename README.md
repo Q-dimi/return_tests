@@ -24,7 +24,8 @@ console.log(errors);
 # Creating Functions
 
 If you dont feel like writing out all the functions, run the below
-and a functions file with all your functions will be created for you.
+and a functions file will be created for you. Objects are horizontally
+formatted.
 
 ```js
 var return_tests = require("return_tests");
@@ -36,7 +37,8 @@ return_tests.generate_functions("./file_written_to", {
 
 # Functions
 
-These are all of your functions as an array you are testing. They can be created via the above or yourself.
+These are all of your functions as an array you are testing.
+They can be created via the above or yourself.
 
 ```js
 /*
