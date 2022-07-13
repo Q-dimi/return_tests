@@ -100,7 +100,7 @@
               tests[i].unit.allowed_values.index_exact === false && 
               tests[i].unit.allowed_values.values.includes(return_value) !== true
             ) { 
-              error_string += `value error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} is not in the array of allowed values ${JSON.stringify(tests[i].unit.allowed_values.values)}.\n`; //dont need if here
+              error_string += `value error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} is not in the array of allowed values ${typeof(tests[i].unit.allowed_values.values) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values) : tests[i].unit.allowed_values.values}.\n`;
               error_count++;
             }
 
@@ -108,7 +108,7 @@
               tests[i].unit.allowed_values.index_exact === true && 
               tests[i].unit.allowed_values.values[j] !== return_value
             ) { 
-              error_string += `value error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not match the allowed value ${tests[i].unit.allowed_values.values[j]}.\n`;
+              error_string += `value error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not match the allowed value ${typeof(tests[i].unit.allowed_values.values[j]) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values[j]) : tests[i].unit.allowed_values.values[j]}.\n`;
               error_count++;
             }
 
@@ -130,7 +130,7 @@
               }
 
               if(match === false) { 
-                error_string += `value error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} is not in the array of allowed values ${JSON.stringify(tests[i].unit.allowed_values.values)}.\n`;
+                error_string += `value error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} is not in the array of allowed values ${typeof(tests[i].unit.allowed_values.values) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values) : tests[i].unit.allowed_values.values}.\n`;
                 error_count++;
               }
 
@@ -140,7 +140,7 @@
               tests[i].unit.allowed_values.index_exact === true && 
               JSON.stringify(tests[i].unit.allowed_values.values[j]) !== JSON.stringify(return_value)
             ) { 
-              error_string += `value error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not match the allowed value ${JSON.stringify(tests[i].unit.allowed_values.values[j])}.\n`;
+              error_string += `value error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not match the allowed value ${typeof(tests[i].unit.allowed_values.values[j]) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values[j]) : tests[i].unit.allowed_values.values[j]}.\n`;
               error_count++;
             }
 
@@ -153,7 +153,7 @@
           if(tests[i].unit.regex_set.index_exact === false) {
             for(let k = 0; k < tests[i].unit.regex_set.values.length; k++) { 
               if(test(tests[i].unit.regex_set.values[k], return_value) !== true) { 
-                error_string += `rejex error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not pass ${tests[i].unit.regex_set.values[k]}\n`;
+                error_string += `rejex error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not pass ${typeof(tests[i].unit.regex_set.values[k]) === 'object' ? JSON.stringify(tests[i].unit.regex_set.values[k]) : tests[i].unit.regex_set.values[k]}\n`;
                 error_count++;
               }
             }
@@ -161,7 +161,7 @@
 
           if(tests[i].unit.regex_set.index_exact === true) { 
             if(test(tests[i].unit.regex_set.values[j], return_value) !== true) { 
-              error_string += `rejex error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not pass ${tests[i].unit.regex_set.values[j]}.\n`;
+              error_string += `rejex error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not pass ${typeof(tests[i].unit.regex_set.values[j]) === 'object' ? JSON.stringify(tests[i].unit.regex_set.values[j]) : tests[i].unit.regex_set.values[j]}.\n`;
               error_count++;
             }
           }
