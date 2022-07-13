@@ -4,6 +4,14 @@ module.exports = [
 
   { 
 
+    /*
+      standard test example. 
+      compares unit.allowed_values.values array 
+      with function_called.parameters array (return values)
+      AT each index. Every test case must match one specific 
+      index in unit.allowed_values.values
+    */
+
     function_called: {
 
       on: true,
@@ -16,7 +24,7 @@ module.exports = [
 
       param_names: 'apple, sauce',
 
-      parameters: [[2, 12], [30, 2]],
+      parameters: [[2, 12], [30, 2], [3, 23], [22, 22]],
 
       function: function (a, b) {
         try { 
@@ -32,11 +40,11 @@ module.exports = [
 
       allowed_types: {
 
-        on: true,
+        on: false,
 
         index_exact: true,
 
-        values: ['string', 'string']
+        values: ['string', 'number']
 
       }, 
       
@@ -46,13 +54,13 @@ module.exports = [
 
         index_exact: true,
 
-        values: [11, 12]
+        values: [11, 12, 'hello world', 44]
 
       }, 
       
       regex_set: {
 
-        on: true,
+        on: false,
 
         index_exact: true,
 
@@ -61,6 +69,7 @@ module.exports = [
       } 
     
     }  
+
   },
 
 ];

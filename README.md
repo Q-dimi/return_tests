@@ -4,7 +4,8 @@ return-tests tests if a functions return value matches a regular expression, dat
 
 # Getting Started
 
-Pass an array of functions (see Function Format below) to the 'run' function and view your errors.
+Pass an array of functions (see Function Format below) to the 'run' function and view your errors. For
+a standard testing example see /example/functions.js
 
 ```js
 var return_tests = require("return_tests");
