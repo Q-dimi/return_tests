@@ -22,7 +22,7 @@ for (let i = 0; i < errors.length; i++) {
 }
 ```
 
-# ~~~Creating Functions~~~
+<!-- # ~~~Creating Functions~~~
 
 ```js
 var return_tests = require("return_tests");
@@ -31,7 +31,7 @@ return_tests.generate_functions("./file_written_to", {
   functions: ['regular', 'named', 'arrow'] //...
   files: [],
 });
-```
+``` -->
 
 # Function Format
 
@@ -50,7 +50,7 @@ module.exports = [
       param_names: "apple, sauce",
 
       /*
-        each parameter set is passed 
+        each parameter set is passed
         to the function and a return value
         is tested against the unit objects
       */
@@ -70,7 +70,7 @@ module.exports = [
     },
 
     /*
-        return value of function_called.function is tested against 
+        return value of function_called.function is tested against
         allowed_types.values, allowed_values.values, regex_set.values.
     */
 
@@ -165,4 +165,8 @@ values that must be returned (one or all)
 @param {unit.allowed_values.regex_set}:
 regular expressions that must pass (one or all)
 */
+```
+
+```
+
 ```
