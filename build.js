@@ -23,7 +23,7 @@
 
   /*
     @param {multiply_this_object}: takes the object index and multiplies it each time with random parameters
-    @param {returned_set}: the array of objects under one index with random parameters
+    @param {returned_set}: the array of arrays (parameters) for one index replacing function_called.parameters
   */
 
   function multiply_function_set(randomized_object_configuration) {
@@ -106,7 +106,6 @@
 
 
   /*
-    returns one of string, number, boolean, array or object
     @param {config_and_build: object / array}: the typed object/array passed for building
   */    
 
@@ -546,4 +545,3 @@
     run: start_tests, 
     generate: generate_functions 
   } 
-
