@@ -85,43 +85,71 @@ module.exports = [
 # Parameters
 
 ```js
-// @param {function_called: object}:
-// function_called is the function in your application you are testing
+/*
+@param {function_called: object}:
+function_called is the function in your application you are testing
 
-// @param {function_called.on: boolean}:
-// if true, loops through function_called.parameters and runs tests for each set of parameters
+@param {function_called.on: boolean}:
+if true, loops through function_called.parameters and runs tests for each set of parameters
 
-// @param {function_called.name: string}:
-// name of the function
+@param {function_called.name: string}:
+name of the function
 
-// @param {function_called.file_path: string}:
-// filepath of the function
+@param {function_called.file_path: string}:
+filepath of the function
 
-// @param {function_called.description: string}:
-// description of the function
+@param {function_called.description: string}:
+description of the function
 
-// @param {function_called.param_names: string}:
-// the names of the parameters of the function
+@param {function_called.param_names: string}:
+the names of the parameters of the function
 
-// @param {function_called.parameters: array}:
-// the sets of parameters passed to the function during execution
+@param {function_called.parameters: array}:
+the sets of parameters passed to the function during execution
 
-// @param {function_called.function: function}:
-// the function you are testing
+@param {function_called.function: function}:
+the function you are testing
 
-// @param {unit: object}:
-// unit are the three unit tests executed on the return_value
+@param {unit: object}:
+unit are the three unit tests executed on the return_value
 
-// @param {unit.allowed_types unit.allowed_values unit.regex_set: object}:
-// the allowed types, values and expressions the function must return and pass
+@param {unit.allowed_types: object}:
+the allowed types the function must return
 
-// @param {unit.on}:
-// whether or not to run the allowed types test on the return value
+@param {unit.allowed_values: object}:
+the allowed values the function must return
 
-// @param {unit.index_exact}:
-// check for a match on the entire array or check for a match on the
-// exact index (function_called.parameters vs unit.values)
+@param {unit.regex_set: object}:
+the regular expressions the function must pass
 
-// @param {.values}:
-// types that must be returned
+@param {unit.allowed_types.on}:
+whether or not to run the allowed types test on the return value
+
+@param {unit.allowed_values.on}:
+whether or not to run the allowed values test on the return value
+
+@param {unit.regex_set.on}:
+whether or not to run the regular expressions test on the return value
+
+@param {unit.allowed_types.index_exact}:
+check for a match on the entire array or check for a match on the
+exact index (function_called.parameters vs unit.allowed_types.values)
+
+@param {unit.allowed_values.index_exact}:
+check for a match on the entire array or check for a match on the
+exact index (function_called.parameters vs unit.allowed_values.values)
+
+@param {unit.regex_set.index_exact}:
+check for a match on the entire array or check for a match on the
+exact index (function_called.parameters vs unit.regex_set.values)
+
+@param {unit.allowed_types.values}:
+types that must be returned (one or all)
+
+@param {unit.allowed_values.values}:
+values that must be returned (one or all)
+
+@param {unit.allowed_values.regex_set}:
+regular expressions that must pass (one or all)
+*/
 ```
