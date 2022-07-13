@@ -16,31 +16,38 @@ module.exports = [
     randomized: {
 
       /*
-        if randomized.on is true, creates the random parameters at this function index
+        if randomized.on is true, creates 
+        the random parameters at this function index
       */
 
       on: false,
 
       /*
-        string, null, undefined, boolean, object, number, random (these are the input parameters)
+        string, null, undefined, boolean,
+        object, number, random (these are the input parameters)
       */
 
       parameters: ['number', 'number'],
 
       /*
-        string, null, undefined, boolean, number (if randomized.parameters includes object keyword, this creates object with number and string value)
+        string, null, undefined, 
+        boolean, number 
+        (if randomized.parameters includes object keyword, this creates object with number and string value)
       */  
 
       when_arr_passed: ['number', 'string'],
 
       /*
-        string, null, undefined, boolean, number (if randomized.parameters includes array keyword, creates an array with number and string value)
+        string, null, undefined, boolean,
+        number (if randomized.parameters includes array keyword, creates an array with number and string value)
       */  
 
       when_obj_passed: [{parameter_type: 'number', parameter_name: 'awesome'}],
 
       /*
-        the amount of parameter sets created --> [[1,2][4,3][5,7]] --> this replaces function_called.parameters during execution (if randomized.on is true)
+        the amount of parameter sets created --> 
+        [[1,2][4,3][5,7]] --> 
+        this replaces function_called.parameters during execution (if randomized.on is true)
       */  
 
       multiply_amount: 3
@@ -48,13 +55,15 @@ module.exports = [
     },  
 
     /*
-      function_called is the function in your application you are testing
+      function_called is the 
+      function in your application you are testing
     */
 
     function_called: {
 
       /*
-        if true, loops through function_called.parameters and runs tests for each set of parameters
+        if true, loops through function_called.parameters
+        and runs tests for each set of parameters
       */
 
       on: true,
@@ -66,7 +75,8 @@ module.exports = [
       name: 'apple',
 
       /*
-        filepath of function (automatically generated with generate function)
+        filepath of function 
+        (automatically generated with generate function)
       */
 
       filepath: '/sauce',
@@ -84,13 +94,16 @@ module.exports = [
       param_names: 'apple, sauce',
 
       /*
-        set of parameters passed. each array is the parameters passed to function_called.function (tests will be executed for each set of parameters)
+        set of parameters passed. each array 
+        is the parameters passed to function_called.function 
+        (tests will be executed for each set of parameters)
       */
 
       parameters: [[1, 10], [10, 1]],
 
       /*
-        your function (generate will append all functions in selected directories)
+        your function 
+        (generate will append all functions in selected directories)
       */
 
       function: function (a, b) {
@@ -104,8 +117,10 @@ module.exports = [
     }, 
 
     /*
-      unit are the three unit tests executed for each parameter set in function_called.parameters. 
-      when looping through function_called.parameters, each set is tested against the below units (if unit set to on)
+      unit are the three unit tests executed for 
+      each parameter set in function_called.parameters. 
+      when looping through function_called.parameters, 
+      each set is tested against the below units (if unit set to on)
     */
     
     unit: { 
@@ -123,7 +138,9 @@ module.exports = [
         on: false,
 
         /*
-          allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+          allowed_values.values[index] must match the return 
+          value index of function_called.parameters[index] 
+          otherwise will check entire array for match
         */
 
         index_exact: false,
@@ -149,7 +166,9 @@ module.exports = [
         on: true,
 
         /*
-          allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+          allowed_values.values[index] must match the 
+          return value index of function_called.parameters[index] 
+          otherwise will check entire array for match
         */
 
         index_exact: false,
@@ -163,7 +182,8 @@ module.exports = [
       }, 
 
       /*
-        the regular expressions the function must return (must pass all regular expressions or one)
+        the regular expressions the function 
+        must return (must pass all regular expressions or one)
       */
       
       regex_set: {
@@ -175,13 +195,16 @@ module.exports = [
         on: false,
 
         /*
-          allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+          allowed_values.values[index] must match 
+          the return value index of function_called.parameters[index] 
+          otherwise will check entire array for match
         */
 
         index_exact: true,
 
         /*
-          regular expression being tested against for each returned value
+          regular expression being tested 
+          against for each returned value
         */
 
         values: [/^([0-9])$/, /^([0-9])$/]
