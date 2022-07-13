@@ -81,7 +81,6 @@ module.exports = [
         values: [/^([0-9])$/, /^([0-9])$/],
       },
     },
-    index_of_set: 1,
   },
 ];
 ```

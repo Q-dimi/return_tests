@@ -32,13 +32,12 @@
       if(
         typeof(tests[i]) !== 'object' || 
         typeof(tests[i].unit) !== 'object' || 
-        typeof(tests[i].index_of_set) !== 'number' ||
         typeof(tests[i].function_called) !== 'object'
       ) {
         throw new Error(`
           index: ${i} \n
-          error: (unit: object), (index_of_set: number), 
-          (parameters: object), (function_called: object), 
+          error: (unit: object), (parameters: object), 
+          (function_called: object), 
            must be defined
         `);
       }
@@ -214,9 +213,9 @@
           finalized_error_object.fi = i;
           finalized_error_object.info = tests[i];
           error_sets.push(finalized_error_object);
-          typeof(index_set['function-'+i]) === 'undefined' ? 
-          index_set['function-'+i] = [finalized_error_object] : 
-          index_set['function-'+i].push(finalized_error_object);
+          typeof(index_set[i]) === 'undefined' ? 
+          index_set[i] = [finalized_error_object] : 
+          index_set[i].push(finalized_error_object);
         }
 
       }

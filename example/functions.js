@@ -16,7 +16,7 @@ module.exports = [
 
       param_names: 'apple, sauce',
 
-      parameters: [[2, 10], [10, 2], [9,7]],
+      parameters: [[2, 10], [10, 2]],
 
       function: function (a, b) {
         try { 
@@ -32,11 +32,11 @@ module.exports = [
 
       allowed_types: {
 
-        on: true,
+        on: false,
 
-        index_exact: true,
+        index_exact: false,
 
-        values: ['string', 'number']
+        values: ['number', 'number']
 
       }, 
       
@@ -60,10 +60,7 @@ module.exports = [
 
       } 
     
-    }, 
-    
-    index_of_set: 1 
-  
+    }  
   },
 
 ];
