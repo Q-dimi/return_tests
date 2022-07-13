@@ -26,7 +26,7 @@ for (let i = 0; i < errors.length; i++) {
     value error: error from unit.allowed_types.values
     type error: error from unit.allowed_types.values
     regex_error: error from unit.regex_set.values
-  /*
+  */
 }
 ```
 
