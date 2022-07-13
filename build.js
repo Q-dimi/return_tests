@@ -153,7 +153,7 @@
           if(tests[i].unit.regex_set.index_exact === false) {
             for(let k = 0; k < tests[i].unit.regex_set.values.length; k++) { 
               if(test(tests[i].unit.regex_set.values[k], return_value) !== true) { 
-                error_string += `regex error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' does not pass '${tests[i].unit.regex_set.values[k]} (${k})'/\n`;
+                error_string += `regex error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' does not pass '${tests[i].unit.regex_set.values[k]} (index ${k})'/\n`;
                 error_count++;
               }
             }

@@ -4,6 +4,8 @@ return-tests tests if a functions return value matches a regular expression, dat
 
 # Getting Started
 
+Pass an array of functions (see Function Format below) to the 'run' function and view your errors.
+
 ```js
 var return_tests = require("return_tests");
 var functions = require("my_testing_functions");
@@ -19,13 +21,11 @@ try {
 for (let i = 0; i < errors.length; i++) {
   console.log(errors[i]);
   //string with function index, parameter index, and types of errors (type, value, regex)
-
   //function index: index where function is
   //parameter index: parameter index where the function failed (function_called.parameters)
   //value error: allowed_types.values
   //type error: allowed_types.values
   //regex_error: regex_set.values
-
   //(when viewing errors, go to the function index then function_called.parameters index. Then compare the value with unit.allowed_x
 }
 ```
@@ -80,12 +80,15 @@ module.exports = [
     /*
         return value of function_called.function is tested against
         allowed_types.values, allowed_values.values, regex_set.values.
+        1 or all values are tested against dependent on index_exact.
+        index_exact matches the function_called.parameters index with 
+        the unit.allowed_x.values index
     */
 
     unit: {
       allowed_types: {
         on: false,
-        index_exact: false, //if true function_called.parameters and allowed_types.values index is matched
+        index_exact: false,
         values: ["string", "number"],
       },
       allowed_values: {
@@ -137,38 +140,38 @@ unit are the three unit tests executed on the return_value
 @param {unit.allowed_types: object}:
 the allowed types the function must return
 
-@param {unit.allowed_values: object}:
-the allowed values the function must return
-
-@param {unit.regex_set: object}:
-the regular expressions the function must pass
-
 @param {unit.allowed_types.on}:
 whether or not to run the allowed types test on the return value
-
-@param {unit.allowed_values.on}:
-whether or not to run the allowed values test on the return value
-
-@param {unit.regex_set.on}:
-whether or not to run the regular expressions test on the return value
 
 @param {unit.allowed_types.index_exact}:
 check for a match on the entire array or check for a match on the
 exact index (function_called.parameters vs unit.allowed_types.values)
 
+@param {unit.allowed_types.values}:
+types that must be returned (one or all)
+
+@param {unit.allowed_values: object}:
+the allowed values the function must return
+
+@param {unit.allowed_values.on}:
+whether or not to run the allowed values test on the return value
+
 @param {unit.allowed_values.index_exact}:
 check for a match on the entire array or check for a match on the
 exact index (function_called.parameters vs unit.allowed_values.values)
 
+@param {unit.allowed_values.values}:
+values that must be returned (one or all)
+
+@param {unit.regex_set: object}:
+the regular expressions the function must pass
+
+@param {unit.regex_set.on}:
+whether or not to run the regular expressions test on the return value
+
 @param {unit.regex_set.index_exact}:
 check for a match on the entire array or check for a match on the
 exact index (function_called.parameters vs unit.regex_set.values)
-
-@param {unit.allowed_types.values}:
-types that must be returned (one or all)
-
-@param {unit.allowed_values.values}:
-values that must be returned (one or all)
 
 @param {unit.allowed_values.regex_set}:
 regular expressions that must pass (one or all)
