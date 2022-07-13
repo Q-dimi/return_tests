@@ -49,51 +49,6 @@ They can be created via the above or yourself.
 module.exports = [
   {
     /*
-      randomized creates a random set of parameter sets 
-      that replace function_called.parameters 
-      during execution. 
-    */
-
-    randomized: {
-      /*
-        if randomized.on is true, creates 
-        the random parameters at this function index
-      */
-
-      on: true,
-
-      /*
-        string, null, undefined, boolean,
-        object, number, random, array
-      */
-
-      parameters: ["object", "undefined"],
-
-      /*
-        string, null, undefined, 
-        boolean, number 
-      */
-
-      when_arr_passed: ["number", "string"],
-
-      /*
-        string, null, undefined, boolean,
-        number
-      */
-
-      when_obj_passed: [
-        { parameter_type: "number", parameter_name: "awesome" },
-      ],
-
-      /*
-        the amount of parameter sets created
-        [[1,2][4,'hello'][{name: "hello world"},7]]
-      */
-
-      multiply_amount: 3,
-    },
-
-    /*
       function_called is the 
       function in your application you are testing
     */

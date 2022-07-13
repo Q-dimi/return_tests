@@ -22,198 +22,6 @@
   }
 
   /*
-    @param {multiply_this_object}: takes the object index and multiplies it each time with random parameters
-    @param {returned_set}: the array of arrays (parameters) for one index replacing function_called.parameters
-  */
-
-  function multiply_function_set(randomized_object_configuration) {
-
-    var returned_set = [];
-
-    for(let i = 0; i < randomized_object_configuration.multiply_amount; i++) {
-      returned_set.push(create_single_randomized_object(
-        randomized_object_configuration 
-      ));
-    }
-
-    console.log(returned_set);
-
-    return returned_set; 
-
-  }
-
-  /*
-    @param {randomized_object_configuration} the randomized object at index
-  */
-
-  function create_single_randomized_object(randomized_object_configuration) { 
-
-    var params = [];
-
-    var if_random_or_not_in_selected = [
-      create_random_inner_param_object(randomized_object_configuration.when_obj_passed),
-      create_random_inner_param_array(randomized_object_configuration.when_arr_passed),
-      create_random_inner_param_string(), 
-      create_random_inner_param_number(),
-      create_random_inner_param_boolean(), 
-      undefined, 
-      null
-    ];
-
-    for(let i = 0; i < randomized_object_configuration.parameters.length; i++) { 
-
-      var current_parameter = randomized_object_configuration.parameters[i]; 
-
-      if(current_parameter === 'string') { 
-        params.push(create_random_inner_param_string());
-      }
-
-      else if(current_parameter === 'number') { 
-        params.push(create_random_inner_param_number());
-      }
-
-      else if(current_parameter === 'object') { 
-        params.push(create_random_inner_param_object(randomized_object_configuration.when_obj_passed));
-      }
-
-      else if(current_parameter === 'array') { 
-        params.push(create_random_inner_param_array(randomized_object_configuration.when_arr_passed));
-      }
-
-      else if(current_parameter === 'undefined') { 
-        params.push(undefined);
-      }
-
-      else if(current_parameter === 'boolean') { 
-        params.push(create_random_inner_param_boolean());
-      }
-
-      else if(current_parameter === 'null') { 
-        params.push(null);
-      }
-
-      else if(current_parameter === 'random') { 
-        params.push(if_random_or_not_in_selected[Math.floor(Math.random() * if_random_or_not_in_selected.length)]);
-      }
-
-      else { 
-        params.push(if_random_or_not_in_selected[Math.floor(Math.random() * if_random_or_not_in_selected.length)]);
-      }
-
-    }
-    
-    return params;
-
-  }
-
-
-  /*
-    @param {config_and_build: object / array}: the typed object/array passed for building (figure out a way to build deeper - rec)
-  */    
-
-  function create_random_inner_param_string()  { 
-    return Math.random().toString(36).replace(/[^a-z]+/g, '');
-  }
-
-  function create_random_inner_param_number()  { 
-    return Math.floor(Math.random() * 100000);
-  }
-
-  function create_random_inner_param_boolean() { 
-    return Boolean(Math.floor(Math.random() * 2));
-  }  
-
-  function create_random_inner_param_object(config_and_build)  {
-
-    var o = {};
-
-    for(let i = 0; i < config_and_build.length; i++) { 
-
-      if(typeof(config_and_build[i].parameter_name) === 'undefined') { 
-        throw new Error(`
-          Parameter_name must be defined on when_obj_passed
-        `);
-      }
-
-      if(typeof(config_and_build[i].parameter_type) === 'undefined') { 
-        throw new Error(`
-          Parameter_type must be defined on when_obj_passed
-        `);
-      }
-
-      if(typeof(o[config_and_build[i].parameter_name]) !== 'undefined') { 
-        throw new Error(`
-          The parameter_names in randomized.when_obj_passed must be unique
-        `);
-      }
-
-      if(config_and_build[i].parameter_type === 'boolean') { 
-        o[config_and_build[i].parameter_name] = create_random_inner_param_boolean();
-      }
-
-      else if(config_and_build[i].parameter_type === 'number') { 
-        o[config_and_build[i].parameter_name] = create_random_inner_param_number();
-      }
-
-      else if(config_and_build[i].parameter_type === 'string') { 
-        o[config_and_build[i].parameter_name] = create_random_inner_param_string();
-      }
-
-      else if(config_and_build[i].parameter_type === 'undefined') { 
-        o[config_and_build[i].parameter_name] = undefined;
-      }
-
-      else if(config_and_build[i].parameter_type === 'null') { 
-        o[config_and_build[i].parameter_name] = null;
-      }
-
-      else { 
-        o[config_and_build[i].parameter_name] = null;
-      }
-
-    }
-
-    return o;
-
-  } 
-
-  function create_random_inner_param_array(config_and_build)   {
-
-    var a = [];
-
-    for(let i = 0; i < config_and_build.length; i++) { 
-
-      if(config_and_build[i] === 'boolean') { 
-        a.push(create_random_inner_param_boolean());
-      }
-
-      else if(config_and_build[i] === 'number') { 
-        a.push(create_random_inner_param_number());
-      }
-
-      else if(config_and_build[i] === 'string') { 
-        a.push(create_random_inner_param_string());
-      }
-
-      else if(config_and_build[i] === 'undefined') { 
-        a.push(undefined);
-      }
-
-      else if(config_and_build[i] === 'null') { 
-        a.push(null);
-      }
-
-      else { 
-        a.push(null);
-      }
-
-    }
-
-    return a;
-
-  }
-
-  /*
     @param {tests: array}: the array of tests
   */
         
@@ -230,7 +38,9 @@
       ) {
         throw new Error(`
           index: ${i} \n
-          error: (unit: object), (index_of_set: number), (parameters: object), (function_called: object), (randomized: object) must be defined \n
+          error: (unit: object), (index_of_set: number), 
+          (parameters: object), (function_called: object), 
+          (randomized: object) must be defined
         `);
       }
 
@@ -261,10 +71,6 @@
 
       if(tests[i].function_called.on !== true) { 
         continue;
-      }
-
-      if(tests[i].randomized.on === true) { 
-        tests[i].function_called.parameters = multiply_function_set(tests[i].randomized);
       }
 
       for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
