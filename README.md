@@ -88,13 +88,12 @@ module.exports = [
 
       /*
         each set of parameters passed to the function
-        (will add a random here for one random and get rid of random.on)
       */
 
       parameters: [
         [1, 10],
         [10, 1],
-      ], //(make the randomized thing here)
+      ],
 
       /*
         your function 

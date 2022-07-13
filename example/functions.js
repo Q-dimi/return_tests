@@ -48,10 +48,9 @@ module.exports = [
 
       /*
         each set of parameters passed to the function
-        (will add a random here for one random and get rid of random.on)
       */
 
-      parameters: [[1, 10], [10, 1]], //({ randomized: true, parameters: [], when_obj_passed: [], when_arr_passed, multiply_amount: 2 })
+      parameters: [[1, 10], [10, 1]],
 
       /*
         your function 
