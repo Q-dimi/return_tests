@@ -2,6 +2,8 @@
 
 return-tests tests if a functions return value matches a regular expression, data type and data value.
 
+# Getting Started
+
 ```js
 var return_tests = require("return_tests");
 var functions = require("my_testing_functions");
@@ -20,13 +22,11 @@ console.log(errors);
 # Functions
 
 ```js
-var return_tests = require("return_tests");
-
 /*
-  The functions you are passing to the run() function. 
+  The functions you are passing to the run() function. /my_testing_functions.js
 */
 
-var functions = [
+module.exports = [
   {
     /*
       randomized creates a random set of parameter sets 
