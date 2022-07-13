@@ -200,15 +200,7 @@
         
   function run_tests(tests) {
 
-    /*
-      running through each test
-    */
-
     for(let i = 0; i < tests.length; i++) { 
-
-      /*
-        outside error check
-      */
 
       if(
         typeof(tests[i]) !== 'object' || 
@@ -222,10 +214,6 @@
           error: (unit: object), (index_of_set: number), (parameters: object), (function_called: object), (randomized: object) must be defined \n
         `);
       }
-
-      /*
-        inside error check
-      */
 
       var check_inside_errors = main_or_fallback_errors(
         tests[i].unit.allowed_types,
@@ -252,43 +240,19 @@
         `);
       };
 
-      /*
-        skip this function if off
-      */
-
       if(tests[i].function_called.on !== true) { 
         continue;
       }
-
-      /*
-        if multiplying, multiply and pass result to function_called.parameters
-      */
 
       if(tests[i].randomized.on === true) { 
         tests[i].function_called.parameters = multiply_function_set(tests[i].randomized);
       }
 
-      /*
-        iterting through function_called.parameters and getting and checking the return value on each set
-      */
-
       for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
-
-        /*
-          error count for [[params]]
-        */
 
         var error_count = 0;
 
-        /*
-          the return value of the function
-        */
-
         var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
-
-        /*
-          error type test
-        */
 
         var error_type = {};
 
@@ -318,10 +282,6 @@
 
         }
 
-        /*
-          error value test (test this)
-        */
-
         var error_value = {};
 
         if(tests[i].unit.allowed_values.on === true) {
@@ -350,7 +310,9 @@
               error_count++;
             }
 
-          } else if(typeof(return_value) === 'object') { 
+          } 
+          
+          if(typeof(return_value) === 'object') { 
 
             if(tests[i].unit.allowed_values.index_exact === false) {
 
@@ -386,20 +348,9 @@
               error_count++;
             }
 
-          } else { 
-
-            throw new Error(`
-              index: ${i} \n
-              error: the only allowed types are number, string, boolean, undefined and object
-            `);
-
           }
 
         }
-
-        /*
-          regex test -- add to this
-        */
 
         var error_rejex = [];
 
@@ -437,10 +388,6 @@
           error_count++;
         }
 
-        /*
-          pushing to error set
-        */
-
         if(error_count > 0) { 
           var finalized_error_object = {};
           finalized_error_object.ev = error_value;
@@ -458,10 +405,6 @@
       }
 
     }
-
-    /*
-      return all errors and errors at index
-    */
 
     return { 
       all_errors: error_sets,
