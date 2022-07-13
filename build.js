@@ -70,7 +70,7 @@
 
         var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
 
-        var error_string = `function index: ${i}\nparameter index: ${j}\n`;
+        var error_string = `\nfunction index: ${i}\nparameter index: ${j}\n`;
 
         if(tests[i].unit.allowed_types.on === true) {
 
