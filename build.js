@@ -106,7 +106,7 @@
 
 
   /*
-    @param {config_and_build: object / array}: the typed object/array passed for building
+    @param {config_and_build: object / array}: the typed object/array passed for building (figure out a way to build deeper)
   */    
 
   function create_random_inner_param_string()  { 
@@ -145,7 +145,7 @@
         o[config_and_build[i].parameter_name] = create_random_inner_param_string();
       }
 
-      else if(config_and_build[i].parameter_type=== 'undefined') { 
+      else if(config_and_build[i].parameter_type === 'undefined') { 
         o[config_and_build[i].parameter_name] = undefined;
       }
 

@@ -1,7 +1,7 @@
 var return_tests = require('return_tests');
 
 /*
-  The functions you are passing to the run function. 
+  The functions you are passing to the run() function. 
 */
 
 var functions = [
@@ -16,15 +16,35 @@ var functions = [
 
     randomized: {
 
-      on: false, // if randomized.on is true, creates the random parameters at this function index
+      /*
+        if randomized.on is true, creates the random parameters at this function index
+      */
 
-      parameters: ['number', 'number'], //string, null, undefined, boolean, object, number, random (these are the input parameters)
+      on: false,
 
-      when_obj_passed: ['number', 'string'], //string, null, undefined, boolean, number (if randomized.parameters includes object keyword, this creates object with number and string value)
+      /*
+        string, null, undefined, boolean, object, number, random (these are the input parameters)
+      */
 
-      when_arr_passed: [{parameter_type: 'number', parameter_name: 'awesome'}], //string, null, undefined, boolean, number (if randomized.parameters includes array keyword, creates an array with number and string value)
+      parameters: ['number', 'number'],
 
-      multiply_amount: 3 //the amount of parameter sets created --> [[1,2][4,3][5,7]] --> this replaces function_called.parameters during execution (if randomized.on is true)
+      /*
+        string, null, undefined, boolean, number (if randomized.parameters includes object keyword, this creates object with number and string value)
+      */  
+
+      when_arr_passed: ['number', 'string'],
+
+      /*
+        string, null, undefined, boolean, number (if randomized.parameters includes array keyword, creates an array with number and string value)
+      */  
+
+      when_obj_passed: [{parameter_type: 'number', parameter_name: 'awesome'}],
+
+      /*
+        the amount of parameter sets created --> [[1,2][4,3][5,7]] --> this replaces function_called.parameters during execution (if randomized.on is true)
+      */  
+
+      multiply_amount: 3
 
     },  
 
@@ -34,19 +54,47 @@ var functions = [
 
     function_called: {
 
-      on: true, //if true, loops through function_called.parameters and runs tests for each set of parameters
+      /*
+        if true, loops through function_called.parameters and runs tests for each set of parameters
+      */
 
-      name: 'apple', //name of function
+      on: true,
 
-      filepath: '/sauce', //filepath of function (automatically generated with generate function)
+      /*
+        name of function
+      */
 
-      description: 'apple sauce', //description of function
+      name: 'apple',
 
-      param_names: 'apple, sauce', //names of parameters
+      /*
+        filepath of function (automatically generated with generate function)
+      */
 
-      parameters: [[1, 10], [10, 1]], //set of parameters passed. each array is the parameters passed to function_called.function (tests will be executed for each set of parameters)
+      filepath: '/sauce',
 
-      function: function (a, b) { //your function (generate will append all functions in selected directories)
+      /*
+        description of function
+      */
+
+      description: 'apple sauce',
+
+      /*
+        names of parameters
+      */
+
+      param_names: 'apple, sauce',
+
+      /*
+        set of parameters passed. each array is the parameters passed to function_called.function (tests will be executed for each set of parameters)
+      */
+
+      parameters: [[1, 10], [10, 1]],
+
+      /*
+        your function (generate will append all functions in selected directories)
+      */
+
+      function: function (a, b) {
         try { 
           return a + b; 
         } catch(err) { 
@@ -63,33 +111,81 @@ var functions = [
     
     unit: { 
 
-      allowed_types: {  //the allowed types the function must return
+      /*
+        the allowed types the function must return
+      */
 
-        on: false, //whether to run this test
+      allowed_types: {
 
-        index_exact: false, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+        /*
+          whether to run this test
+        */
 
-        values: ['string', 'number'] //one of the types that must be returned
+        on: false,
+
+        /*
+          allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+        */
+
+        index_exact: false,
+
+        /*
+          one of the types that must be returned
+        */
+
+        values: ['string', 'number']
 
       }, 
+
+      /*
+        the allowed values the function must return
+      */
       
-      allowed_values: { //the allowed values the function must return
+      allowed_values: {
 
-        on: true, //whether to run this test in execution
+        /*
+          whether to run this test in execution
+        */
 
-        index_exact: false, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+        on: true,
 
-        values: [12, 12] //one of the values the function must return add trim middle
+        /*
+          allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+        */
+
+        index_exact: false,
+
+        /*
+          one of the values the function must return add trim middle
+        */
+
+        values: [12, 12]
 
       }, 
+
+      /*
+        the regular expressions the function must return (must pass all regular expressions or one)
+      */
       
-      regex_set: { //the regular expressions the function must return (must pass all regular expressions or one)
+      regex_set: {
 
-        on: false, //whether to run this test in execution
+        /*
+          whether to run this test in execution
+        */
 
-        index_exact: true, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+        on: false,
 
-        values: [/^([0-9])$/, /^([0-9])$/] //regular expression being tested against for each returned value 
+        /*
+          allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
+        */
+
+        index_exact: true,
+
+        /*
+          regular expression being tested against for each returned value
+        */
+
+        values: [/^([0-9])$/, /^([0-9])$/]
 
       } 
     
