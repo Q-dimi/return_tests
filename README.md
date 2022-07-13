@@ -2,6 +2,19 @@
 
 return-tests tests if a functions return value matches a regular expression, data type and data value.
 
+# How it works
+
+An array of objects, each representing one function is passed to a testing function.
+The testing function accepts the object (function), runs a test on the function,
+and returns a value. The return value is then checked for correctness and errors are displayed.
+
+1. pass functions to testing function (return_tests.run)
+2. For each index, function_called.parameters is looped over. Each set of parameters spits back a return value.
+3. The return value is checked against unit.allowed_types.values, unit.allowed_values.values, unit.regex_set.values
+4. If there are any errors, they will display after execution
+
+See /examples for details
+
 # Getting Started
 
 To view all your errors across all the functions you are testing
@@ -19,7 +32,7 @@ try {
 }
 ```
 
-# Creating Functions
+# Creating Functions (in progress)
 
 If you dont feel like writing out all the functions, run the below
 and a functions file will be created for you. Objects are horizontally
