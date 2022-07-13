@@ -121,34 +121,40 @@
     return Boolean(Math.floor(Math.random() * 2));
   }  
 
-  function create_random_inner_param_object(config_and_build)  {
+  function create_random_inner_param_object(config_and_build)  { //recurse on object
 
-    var o = {}
+    var o = {};
 
     for(let i = 0; i < config_and_build.length; i++) { 
 
-      if(config_and_build[i] === 'boolean') { 
-        o[`test-param-boolean-${i}`] = create_random_inner_param_boolean();
+      if(typeof(o[config_and_build[i].parameter_name]) !== 'undefined') { 
+        throw new Error(`
+          The parameter_names in randomized.when_obj_passed must be unique
+        `);
       }
 
-      else if(config_and_build[i] === 'number') { 
-        o[`test-param-number-${i}`] = create_random_inner_param_number();
+      if(config_and_build[i].parameter_type === 'boolean') { 
+        o[config_and_build[i].parameter_name] = create_random_inner_param_boolean();
       }
 
-      else if(config_and_build[i] === 'string') { 
-        o[`test-param-string-${i}`] = create_random_inner_param_string();
+      else if(config_and_build[i].parameter_type === 'number') { 
+        o[config_and_build[i].parameter_name] = create_random_inner_param_number();
       }
 
-      else if(config_and_build[i] === 'undefined') { 
-        o[`test-param-undefined-${i}`] = undefined;
+      else if(config_and_build[i].parameter_type === 'string') { 
+        o[config_and_build[i].parameter_name] = create_random_inner_param_string();
       }
 
-      else if(config_and_build[i] === 'null') { 
-        o[`test-param-null-${i}`] = null;
+      else if(config_and_build[i].parameter_type=== 'undefined') { 
+        o[config_and_build[i].parameter_name] = undefined;
+      }
+
+      else if(config_and_build[i].parameter_type === 'null') { 
+        o[config_and_build[i].parameter_name] = null;
       }
 
       else { 
-        o[`test-param-null-${i}`] = null;
+        o[config_and_build[i].parameter_name] = null;
       }
 
     }
@@ -157,7 +163,7 @@
 
   } 
 
-  function create_random_inner_param_array(config_and_build)   { 
+  function create_random_inner_param_array(config_and_build)   { //recurse on object
 
     var a = [];
 

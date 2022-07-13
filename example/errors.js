@@ -22,7 +22,7 @@ var functions = [
 
       when_obj_passed: ['number', 'string'], //string, null, undefined, boolean, number (if randomized.parameters includes object keyword, this creates object with number and string value)
 
-      when_arr_passed: ['number', 'string'], //string, null, undefined, boolean, number (if randomized.parameters includes array keyword, creates an array with number and string value)
+      when_arr_passed: [{parameter_type: 'number', parameter_name: 'awesome'}], //string, null, undefined, boolean, number (if randomized.parameters includes array keyword, creates an array with number and string value)
 
       multiply_amount: 3 //the amount of parameter sets created --> [[1,2][4,3][5,7]] --> this replaces function_called.parameters during execution (if randomized.on is true)
 
