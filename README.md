@@ -17,8 +17,6 @@ See /examples for details
 
 # Getting Started
 
-To view all your errors across all the functions you are testing
-
 ```js
 var return_tests = require("return_tests");
 var functions = require("my_testing_functions");
@@ -34,10 +32,6 @@ try {
 
 # Creating Functions (in progress)
 
-If you dont feel like writing out all the functions, run the below
-and a functions file will be created for you. Objects are horizontally
-formatted.
-
 ```js
 var return_tests = require("return_tests");
 return_tests.generate_functions("./file_written_to", {
@@ -47,10 +41,7 @@ return_tests.generate_functions("./file_written_to", {
 });
 ```
 
-# Functions
-
-These are all of your functions as an array you are testing.
-They can be created via the above or yourself.
+# Function Format
 
 ```js
 module.exports = [
