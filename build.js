@@ -375,8 +375,7 @@
 
           if(tests[i].unit.regex_set.index_exact === false) {
             for(let k = 0; k < tests[i].unit.regex_set.values.length; k++) { 
-              var test_regex = test(tests[i].unit.regex_set.values[k], return_value); 
-              if(test_regex !== true) { 
+              if(test(tests[i].unit.regex_set.values[k], return_value) !== true) { 
                 error_rejex.push({ 
                   message: `The value returned does not pass all regular expressions`, 
                   regular_expression:  tests[i].unit.regex_set.values[k], 
@@ -388,8 +387,7 @@
           }
 
           if(tests[i].unit.regex_set.index_exact === true) { 
-            var test_regex = test(tests[i].unit.regex_set.values[j], return_value); 
-            if(test_regex !== true) { 
+            if(test(tests[i].unit.regex_set.values[j], return_value) !== true) { 
               error_rejex.push({ 
                 message: `The value returned does not pass the one regular expression`, 
                 regular_expression:  tests[i].unit.regex_set.values[j], 
