@@ -22,11 +22,11 @@ try {
 for (let i = 0; i < errors.length; i++) {
   console.log(errors[i]);
   /*
-    function index: index where the function failed
+    "function index: index where the function failed
     parameter index: parameter index where the function failed (function_called.parameters)
     value error: error from unit.allowed_types.values
     type error: error from unit.allowed_types.values
-    regex_error: error from unit.regex_set.values
+    regex_error: error from unit.regex_set.values"
   */
 }
 ```
@@ -79,11 +79,8 @@ module.exports = [
     },
 
     /*
-        if unit.x.on, return value of function_called.function is tested against
-        allowed_types.values, allowed_values.values, regex_set.values.
-        1 or all values are tested against dependent on index_exact.
-        index_exact matches the function_called.parameters index with 
-        the unit.x.values index
+        if unit.x.on is true, return value of function_called.function is tested against
+        unit.x.values (individually or all at the same time)
     */
 
     unit: {
