@@ -4,6 +4,8 @@ return-tests tests if a functions return value matches a regular expression, dat
 
 # Getting Started
 
+To view all your errors across all the functions you are testing
+
 ```js
 var return_tests = require("return_tests");
 var functions = require("my_testing_functions");
@@ -19,7 +21,22 @@ try {
 console.log(errors);
 ```
 
+# Creating Functions
+
+If you dont feel like writing out all the functions, run the below
+and a functions file with all your functions will be created for you.
+
+```js
+var return_tests = require("return_tests");
+return_tests.generate_functions("./file_written_to", {
+  folders: "",
+  files: [],
+});
+```
+
 # Functions
+
+These are all of your functions as an array you are testing. They can be created via the above or yourself.
 
 ```js
 /*

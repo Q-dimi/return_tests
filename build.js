@@ -106,7 +106,7 @@
 
 
   /*
-    @param {config_and_build: object / array}: the typed object/array passed for building (figure out a way to build deeper)
+    @param {config_and_build: object / array}: the typed object/array passed for building (figure out a way to build deeper - rec)
   */    
 
   function create_random_inner_param_string()  { 
@@ -121,11 +121,23 @@
     return Boolean(Math.floor(Math.random() * 2));
   }  
 
-  function create_random_inner_param_object(config_and_build)  { //recurse on object
+  function create_random_inner_param_object(config_and_build)  {
 
     var o = {};
 
     for(let i = 0; i < config_and_build.length; i++) { 
+
+      if(typeof(config_and_build[i].parameter_name) === 'undefined') { 
+        throw new Error(`
+          Parameter_name must be defined on when_obj_passed
+        `);
+      }
+
+      if(typeof(config_and_build[i].parameter_type) === 'undefined') { 
+        throw new Error(`
+          Parameter_type must be defined on when_obj_passed
+        `);
+      }
 
       if(typeof(o[config_and_build[i].parameter_name]) !== 'undefined') { 
         throw new Error(`
@@ -163,7 +175,7 @@
 
   } 
 
-  function create_random_inner_param_array(config_and_build)   { //recurse on object
+  function create_random_inner_param_array(config_and_build)   {
 
     var a = [];
 
