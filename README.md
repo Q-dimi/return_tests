@@ -20,13 +20,13 @@ try {
 
 for (let i = 0; i < errors.length; i++) {
   console.log(errors[i]);
-  //string with function index, parameter index, and types of errors (type, value, regex)
-  //function index: index where function is
-  //parameter index: parameter index where the function failed (function_called.parameters)
-  //value error: allowed_types.values
-  //type error: allowed_types.values
-  //regex_error: regex_set.values
-  //(when viewing errors, go to the function index then function_called.parameters index. Then compare the value with unit.allowed_x
+  /*
+    function index: index where the function failed
+    parameter index: parameter index where the function failed (function_called.parameters)
+    value error: error from unit.allowed_types.values
+    type error: error from unit.allowed_types.values
+    regex_error: error from unit.regex_set.values
+  /*
 }
 ```
 
@@ -78,11 +78,11 @@ module.exports = [
     },
 
     /*
-        return value of function_called.function is tested against
+        if unit.x.on, return value of function_called.function is tested against
         allowed_types.values, allowed_values.values, regex_set.values.
         1 or all values are tested against dependent on index_exact.
         index_exact matches the function_called.parameters index with 
-        the unit.allowed_x.values index
+        the unit.x.values index
     */
 
     unit: {
