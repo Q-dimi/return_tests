@@ -292,28 +292,30 @@
 
         var error_type = {};
 
-        if(
-          tests[i].unit.allowed_types.on === true && 
-          tests[i].unit.allowed_types.index_exact === false && 
-          tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true
-        ) { 
-          error_type.message = `The value returned is not within the allowed types.`;
-          error_type.return_type =  typeof(return_value);
-          error_type.return_value =  return_value;
-          error_type.allowed_values = tests[i].unit.allowed_types.values;
-          error_count++;
-        }
+        if(tests[i].unit.allowed_types.on === true) {
 
-        if(
-          tests[i].unit.allowed_types.on === true && 
-          tests[i].unit.allowed_types.index_exact === true && 
-          tests[i].unit.allowed_types.values[j] !== typeof(return_value)
-        ) { 
-          error_type.message = `The type returned is not equal to the allowed type.`;
-          error_type.return_type =  typeof(return_value);
-          error_type.return_value =  return_value;
-          error_type.allowed_values = typeof(tests[i].unit.allowed_types.values[j]) !== 'undefined' ? tests[i].unit.allowed_types.values[j] : 'not value set at this index';
-          error_count++;
+          if(
+            tests[i].unit.allowed_types.index_exact === false && 
+            tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true
+          ) { 
+            error_type.message = `The value returned is not within the allowed types.`;
+            error_type.return_type =  typeof(return_value);
+            error_type.return_value =  return_value;
+            error_type.allowed_values = tests[i].unit.allowed_types.values;
+            error_count++;
+          }
+
+          if(
+            tests[i].unit.allowed_types.index_exact === true && 
+            tests[i].unit.allowed_types.values[j] !== typeof(return_value)
+          ) { 
+            error_type.message = `The type returned is not equal to the allowed type.`;
+            error_type.return_type =  typeof(return_value);
+            error_type.return_value =  return_value;
+            error_type.allowed_values = typeof(tests[i].unit.allowed_types.values[j]) !== 'undefined' ? tests[i].unit.allowed_types.values[j] : 'not value set at this index';
+            error_count++;
+          }
+
         }
 
         /*
@@ -362,7 +364,7 @@
 
               for(let k = 0; j < tests[i].unit.allowed_values.values.length; k++) { 
                 if(typeof(tests[i].unit.allowed_values.values[k]) === 'object') { 
-                  if(JSON.stringify(tests[i].unit.allowed_values.values[k]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()) { 
+                  if(JSON.stringify(tests[i].unit.allowed_values.values[k]) === JSON.stringify(return_value)) { 
                     match = true;
                     break;
                   }
@@ -381,7 +383,7 @@
 
             if(
               tests[i].unit.allowed_values.index_exact === true && 
-              JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() !== JSON.stringify(return_value).toLowerCase().trim()
+              JSON.stringify(tests[i].unit.allowed_values.values[j]) !== JSON.stringify(return_value)
             ) { 
               error_value.message = `The value returned is not equal to the allowed values.`;
               error_value.return_value = return_value;

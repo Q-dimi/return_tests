@@ -80,7 +80,7 @@ var functions = [
 
         index_exact: true, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
 
-        values: [{a:'1'}, { a:"1"}] //one of the values the function must return
+        values: [{a:'1'}, { a:"1"}] //one of the values the function must return add trim middle
 
       }, 
       
