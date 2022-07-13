@@ -327,11 +327,8 @@
         if(tests[i].unit.allowed_values.on === true) {
 
           if(
-            typeof(return_value) === 'number' || 
-            typeof(return_value) === 'string' ||  
-            typeof(return_value) === 'undefined' ||  
-            typeof(return_value) === 'boolean' ||
-            return_value === null
+            return_value === null ||
+            typeof(return_value) !== 'object'
           ) {
 
             if(
@@ -404,7 +401,7 @@
         }
 
         /*
-          regex test
+          regex test -- add to this
         */
 
         var error_rejex = [];
