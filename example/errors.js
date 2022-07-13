@@ -48,7 +48,8 @@ var functions = [
 
       function: function (a, b) { //your function (generate will append all functions in selected directories)
         try { 
-          return a + b; 
+          return {a:'1'};
+          // return a + b; 
         } catch(err) { 
           return err; 
         } 
@@ -79,7 +80,7 @@ var functions = [
 
         index_exact: true, //allowed_values.values[index] must match the return value index of function_called.parameters[index] otherwise will check entire array for match
 
-        values: [7, 12] //one of the values the function must return
+        values: [{a:'1'}, { a:"1"}] //one of the values the function must return
 
       }, 
       

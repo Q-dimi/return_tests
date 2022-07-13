@@ -381,7 +381,7 @@
 
             if(
               tests[i].unit.allowed_values.index_exact === true && 
-              JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() === JSON.stringify(return_value).toLowerCase().trim()
+              JSON.stringify(tests[i].unit.allowed_values.values[j]).toLowerCase().trim() !== JSON.stringify(return_value).toLowerCase().trim()
             ) { 
               error_value.message = `The value returned is not equal to the allowed values.`;
               error_value.return_value = return_value;
