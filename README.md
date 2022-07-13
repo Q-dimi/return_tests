@@ -133,45 +133,45 @@ the sets of parameters passed to the function during execution
 the function you are testing
 
 @param {unit: object}:
-unit are the three unit tests executed on the return_value
+unit contains the three objects for testing
 
 @param {unit.allowed_types: object}:
-the allowed types the function must return
+the object containing the allowed types the function must return
 
-@param {unit.allowed_types.on}:
+@param {unit.allowed_types.on: boolean}:
 whether or not to run the allowed types test on the return value
 
-@param {unit.allowed_types.index_exact}:
+@param {unit.allowed_types.index_exact: boolean}:
 check for a match on the entire array or check for a match on the
 exact index (function_called.parameters vs unit.allowed_types.values)
 
-@param {unit.allowed_types.values}:
-types that must be returned (one or all)
+@param {unit.allowed_types.values: array}:
+types that must be equal to the return value of function_called.function
 
 @param {unit.allowed_values: object}:
-the allowed values the function must return
+the object containing allowed values the function must return
 
-@param {unit.allowed_values.on}:
+@param {unit.allowed_values.on: boolean}:
 whether or not to run the allowed values test on the return value
 
-@param {unit.allowed_values.index_exact}:
+@param {unit.allowed_values.index_exact: boolean}:
 check for a match on the entire array or check for a match on the
 exact index (function_called.parameters vs unit.allowed_values.values)
 
-@param {unit.allowed_values.values}:
-values that must be returned (one or all)
+@param {unit.allowed_values.values: array}:
+values that must be equal to the return value of function_called.function
 
 @param {unit.regex_set: object}:
-the regular expressions the function must pass
+the object containing the regular expressions the function must pass
 
 @param {unit.regex_set.on}:
 whether or not to run the regular expressions test on the return value
 
-@param {unit.regex_set.index_exact}:
+@param {unit.regex_set.index_exact: boolean}:
 check for a match on the entire array or check for a match on the
 exact index (function_called.parameters vs unit.regex_set.values)
 
-@param {unit.allowed_values.regex_set}:
-regular expressions that must pass (one or all)
+@param {unit.allowed_values.regex_set: array}:
+regular expressions the return value must pass
 */
 ```
