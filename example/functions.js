@@ -32,11 +32,11 @@ module.exports = [
 
       allowed_types: {
 
-        on: false,
+        on: true,
 
-        index_exact: false,
+        index_exact: true,
 
-        values: ['number', 'number']
+        values: ['string', 'number']
 
       }, 
       

@@ -19,6 +19,11 @@ try {
 for (let i = 0; i < errors.length; i++) {
   console.log(errors[i]);
   //string with function index, parameter index, and types of errors (type, value, regex)
+  //function index: index where function is
+  //parameter index: parameter index where the function failed (function_called.parameters)
+  //value error: allowed_types.values
+  //type error: allowed_types.values
+  //regex_error: regex_set.values
 }
 ```
 
