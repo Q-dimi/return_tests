@@ -3,7 +3,7 @@
     @param {generate_functions: function}: if true, searches directories and writes to a file of all functions asked to test
   */
 
-  var generate_functions = require('./generate_functions');
+  var generate_functions = require('./generate');
 
   /*
     @param {error_sets: array}: exported set of objects that did not pass test
@@ -35,6 +35,8 @@
         randomized_object_configuration 
       ));
     }
+
+    console.log(returned_set);
 
     return returned_set; 
 
@@ -275,7 +277,10 @@
 
         if(tests[i].unit.allowed_types.on === true) {
 
-          if(tests[i].unit.allowed_types.index_exact === false && tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true) { 
+          if(
+            tests[i].unit.allowed_types.index_exact === false && 
+            tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true
+          ) { 
             error_type.message = `The value returned is not within the allowed types.`;
             error_type.return_type =  typeof(return_value);
             error_type.return_value =  return_value;
@@ -283,7 +288,10 @@
             error_count++;
           }
 
-          if(tests[i].unit.allowed_types.index_exact === true && tests[i].unit.allowed_types.values[j] !== typeof(return_value)) { 
+          if(
+            tests[i].unit.allowed_types.index_exact === true && 
+            tests[i].unit.allowed_types.values[j] !== typeof(return_value)
+          ) { 
             error_type.message = `The type returned is not equal to the allowed type.`;
             error_type.return_type =  typeof(return_value);
             error_type.return_value =  return_value;
@@ -299,7 +307,10 @@
 
           if(return_value === null || typeof(return_value) !== 'object') {
 
-            if(tests[i].unit.allowed_values.index_exact === false && tests[i].unit.allowed_values.values.includes(return_value) !== true) { 
+            if(
+              tests[i].unit.allowed_values.index_exact === false && 
+              tests[i].unit.allowed_values.values.includes(return_value) !== true
+            ) { 
               error_value.message = `The value returned is not within the allowed values. `;
               error_value.return_value = return_value;
               error_value.return_type =  typeof(return_value);
@@ -307,7 +318,10 @@
               error_count++;
             }
 
-            if(tests[i].unit.allowed_values.index_exact === true && tests[i].unit.allowed_values.values[j] !== return_value) { 
+            if(
+              tests[i].unit.allowed_values.index_exact === true && 
+              tests[i].unit.allowed_values.values[j] !== return_value
+            ) { 
               error_value.message = `The value returned is not equal to the allowed value. `;
               error_value.return_value = return_value;
               error_value.return_type =  typeof(return_value);
@@ -342,7 +356,10 @@
 
             }
 
-            if(tests[i].unit.allowed_values.index_exact === true && JSON.stringify(tests[i].unit.allowed_values.values[j]) !== JSON.stringify(return_value)) { 
+            if(
+              tests[i].unit.allowed_values.index_exact === true && 
+              JSON.stringify(tests[i].unit.allowed_values.values[j]) !== JSON.stringify(return_value)
+            ) { 
               error_value.message = `The value returned is not equal to the allowed values.`;
               error_value.return_value = return_value;
               error_value.return_type =  typeof(return_value);

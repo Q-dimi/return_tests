@@ -43,44 +43,42 @@ They can be created via the above or yourself.
 
 ```js
 /*
-  The functions you are passing to the run() function. /my_testing_functions.js
+  The functions you are passing to the run() function. 
 */
 
 module.exports = [
   {
     /*
       randomized creates a random set of parameter sets 
-      using randomized.parameters that replace function_called.parameters 
+      that replace function_called.parameters 
       during execution. 
     */
 
     randomized: {
       /*
-        if randomized.on is true, 
-        creates the random parameters 
-        at this function index
+        if randomized.on is true, creates 
+        the random parameters at this function index
       */
 
-      on: false,
+      on: true,
+
+      /*
+        string, null, undefined, boolean,
+        object, number, random, array
+      */
+
+      parameters: ["object", "undefined"],
 
       /*
         string, null, undefined, 
-        boolean, object, number, 
-        random (these are the input parameters)
-      */
-
-      parameters: ["number", "number"],
-
-      /*
-        string, null, undefined, 
-        boolean, number
+        boolean, number 
       */
 
       when_arr_passed: ["number", "string"],
 
       /*
-        string, null, undefined,
-        boolean, number
+        string, null, undefined, boolean,
+        number
       */
 
       when_obj_passed: [
@@ -88,27 +86,22 @@ module.exports = [
       ],
 
       /*
-        the amount of parameter sets created 
-        --> [[1,2][4,3][5,7]] 
-        replaces function_called.parameters 
-        during execution
+        the amount of parameter sets created
+        [[1,2][4,'hello'][{name: "hello world"},7]]
       */
 
       multiply_amount: 3,
     },
 
     /*
-      function_called is the
-      function in your application 
-      you are testing
+      function_called is the 
+      function in your application you are testing
     */
 
     function_called: {
       /*
-        if true, loops 
-        through function_called.parameters 
-        and runs tests for 
-        each set of parameters
+        if true, loops through function_called.parameters
+        and runs tests for each set of parameters
       */
 
       on: true,
@@ -139,21 +132,17 @@ module.exports = [
       param_names: "apple, sauce",
 
       /*
-        set of parameters passed.
-        each array is the parameters
-        passed to function_called.function 
-        (tests will be executed for each set of parameters)
+        each set of parameters passed to the function
+        (will add a random here for one random and get rid of random.on)
       */
 
       parameters: [
         [1, 10],
         [10, 1],
-      ],
+      ], //(make the randomized thing here)
 
       /*
         your function 
-        (generate will append all 
-        functions in selected directories)
       */
 
       function: function (a, b) {
@@ -166,19 +155,13 @@ module.exports = [
     },
 
     /*
-      unit are the three unit tests 
-      executed for each parameter 
-      set in function_called.parameters. 
-      when looping through 
-      function_called.parameters, 
-      each set is tested against the below units. 
-      (if on)
+      unit are the three unit tests executed 
+      on the return_value
     */
 
     unit: {
       /*
-        the allowed types the
-        function must return
+        the allowed types the function must return
       */
 
       allowed_types: {
@@ -189,16 +172,14 @@ module.exports = [
         on: false,
 
         /*
-          allowed_values.values[index] must match
-          the return value index of 
-          function_called.parameters[index] 
-          otherwise will check entire array for match
+          check for a match on the entire array 
+          or check for a match on the exact index
         */
 
         index_exact: false,
 
         /*
-          one of the types that must be returned
+          types that must be returned
         */
 
         values: ["string", "number"],
@@ -216,27 +197,21 @@ module.exports = [
         on: true,
 
         /*
-          allowed_values.values[index] must 
-          match the return value index of 
-          function_called.parameters[index] 
-          otherwise will check entire array for match
+          check for a match on the entire array 
+          or check for a match on the exact index
         */
 
         index_exact: false,
 
         /*
-          one of the values the
-          function must return 
-          add trim middle
+          values that must be returned
         */
 
         values: [12, 12],
       },
 
       /*
-        the regular expressions 
-        the function must return 
-        (must pass all regular expressions or one)
+        the regular expressions the function must pass
       */
 
       regex_set: {
@@ -247,17 +222,15 @@ module.exports = [
         on: false,
 
         /*
-          allowed_values.values[index] must 
-          match the return value index of 
-          function_called.parameters[index] 
-          otherwise will check entire array for match
+          check for a match on the entire array 
+          or check for a match on the exact index
         */
 
         index_exact: true,
 
         /*
-          regular expression being 
-          tested against for each returned value
+          regular expressions being tested 
+          against for each returned value
         */
 
         values: [/^([0-9])$/, /^([0-9])$/],
