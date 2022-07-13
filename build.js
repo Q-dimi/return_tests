@@ -32,7 +32,6 @@
       if(
         typeof(tests[i]) !== 'object' || 
         typeof(tests[i].unit) !== 'object' || 
-        typeof(tests[i].randomized) !== 'object' || 
         typeof(tests[i].index_of_set) !== 'number' ||
         typeof(tests[i].function_called) !== 'object'
       ) {
@@ -40,7 +39,7 @@
           index: ${i} \n
           error: (unit: object), (index_of_set: number), 
           (parameters: object), (function_called: object), 
-          (randomized: object) must be defined
+           must be defined
         `);
       }
 
@@ -55,11 +54,6 @@
         tests[i].function_called.param_names,
         tests[i].function_called.on, 
         tests[i].function_called.parameters,
-        tests[i].randomized.on,
-        tests[i].randomized.parameters,
-        tests[i].randomized.when_obj_passed,
-        tests[i].randomized.when_arr_passed,
-        tests[i].randomized.multiply_amount,
       ); 
 
       if(check_inside_errors.error === true) { 
@@ -247,11 +241,6 @@
     @param {function_param_names: string}: parameter names of the function (not passed in)
     @param {function_on: boolean}: whether to skip this function or test it
     @param {function_paramters: array}: the original values of the parameters passed to the function
-    @param {randomized_on: boolean}: whether to multiply the index of object function with random parametrs or not
-    @param {randomized_parameters: array}: the parameter types listed in an array. accepted is undefined, null, object, array, number, string
-    @param {randomized_when_obj_passed: array}: if an object is passed to randmized_parameters, an object gets built with random values athat param index
-    @param {randomized_when_arr_passed: array}: if an array is passed to randmized_parameters, an array gets built with random values
-    @param {randomized_multiply_amount: number}: amount of times to multiply object index
   */
 
   function main_or_fallback_errors(
@@ -265,11 +254,6 @@
     function_param_names, 
     function_on, 
     function_parameters,
-    randomized_on,
-    randomized_parameters, 
-    randomized_when_obj_passed,
-    randomized_when_arr_passed, 
-    randomized_multiply_amount
   ) { 
 
     var init_errors = '';
@@ -327,26 +311,6 @@
 
     if(typeof(function_parameters) !== 'object' || Array.isArray(function_parameters) === false) { 
       init_errors += '(function_called.function_parameters) must be an array \n';
-    }
-
-    if(typeof(randomized_on) !== 'boolean') {
-      init_errors += '(randomized.randomized_on) must be a boolean \n';
-    }
-
-    if((typeof(randomized_parameters) !== 'object' || Array.isArray(randomized_parameters) === false)) {
-      init_errors += '(randomized.randomized_parameters) must be an array \n';
-    }
-
-    if((typeof(randomized_when_obj_passed) !== 'object' || Array.isArray(randomized_when_obj_passed) === false)) {
-      init_errors += '(randomized.randomized_when_obj_passed) must be an array \n';
-    }
-
-    if((typeof(randomized_when_arr_passed) !== 'object' || Array.isArray(randomized_when_arr_passed) === false)) {
-      init_errors += '(randomized.randomized_when_arr_passed) must be an array \n';
-    }
-
-    if(typeof(randomized_multiply_amount) !== 'number' && typeof(randomized_multiply_amount) !== 'object') {
-      init_errors += '(randomized.randomized_multiply_amount) must be a number or null \n';
     }
 
     if(init_errors.trim().length > 0) { 
