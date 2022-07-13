@@ -78,7 +78,7 @@
             tests[i].unit.allowed_types.index_exact === false && 
             tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true
           ) { 
-            error_string += `type error: '${typeof(return_value)}' is not in the array of allowed types '${typeof(tests[i].unit.allowed_types.values) === 'object' ? JSON.stringify(tests[i].unit.allowed_types.values) : tests[i].unit.allowed_types.values}'/\n`;
+            error_string += `type error: '${typeof(return_value)}' is not in the array of allowed types '${JSON.stringify(tests[i].unit.allowed_types.values)}'/\n`;
             error_count++;
           }
 
@@ -86,7 +86,7 @@
             tests[i].unit.allowed_types.index_exact === true && 
             tests[i].unit.allowed_types.values[j] !== typeof(return_value)
           ) { 
-            error_string += `type error: '${typeof(return_value)}' does not match the allowed type '${typeof(tests[i].unit.allowed_types.values[j]) === 'object' ? JSON.stringify(tests[i].unit.allowed_types.values[j]) : tests[i].unit.allowed_types.values[j]}'/\n`;
+            error_string += `type error: '${typeof(return_value)}' does not match the allowed type '${tests[i].unit.allowed_types.values[j]}'/\n`;
             error_count++;
           }
 
@@ -100,7 +100,7 @@
               tests[i].unit.allowed_values.index_exact === false && 
               tests[i].unit.allowed_values.values.includes(return_value) !== true
             ) { 
-              error_string += `value error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' is not in the array of allowed values '${typeof(tests[i].unit.allowed_values.values) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values) : tests[i].unit.allowed_values.values}'/\n`;
+              error_string += `value error: '${return_value}' is not in the array of allowed values '${typeof(tests[i].unit.allowed_values.values) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values) : tests[i].unit.allowed_values.values}'/\n`;
               error_count++;
             }
 
@@ -108,7 +108,7 @@
               tests[i].unit.allowed_values.index_exact === true && 
               tests[i].unit.allowed_values.values[j] !== return_value
             ) { 
-              error_string += `value error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' does not match the allowed value '${typeof(tests[i].unit.allowed_values.values[j]) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values[j]) : tests[i].unit.allowed_values.values[j]}'/\n`;
+              error_string += `value error: '${return_value}' does not match the allowed value '${typeof(tests[i].unit.allowed_values.values[j]) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values[j]) : tests[i].unit.allowed_values.values[j]}'/\n`;
               error_count++;
             }
 
@@ -153,7 +153,7 @@
           if(tests[i].unit.regex_set.index_exact === false) {
             for(let k = 0; k < tests[i].unit.regex_set.values.length; k++) { 
               if(test(tests[i].unit.regex_set.values[k], return_value) !== true) { 
-                error_string += `regex error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' does not pass '${tests[i].unit.regex_set.values[k]}'/\n`;
+                error_string += `regex error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' does not pass '${tests[i].unit.regex_set.values[k]} (${k})'/\n`;
                 error_count++;
               }
             }

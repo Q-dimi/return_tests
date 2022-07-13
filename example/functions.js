@@ -36,7 +36,7 @@ module.exports = [
 
         index_exact: true,
 
-        values: ['string', 'number']
+        values: ['string', 'string']
 
       }, 
       
@@ -44,7 +44,7 @@ module.exports = [
 
         on: true,
 
-        index_exact: false,
+        index_exact: true,
 
         values: [11, 12]
 
