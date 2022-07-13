@@ -53,14 +53,26 @@ module.exports = [
   {
     function_called: {
       on: true,
+
       name: "apple",
+
       filepath: "/sauce",
+
       description: "apple sauce",
+
       param_names: "apple, sauce",
+
+      /*
+        each parameter set is passed 
+        to the function and a return value
+        is tested against the unit objects
+      */
+
       parameters: [
         [1, 10],
         [10, 1],
       ],
+
       function: function (a, b) {
         try {
           return a + b;
@@ -69,10 +81,16 @@ module.exports = [
         }
       },
     },
+
+    /*
+        return value of function_called.function is tested against 
+        allowed_types.values, allowed_values.values, regex_set.values.
+    */
+
     unit: {
       allowed_types: {
         on: false,
-        index_exact: false,
+        index_exact: false, //if true function_called.parameters and allowed_types.values index is matched
         values: ["string", "number"],
       },
       allowed_values: {
