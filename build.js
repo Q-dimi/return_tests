@@ -153,7 +153,7 @@
           if(tests[i].unit.regex_set.index_exact === false) {
             for(let k = 0; k < tests[i].unit.regex_set.values.length; k++) { 
               if(test(tests[i].unit.regex_set.values[k], return_value) !== true) { 
-                error_string += `rejex error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not pass ${typeof(tests[i].unit.regex_set.values[k]) === 'object' ? JSON.stringify(tests[i].unit.regex_set.values[k]) : tests[i].unit.regex_set.values[k]}\n`;
+                error_string += `regex error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not pass ${typeof(tests[i].unit.regex_set.values[k]) === 'object' ? JSON.stringify(tests[i].unit.regex_set.values[k]) : tests[i].unit.regex_set.values[k]}\n`;
                 error_count++;
               }
             }
@@ -161,7 +161,7 @@
 
           if(tests[i].unit.regex_set.index_exact === true) { 
             if(test(tests[i].unit.regex_set.values[j], return_value) !== true) { 
-              error_string += `rejex error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not pass ${typeof(tests[i].unit.regex_set.values[j]) === 'object' ? JSON.stringify(tests[i].unit.regex_set.values[j]) : tests[i].unit.regex_set.values[j]}.\n`;
+              error_string += `regex error: ${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value} does not pass ${typeof(tests[i].unit.regex_set.values[j]) === 'object' ? JSON.stringify(tests[i].unit.regex_set.values[j]) : tests[i].unit.regex_set.values[j]}.\n`;
               error_count++;
             }
           }

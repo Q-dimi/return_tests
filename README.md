@@ -21,12 +21,17 @@ See /examples for details
 var return_tests = require("return_tests");
 var functions = require("my_testing_functions");
 
-var errors;
+var errors = [];
 
 try {
   errors = return_tests.run(functions);
 } catch (err) {
   console.log(err.message);
+}
+
+for (let i = 0; i < errors.length; i++) {
+  console.log(errors[i]);
+  //string with function index, parameter index, and types of errors (type, value, regex)
 }
 ```
 
