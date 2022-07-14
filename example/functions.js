@@ -24,7 +24,7 @@ module.exports = [
 
       param_names: 'apple, sauce',
 
-      parameters: [[2, 12], [30, 2], [3, 23], [22, 22]], //each return value at index must match below
+      parameters: [[2, 12], [30, 2], [3, 23], [22, 22]], //each return value at index must match below (last will pass)
 
       function: function (a, b) {
         try { 
@@ -44,7 +44,7 @@ module.exports = [
 
         index_exact: true,
 
-        values: [11, 12, 'hello world', 44] //each index must match above
+        values: [{a: '3'}, 12, 'hello world', 44] //each index must match above (last will pass)
 
       }, 
 

@@ -120,7 +120,7 @@
 
               var match = false;
 
-              for(let k = 0; j < tests[i].unit.allowed_values.values.length; k++) { 
+              for(let k = 0; k < tests[i].unit.allowed_values.values.length; k++) { 
                 if(typeof(tests[i].unit.allowed_values.values[k]) === 'object') { 
                   if(JSON.stringify(tests[i].unit.allowed_values.values[k]) === JSON.stringify(return_value)) { 
                     match = true;
@@ -130,7 +130,7 @@
               }
 
               if(match === false) { 
-                error_string += `value error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' is not in the array of allowed values '${typeof(tests[i].unit.allowed_values.values) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values) : tests[i].unit.allowed_values.values}'/\n`;
+                error_string += `value error: '${JSON.stringify(return_value)}' is not in the array of allowed values '${JSON.stringify(tests[i].unit.allowed_values.values)}'/\n`;
                 error_count++;
               }
 
@@ -140,7 +140,7 @@
               tests[i].unit.allowed_values.index_exact === true && 
               JSON.stringify(tests[i].unit.allowed_values.values[j]) !== JSON.stringify(return_value)
             ) { 
-              error_string += `value error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' does not match the allowed value '${typeof(tests[i].unit.allowed_values.values[j]) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values[j]) : tests[i].unit.allowed_values.values[j]}'/\n`;
+              error_string += `value error: '${JSON.stringify(return_value)}' does not match the allowed value '${typeof(tests[i].unit.allowed_values.values[j]) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values[j]) : tests[i].unit.allowed_values.values[j]}'/\n`;
               error_count++;
             }
 
