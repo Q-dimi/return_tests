@@ -80,7 +80,7 @@ module.exports = [
 
     /*
         if unit.x.on is true, return value of function_called.function is tested against
-        unit.x.values (individually or all at the same time)
+        unit.x.values
     */
 
     unit: {
@@ -142,7 +142,7 @@ the object containing the allowed types the function must return
 whether or not to run the allowed types test on the return value
 
 @param {unit.allowed_types.index_exact: boolean}:
-check for a match on the entire array or check for a match on the
+check for a match across the entire array or check for a match on the
 exact index (function_called.parameters vs unit.allowed_types.values)
 
 @param {unit.allowed_types.values: array}:
@@ -155,7 +155,7 @@ the object containing allowed values the function must return
 whether or not to run the allowed values test on the return value
 
 @param {unit.allowed_values.index_exact: boolean}:
-check for a match on the entire array or check for a match on the
+check for a match across the entire array or check for a match on the
 exact index (function_called.parameters vs unit.allowed_values.values)
 
 @param {unit.allowed_values.values: array}:
@@ -168,7 +168,7 @@ the object containing the regular expressions the function must pass
 whether or not to run the regular expressions test on the return value
 
 @param {unit.regex_set.index_exact: boolean}:
-check for a match on the entire array or check for a match on the
+check for a match across the entire array or check for a match on the
 exact index (function_called.parameters vs unit.regex_set.values)
 
 @param {unit.allowed_values.regex_set: array}:

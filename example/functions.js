@@ -24,7 +24,7 @@ module.exports = [
 
       param_names: 'apple, sauce',
 
-      parameters: [[2, 12], [30, 2], [3, 23], [22, 22]], //each return value at index must match below (last will pass)
+      parameters: [[2, 6], [3, 2], [3, 23], [22, 22]], //each return value at index must match below (last will pass)
 
       function: function (a, b) {
         try { 
@@ -54,7 +54,7 @@ module.exports = [
 
         index_exact: false,
 
-        values: []
+        values: ['number', 'number', 'number', 'number']
 
       }, 
       
@@ -64,7 +64,7 @@ module.exports = [
 
         index_exact: false,
 
-        values: []
+        values: [/^([0-9])$/, /^([0-9])$/, /^([0-9])$/, /^([0-9])$/]
 
       } 
     
