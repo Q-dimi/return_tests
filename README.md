@@ -170,8 +170,8 @@ regular expressions the return value must pass
 
 # Use Case
 
-return-tests works well for functions that contain mathematical algorithms.
-If you have many functions that require many tests, return-tests can loop
-through every function, pass many sets of parameters at the function,
-get the return value of each set of parameters and check that return value
-against any of the unit tests which are on.
+return-tests works well for functions which need to pass many test cases.
+If you have many functions that require many tests, return-tests will loop
+through every function and for each function, pass many sets of parameters at it.
+Every return value from each set of parameters is compared against the unit
+object and errors are displayed as a string.
