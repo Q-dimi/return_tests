@@ -1,7 +1,8 @@
 # return-tests
 
-return-tests tests if a functions return value matches a regular expression, data type and data value.
-return-tests plans on adding more types of tests for return values.
+return-tests loops through functions and runs as many parameterized tests per function that you add ([[4, 8], [10, 2]]).
+After a function executes a test case, its return value is compared against any of the chosen
+unit tests you have added. The three tests are listed below in the unit object.
 
 ```sh
 npm i return-tests

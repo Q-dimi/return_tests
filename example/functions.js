@@ -35,5 +35,5 @@ module.exports = [
         values: [{a: '3'}, 12, 'hello world', 44] //(fail, fail, fail, pass) /|\
       }, 
     }  
-  },
+  }
 ];
