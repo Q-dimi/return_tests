@@ -13,7 +13,7 @@ Pass an array of functions (see Function Format below) to the 'run' function and
 a standard testing example see /example/functions.js
 
 ```js
-var return_tests = require("return_tests");
+var return_tests = require("return-tests");
 var functions = require("my_testing_functions");
 
 var errors = [];
