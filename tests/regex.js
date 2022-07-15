@@ -1,4 +1,4 @@
-function test(test, return_value, j) {
+function test(test, return_value, i, j) {
 
     if(
         typeof(test.unit.regex_set) !== 'object' || 
@@ -7,7 +7,7 @@ function test(test, return_value, j) {
         Array.isArray(test.unit.regex_set.values) === false) || 
         typeof(test.unit.regex_set.index_exact) !== 'boolean'
       ) {
-        throw new Error('(unit.regex_set) must be an object with parameters (on: boolean) and (values: array)');
+        throw new Error(`function index: ${i}\nerror: (unit.regex_set) must be an object with parameters (on: boolean) and (values: array)`);
       }
 
     if(test.unit.regex_set.on === true) {

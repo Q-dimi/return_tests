@@ -51,9 +51,9 @@
         var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
 
         var test_suite = { 
-          value: typeof(tests[i].unit.allowed_values) === 'object' && tests[i].unit.allowed_values !== null ? value(tests[i], return_value, j) : 'PASSED',
-          type: typeof(tests[i].unit.allowed_types) === 'object' && tests[i].unit.allowed_types !== null ? type(tests[i], return_value, j) : 'PASSED',
-          regex: typeof(tests[i].unit.regex_set) === 'object' && tests[i].unit.regex_set !== null ? regex(tests[i], return_value, j) : 'PASSED'
+          value: typeof(tests[i].unit.allowed_values) === 'object' && tests[i].unit.allowed_values !== null ? value(tests[i], return_value, i, j) : 'PASSED',
+          type: typeof(tests[i].unit.allowed_types) === 'object' && tests[i].unit.allowed_types !== null ? type(tests[i], return_value, i, j) : 'PASSED',
+          regex: typeof(tests[i].unit.regex_set) === 'object' && tests[i].unit.regex_set !== null ? regex(tests[i], return_value, i, j) : 'PASSED'
         }
 
         if(test_suite.value !== 'PASSED') { 

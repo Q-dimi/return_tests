@@ -1,4 +1,4 @@
-function test(test, return_value, j) { 
+function test(test, return_value, i, j) { 
 
     if(
       typeof(test.unit.allowed_values) !== 'object' || 
@@ -7,7 +7,7 @@ function test(test, return_value, j) {
       Array.isArray(test.unit.allowed_values.values) === false) || 
       typeof(test.unit.allowed_values.index_exact) !== 'boolean'
     ) {
-      throw new Error(`(unit.allowed_values) must be an object with parameters (on: boolean) (values: array) (index_exact: boolean)`);
+      throw new Error(`function index: ${i}\nerror: (unit.allowed_values) must be an object with parameters (on: boolean) (values: array) (index_exact: boolean)`);
     }
 
     if(test.unit.allowed_values.on === true) {
