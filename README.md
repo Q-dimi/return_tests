@@ -165,4 +165,5 @@ return-tests works well for functions which need to pass many test cases.
 If you have many functions that require many tests, return-tests will loop
 through every function and for each function, pass many sets of parameters at it.
 Every return value from each set of parameters is compared against one of the unit
-object tests. Errors are displayed as a string.
+object tests. Errors are displayed as a string. If you are a large team who constantly
+updates functions, return-tests is a great fit (see /example/functions.js).

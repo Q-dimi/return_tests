@@ -1,6 +1,6 @@
 {
   "name": "return-tests",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "package that tests the return values of functions",
   "main": "build.js",
   "scripts": {
@@ -11,6 +11,6 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/Q-dimi/return_tests.git"
+    "url": "https://github.com/Q-dimi/return-tests.git"
   }
 }
