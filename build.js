@@ -3,7 +3,7 @@
     @param {generate_functions: function}: if true, searches directories and writes to a file of all functions asked to test
   */
 
-  var generate_functions = require('./generate');
+  var generate_functions = require('./lib/generate');
 
   /*
     @param {error_sets: array}: exported set of objects that did not pass test
