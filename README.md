@@ -67,7 +67,6 @@ module.exports = [
       sets.
     */
     index: 1,
-    index: 'djdjdsdd'
     function_called: {
       on: true,
       description: "this function adds numbers",
