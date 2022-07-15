@@ -1,5 +1,15 @@
 function test(test, return_value, j) {
 
+    if(
+        typeof(test.unit.regex_set) !== 'object' || 
+        typeof(test.unit.regex_set.on) !== 'boolean' || 
+        (typeof(test.unit.regex_set.values) !== 'object' || 
+        Array.isArray(test.unit.regex_set.values) === false) || 
+        typeof(test.unit.regex_set.index_exact) !== 'boolean'
+      ) {
+        throw new Error('(unit.regex_set) must be an object with parameters (on: boolean) and (values: array)');
+      }
+
     if(test.unit.regex_set.on === true) {
 
         if(test.unit.regex_set.index_exact === false) {

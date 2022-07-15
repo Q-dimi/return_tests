@@ -1,5 +1,15 @@
 function test(test, return_value, j) { 
 
+    if(
+      typeof(test.unit.allowed_values) !== 'object' || 
+      typeof(test.unit.allowed_values.on) !== 'boolean' || 
+      (typeof(test.unit.allowed_values.values) !== 'object' || 
+      Array.isArray(test.unit.allowed_values.values) === false) || 
+      typeof(test.unit.allowed_values.index_exact) !== 'boolean'
+    ) {
+      throw new Error(`(unit.allowed_values) must be an object with parameters (on: boolean) (values: array) (index_exact: boolean)`);
+    }
+
     if(test.unit.allowed_values.on === true) {
 
         if(return_value === null || typeof(return_value) !== 'object') {

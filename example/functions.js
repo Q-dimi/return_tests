@@ -16,15 +16,9 @@ module.exports = [
 
       on: true,
 
-      name: 'apple',
+      description: 'function Name / function Filepath / function Description / function parameter names',
 
-      filepath: '/sauce',
-
-      description: 'apple sauce',
-
-      param_names: 'apple, sauce',
-
-      parameters: [[2, 6], [3, 2], [3, 23], [22, 22]], //each return value at index must match below (last will pass)
+      parameters: [[2, 6], [3, 2], [3, 23], [22, 22]],
 
       function: function (a, b) {
         try { 
@@ -44,29 +38,9 @@ module.exports = [
 
         index_exact: false,
 
-        values: [{a: '3'}, 12, 'hello world', 44] //each index must match above (last will pass)
+        values: [{a: '3'}, 12, 'hello world', 44]
 
       }, 
-
-      allowed_types: {
-
-        on: false,
-
-        index_exact: true,
-
-        values: ['number', 'string', 'string', 'string']
-
-      }, 
-      
-      regex_set: {
-
-        on: false,
-
-        index_exact: false,
-
-        values: [/^([0-9])$/, /^([0-9])$/, /^([0-9])$/, /^([0-9])$/]
-
-      } 
     
     }  
 

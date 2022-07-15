@@ -1,6 +1,7 @@
 # return-tests
 
 return-tests tests if a functions return value matches a regular expression, data type and data value.
+return-tests plans on adding more types of tests for return values.
 
 # Getting Started
 
@@ -49,10 +50,7 @@ module.exports = [
   {
     function_called: {
       on: true,
-      name: "add_numbers",
-      filepath: "/javascripts/main.js",
       description: "this function adds numbers",
-      param_names: "a, b",
       /*
         each parameter set is passed
         to the function and a return value
@@ -73,7 +71,9 @@ module.exports = [
     },
     /*
         if unit.x.on is true, return value of function_called.function is tested against
-        unit.x.values
+        unit.x.values. You may remove tests you dont need (unit.x) but the unit object 
+        itself must exist during execution. When using a test, on, index_exact and 
+        values must be defined.
     */
     unit: {
       allowed_types: {
@@ -106,17 +106,8 @@ function_called is the object containing the function in your application you ar
 @param {function_called.on: boolean}:
 if true, loops through function_called.parameters and runs tests for each return value
 
-@param {function_called.name: string}:
-name of the function
-
-@param {function_called.file_path: string}:
-filepath of the function
-
 @param {function_called.description: string}:
 description of the function
-
-@param {function_called.param_names: string}:
-the names of the parameters of the function
 
 @param {function_called.parameters: array}:
 the sets of parameters passed to the function during execution
@@ -125,7 +116,7 @@ the sets of parameters passed to the function during execution
 the function you are testing
 
 @param {unit: object}:
-unit contains the three objects for testing
+unit contains the three objects for testing (more tests will be added)
 
 @param {unit.allowed_types: object}:
 the object containing the allowed types the function must return
