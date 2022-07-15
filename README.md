@@ -3,6 +3,10 @@
 return-tests tests if a functions return value matches a regular expression, data type and data value.
 return-tests plans on adding more types of tests for return values.
 
+```sh
+npm i return-tests
+```
+
 # Getting Started
 
 Pass an array of functions (see Function Format below) to the 'run' function and view your errors. For

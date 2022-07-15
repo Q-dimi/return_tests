@@ -1,4 +1,4 @@
-var return_tests = require('../build'); //'return_tests'
+var return_tests = require('../build'); //'return-tests'
 var functions = require('./functions'); //functions testing
 
 var errors = [];

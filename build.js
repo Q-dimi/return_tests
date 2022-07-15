@@ -47,7 +47,7 @@
       for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
 
         var error_count = 0;
-        var error_string = `\nfunction index: ${i}/\nparameter index: ${j}/\n`;
+        var error_string = `\nERROR\nfunction index: ${i}/\nparameter index: ${j}/\n`;
         var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
 
         var test_suite = { 
