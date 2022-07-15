@@ -42,7 +42,7 @@ module.exports = [
 
         on: true,
 
-        index_exact: true,
+        index_exact: false,
 
         values: [{a: '3'}, 12, 'hello world', 44] //each index must match above (last will pass)
 
@@ -52,9 +52,9 @@ module.exports = [
 
         on: false,
 
-        index_exact: false,
+        index_exact: true,
 
-        values: ['string', 'string', 'string', 'string']
+        values: ['number', 'string', 'string', 'string']
 
       }, 
       

@@ -1,9 +1,7 @@
-
-  /*
-    @param {generate_functions: function}: if true, searches directories and writes to a file of all functions asked to test
-  */
-
   var generate_functions = require('./lib/generate');
+  var type = require('./tests/type');
+  var value = require('./tests/value');
+  var regex = require('./tests/regex');
 
   /*
     @param {error_sets: array}: exported set of objects that did not pass test
@@ -72,100 +70,25 @@
 
         var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
 
-        if(tests[i].unit.allowed_types.on === true) {
-
-          if(
-            tests[i].unit.allowed_types.index_exact === false && 
-            tests[i].unit.allowed_types.values.includes(typeof(return_value)) !== true
-          ) { 
-            error_string += `type error: '${typeof(return_value)}' is not in the array of allowed types '${JSON.stringify(tests[i].unit.allowed_types.values)}'/\n`;
-            error_count++;
-          }
-
-          if(
-            tests[i].unit.allowed_types.index_exact === true && 
-            tests[i].unit.allowed_types.values[j] !== typeof(return_value)
-          ) { 
-            error_string += `type error: '${typeof(return_value)}' does not match the allowed type '${tests[i].unit.allowed_types.values[j]}'/\n`;
-            error_count++;
-          }
-
+        var test_suite = { 
+          value: value(tests[i], return_value, j),
+          type: type(tests[i], return_value, j), 
+          regex: regex(tests[i], return_value, j)
         }
 
-        if(tests[i].unit.allowed_values.on === true) {
-
-          if(return_value === null || typeof(return_value) !== 'object') {
-
-            if(
-              tests[i].unit.allowed_values.index_exact === false && 
-              tests[i].unit.allowed_values.values.includes(return_value) !== true
-            ) { 
-              error_string += `value error: '${return_value}' is not in the array of allowed values '${typeof(tests[i].unit.allowed_values.values) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values) : tests[i].unit.allowed_values.values}'/\n`;
-              error_count++;
-            }
-
-            if(
-              tests[i].unit.allowed_values.index_exact === true && 
-              tests[i].unit.allowed_values.values[j] !== return_value
-            ) { 
-              error_string += `value error: '${return_value}' does not match the allowed value '${typeof(tests[i].unit.allowed_values.values[j]) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values[j]) : tests[i].unit.allowed_values.values[j]}'/\n`;
-              error_count++;
-            }
-
-          } 
-          
-          if(typeof(return_value) === 'object') { 
-
-            if(tests[i].unit.allowed_values.index_exact === false) {
-
-              var match = false;
-
-              for(let k = 0; k < tests[i].unit.allowed_values.values.length; k++) { 
-                if(typeof(tests[i].unit.allowed_values.values[k]) === 'object') { 
-                  if(JSON.stringify(tests[i].unit.allowed_values.values[k]) === JSON.stringify(return_value)) { 
-                    match = true;
-                    break;
-                  }
-                }
-              }
-
-              if(match === false) { 
-                error_string += `value error: '${JSON.stringify(return_value)}' is not in the array of allowed values '${JSON.stringify(tests[i].unit.allowed_values.values)}'/\n`;
-                error_count++;
-              }
-
-            }
-
-            if(
-              tests[i].unit.allowed_values.index_exact === true && 
-              JSON.stringify(tests[i].unit.allowed_values.values[j]) !== JSON.stringify(return_value)
-            ) { 
-              error_string += `value error: '${JSON.stringify(return_value)}' does not match the allowed value '${typeof(tests[i].unit.allowed_values.values[j]) === 'object' ? JSON.stringify(tests[i].unit.allowed_values.values[j]) : tests[i].unit.allowed_values.values[j]}'/\n`;
-              error_count++;
-            }
-
-          }
-
+        if(test_suite.value !== 'PASSED') { 
+          error_string += test_suite.value;
+          error_count++;
         }
 
-        if(tests[i].unit.regex_set.on === true) {
+        if(test_suite.type !== 'PASSED') { 
+          error_string += test_suite.type;
+          error_count++;
+        }
 
-          if(tests[i].unit.regex_set.index_exact === false) {
-            for(let k = 0; k < tests[i].unit.regex_set.values.length; k++) { 
-              if(test(tests[i].unit.regex_set.values[k], return_value) !== true) { 
-                error_string += `regex error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' does not pass '${tests[i].unit.regex_set.values[k]} (index ${k})'/\n`;
-                error_count++;
-              }
-            }
-          }
-
-          if(tests[i].unit.regex_set.index_exact === true) { 
-            if(test(tests[i].unit.regex_set.values[j], return_value) !== true) { 
-              error_string += `regex error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' does not pass '${tests[i].unit.regex_set.values[j]}'/\n`;
-              error_count++;
-            }
-          }
-
+        if(test_suite.regex !== 'PASSED') { 
+          error_string += test_suite.regex;
+          error_count++;
         }
 
         if(error_count > 0) { 
@@ -275,19 +198,6 @@
       error_string: init_errors
     }
 
-  }
-
-  /*
-    @param {regular_expression: string}: regular expression being tested
-    @param {return_value: number, string, undefined, null, object, boolean}: the value being tested against
-  */
-
-  function test(regular_expression, return_value) { 
-    try {
-      return regular_expression.test(return_value);
-    } catch(err) { 
-      return false;
-    } 
   }
 
   /*
