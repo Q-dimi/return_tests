@@ -3,8 +3,36 @@
   var value = require('./tests/value');
   var regex = require('./tests/regex');
 
-  function start_tests(tests) {   
+  function start_tests(tests, optional_index_array) { 
+
+    if(typeof(tests) !== 'object' || Array.isArray(tests) === false) { 
+      throw new Error('the functions you are passing must be an array');
+    }
+
+    if(
+      typeof(optional_index_array) === 'object' && 
+      Array.isArray(optional_index_array) === true && 
+      optional_index_array.length > 0
+    ) { 
+
+      var specific = [];
+
+      for(let i = 0; i < tests.length; i++) { 
+        if(
+          typeof(tests[i]) === 'object' && 
+          typeof(tests[i].index) !== 'undefined' && 
+          optional_index_array.includes(tests[i].index)
+        ) { 
+          specific.push(tests[i]);
+        }
+      }
+
+      return run_tests(specific);
+
+    }
+
     return run_tests(tests);
+
   }
         
   function run_tests(tests) {
@@ -46,9 +74,15 @@
 
       for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
 
+        var return_value;
         var error_count = 0;
-        var error_string = `\nERROR\nfunction index: ${i}/\nparameter index: ${j}/\n`;
-        var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
+        var error_string = `\nERROR\nfunction index: ${i}(${typeof(tests[i].index) !== 'undefined' ? (typeof(tests[i].index) === 'object' ? JSON.stringify(tests[i].index) : tests[i].index) : ''})/\nparameter index: ${j}/\n`;
+
+        try {
+          return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
+        } catch(err) { 
+          return_value = err.message;
+        }
 
         var test_suite = { 
           value: typeof(tests[i].unit.allowed_values) === 'object' && tests[i].unit.allowed_values !== null ? value(tests[i], return_value, i, j) : 'PASSED',
@@ -79,7 +113,7 @@
 
     }
 
-    return error_sets
+    return error_sets;
           
   }
 

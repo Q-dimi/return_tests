@@ -17,10 +17,19 @@ a standard testing example see /example/functions.js
 var return_tests = require("return-tests");
 var functions = require("my_testing_functions");
 
+//only run math functions
+var index_set_A = ["math"];
+//only run business functions
+var index_set_B = ["business"];
+//only run to do functions
+var index_set_C = ["todo"];
+//run math and business
+var index_set_D = ["math", "business"];
+
 var errors = [];
 
 try {
-  errors = return_tests.run(functions);
+  errors = return_tests.run(functions /*,index_set_A*/); //only run functions containing a 'math' index (optional)
 } catch (err) {
   console.log(err.message);
 }
@@ -53,6 +62,12 @@ return_tests.generate_functions("./file_written_to", {
 ```js
 module.exports = [
   {
+    /*
+      indexes are optional and only used for testing certain
+      sets.
+    */
+    index: 1,
+    index: 'djdjdsdd'
     function_called: {
       on: true,
       description: "this function adds numbers",
@@ -76,8 +91,8 @@ module.exports = [
     },
     /*
       if unit.x.on is true, return value of function_called.function is tested against
-      unit.x.values. You may remove tests you dont need (unit.x) but the unit object 
-      itself must exist during execution. When using a test, on, index_exact and 
+      unit.x.values. You may remove tests you dont need (unit.x) but the unit object
+      itself must exist during execution. When using a test, on, index_exact and
       values must be defined.
     */
     unit: {
@@ -105,6 +120,12 @@ module.exports = [
 
 ```js
 /*
+@param {index: optional}:
+index is an optional value you can use when testing different sets or individual functions. 
+This is used so that you dont have to keep setting functions on and off.
+Pass an index set to the run function, and only those functions with indexes
+will be run. See /example/errors.js
+
 @param {function_called: object}:
 function_called is the object containing the function in your application you are testing
 
@@ -164,11 +185,10 @@ regular expressions the return value must pass
 */
 ```
 
-# Use Case
+# Uses
 
-return-tests works well for functions which need to pass many test cases.
-If you have many functions that require many tests, return-tests will loop
-through every function and for each function, pass many sets of parameters at it.
+return-tests works well for functions that need to pass many test cases. return-tests will loop
+through every function and for each function, throw many sets of parameters at it.
 Every return value from each set of parameters is compared against one of the unit
-object tests. Errors are displayed as a string. If you are a large team who constantly
-updates functions, return-tests is a great fit (see /example/functions.js).
+object tests you have added. Errors are displayed as a string. For best use, set every function to
+on and use index sets so that you get to decide what to run.

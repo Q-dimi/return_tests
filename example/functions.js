@@ -3,11 +3,16 @@
   then used for function_called.function. This 
   will help for when your team keeps updating functions
   because you can loop through all of them and run all of 
-  the edge cases every x hours making sure your functions 
+  their edge cases every x hours making sure your functions 
   are always passing.
 */
 module.exports = [
   { 
+    /*
+      indexes are optional and only used for testing certain 
+      sets.
+    */
+    index: 1,
     /*
       standard test example. 
       compares unit.allowed_values.values array 
@@ -24,7 +29,7 @@ module.exports = [
         try { 
           return a + b; 
         } catch(err) { 
-          return err; 
+          throw new Error('something went wrong');
         } 
       }
     }, 

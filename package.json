@@ -1,6 +1,6 @@
 {
   "name": "return-tests",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "package that tests the return values of functions",
   "main": "build.js",
   "scripts": {
