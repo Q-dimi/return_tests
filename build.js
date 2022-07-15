@@ -3,13 +3,13 @@
   var value = require('./tests/value');
   var regex = require('./tests/regex');
 
-  var error_sets = [];
-
   function start_tests(tests) {   
     return run_tests(tests);
   }
         
   function run_tests(tests) {
+
+    var error_sets = [];
 
     for(let i = 0; i < tests.length; i++) { 
 
