@@ -70,10 +70,10 @@ module.exports = [
       },
     },
     /*
-        if unit.x.on is true, return value of function_called.function is tested against
-        unit.x.values. You may remove tests you dont need (unit.x) but the unit object 
-        itself must exist during execution. When using a test, on, index_exact and 
-        values must be defined.
+      if unit.x.on is true, return value of function_called.function is tested against
+      unit.x.values. You may remove tests you dont need (unit.x) but the unit object 
+      itself must exist during execution. When using a test, on, index_exact and 
+      values must be defined.
     */
     unit: {
       allowed_types: {
