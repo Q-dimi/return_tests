@@ -24,7 +24,7 @@ for (let i = 0; i < errors.length; i++) {
   /*
     "function index: index where the function failed
     parameter index: parameter index where the function failed (function_called.parameters)
-    value error: error from unit.allowed_types.values
+    value error: error from unit.allowed_values.values
     type error: error from unit.allowed_types.values
     regex_error: error from unit.regex_set.values"
   */
@@ -49,26 +49,20 @@ module.exports = [
   {
     function_called: {
       on: true,
-
-      name: "apple",
-
-      filepath: "/sauce",
-
-      description: "apple sauce",
-
-      param_names: "apple, sauce",
-
+      name: "add_numbers",
+      filepath: "/javascripts/main.js",
+      description: "this function adds numbers",
+      param_names: "a, b",
       /*
         each parameter set is passed
         to the function and a return value
         is tested against the unit objects
+        which are on
       */
-
       parameters: [
         [1, 10],
         [10, 1],
       ],
-
       function: function (a, b) {
         try {
           return a + b;
@@ -77,12 +71,10 @@ module.exports = [
         }
       },
     },
-
     /*
         if unit.x.on is true, return value of function_called.function is tested against
         unit.x.values
     */
-
     unit: {
       allowed_types: {
         on: false,
@@ -109,10 +101,10 @@ module.exports = [
 ```js
 /*
 @param {function_called: object}:
-function_called is the function in your application you are testing
+function_called is the object containing the function in your application you are testing
 
 @param {function_called.on: boolean}:
-if true, loops through function_called.parameters and runs tests for each set of parameters
+if true, loops through function_called.parameters and runs tests for each return value
 
 @param {function_called.name: string}:
 name of the function
@@ -139,7 +131,7 @@ unit contains the three objects for testing
 the object containing the allowed types the function must return
 
 @param {unit.allowed_types.on: boolean}:
-whether or not to run the allowed types test on the return value
+whether or not to run the allowed types test on the return value 
 
 @param {unit.allowed_types.index_exact: boolean}:
 check for a match across the entire array or check for a match on the
@@ -175,3 +167,11 @@ exact index (function_called.parameters vs unit.regex_set.values)
 regular expressions the return value must pass
 */
 ```
+
+# Use Case
+
+return-tests works well for functions that contain mathematical algorithms.
+If you have many functions that require many tests, return-tests can loop
+through every function, pass many sets of parameters at the function,
+get the return value of each set of parameters and check that return value
+against any of the unit tests which are on.

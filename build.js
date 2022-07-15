@@ -68,9 +68,9 @@
 
         var error_count = 0;
 
-        var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
-
         var error_string = `\nfunction index: ${i}/\nparameter index: ${j}/\n`;
+
+        var return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
 
         if(tests[i].unit.allowed_types.on === true) {
 

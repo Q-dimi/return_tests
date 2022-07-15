@@ -7,7 +7,7 @@ module.exports = [
     /*
       standard test example. 
       compares unit.allowed_values.values array 
-      with function_called.parameters array (return values)
+      with the function_called.parameters array
       AT each index. Return value from function_called.parameters[i]
       must match unit.allowed_values.values[i]. 
     */
@@ -54,7 +54,7 @@ module.exports = [
 
         index_exact: false,
 
-        values: ['number', 'number', 'number', 'number']
+        values: ['string', 'string', 'string', 'string']
 
       }, 
       
