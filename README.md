@@ -164,5 +164,5 @@ regular expressions the return value must pass
 return-tests works well for functions which need to pass many test cases.
 If you have many functions that require many tests, return-tests will loop
 through every function and for each function, pass many sets of parameters at it.
-Every return value from each set of parameters is compared against the unit
-object and errors are displayed as a string.
+Every return value from each set of parameters is compared against one of the unit
+object tests. Errors are displayed as a string.
