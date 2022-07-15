@@ -1,4 +1,11 @@
-
+  /*
+    functions can be imported or required here 
+    then used for function_called.function. This 
+    will help for when your team keeps updating functions
+    because you can loop through all of them and run all of 
+    the edge cases every x hours making sure your functions 
+    are always passing.
+  */
 
 module.exports = [
 
