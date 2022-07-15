@@ -10,6 +10,7 @@ module.exports = [
       with the function_called.parameters array
       AT each index. Return value from function_called.parameters[i]
       must match unit.allowed_values.values[i]. 
+      type 'node example/errors.js' to see errors
     */
 
     function_called: {
@@ -36,7 +37,7 @@ module.exports = [
 
         on: true,
 
-        index_exact: false,
+        index_exact: true,
 
         values: [{a: '3'}, 12, 'hello world', 44]
 
