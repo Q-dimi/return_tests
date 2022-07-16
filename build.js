@@ -52,9 +52,9 @@
         typeof(tests[i].function_called) !== 'object'
       ) {
         throw new Error(`
-          index: ${i} \n
-          error: (unit: object), (parameters: object), 
-          (function_called: object), 
+          function index: ${i} \n
+          error: function index, (unit: object) and 
+          (function_called: object)
           must be defined
         `);
       }
@@ -68,7 +68,7 @@
 
       if(check_inside_errors.error === true) { 
         throw new Error(`
-          index: ${i} \n 
+          function index: ${i} \n 
           ${check_inside_errors.error_string}
         `);
       };
@@ -79,8 +79,19 @@
 
       for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
 
+        if(
+          typeof(tests[i].function_called.parameters[j]) !== 'object' || 
+          Array.isArray(tests[i].function_called.parameters[j]) === false
+        ) { 
+          throw new Error(`
+            function index: ${i} \n 
+            parameter index: ${i} \n 
+            error: the parameters passed must be an array
+          `);
+        }
+
         var return_value;
-        var time_taken;
+        var time_taken = null;
         var error_count = 0;
         var error_string = `\nERROR\nfunction index: ${i}/${typeof(tests[i].index) !== 'undefined' ? (typeof(tests[i].index) === 'object' ? '\nfunction index name: '+JSON.stringify(tests[i].index)+'/' : '\nfunction index name: '+tests[i].index)+'/' : ''}\nparameter index: ${j}/\n`;
 

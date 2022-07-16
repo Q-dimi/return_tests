@@ -14,24 +14,24 @@ function test(test, return_value, i, j) {
 
         if(test.unit.is_greater_than.index_exact === false) { 
 
-            var stop = false;
-
+            var found = false;
+            
             for(let k = 0; k < test.unit.is_greater_than.values.length; k++) { 
-                if(return_value < test.unit.is_greater_than.values[k]) {
-                    stop = true;
+                if(return_value > test.unit.is_greater_than.values[k]) {
+                    found = true;
                     break;
                 }
             }
 
-            if(stop === true) { 
-                return `greaterThanError: ${return_value} is less than one or all of the values in the array ${JSON.stringify(test.unit.is_greater_than.values)}/\n`;
+            if(found === false) { 
+                return `greaterThanError: '${return_value}' is less than all of the values in the array '${JSON.stringify(test.unit.is_greater_than.values)}'/\n`;
             } 
 
         }
 
         if(test.unit.is_greater_than.index_exact === true) { 
             if(return_value < test.unit.is_greater_than.values[j]) { 
-                return `greaterThanError: ${return_value} is less than ${test.unit.is_greater_than.values[j]}/\n`;
+                return `greaterThanError: '${return_value}' is less than '${test.unit.is_greater_than.values[j]}'/\n`;
             }
         }
 
