@@ -34,18 +34,18 @@ function test(test, return_value, i, j) {
 
           if(test.unit.allowed_values.index_exact === false) {
 
-            var match = false;
+            var found = false;
 
             for(let k = 0; k < test.unit.allowed_values.values.length; k++) { 
               if(typeof(test.unit.allowed_values.values[k]) === 'object') { 
-                if(JSON.stringify(test.unit.allowed_values.values[k]) === JSON.stringify(return_value)) { 
-                  match = true;
+                if(JSON.stringify(test.unit.allowed_values.values[k]) === JSON.stringify(return_value)) { //change this
+                  found = true;
                   break;
                 }
               }
             }
 
-            if(match === false) { 
+            if(found === false) { 
               return `value error: '${JSON.stringify(return_value)}' is not in the array of allowed values '${JSON.stringify(test.unit.allowed_values.values)}'/\n`;
             }
 
