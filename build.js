@@ -10,7 +10,10 @@ var hasRemainder = require('./tests/hasRemainder');
 
 function start_tests(tests, optional_index_array) { 
 
-  if(typeof(tests) !== 'object' || Array.isArray(tests) === false) { 
+  if(
+    typeof(tests) !== 'object' || 
+    Array.isArray(tests) === false
+  ) { 
     throw new Error('the functions you are passing must be an array');
   }
 
@@ -98,9 +101,7 @@ function run_tests(tests) {
 
       try {
         return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
-        time_taken = Date.now() - time_taken;
       } catch(err) { 
-        time_taken = Date.now() - time_taken;
         return_value = err.message;
       }
 
@@ -156,7 +157,7 @@ function run_tests(tests) {
       }
 
       if(error_count > 0) { 
-        error_string += `execution time: ${time_taken}ms/\n`;
+        error_string += `function and test execution time: ${Date.now() - time_taken}ms/\n`;
         error_sets.push(error_string);
       }
 
