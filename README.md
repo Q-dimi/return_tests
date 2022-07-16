@@ -121,9 +121,9 @@ module.exports = [
 /*
 @param {index: optional}:
 index is an optional value you can use when testing different sets or individual functions. 
-This is used so that you dont have to keep setting functions on and off.
-Pass an index set to the run function, and only those functions with indexes
-will be run. See /example/errors.js
+This is used so that you dont have to keep setting functions on and off and to know what to control 
+f for when something fails. Pass an index set to the run function, and only those
+functions with indexeswill be run. See /example/errors.js
 
 @param {function_called: object}:
 function_called is the object containing the function in your application you are testing

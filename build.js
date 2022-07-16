@@ -7,7 +7,6 @@
   var inRange = require('./tests/inRange');
   var isEvenOrOdd = require('./tests/isEvenOrOdd');
   var hasRemainder = require('./tests/hasRemainder');
-  var timeTrial = require('./tests/timeTrial');
 
   function start_tests(tests, optional_index_array) { 
 
@@ -81,17 +80,18 @@
       for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
 
         var return_value;
-        var time_taken = Date.now();
+        var time_taken;
         var error_count = 0;
         var error_string = `\nERROR\nfunction index: ${i}/${typeof(tests[i].index) !== 'undefined' ? (typeof(tests[i].index) === 'object' ? '\nfunction index name: '+JSON.stringify(tests[i].index)+'/' : '\nfunction index name: '+tests[i].index)+'/' : ''}\nparameter index: ${j}/\n`;
 
         try {
+          time_taken = Date.now();
           return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
+          time_taken = Date.now() - time_taken;
         } catch(err) { 
+          time_taken = Date.now() - time_taken;
           return_value = err.message;
         }
-
-        time_taken = Date.now() - time_taken;
 
         var test_suite = { 
           value: typeof(tests[i].unit.allowed_values) === 'object' && tests[i].unit.allowed_values !== null ? value(tests[i], return_value, i, j) : 'PASSED',
@@ -102,7 +102,6 @@
           inRange: typeof(tests[i].unit.in_range) === 'object' && tests[i].unit.in_range !== null ? inRange(tests[i], return_value, i, j) : 'PASSED',
           isEvenOrOdd: typeof(tests[i].unit.is_even_or_odd) === 'object' && tests[i].unit.is_even_or_odd !== null ? isEvenOrOdd(tests[i], return_value, i, j) : 'PASSED',
           hasRemainder: typeof(tests[i].unit.has_remainder) === 'object' && tests[i].unit.has_remainder !== null ? hasRemainder(tests[i], return_value, i, j) : 'PASSED',
-          timeTrial: typeof(tests[i].unit.time_trial) === 'object' && tests[i].unit.time_trial !== null ? timeTrial(tests[i], return_value, i, j, time_taken) : 'PASSED'
         }
 
         if(test_suite.value !== 'PASSED') { 
@@ -145,12 +144,8 @@
           error_count++;
         }
 
-        if(test_suite.timeTrial !== 'PASSED') { 
-          error_string += test_suite.timeTrial;
-          error_count++;
-        }
-
         if(error_count > 0) { 
+          error_string += `execution time: ${time_taken}ms/\n`;
           error_sets.push(error_string);
         }
 
