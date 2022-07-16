@@ -6,7 +6,6 @@ var greaterThan = require('./tests/greaterThan');
 var lessThan = require('./tests/lessThan');
 var inRange = require('./tests/inRange');
 var isEvenOrOdd = require('./tests/isEvenOrOdd');
-var hasRemainder = require('./tests/hasRemainder');
 
 function start_tests(tests, optional_index_array) { 
 
@@ -113,7 +112,6 @@ function run_tests(tests) {
         lessThan: typeof(tests[i].unit.is_less_than) === 'object' && tests[i].unit.is_less_than !== null ? lessThan(tests[i], return_value, i, j) : 'PASSED',
         inRange: typeof(tests[i].unit.in_range) === 'object' && tests[i].unit.in_range !== null ? inRange(tests[i], return_value, i, j) : 'PASSED',
         isEvenOrOdd: typeof(tests[i].unit.is_even_or_odd) === 'object' && tests[i].unit.is_even_or_odd !== null ? isEvenOrOdd(tests[i], return_value, i, j) : 'PASSED',
-        hasRemainder: typeof(tests[i].unit.has_remainder) === 'object' && tests[i].unit.has_remainder !== null ? hasRemainder(tests[i], return_value, i, j) : 'PASSED',
       }
 
       if(test_suite.value !== 'PASSED') { 
