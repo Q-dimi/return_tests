@@ -1,8 +1,7 @@
 # return-tests
 
-return-tests loops through functions and runs as many parameterized tests per function that you add ([[4, 8], [10, 2]]).
-After a function executes a test case, its return value is compared against any of the chosen
-unit tests you have added. The three tests are listed below in the unit object.
+return-tests loops through functions and runs as many parameterized tests per function that you add ([[4, 8], [10, 2]]). After a function executes a test case, its return value is compared against any of the chosen
+unit tests you have added. The three tests are listed below in the unit object with more to come.
 
 ```sh
 npm i return-tests
@@ -38,6 +37,7 @@ for (let i = 0; i < errors.length; i++) {
   console.log(errors[i]);
   /*
     "function index: index where the function failed
+    function index name: name of index for running and testing certain sets (optional)
     parameter index: parameter index where the function failed (function_called.parameters)
     value error: error from unit.allowed_values.values
     type error: error from unit.allowed_types.values

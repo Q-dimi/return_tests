@@ -149,11 +149,6 @@ function run_tests(tests) {
         error_count++;
       }
 
-      if(test_suite.hasRemainder !== 'PASSED') { 
-        error_string += test_suite.hasRemainder;
-        error_count++;
-      }
-
       if(error_count > 0) { 
         error_string += `function and test execution time: ${Date.now() - time_taken}ms/\n`;
         error_sets.push(error_string);
