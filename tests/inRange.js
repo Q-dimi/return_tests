@@ -17,7 +17,7 @@ function test(test, return_value, i, j) {
             var found = false; 
 
             for(let k = 0; k < test.unit.in_range.values.length; k++) { 
-                if(return_value >= test.unit.in_range.values[k][0] && return_value <= test.unit.in_range.values[k][1]) { 
+                if(return_value >= test.unit.in_range.values[k][0] && return_value <= test.unit.in_range.values[k][1]) { //types on hehh mate
                     found = true;
                     break;
                 }
