@@ -151,6 +151,7 @@ function run_tests(tests) {
 
       if(error_count > 0) { 
         error_string += `function and test execution time: ${Date.now() - time_taken}ms/\n`;
+        error_string += `function description: ${tests[i].function_called.description}/\n`;
         error_sets.push(error_string);
       }
 
