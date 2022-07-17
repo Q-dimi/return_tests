@@ -1,0 +1,26 @@
+
+listening for changes.
+
+ERROR
+function index: 0/
+function index name: 1/
+parameter index: 0/
+value error: '8' does not match the allowed value '{"a":"3"}'/
+function and test execution time: 0ms/
+path: ../example/functions.js
+
+ERROR
+function index: 0/
+function index name: 1/
+parameter index: 1/
+value error: '5' does not match the allowed value '12'/
+function and test execution time: 0ms/
+path: ../example/functions.js
+
+ERROR
+function index: 0/
+function index name: 1/
+parameter index: 2/
+value error: '113' does not match the allowed value 'hello world'/
+function and test execution time: 0ms/
+path: ../example/functions.js
