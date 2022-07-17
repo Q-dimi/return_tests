@@ -8,7 +8,9 @@
   },
   "author": "Alexander Eatman",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "file-system": "^2.2.2"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/WPRESSBUNNYLLC/return-tests.git"
