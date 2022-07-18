@@ -1,5 +1,7 @@
 var type_test = require('./helpers/typeTest');
+
 function test(test, return_value, i, j) { 
+
  if(!type_test(
   test.unit.in_range, 
   test.unit.in_range.on, 
@@ -13,6 +15,7 @@ function test(test, return_value, i, j) {
    (index_exact: boolean)`
   );
  } 
+
  if(test.unit.in_range.on === true) { 
   if(test.unit.in_range.index_exact === false) { 
    var found = false; 
@@ -32,6 +35,9 @@ function test(test, return_value, i, j) {
    }
   }
  }
+
  return 'PASSED';
+
 }
+
 module.exports = test;

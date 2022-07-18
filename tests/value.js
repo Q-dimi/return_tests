@@ -1,5 +1,7 @@
 var type_test = require('./helpers/typeTest');
+
 function test(test, return_value, i, j) { 
+
  if(!type_test(
   test.unit.allowed_values, 
   test.unit.allowed_values.on, 
@@ -13,6 +15,7 @@ function test(test, return_value, i, j) {
    (index_exact: boolean)`
   );
  } 
+
  if(test.unit.allowed_values.on === true) {
   if(return_value === null || typeof(return_value) !== 'object') {
    if(
@@ -51,7 +54,9 @@ function test(test, return_value, i, j) {
    }
   }
  }
+
  return 'PASSED';
+
 }
 
 module.exports = test;

@@ -1,5 +1,7 @@
 var type_test = require('./helpers/typeTest');
+
 function test(test, return_value, i, j) { 
+
  if(!type_test(
   test.unit.regex_set, 
   test.unit.regex_set.on, 
@@ -13,6 +15,7 @@ function test(test, return_value, i, j) {
    (index_exact: boolean)`
   );
  } 
+
  if(test.unit.regex_set.on === true) {
   if(test.unit.regex_set.index_exact === false) {
    var es = '';
@@ -31,8 +34,11 @@ function test(test, return_value, i, j) {
    }
   }
  }
+
  return 'PASSED';
+
 }
+
 function testrg(regular_expression, return_value) { 
  try {
   return regular_expression.test(return_value);
@@ -40,4 +46,5 @@ function testrg(regular_expression, return_value) {
   return false;
  } 
 }
+
 module.exports = test;

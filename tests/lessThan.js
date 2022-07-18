@@ -1,4 +1,5 @@
 var type_test = require('./helpers/typeTest');
+
 function test(test, return_value, i, j) { 
  if(!type_test(
   test.unit.is_less_than, 
@@ -13,6 +14,7 @@ function test(test, return_value, i, j) {
    (index_exact: boolean)`
   );
  } 
+
  if(test.unit.is_less_than.on === true) { 
   if(test.unit.is_less_than.index_exact === false) { 
    var found = false;
@@ -32,6 +34,9 @@ function test(test, return_value, i, j) {
    }
   }
  }
+
  return 'PASSED';
+
 }
+
 module.exports = test;
