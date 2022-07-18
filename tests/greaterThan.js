@@ -1,4 +1,5 @@
 var type_test = require('./helpers/typeTest');
+var format = require('./helpers/stringFormatters');
 
 function test(test, return_value, i, j) { 
 
@@ -27,6 +28,11 @@ function test(test, return_value, i, j) {
    }
    if(found === false) { 
     return `greaterThanError: '${return_value}' is less than all of the values in the array '${JSON.stringify(test.unit.is_greater_than.values)}'\n`;
+    return format({
+     id: 'greaterThanAll', 
+     return_value: return_value, 
+     compared_to: JSON.stringify(test.unit.is_greater_than.values)
+    })
    } 
   }
   if(test.unit.is_greater_than.index_exact === true) { 

@@ -1,4 +1,5 @@
 var type_test = require('./helpers/typeTest');
+var format = require('./helpers/stringFormatters');
 
 function test(test, return_value, i, j) { 
  if(!type_test(
