@@ -9,201 +9,201 @@ var isEvenOrOdd = require('./tests/isEvenOrOdd');
 
 function start_tests(tests, optional_index_array) { 
 
-  if(
-    typeof(tests) !== 'object' || 
-    Array.isArray(tests) === false
-  ) { 
-    throw new Error('the functions you are passing must be an array');
+ if(
+  typeof(tests) !== 'object' || 
+  Array.isArray(tests) === false
+ ) { 
+  throw new Error('the functions you are passing must be an array');
+ }
+
+ if(
+  typeof(optional_index_array) === 'object' && 
+  Array.isArray(optional_index_array) === true && 
+  optional_index_array.length > 0
+ ) { 
+
+  var specific = [];
+
+  for(let i = 0; i < tests.length; i++) { 
+   if(
+    typeof(tests[i]) === 'object' && 
+    typeof(tests[i].index) !== 'undefined' && 
+    optional_index_array.includes(tests[i].index)
+   ) { 
+    specific.push(tests[i]);
+   }
   }
 
-  if(
-    typeof(optional_index_array) === 'object' && 
-    Array.isArray(optional_index_array) === true && 
-    optional_index_array.length > 0
-  ) { 
+  return run_tests(specific);
 
-    var specific = [];
+ }
 
-    for(let i = 0; i < tests.length; i++) { 
-      if(
-        typeof(tests[i]) === 'object' && 
-        typeof(tests[i].index) !== 'undefined' && 
-        optional_index_array.includes(tests[i].index)
-      ) { 
-        specific.push(tests[i]);
-      }
-    }
-
-    return run_tests(specific);
-
-  }
-
-  return run_tests(tests);
+ return run_tests(tests);
 
 }
       
 function run_tests(tests) {
 
-  var error_sets = [];
+ var error_sets = [];
 
-  for(let i = 0; i < tests.length; i++) { 
+ for(let i = 0; i < tests.length; i++) { 
 
-    if(
-      typeof(tests[i]) !== 'object' || 
-      typeof(tests[i].unit) !== 'object' || 
-      typeof(tests[i].function_called) !== 'object'
-    ) {
-      throw new Error(`
-        function index: ${i} \n
-        error: function index, (unit: object) and 
-        (function_called: object)
-        must be defined
-      `);
-    }
+  if(
+   typeof(tests[i]) !== 'object' || 
+   typeof(tests[i].unit) !== 'object' || 
+   typeof(tests[i].function_called) !== 'object'
+  ) {
+   throw new Error(`
+    function index: ${i} \n
+    error: function index, (unit: object) and 
+    (function_called: object)
+    must be defined
+   `);
+  }
 
-    var check_inside_errors = main_or_fallback_errors(
-      tests[i].function_called.function, 
-      tests[i].function_called.description, 
-      tests[i].function_called.on, 
-      tests[i].function_called.parameters,
-    ); 
+  var check_inside_errors = main_or_fallback_errors(
+   tests[i].function_called.function, 
+   tests[i].function_called.description, 
+   tests[i].function_called.on, 
+   tests[i].function_called.parameters,
+  ); 
 
-    if(check_inside_errors.error === true) { 
-      throw new Error(`
-        function index: ${i} \n 
-        ${check_inside_errors.error_string}
-      `);
-    };
+  if(check_inside_errors.error === true) { 
+   throw new Error(`
+    function index: ${i} \n 
+    ${check_inside_errors.error_string}
+   `);
+  };
 
-    if(tests[i].function_called.on !== true) { 
-      continue;
-    }
+  if(tests[i].function_called.on !== true) { 
+   continue;
+  }
 
-    for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
+  for(let j = 0; j < tests[i].function_called.parameters.length; j++) { 
 
-      if(
-        typeof(tests[i].function_called.parameters[j]) !== 'object' || 
-        Array.isArray(tests[i].function_called.parameters[j]) === false
-      ) { 
-        throw new Error(`
-          function index: ${i} \n 
-          parameter index: ${i} \n 
-          error: the parameters passed must be an array
-        `);
-      }
+   if(
+    typeof(tests[i].function_called.parameters[j]) !== 'object' || 
+    Array.isArray(tests[i].function_called.parameters[j]) === false
+   ) { 
+    throw new Error(`
+     function index: ${i} \n 
+     parameter index: ${i} \n 
+     error: the parameters passed must be an array
+    `);
+   }
 
-      var return_value;
-      var time_taken = Date.now();
-      var error_count = 0;
+   var return_value;
+   var time_taken = Date.now();
+   var error_count = 0;
 
-      var error_string = `\nERROR\nfunction index: ${i}${typeof(tests[i].index) !== 'undefined' ? (typeof(tests[i].index) === 'object' ? '\nfunction index name: '+JSON.stringify(tests[i].index)+'' : '\nfunction index name: '+tests[i].index)+'' : ''}\nparameter index: ${j}\n`;
+   var error_string = `\nERROR\nfunction index: ${i}${typeof(tests[i].index) !== 'undefined' ? (typeof(tests[i].index) === 'object' ? '\nfunction index name: '+JSON.stringify(tests[i].index)+'' : '\nfunction index name: '+tests[i].index)+'' : ''}\nparameter index: ${j}\n`;
 
-      try {
-        return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
-      } catch(err) { 
-        return_value = err.message;
-      }
+   try {
+    return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
+   } catch(err) { 
+    return_value = err.message;
+   }
 
-      var test_suite = { 
-        value: typeof(tests[i].unit.allowed_values) === 'object' && tests[i].unit.allowed_values !== null ? value(tests[i], return_value, i, j) : 'PASSED',
-        type: typeof(tests[i].unit.allowed_types) === 'object' && tests[i].unit.allowed_types !== null ? type(tests[i], return_value, i, j) : 'PASSED',
-        regex: typeof(tests[i].unit.regex_set) === 'object' && tests[i].unit.regex_set !== null ? regex(tests[i], return_value, i, j) : 'PASSED',
-        greaterThan: typeof(tests[i].unit.is_greater_than) === 'object' && tests[i].unit.is_greater_than !== null ? greaterThan(tests[i], return_value, i, j) : 'PASSED',
-        lessThan: typeof(tests[i].unit.is_less_than) === 'object' && tests[i].unit.is_less_than !== null ? lessThan(tests[i], return_value, i, j) : 'PASSED',
-        inRange: typeof(tests[i].unit.in_range) === 'object' && tests[i].unit.in_range !== null ? inRange(tests[i], return_value, i, j) : 'PASSED',
-        isEvenOrOdd: typeof(tests[i].unit.is_even_or_odd) === 'object' && tests[i].unit.is_even_or_odd !== null ? isEvenOrOdd(tests[i], return_value, i, j) : 'PASSED',
-      }
+   var test_suite = { 
+    value: typeof(tests[i].unit.allowed_values) === 'object' && tests[i].unit.allowed_values !== null ? value(tests[i], return_value, i, j) : 'PASSED',
+    type: typeof(tests[i].unit.allowed_types) === 'object' && tests[i].unit.allowed_types !== null ? type(tests[i], return_value, i, j) : 'PASSED',
+    regex: typeof(tests[i].unit.regex_set) === 'object' && tests[i].unit.regex_set !== null ? regex(tests[i], return_value, i, j) : 'PASSED',
+    greaterThan: typeof(tests[i].unit.is_greater_than) === 'object' && tests[i].unit.is_greater_than !== null ? greaterThan(tests[i], return_value, i, j) : 'PASSED',
+    lessThan: typeof(tests[i].unit.is_less_than) === 'object' && tests[i].unit.is_less_than !== null ? lessThan(tests[i], return_value, i, j) : 'PASSED',
+    inRange: typeof(tests[i].unit.in_range) === 'object' && tests[i].unit.in_range !== null ? inRange(tests[i], return_value, i, j) : 'PASSED',
+    isEvenOrOdd: typeof(tests[i].unit.is_even_or_odd) === 'object' && tests[i].unit.is_even_or_odd !== null ? isEvenOrOdd(tests[i], return_value, i, j) : 'PASSED',
+   }
 
-      error_string += `function and test execution time: ${Date.now() - time_taken}ms\n`;
-      error_string += `function description: ${tests[i].function_called.description}\n`;
+   error_string += `function and test execution time: ${Date.now() - time_taken}ms\n`;
+   error_string += `function description: ${tests[i].function_called.description}\n`;
 
-      if(test_suite.value !== 'PASSED') { 
-        error_string += test_suite.value;
-        error_count++;
-      }
+   if(test_suite.value !== 'PASSED') { 
+    error_string += test_suite.value;
+    error_count++;
+   }
 
-      if(test_suite.type !== 'PASSED') { 
-        error_string += test_suite.type;
-        error_count++;
-      }
+   if(test_suite.type !== 'PASSED') { 
+    error_string += test_suite.type;
+    error_count++;
+   }
 
-      if(test_suite.regex !== 'PASSED') { 
-        error_string += test_suite.regex;
-        error_count++;
-      }
+   if(test_suite.regex !== 'PASSED') { 
+    error_string += test_suite.regex;
+    error_count++;
+   }
 
-      if(test_suite.greaterThan !== 'PASSED') { 
-        error_string += test_suite.greaterThan;
-        error_count++;
-      }
+   if(test_suite.greaterThan !== 'PASSED') { 
+    error_string += test_suite.greaterThan;
+    error_count++;
+   }
 
-      if(test_suite.lessThan !== 'PASSED') { 
-        error_string += test_suite.lessThan;
-        error_count++;
-      }
+   if(test_suite.lessThan !== 'PASSED') { 
+    error_string += test_suite.lessThan;
+    error_count++;
+   }
 
-      if(test_suite.inRange !== 'PASSED') { 
-        error_string += test_suite.inRange;
-        error_count++;
-      }
+   if(test_suite.inRange !== 'PASSED') { 
+    error_string += test_suite.inRange;
+    error_count++;
+   }
 
-      if(test_suite.isEvenOrOdd !== 'PASSED') { 
-        error_string += test_suite.isEvenOrOdd;
-        error_count++;
-      }
+   if(test_suite.isEvenOrOdd !== 'PASSED') { 
+    error_string += test_suite.isEvenOrOdd;
+    error_count++;
+   }
 
-      if(error_count > 0) { 
-        error_sets.push(error_string);
-      }
-
-    }
+   if(error_count > 0) { 
+    error_sets.push(error_string);
+   }
 
   }
 
-  return error_sets;
+ }
+
+ return error_sets;
         
 }
 
 function main_or_fallback_errors(
-  function_, 
-  function_description, 
-  function_on, 
-  function_parameters,
+ function_, 
+ function_description, 
+ function_on, 
+ function_parameters,
 ) { 
 
-  var init_errors = '';
+ var init_errors = '';
 
-  if(typeof(function_) !== 'function') {
-    init_errors += '(function_called.function) must be a function \n';
-  }
+ if(typeof(function_) !== 'function') {
+  init_errors += '(function_called.function) must be a function \n';
+ }
 
-  if(typeof(function_description) !== 'object' && typeof(function_description) !== 'string') {
-    init_errors += '(function_called.description) must be null or a string \n';
-  }
+ if(typeof(function_description) !== 'object' && typeof(function_description) !== 'string') {
+  init_errors += '(function_called.description) must be null or a string \n';
+ }
 
-  if(typeof(function_on) !== 'boolean') {
-    init_errors += '(function_called.on) must be a boolean \n';
-  }
+ if(typeof(function_on) !== 'boolean') {
+  init_errors += '(function_called.on) must be a boolean \n';
+ }
 
-  if(typeof(function_parameters) !== 'object' || Array.isArray(function_parameters) === false) { 
-    init_errors += '(function_called.parameters) must be an array \n';
-  }
+ if(typeof(function_parameters) !== 'object' || Array.isArray(function_parameters) === false) { 
+  init_errors += '(function_called.parameters) must be an array \n';
+ }
 
-  if(init_errors.trim().length > 0) { 
-    return { 
-      error: true, 
-      error_string: init_errors
-    }
-  }
-
+ if(init_errors.trim().length > 0) { 
   return { 
-    error: false, 
-    error_string: init_errors
+   error: true, 
+   error_string: init_errors
   }
+ }
+
+ return { 
+  error: false, 
+  error_string: init_errors
+ }
 
 }
 
 module.exports = { 
-  run: start_tests, 
-  generate: generate_functions 
+ run: start_tests, 
+ generate: generate_functions 
 } 
