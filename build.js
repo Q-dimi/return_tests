@@ -12,9 +12,9 @@ var isEvenOrOdd = require('./tests/isEvenOrOdd');
  * runs tests
  *
  * - iterates through functions
- * - iterates throuh parameters sets of function
+ * - iterates through parameter sets of function
  * - passes a parameter set to the function
- * - returns a value
+ * - returns a value from that parameter set
  * - value is tested against any of the unit objects
  * 
  * @param {Array} tests The functions being tested

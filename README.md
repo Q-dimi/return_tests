@@ -110,6 +110,25 @@ module.exports = [
         index_exact: true,
         values: [/^([0-9])$/, /^([0-9])$/],
       },
+      is_greater_than: {
+        on: false,
+        index_exact: true,
+        values: [2, 5, 8],
+      },
+      is_less_than: {
+        on: false,
+        index_exact: true,
+        values: [2, 5, 8],
+      },
+      is_range: {
+        on: false,
+        index_exact: true,
+        values: [
+          [2, 6],
+          [1, 7],
+          [2, 8],
+        ],
+      },
     },
   },
 ];
@@ -143,44 +162,19 @@ the function you are testing
 @param {unit: object}:
 unit contains the three objects for testing (more tests will be added)
 
-@param {unit.allowed_types: object}:
-the object containing the allowed types the function must return
+@param {unit.x: object}:
+the object containing the test the function must return
 
-@param {unit.allowed_types.on: boolean}:
-whether or not to run the allowed types test on the return value 
+@param {unit.x.on: boolean}:
+whether or not to run the test
 
-@param {unit.allowed_types.index_exact: boolean}:
-check for a match across the entire array or check for a match on the
-exact index (function_called.parameters vs unit.allowed_types.values)
+@param {unit.x.index_exact: boolean}:
+check for a match or fact across the entire array or check for a match or fact on the
+exact index
 
-@param {unit.allowed_types.values: array}:
-types that must be equal to the return value of function_called.function
+@param {unit.x.values: array}:
+values that the return value for each parameter set compares itself to
 
-@param {unit.allowed_values: object}:
-the object containing allowed values the function must return
-
-@param {unit.allowed_values.on: boolean}:
-whether or not to run the allowed values test on the return value
-
-@param {unit.allowed_values.index_exact: boolean}:
-check for a match across the entire array or check for a match on the
-exact index (function_called.parameters vs unit.allowed_values.values)
-
-@param {unit.allowed_values.values: array}:
-values that must be equal to the return value of function_called.function
-
-@param {unit.regex_set: object}:
-the object containing the regular expressions the function must pass
-
-@param {unit.regex_set.on}:
-whether or not to run the regular expressions test on the return value
-
-@param {unit.regex_set.index_exact: boolean}:
-check for a match across the entire array or check for a match on the
-exact index (function_called.parameters vs unit.regex_set.values)
-
-@param {unit.allowed_values.regex_set: array}:
-regular expressions the return value must pass
 */
 ```
 
