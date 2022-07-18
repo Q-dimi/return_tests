@@ -1,4 +1,5 @@
 var generate_functions = require('./lib/generate');
+var format = require('./tests/helpers/stringFormatters');
 var type = require('./tests/type');
 var value = require('./tests/value');
 var regex = require('./tests/regex');
@@ -96,7 +97,12 @@ function run_tests(tests) {
    var time_taken = Date.now();
    var error_count = 0;
 
-   var error_string = `\nERROR\nfunction index: ${i}${typeof(tests[i].index) !== 'undefined' ? (typeof(tests[i].index) === 'object' ? '\nfunction index name: '+JSON.stringify(tests[i].index)+'' : '\nfunction index name: '+tests[i].index)+'' : ''}\nparameter index: ${j}\n`;
+   var error_string = format({ 
+    id: 'startString',
+    function_index: i, 
+    function_index_name: typeof(tests[i].index) !== 'undefined' ? typeof(tests[i].index) === 'object' ? JSON.stringify(tests[i].index) : tests[i].index : '', 
+    parameter_index: j
+   })
 
    try {
     return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);

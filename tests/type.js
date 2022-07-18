@@ -8,7 +8,7 @@ function test(test, return_value, i, j) {
   test.unit.allowed_types.on, 
   test.unit.allowed_types.values, 
   test.unit.allowed_types.index_exact
-  )) { 
+ )) { 
   throw new Error(`
    function index: ${i}\n
    error: (unit.allowed_types) must be an object 
@@ -35,7 +35,7 @@ function test(test, return_value, i, j) {
    test.unit.allowed_types.values[j] !== typeof(return_value)
   ) { 
    return format({
-    id: 'typeErrorAll', 
+    id: 'typeErrorOne', 
     return_value: typeof(return_value), 
     compared_to: test.unit.allowed_types.values[j]
    }); 

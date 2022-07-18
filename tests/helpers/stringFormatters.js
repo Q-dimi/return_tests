@@ -1,5 +1,7 @@
 function format(string_object) {
  switch(string_object.id) { 
+  case 'startString':
+   return `\nERROR\nfunction index: ${string_object.function_index} (${string_object.function_index_name})\nparameter index: ${string_object.parameter_index}\n`;
   case 'greaterThanErrorAll':
    return `greaterThanError: '${string_object.return_value}' is less than all of the values in the array '${string_object.compared_to}'\n`;
   case 'greaterThanErrorOne':
@@ -17,7 +19,13 @@ function format(string_object) {
   case 'regexErrorOne':
    return `regex error: '${string_object.return_value}' does not pass '${string_object.compared_to}'\n`;
   case 'valueErrorAll':
+   return `value error: '${string_object.return_value}' is not in the array of allowed values '${string_object.compared_to}'\n`;
   case 'valueErrorOne':
+   return `value error: '${string_object.return_value}' does not match the allowed value '${string_object.compared_to}'\n`;
+  case 'valueErrorAllObject':
+   return `value error: '${string_object.return_value}' is not in the array of allowed values '${string_object.compared_to}'\n`;
+  case 'valueErrorOneObject':
+   return `value error: '${string_object.return_value}' does not match the allowed value '${string_object.compared_to}'\n`;
   case 'typeErrorAll':
    return `type error: '${string_object.return_value}' is not in the array of allowed types '${string_object.compared_to}'\n`;
   case 'typeErrorOne':
