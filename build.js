@@ -96,7 +96,7 @@ function run_tests(tests) {
       var time_taken = Date.now();
       var error_count = 0;
 
-      var error_string = `\nERROR/\nfunction index: ${i}/${typeof(tests[i].index) !== 'undefined' ? (typeof(tests[i].index) === 'object' ? '\nfunction index name: '+JSON.stringify(tests[i].index)+'/' : '\nfunction index name: '+tests[i].index)+'/' : ''}\nparameter index: ${j}/\n`;
+      var error_string = `\nERROR\nfunction index: ${i}${typeof(tests[i].index) !== 'undefined' ? (typeof(tests[i].index) === 'object' ? '\nfunction index name: '+JSON.stringify(tests[i].index)+'' : '\nfunction index name: '+tests[i].index)+'' : ''}\nparameter index: ${j}\n`;
 
       try {
         return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
@@ -113,6 +113,9 @@ function run_tests(tests) {
         inRange: typeof(tests[i].unit.in_range) === 'object' && tests[i].unit.in_range !== null ? inRange(tests[i], return_value, i, j) : 'PASSED',
         isEvenOrOdd: typeof(tests[i].unit.is_even_or_odd) === 'object' && tests[i].unit.is_even_or_odd !== null ? isEvenOrOdd(tests[i], return_value, i, j) : 'PASSED',
       }
+
+      error_string += `function and test execution time: ${Date.now() - time_taken}ms\n`;
+      error_string += `function description: ${tests[i].function_called.description}\n`;
 
       if(test_suite.value !== 'PASSED') { 
         error_string += test_suite.value;
@@ -150,8 +153,6 @@ function run_tests(tests) {
       }
 
       if(error_count > 0) { 
-        error_string += `function and test execution time: ${Date.now() - time_taken}ms/\n`;
-        error_string += `function description: ${tests[i].function_called.description}/\n`;
         error_sets.push(error_string);
       }
 
