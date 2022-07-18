@@ -1,6 +1,15 @@
 var type_test = require('./helpers/typeTest');
 var format = require('./helpers/stringFormatters');
 
+/**
+ * makes sure the return value matches one or all of the allowed types (array)
+ * 
+ * @param {object} test The object containing the function which was just tested
+ * @param {Number} return_value The return value from the function which was just tested
+ * @param {Number} i the index of the function
+ * @param {Number} j the parameter index that was just executed
+*/
+
 function test(test, return_value, i, j) { 
 
  if(!type_test(

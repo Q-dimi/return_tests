@@ -8,6 +8,19 @@ var lessThan = require('./tests/lessThan');
 var inRange = require('./tests/inRange');
 var isEvenOrOdd = require('./tests/isEvenOrOdd');
 
+/**
+ * runs tests
+ *
+ * - iterates through functions
+ * - iterates throuh parameters sets of function
+ * - passes a parameter set to the function
+ * - returns a value
+ * - value is tested against any of the unit objects
+ * 
+ * @param {Array} tests The functions being tested
+ * @param {Array} optional_index_array array containing indexes of functions to ONLY test. Tests all functions if not passed
+*/
+
 function start_tests(tests, optional_index_array) { 
 
  if(
@@ -100,9 +113,14 @@ function run_tests(tests) {
    var error_string = format({ 
     id: 'startString',
     function_index: i, 
-    function_index_name: typeof(tests[i].index) !== 'undefined' ? typeof(tests[i].index) === 'object' ? JSON.stringify(tests[i].index) : tests[i].index : '', 
+    function_index_name: 
+    typeof(tests[i].index) !== 'undefined' ? 
+    typeof(tests[i].index) === 'object' ? 
+    JSON.stringify(tests[i].index) : 
+    tests[i].index : 
+    '', 
     parameter_index: j
-   })
+   });
 
    try {
     return_value = tests[i].function_called.function(...tests[i].function_called.parameters[j]);
@@ -169,6 +187,15 @@ function run_tests(tests) {
  return error_sets;
         
 }
+
+/**
+ * checks if function is set correctly
+ * 
+ * @param {function} function_ The function being tested
+ * @param {String} function_description The description of the function like filepath, name...ect
+ * @param {Boolean} function_on whether to run the function or not
+ * @param {Array} function_parameters the set of parameter sets being passed to the function [[1,2],[5,6]]
+*/
 
 function main_or_fallback_errors(
  function_, 
