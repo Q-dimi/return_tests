@@ -23,7 +23,12 @@ function test(test, return_value, i, j) {
    var es = '';
    for(let k = 0; k < test.unit.regex_set.values.length; k++) { 
     if(testrg(test.unit.regex_set.values[k], return_value) !== true) { 
-     es += `regex error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' does not pass '${test.unit.regex_set.values[k]} (index ${k})'\n`;
+     es += format({
+      id: 'regexErrorAll', 
+      return_value: typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value, 
+      compared_to: test.unit.regex_set.values[k], 
+      index: k
+     });
     }
    }
    if(es.trim().length > 0) { 
@@ -33,7 +38,11 @@ function test(test, return_value, i, j) {
 
   if(test.unit.regex_set.index_exact === true) { 
    if(testrg(test.unit.regex_set.values[j], return_value) !== true) { 
-    return `regex error: '${typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value}' does not pass '${test.unit.regex_set.values[j]}'\n`;
+    return format({
+     id: 'regexErrorOne', 
+     return_value: typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value, 
+     compared_to: test.unit.regex_set.values[j], 
+    });
    }
   }
   

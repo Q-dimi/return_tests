@@ -35,7 +35,7 @@ function start_tests(tests, optional_index_array) {
   }
 
   return run_tests(specific);
-
+  
  }
 
  return run_tests(tests);
