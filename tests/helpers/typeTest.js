@@ -10,5 +10,4 @@ function type_test(a, b, c, d) {
    return true;
  }
 }
-
 module.exports = type_test;
