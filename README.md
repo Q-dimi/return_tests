@@ -191,3 +191,9 @@ through functions and for each, input many sets of parameters.
 Every return value from each set of parameters is compared to one of the unit
 object tests you have added. Errors are displayed as a string. For best use, set every function to
 on and use index sets so that you get to decide what to run.
+
+# Fork Me
+
+return-tests is a small project I decided to make because I could not find anything similar.
+Although just started and not anywhere near completion, if you feel return-tests is useful, fork it and
+add it to your already existing testing framework.
