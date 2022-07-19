@@ -92,7 +92,8 @@ module.exports = [
       if unit.x.on is true, return value of function_called.function is tested against
       unit.x.values. You may remove tests you dont need (unit.x) but the unit object
       itself must exist during execution. When using a test, on, index_exact and
-      values must be defined.
+      values must be defined. If you want to add a test, check out /tests 
+      tests you can add (see contributing): (isLength, isLengthGreaterThan, isLengthLessThan, isEvenOrOdd...)
     */
     unit: {
       allowed_types: {
@@ -120,7 +121,7 @@ module.exports = [
         index_exact: true,
         values: [2, 5, 8],
       },
-      is_range: {
+      in_range: {
         on: false,
         index_exact: true,
         values: [
@@ -176,6 +177,54 @@ exact index
 values that the return value for each parameter set compares itself to
 
 */
+```
+
+# Working Sets
+
+To view your errors live in a page, use working sets. Spin up a terminal and type node 'filepath'
+and your errors will display in node_modules/return_tests/yourkey.html
+
+```js
+var live_changes = require("../lib/listen");
+
+/*
+  index_a.html will show all path errors where path is set 
+  of functions like /example/functions.js ...keep the html pages
+  open that are live and use them to view errors when making changes
+*/
+
+live_changes.set_working_set({
+  index_a: { on: true, paths: ["../example/functions.js"], errors: [] },
+  index_b: { on: true, paths: ["../example/functions.js"], errors: [] },
+});
+
+/*
+  starts writing errors to file
+*/
+
+try {
+  live_changes.start_interval();
+} catch (err) {
+  console.log(err.message);
+}
+
+/*
+  gets the current working set
+*/
+
+live_changes.get_working_set();
+
+/*
+  checks if the interval is running (pages being displayed)
+*/
+
+live_changes.interval_status();
+
+/*
+  stops listening for changes (same as ctrl c) <- leave interval on to view changes and dont do this
+*/
+
+live_changes.stop_interval();
 ```
 
 # Uses
