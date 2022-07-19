@@ -1,4 +1,4 @@
-# /return-tests/tests
+# Adding a Test
 
 1. see the example in examples/functions.js (add your test in the unit object)
 2. to make a test, write out must_be_x with the three parameters
