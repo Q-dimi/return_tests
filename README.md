@@ -1,7 +1,7 @@
 # return-tests
 
 return-tests loops through functions and runs as many parameterized tests per function that you add ([[4, 8], [10, 2]]). After a function executes a test case, its return value is compared against any of the chosen
-unit tests you have added. The three tests are listed below in the unit object with more to come.
+unit tests you have added. The tests are listed below in the unit object with more to come.
 
 ```sh
 npm i return-tests
@@ -36,7 +36,7 @@ var index_set_D = ["math", "business"];
 var errors = [];
 
 try {
-  errors = return_tests.run(functions /*,index_set_A*/); //only run functions containing a 'math' index (optional)
+  errors = return_tests.run(functions /*,index_set_A*/); //only test functions containing a 'math' index (optional)
 } catch (err) {
   console.log(err.message);
 }
@@ -47,9 +47,9 @@ for (let i = 0; i < errors.length; i++) {
     "function index: index where the function failed
     function index name: name of index for running and testing certain sets (optional)
     parameter index: parameter index where the function failed (function_called.parameters)
-    value error: error from unit.allowed_values.values
-    type error: error from unit.allowed_types.values
-    regex_error: error from unit.regex_set.values"
+    Execution time: execution time
+    function description: function description
+    ERRORS
   */
 }
 ```
@@ -82,7 +82,8 @@ module.exports = [
         each parameter set is passed
         to the function and a return value
         is tested against the unit objects
-        which are on
+        which are on. Take out tests you don't
+        need. 
       */
       parameters: [
         [1, 10],
@@ -97,11 +98,7 @@ module.exports = [
       },
     },
     /*
-      if unit.x.on is true, return value of function_called.function is tested against
-      all of one one of unit.x.values. You may remove tests you dont need (unit.x) but the unit object
-      itself must exist during execution. When using a test, x.on, x.index_exact and
-      x.values must be defined. If you want to add a test, check out /tests. 
-      Tests you can add now (see contributing): (isLength, isLengthGreaterThan, isLengthLessThan, isEvenOrOdd...)
+      add tests here.  
     */
     unit: {
       must_be_type: {
