@@ -13,44 +13,44 @@ var format = require('./helpers/stringFormatters');
 function test(test, return_value, i, j) { 
 
  if(!type_test(
-  test.unit.allowed_values, 
-  test.unit.allowed_values.on, 
-  test.unit.allowed_values.values, 
-  test.unit.allowed_values.index_exact
+  test.unit.must_be_value, 
+  test.unit.must_be_value.on, 
+  test.unit.must_be_value.values, 
+  test.unit.must_be_value.index_exact
  )) { 
   throw new Error(`
    function index: ${i}\n
-   error: (unit.allowed_values) must be an object 
+   error: (unit.must_be_value) must be an object 
    with parameters (on: boolean) (values: array) 
    (index_exact: boolean)`
   );
  } 
 
- if(test.unit.allowed_values.on === true) {
+ if(test.unit.must_be_value.on === true) {
 
   if(return_value === null || typeof(return_value) !== 'object') {
 
    if(
-    test.unit.allowed_values.index_exact === false && 
-    test.unit.allowed_values.values.includes(return_value) !== true
+    test.unit.must_be_value.index_exact === false && 
+    test.unit.must_be_value.values.includes(return_value) !== true
    ) { 
     return format({
      id: 'valueErrorAll', 
      return_value: return_value, 
-     compared_to: JSON.stringify(test.unit.allowed_values.values)
+     compared_to: JSON.stringify(test.unit.must_be_value.values)
     }); 
    }
 
    if(
-    test.unit.allowed_values.index_exact === true && 
-    test.unit.allowed_values.values[j] !== return_value
+    test.unit.must_be_value.index_exact === true && 
+    test.unit.must_be_value.values[j] !== return_value
    ) { 
     return format({
      id: 'valueErrorOne', 
      return_value: return_value, 
-     compared_to: typeof(test.unit.allowed_values.values[j]) === 'object' ? 
-     JSON.stringify(test.unit.allowed_values.values[j]) : 
-     test.unit.allowed_values.values[j]
+     compared_to: typeof(test.unit.must_be_value.values[j]) === 'object' ? 
+     JSON.stringify(test.unit.must_be_value.values[j]) : 
+     test.unit.must_be_value.values[j]
     }); 
    }
 
@@ -58,11 +58,11 @@ function test(test, return_value, i, j) {
 
   if(typeof(return_value) === 'object') { 
 
-   if(test.unit.allowed_values.index_exact === false) {
+   if(test.unit.must_be_value.index_exact === false) {
     var found = false;
-    for(let k = 0; k < test.unit.allowed_values.values.length; k++) { 
-     if(typeof(test.unit.allowed_values.values[k]) === 'object') { 
-      if(JSON.stringify(test.unit.allowed_values.values[k]) === JSON.stringify(return_value)) { //change this
+    for(let k = 0; k < test.unit.must_be_value.values.length; k++) { 
+     if(typeof(test.unit.must_be_value.values[k]) === 'object') { 
+      if(JSON.stringify(test.unit.must_be_value.values[k]) === JSON.stringify(return_value)) { //change this
        found = true;
        break;
       }
@@ -72,21 +72,21 @@ function test(test, return_value, i, j) {
      return format({
       id: 'valueErrorAllObject', 
       return_value: JSON.stringify(return_value), 
-      compared_to: JSON.stringify(test.unit.allowed_values.values)
+      compared_to: JSON.stringify(test.unit.must_be_value.values)
      });
     }
    }
 
    if(
-    test.unit.allowed_values.index_exact === true && 
-    JSON.stringify(test.unit.allowed_values.values[j]) !== JSON.stringify(return_value) //change this
+    test.unit.must_be_value.index_exact === true && 
+    JSON.stringify(test.unit.must_be_value.values[j]) !== JSON.stringify(return_value) //change this
    ) { 
     return format({
      id: 'valueErrorOneObject', 
      return_value: JSON.stringify(return_value), 
-     compared_to: typeof(test.unit.allowed_values.values[j]) === 'object' ? 
-     JSON.stringify(test.unit.allowed_values.values[j]) : 
-     test.unit.allowed_values.values[j]
+     compared_to: typeof(test.unit.must_be_value.values[j]) === 'object' ? 
+     JSON.stringify(test.unit.must_be_value.values[j]) : 
+     test.unit.must_be_value.values[j]
     });
    }
 

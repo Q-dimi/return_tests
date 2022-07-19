@@ -104,32 +104,32 @@ module.exports = [
       Tests you can add now (see contributing): (isLength, isLengthGreaterThan, isLengthLessThan, isEvenOrOdd...)
     */
     unit: {
-      allowed_types: {
+      must_be_type: {
         on: false,
         index_exact: false,
         values: ["string", "number"],
       },
-      allowed_values: {
+      must_be_value: {
         on: true,
         index_exact: false,
         values: [12, 12],
       },
-      regex_set: {
+      must_pass_regex: {
         on: false,
         index_exact: true,
         values: [/^([0-9])$/, /^([0-9])$/],
       },
-      is_greater_than: {
+      must_be_greater_than: {
         on: false,
         index_exact: true,
         values: [2, 5, 8],
       },
-      is_less_than: {
+      must_be_less_than: {
         on: false,
         index_exact: true,
         values: [2, 5, 8],
       },
-      in_range: {
+      must_be_in_range: {
         on: false,
         index_exact: true,
         values: [

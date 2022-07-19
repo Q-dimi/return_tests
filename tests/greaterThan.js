@@ -2,7 +2,7 @@ var type_test = require('./helpers/typeTest');
 var format = require('./helpers/stringFormatters');
 
 /**
- * makes sure the return value is greater than one or all of test.unit.is_greater_than.values (array)
+ * makes sure the return value is greater than one or all of test.unit.must_be_greater_than.values (array)
  * 
  * @param {object} test The object containing the function which was just tested
  * @param {Number} return_value The return value from the function which was just tested
@@ -13,25 +13,25 @@ var format = require('./helpers/stringFormatters');
 function test(test, return_value, i, j) { 
 
  if(!type_test(
-  test.unit.is_greater_than, 
-  test.unit.is_greater_than.on, 
-  test.unit.is_greater_than.values, 
-  test.unit.is_greater_than.index_exact
+  test.unit.must_be_greater_than, 
+  test.unit.must_be_greater_than.on, 
+  test.unit.must_be_greater_than.values, 
+  test.unit.must_be_greater_than.index_exact
  )) { 
   throw new Error(`
    function index: ${i}\n
-   error: (unit.is_greater_than) must be an object 
+   error: (unit.must_be_greater_than) must be an object 
    with parameters (on: boolean) (values: array) 
    (index_exact: boolean)`
   );
  } 
 
- if(test.unit.is_greater_than.on === true) { 
+ if(test.unit.must_be_greater_than.on === true) { 
 
-  if(test.unit.is_greater_than.index_exact === false) { 
+  if(test.unit.must_be_greater_than.index_exact === false) { 
    var found = false;
-   for(let k = 0; k < test.unit.is_greater_than.values.length; k++) { 
-    if(return_value > test.unit.is_greater_than.values[k]) {
+   for(let k = 0; k < test.unit.must_be_greater_than.values.length; k++) { 
+    if(return_value > test.unit.must_be_greater_than.values[k]) {
      found = true;
      break;
     }
@@ -40,17 +40,17 @@ function test(test, return_value, i, j) {
     return format({
      id: 'greaterThanErrorAll', 
      return_value: return_value, 
-     compared_to: JSON.stringify(test.unit.is_greater_than.values)
+     compared_to: JSON.stringify(test.unit.must_be_greater_than.values)
     });
    } 
   }
 
-  if(test.unit.is_greater_than.index_exact === true) { 
-   if(return_value < test.unit.is_greater_than.values[j]) { 
+  if(test.unit.must_be_greater_than.index_exact === true) { 
+   if(return_value < test.unit.must_be_greater_than.values[j]) { 
     return format({
      id: 'greaterThanErrorOne', 
      return_value: return_value, 
-     compared_to: test.unit.is_greater_than.values[j]
+     compared_to: test.unit.must_be_greater_than.values[j]
     });
    }
   }

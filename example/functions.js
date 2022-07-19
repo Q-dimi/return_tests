@@ -34,7 +34,7 @@ module.exports = [
       }
     }, 
     unit: { 
-      allowed_values: {
+      must_be_value: {
         on: true,
         index_exact: true,
         values: [{a: '3'}, 12, 'hello world', 44] //(fail, fail, fail, pass) /|\

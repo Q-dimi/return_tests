@@ -13,40 +13,40 @@ var format = require('./helpers/stringFormatters');
 function test(test, return_value, i, j) { 
 
  if(!type_test(
-  test.unit.allowed_types, 
-  test.unit.allowed_types.on, 
-  test.unit.allowed_types.values, 
-  test.unit.allowed_types.index_exact
+  test.unit.must_be_type, 
+  test.unit.must_be_type.on, 
+  test.unit.must_be_type.values, 
+  test.unit.must_be_type.index_exact
  )) { 
   throw new Error(`
    function index: ${i}\n
-   error: (unit.allowed_types) must be an object 
+   error: (unit.must_be_type) must be an object 
    with parameters (on: boolean) (values: array) 
    (index_exact: boolean)`
   );
  } 
 
- if(test.unit.allowed_types.on === true) {
+ if(test.unit.must_be_type.on === true) {
 
   if(
-   test.unit.allowed_types.index_exact === false && 
-   test.unit.allowed_types.values.includes(typeof(return_value)) !== true
+   test.unit.must_be_type.index_exact === false && 
+   test.unit.must_be_type.values.includes(typeof(return_value)) !== true
   ) {
    return format({
     id: 'typeErrorAll', 
     return_value: typeof(return_value), 
-    compared_to: JSON.stringify(test.unit.allowed_types.values)
+    compared_to: JSON.stringify(test.unit.must_be_type.values)
    }); 
   }
 
   if(
-   test.unit.allowed_types.index_exact === true && 
-   test.unit.allowed_types.values[j] !== typeof(return_value)
+   test.unit.must_be_type.index_exact === true && 
+   test.unit.must_be_type.values[j] !== typeof(return_value)
   ) { 
    return format({
     id: 'typeErrorOne', 
     return_value: typeof(return_value), 
-    compared_to: test.unit.allowed_types.values[j]
+    compared_to: test.unit.must_be_type.values[j]
    }); 
   }
 

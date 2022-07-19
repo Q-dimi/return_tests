@@ -7,6 +7,10 @@ var greaterThan = require('./tests/greaterThan');
 var lessThan = require('./tests/lessThan');
 var inRange = require('./tests/inRange');
 var isEvenOrOdd = require('./tests/isEvenOrOdd');
+var isDivisibleBy = require('./tests/isDivisibleBy');
+var isOfLength = require('./tests/isOfLength');
+var lengthGreaterThan = require('./tests/lengthGreaterThan');
+var lengthLessThan = require('./tests/lengthLessThan');
 
 /**
  * runs tests
@@ -80,6 +84,7 @@ function run_tests(tests) {
    tests[i].function_called.description, 
    tests[i].function_called.on, 
    tests[i].function_called.parameters,
+   tests[i].unit
   ); 
 
   if(check_inside_errors.error === true) { 
@@ -87,7 +92,7 @@ function run_tests(tests) {
     function index: ${i} \n 
     ${check_inside_errors.error_string}
    `);
-  };
+  }
 
   if(tests[i].function_called.on !== true) { 
    continue;
@@ -129,14 +134,18 @@ function run_tests(tests) {
    }
 
    var test_suite = { 
-    value: typeof(tests[i].unit.allowed_values) === 'object' && tests[i].unit.allowed_values !== null ? value(tests[i], return_value, i, j) : 'PASSED',
-    type: typeof(tests[i].unit.allowed_types) === 'object' && tests[i].unit.allowed_types !== null ? type(tests[i], return_value, i, j) : 'PASSED',
-    regex: typeof(tests[i].unit.regex_set) === 'object' && tests[i].unit.regex_set !== null ? regex(tests[i], return_value, i, j) : 'PASSED',
-    greaterThan: typeof(tests[i].unit.is_greater_than) === 'object' && tests[i].unit.is_greater_than !== null ? greaterThan(tests[i], return_value, i, j) : 'PASSED',
-    lessThan: typeof(tests[i].unit.is_less_than) === 'object' && tests[i].unit.is_less_than !== null ? lessThan(tests[i], return_value, i, j) : 'PASSED',
-    inRange: typeof(tests[i].unit.in_range) === 'object' && tests[i].unit.in_range !== null ? inRange(tests[i], return_value, i, j) : 'PASSED',
-    isEvenOrOdd: typeof(tests[i].unit.is_even_or_odd) === 'object' && tests[i].unit.is_even_or_odd !== null ? isEvenOrOdd(tests[i], return_value, i, j) : 'PASSED',
-   }
+    value: typeof(tests[i].unit.must_be_value) === 'object' && tests[i].unit.must_be_value !== null ? value(tests[i], return_value, i, j) : 'PASSED',
+    type: typeof(tests[i].unit.must_be_type) === 'object' && tests[i].unit.must_be_type !== null ? type(tests[i], return_value, i, j) : 'PASSED',
+    regex: typeof(tests[i].unit.must_pass_regex) === 'object' && tests[i].unit.must_pass_regex !== null ? regex(tests[i], return_value, i, j) : 'PASSED',
+    greaterThan: typeof(tests[i].unit.must_be_greater_than) === 'object' && tests[i].unit.must_be_greater_than !== null ? greaterThan(tests[i], return_value, i, j) : 'PASSED',
+    lessThan: typeof(tests[i].unit.must_be_less_than) === 'object' && tests[i].unit.must_be_less_than !== null ? lessThan(tests[i], return_value, i, j) : 'PASSED',
+    inRange: typeof(tests[i].unit.must_be_in_range) === 'object' && tests[i].unit.must_be_in_range !== null ? inRange(tests[i], return_value, i, j) : 'PASSED',
+    isEvenOrOdd: typeof(tests[i].unit.must_be_even_or_odd) === 'object' && tests[i].unit.must_be_even_or_odd !== null ? isEvenOrOdd(tests[i], return_value, i, j) : 'PASSED',
+    isDivisibleBy: typeof(tests[i].unit.must_be_divisible_by) === 'object' && tests[i].unit.must_be_divisible_by !== null ? isDivisibleBy(tests[i], return_value, i, j) : 'PASSED',
+    isOfLength: typeof(tests[i].unit.must_be_length) === 'object' && tests[i].unit.must_be_length !== null ? isOfLength(tests[i], return_value, i, j) : 'PASSED',
+    lengthGreaterThan: typeof(tests[i].unit.must_be_greater_than_length) === 'object' && tests[i].unit.must_be_greater_than_length !== null ? lengthGreaterThan(tests[i], return_value, i, j) : 'PASSED',
+    lengthLessThan: typeof(tests[i].unit.must_be_less_than_length) === 'object' && tests[i].unit.must_be_less_than_length !== null ? lengthLessThan(tests[i], return_value, i, j) : 'PASSED',
+   };
 
    error_string += `function and test execution time: ${Date.now() - time_taken}ms\n`;
    error_string += `function description: ${tests[i].function_called.description}\n`;
@@ -176,6 +185,26 @@ function run_tests(tests) {
     error_count++;
    }
 
+   if(test_suite.isDivisibleBy !== 'PASSED') { 
+    error_string += test_suite.isDivisibleBy;
+    error_count++;
+   }
+
+   if(test_suite.isOfLength !== 'PASSED') { 
+    error_string += test_suite.isOfLength ;
+    error_count++;
+   }
+
+   if(test_suite.lengthGreaterThan !== 'PASSED') { 
+    error_string += test_suite.lengthGreaterThan;
+    error_count++;
+   }
+
+   if(test_suite.lengthLessThan !== 'PASSED') { 
+    error_string += test_suite.lengthLessThan;
+    error_count++;
+   }
+
    if(error_count > 0) { 
     error_sets.push(error_string);
    }
@@ -189,7 +218,7 @@ function run_tests(tests) {
 }
 
 /**
- * checks if function is set correctly
+ * checks if function index function_called is set correctly
  * 
  * @param {function} function_ The function being tested
  * @param {String} function_description The description of the function like filepath, name...ect
@@ -202,6 +231,7 @@ function main_or_fallback_errors(
  function_description, 
  function_on, 
  function_parameters,
+ unit
 ) { 
 
  var init_errors = '';
@@ -220,6 +250,10 @@ function main_or_fallback_errors(
 
  if(typeof(function_parameters) !== 'object' || Array.isArray(function_parameters) === false) { 
   init_errors += '(function_called.parameters) must be an array \n';
+ }
+
+ if(typeof(unit) !== 'object' || unit === null) { 
+  init_errors += '(unit) must be an object \n';
  }
 
  if(init_errors.trim().length > 0) { 
