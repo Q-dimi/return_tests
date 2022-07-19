@@ -23,7 +23,7 @@ module.exports = [
     */
     function_called: {
       on: true,
-      description: 'filepath is -x-wow',
+      description: 'filepath is... and',
       parameters: [[2, 6], [3, 2], [90, 23], [22, 22]], //(fail, fail, fail, pass) \|/
       function: function (a, b) {
         try { 
