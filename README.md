@@ -16,13 +16,21 @@ a standard testing example see /example/functions.js
 var return_tests = require("return-tests");
 var functions = require("my_testing_functions");
 
-//only run math functions
+/*
+  only test math functions <- index math must be set on function
+*/
 var index_set_A = ["math"];
-//only run business functions
+/*
+  only test business functions
+*/
 var index_set_B = ["business"];
-//only run to do functions
+/*
+  only test todo functions
+*/
 var index_set_C = ["todo"];
-//run math and business
+/*
+  only test math and business functions
+*/
 var index_set_D = ["math", "business"];
 
 var errors = [];
@@ -90,10 +98,10 @@ module.exports = [
     },
     /*
       if unit.x.on is true, return value of function_called.function is tested against
-      unit.x.values. You may remove tests you dont need (unit.x) but the unit object
-      itself must exist during execution. When using a test, on, index_exact and
-      values must be defined. If you want to add a test, check out /tests 
-      tests you can add (see contributing): (isLength, isLengthGreaterThan, isLengthLessThan, isEvenOrOdd...)
+      all of one one of unit.x.values. You may remove tests you dont need (unit.x) but the unit object
+      itself must exist during execution. When using a test, x.on, x.index_exact and
+      x.values must be defined. If you want to add a test, check out /tests. 
+      Tests you can add now (see contributing): (isLength, isLengthGreaterThan, isLengthLessThan, isEvenOrOdd...)
     */
     unit: {
       allowed_types: {
@@ -161,10 +169,10 @@ the sets of parameters passed to the function during execution
 the function you are testing
 
 @param {unit: object}:
-unit contains the three objects for testing (more tests will be added)
+unit contains the testing objects (more tests will be added)
 
 @param {unit.x: object}:
-the object containing the test the function must return
+the object containing x.on, x.index_exact and x.values (the array the return value compares itself to)
 
 @param {unit.x.on: boolean}:
 whether or not to run the test
@@ -174,7 +182,7 @@ check for a match or fact across the entire array or check for a match or fact o
 exact index
 
 @param {unit.x.values: array}:
-values that the return value for each parameter set compares itself to
+array of values the return value compares itself to (all of them or one depending on index_exact)
 
 */
 ```
