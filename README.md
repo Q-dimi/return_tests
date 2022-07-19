@@ -182,7 +182,7 @@ values that the return value for each parameter set compares itself to
 # Working Sets
 
 To view your errors live in a page, use working sets. Spin up a terminal and type node 'filepath'
-and your errors will display in node_modules/return_tests/pages/yourkey.html
+and your errors will display in node_modules/return-tests/pages/yourkey.html
 
 ```js
 var live_changes = require("../lib/listen");
