@@ -135,6 +135,11 @@ module.exports = [
           [2, 8],
         ],
       },
+      must_be_even_or_odd: {
+        on: true,
+        index_exact: true,
+        values: ["even", "odd", "odd", "even"],
+      },
     },
   },
 ];

@@ -34,6 +34,10 @@ function format(string_object) {
    return `type error: '${string_object.return_value}' is not in the array of allowed types '${string_object.compared_to}'\n`;
   case 'typeErrorOne':
    return `type error: '${string_object.return_value}' does not match the allowed type '${string_object.compared_to}'\n`;
- }
+   case 'evenOrOddErrorAll': 
+   return `even or odd error: ${string_object.return_value % 2 === 0 ? `even return value '${string_object.return_value}' was compared to an 'odd' string in ` : `odd return value '${string_object.return_value}' was compared to an 'even' string in `} the array '${string_object.compared_to}'\n`;
+  case 'evenOrOddErrorOne':
+    return `even or odd error: ${string_object.return_value % 2 === 0 ? `even return value '${string_object.return_value}' was compared to an '${string_object.compared_to}' string` : `odd return value '${string_object.return_value}' was compared to an '${string_object.compared_to}' string`}\n`;
+  }
 }
 module.exports = format;

@@ -10,8 +10,8 @@ var format = require('./tests/helpers/stringFormatters');
  * - returns a value from that parameter set
  * - value is tested against any of the unit objects
  * 
- * @param {Array} tests The functions being tested
- * @param {Array} optional_index_array array containing indexes of functions to ONLY test. Tests all functions if not passed
+ * @param {Array} tests - The functions being tested
+ * @param {Array} optional_index_array - array containing indexes of functions to ONLY test. Tests all functions if not passed
 */
 
 function start_tests(tests, optional_index_array) { 

@@ -24,7 +24,7 @@ module.exports = [
     function_called: {
       on: true,
       description: 'filepath is... and',
-      parameters: [[2, 6], [3, 2], [90, 23], [22, 22]], //(fail, fail, fail, pass) \|/
+      parameters: [[2, 5], [3, 2], [90, 10], [22, 22]], //(fail, fail, fail, pass) \|/
       function: function (a, b) {
         try { 
           return a + b; 
@@ -38,7 +38,7 @@ module.exports = [
         on: true,
         index_exact: true,
         values: [{a: '3'}, 12, 'hello world', 44] //(fail, fail, fail, pass) /|\
-      }, 
+      }
     }  
   }
 ];
