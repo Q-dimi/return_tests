@@ -15,10 +15,10 @@ module.exports = [
     index: 1,
     /*
       standard test example. 
-      compares unit.allowed_values.values array 
+      compares unit.must_be_value.values array 
       with the function_called.parameters array
       AT each index. Return value from function_called.parameters[i]
-      must match unit.allowed_values.values[i]. 
+      must match unit.must_be_value.values[i]. 
       type 'node example/errors.js' to see errors
     */
     function_called: {
