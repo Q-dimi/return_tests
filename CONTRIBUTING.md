@@ -1,10 +1,9 @@
 # Adding a Test
 
-1. see the example in examples/functions.js (add your test in the unit object)
-2. to make a test, write out must_be_x with the three parameters
-3. add the test in the header of build.js and in the body of build.js (in the object and add the if condition)
-4. create the test file in /tests/yourfilename.js
-5. make sure to format the string correctly in helpers/stringFormatter.js
+1. see the example in examples/functions.js (add your test in the unit object with the three parameters)
+2. add the test in suite.js (follow the format)
+3. create the test file in /tests/yourfilename.js (make sure to format the string correctly in helpers/stringFormatter.js)
+4. add the if condition after the long list of in build.js
 
 <br>
 All formats for every test are the same.
