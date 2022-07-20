@@ -190,7 +190,7 @@ To view your errors live in a page, use working sets. Spin up a terminal and typ
 and your errors will display in node_modules/return-tests/pages/yourkey.html
 
 ```js
-var live_changes = require("../lib/listen");
+var return_tests = require("return-tests");
 
 /*
   'index_a.html (and b)' will show all errors of
@@ -199,7 +199,7 @@ var live_changes = require("../lib/listen");
   to see live errors
 */
 
-live_changes.set_working_set({
+return_tests.live_changes.set_working_set({
   index_a: { on: true, paths: ["../example/functions.js"] },
   index_b: { on: true, paths: ["../example/functions.js"] },
 });
@@ -209,7 +209,7 @@ live_changes.set_working_set({
 */
 
 try {
-  live_changes.start_interval();
+  return_tests.live_changes.start_interval();
 } catch (err) {
   console.log(err.message);
 }
@@ -218,19 +218,19 @@ try {
   gets the current working set
 */
 
-live_changes.get_working_set();
+return_tests.live_changes.get_working_set();
 
 /*
   checks if the interval is running (pages being displayed)
 */
 
-live_changes.interval_status();
+return_tests.live_changes.interval_status();
 
 /*
   stops listening for changes (same as ctrl c) <- leave interval on to view changes and dont do this
 */
 
-live_changes.stop_interval();
+return_tests.live_changes.stop_interval();
 ```
 
 # Uses

@@ -1,4 +1,4 @@
-var return_tests = require('../build'); //'return-tests'
+var return_tests = require('../index'); //'return-tests'
 var functions = require('./functions'); //functions testing
 
 //only test math functions
@@ -13,7 +13,7 @@ var index_set_D = ['math', 'business'];
 var errors = [];
 
 try { 
-  errors = return_tests.run(functions /*, index_set_A */); //only run functions containing a 'math' index (optional) 
+  errors = return_tests.run(functions);
 } catch(err) { 
   console.log(err.message)
 }

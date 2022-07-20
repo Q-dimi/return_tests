@@ -1,16 +1,5 @@
-var generate_functions = require('./lib/generate');
+var suite = require('./suite');
 var format = require('./tests/helpers/stringFormatters');
-var type = require('./tests/type');
-var value = require('./tests/value');
-var regex = require('./tests/regex');
-var greaterThan = require('./tests/greaterThan');
-var lessThan = require('./tests/lessThan');
-var inRange = require('./tests/inRange');
-var isEvenOrOdd = require('./tests/isEvenOrOdd');
-var isDivisibleBy = require('./tests/isDivisibleBy');
-var isOfLength = require('./tests/isOfLength');
-var lengthGreaterThan = require('./tests/lengthGreaterThan');
-var lengthLessThan = require('./tests/lengthLessThan');
 
 /**
  * runs tests
@@ -79,12 +68,11 @@ function run_tests(tests) {
    `);
   }
 
-  var check_inside_errors = main_or_fallback_errors(
+  var check_inside_errors = inside_errors(
    tests[i].function_called.function, 
    tests[i].function_called.description, 
    tests[i].function_called.on, 
    tests[i].function_called.parameters,
-   tests[i].unit
   ); 
 
   if(check_inside_errors.error === true) { 
@@ -133,22 +121,17 @@ function run_tests(tests) {
     return_value = err.message;
    }
 
-   var test_suite = { 
-    value: typeof(tests[i].unit.must_be_value) === 'object' && tests[i].unit.must_be_value !== null ? value(tests[i], return_value, i, j) : 'PASSED',
-    type: typeof(tests[i].unit.must_be_type) === 'object' && tests[i].unit.must_be_type !== null ? type(tests[i], return_value, i, j) : 'PASSED',
-    regex: typeof(tests[i].unit.must_pass_regex) === 'object' && tests[i].unit.must_pass_regex !== null ? regex(tests[i], return_value, i, j) : 'PASSED',
-    greaterThan: typeof(tests[i].unit.must_be_greater_than) === 'object' && tests[i].unit.must_be_greater_than !== null ? greaterThan(tests[i], return_value, i, j) : 'PASSED',
-    lessThan: typeof(tests[i].unit.must_be_less_than) === 'object' && tests[i].unit.must_be_less_than !== null ? lessThan(tests[i], return_value, i, j) : 'PASSED',
-    inRange: typeof(tests[i].unit.must_be_in_range) === 'object' && tests[i].unit.must_be_in_range !== null ? inRange(tests[i], return_value, i, j) : 'PASSED',
-    isEvenOrOdd: typeof(tests[i].unit.must_be_even_or_odd) === 'object' && tests[i].unit.must_be_even_or_odd !== null ? isEvenOrOdd(tests[i], return_value, i, j) : 'PASSED',
-    isDivisibleBy: typeof(tests[i].unit.must_be_divisible_by) === 'object' && tests[i].unit.must_be_divisible_by !== null ? isDivisibleBy(tests[i], return_value, i, j) : 'PASSED',
-    isOfLength: typeof(tests[i].unit.must_be_length) === 'object' && tests[i].unit.must_be_length !== null ? isOfLength(tests[i], return_value, i, j) : 'PASSED',
-    lengthGreaterThan: typeof(tests[i].unit.must_be_greater_than_length) === 'object' && tests[i].unit.must_be_greater_than_length !== null ? lengthGreaterThan(tests[i], return_value, i, j) : 'PASSED',
-    lengthLessThan: typeof(tests[i].unit.must_be_less_than_length) === 'object' && tests[i].unit.must_be_less_than_length !== null ? lengthLessThan(tests[i], return_value, i, j) : 'PASSED',
-   };
+   const test_suite = suite(tests[i], return_value, i, j);
 
-   error_string += `function and test execution time: ${Date.now() - time_taken}ms\n`;
-   error_string += `function description: ${tests[i].function_called.description}\n`;
+   error_string += format({ 
+    id: 'executionTime',
+    ms: Date.now() - time_taken
+   });
+
+   error_string += format({ 
+    id: 'functionDescription',
+    description: tests[i].function_called.description
+   });
 
    if(test_suite.value !== 'PASSED') { 
     error_string += test_suite.value;
@@ -224,14 +207,14 @@ function run_tests(tests) {
  * @param {String} function_description The description of the function like filepath, name...ect
  * @param {Boolean} function_on whether to run the function or not
  * @param {Array} function_parameters the set of parameter sets being passed to the function [[1,2],[5,6]]
+ * @param {Object} unit the object containing the tests
 */
 
-function main_or_fallback_errors(
+function inside_errors(
  function_, 
  function_description, 
  function_on, 
  function_parameters,
- unit
 ) { 
 
  var init_errors = '';
@@ -252,10 +235,6 @@ function main_or_fallback_errors(
   init_errors += '(function_called.parameters) must be an array \n';
  }
 
- if(typeof(unit) !== 'object' || unit === null) { 
-  init_errors += '(unit) must be an object \n';
- }
-
  if(init_errors.trim().length > 0) { 
   return { 
    error: true, 
@@ -270,7 +249,4 @@ function main_or_fallback_errors(
 
 }
 
-module.exports = { 
- run: start_tests, 
- generate: generate_functions 
-} 
+module.exports = start_tests 

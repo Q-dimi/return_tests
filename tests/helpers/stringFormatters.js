@@ -2,6 +2,10 @@ function format(string_object) {
  switch(string_object.id) { 
   case 'startString':
    return `\nERROR\nfunction index: ${string_object.function_index} (${string_object.function_index_name})\nparameter index: ${string_object.parameter_index}\n`;
+  case 'executionTime':
+    return `function and test execution time: ${string_object.ms}ms\n`;
+  case 'functionDescription':
+    return `function description: ${string_object.description}\n`;
   case 'greaterThanErrorAll':
    return `greaterThanError: '${string_object.return_value}' is less than all of the values in the array '${string_object.compared_to}'\n`;
   case 'greaterThanErrorOne':

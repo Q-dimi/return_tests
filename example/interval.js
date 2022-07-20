@@ -1,12 +1,12 @@
-var live_changes = require('../lib/listen');
+var return_tests = require('../index');
 
-live_changes.set_working_set({ 
+return_tests.live_changes.set_working_set({ 
  index_a: { on: true, paths: ['../example/functions.js'] },
  index_b: { on: true, paths: ['../example/functions.js'] } 
 });
 
 try {
- live_changes.start_interval();
+ return_tests.live_changes.start_interval();
 } catch(err) { 
  console.log(err.message)
 } 
