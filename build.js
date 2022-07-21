@@ -10,8 +10,8 @@ var format = require('./tests/helpers/stringFormatters');
  * - returns a value from that parameter set
  * - value is tested against any of the unit objects
  * 
- * @param {Array} tests - The functions being tested
- * @param {Array} optional_index_array - array containing indexes of functions to ONLY test. Tests all functions if not passed
+ * @param {Array} tests The functions being tested
+ * @param {Array} optional_index_array array containing indexes of functions to ONLY test. Tests all functions if not passed
 */
 
 function start_tests(tests, optional_index_array) { 
@@ -188,6 +188,11 @@ function run_tests(tests) {
     error_count++;
    }
 
+   if(test_suite.primeOrNot !== 'PASSED') { 
+    error_string += test_suite.primeOrNot;
+    error_count++;
+   }
+
    if(error_count > 0) { 
     error_sets.push(error_string);
    }
@@ -207,7 +212,6 @@ function run_tests(tests) {
  * @param {String} function_description The description of the function like filepath, name...ect
  * @param {Boolean} function_on whether to run the function or not
  * @param {Array} function_parameters the set of parameter sets being passed to the function [[1,2],[5,6]]
- * @param {Object} unit the object containing the tests
 */
 
 function inside_errors(

@@ -9,6 +9,7 @@ var isDivisibleBy = require('./tests/isDivisibleBy');
 var isOfLength = require('./tests/isOfLength');
 var lengthGreaterThan = require('./tests/lengthGreaterThan');
 var lengthLessThan = require('./tests/lengthLessThan');
+var primeOrNot = require('./tests/primeOrNot');
 
 function suite(test, return_value, i, j) {
  return { 
@@ -23,6 +24,7 @@ function suite(test, return_value, i, j) {
   isOfLength: typeof(test.unit.must_be_length) === 'object' && test.unit.must_be_length !== null ? isOfLength(test, return_value, i, j) : 'PASSED',
   lengthGreaterThan: typeof(test.unit.must_be_greater_than_length) === 'object' && test.unit.must_be_greater_than_length !== null ? lengthGreaterThan(test, return_value, i, j) : 'PASSED',
   lengthLessThan: typeof(test.unit.must_be_less_than_length) === 'object' && test.unit.must_be_less_than_length !== null ? lengthLessThan(test, return_value, i, j) : 'PASSED',
+  primeOrNot: typeof(test.unit.must_be_prime_or_not_prime) === 'object' && test.unit.must_be_prime_or_not_prime !== null ? primeOrNot(test, return_value, i, j) : 'PASSED'
  };
 }
 

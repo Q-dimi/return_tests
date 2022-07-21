@@ -2,7 +2,7 @@ var type_test = require('./helpers/typeTest');
 var format = require('./helpers/stringFormatters');
 
 /**
- * makes sure the return value passes one or all regular expressions (array)
+ * makes sure the return value passes one or all regular expressions test.unit.must_pass_regex.values (array)
  * 
  * @param {object} test The object containing the function which was just tested
  * @param {Number} return_value The return value from the function which was just tested
