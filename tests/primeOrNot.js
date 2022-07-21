@@ -48,16 +48,12 @@ function test(test, return_value, i, j) {
      break;
     }
     if(k + k > return_value) { 
-        break;
+     break;
     }
    }
    if(prime === null) { 
     prime = true;
    }
-  }
-
-  if(prime === null) {
-   throw new Error('there is something wrong with the program...');
   }
  
   if(test.unit.must_be_prime_or_not_prime.index_exact === false) { 
