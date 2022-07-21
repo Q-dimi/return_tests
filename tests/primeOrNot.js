@@ -76,7 +76,7 @@ function test(test, return_value, i, j) {
      return_value: return_value, 
      isPrime: prime === true ? 'prime number' : 'non prime number' ,
      compared_to: JSON.stringify(test.unit.must_be_prime_or_not_prime.values)
-    })
+    });
    }
   }
 
@@ -90,7 +90,7 @@ function test(test, return_value, i, j) {
      return_value: return_value, 
      isPrime: prime === true ? 'prime number' : 'non prime number',
      compared_to: test.unit.must_be_prime_or_not_prime.values[j]
-    })
+    });
    }
   }
 

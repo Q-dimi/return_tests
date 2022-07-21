@@ -81,9 +81,8 @@ module.exports = [
       /*
         each parameter set is passed
         to the function and a return value
-        is tested against the unit objects
-        which are on. Take out tests you don't
-        need. 
+        is tested against the unit 
+        objects you have added (below)
       */
       parameters: [
         [1, 10],
@@ -98,7 +97,7 @@ module.exports = [
       },
     },
     /*
-      add tests here.  
+      add or remove tests here.  
     */
     unit: {
       must_be_type: {

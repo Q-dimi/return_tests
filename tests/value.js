@@ -28,7 +28,7 @@ function test(test, return_value, i, j) {
 
  if(test.unit.must_be_value.on === true) {
 
-  if(return_value === null || typeof(return_value) !== 'object') {
+  if(return_value === null || typeof(return_value) !== 'object') { //check types in all files and redo this files top portion like the rest of them
 
    if(
     test.unit.must_be_value.index_exact === false && 
