@@ -42,10 +42,13 @@ function test(test, return_value, i, j) {
   }
 
   if(return_value > 2) { 
-   for(let k = 2; k < return_value; k++) { 
+   for(let k = 2; k < return_value; k++) {
     if(return_value % k === 0) { 
      prime = false;
      break;
+    }
+    if(k + k > return_value) { 
+        break;
     }
    }
    if(prime === null) { 

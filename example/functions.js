@@ -24,7 +24,7 @@ module.exports = [
     function_called: {
       on: true,
       description: 'filepath is... and',
-      parameters: [[2, 2], [8, 3], [1,2], [22,22]], //(fail, fail, fail, pass) \|/
+      parameters: [[0, 7], [61, 0], [1,2], [22,22]], //(fail, fail, fail, pass) \|/
       function: function (a, b) {
         try { 
           return a + b; 
