@@ -140,6 +140,11 @@ module.exports = [
         index_exact: true,
         values: ["even", "odd", "odd", "even"],
       },
+      must_be_divisible_by: {
+        on: true,
+        index_exact: false,
+        values: [2, 2, 10, 22],
+      },
     },
   },
 ];

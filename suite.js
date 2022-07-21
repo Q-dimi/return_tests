@@ -10,7 +10,7 @@ var isOfLength = require('./tests/isOfLength');
 var lengthGreaterThan = require('./tests/lengthGreaterThan');
 var lengthLessThan = require('./tests/lengthLessThan');
 
-function suite(test, return_value, i, j) { 
+function suite(test, return_value, i, j) {
  return { 
   value: typeof(test.unit.must_be_value) === 'object' && test.unit.must_be_value !== null ? value(test, return_value, i, j) : 'PASSED',
   type: typeof(test.unit.must_be_type) === 'object' && test.unit.must_be_type !== null ? type(test, return_value, i, j) : 'PASSED',

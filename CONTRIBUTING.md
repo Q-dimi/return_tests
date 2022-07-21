@@ -11,4 +11,4 @@ There are a few tests which are templated and empty which you can try.
 
 # Bugs
 
-find bugs and change / add code you feel necessary
+find bugs and change / add code where you feel necessary

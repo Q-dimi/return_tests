@@ -38,6 +38,10 @@ function format(string_object) {
    return `even or odd error: ${string_object.return_value % 2 === 0 ? `even return value '${string_object.return_value}' was compared to an 'odd' string in ` : `odd return value '${string_object.return_value}' was compared to an 'even' string in `} the array '${string_object.compared_to}'\n`;
   case 'evenOrOddErrorOne':
     return `even or odd error: ${string_object.return_value % 2 === 0 ? `even return value '${string_object.return_value}' was compared to an '${string_object.compared_to}' string` : `odd return value '${string_object.return_value}' was compared to an '${string_object.compared_to}' string`}\n`;
+  case 'divisibleByErrorAll':
+    return `divisible error: '${string_object.return_value}' is not divisible by any of the values in the array '${string_object.compared_to}'`;
+  case 'divisibleByErrorOne':
+    return `divisible error: '${string_object.return_value}' is not divisible by '${string_object.compared_to}'`;
   }
 }
 module.exports = format;
