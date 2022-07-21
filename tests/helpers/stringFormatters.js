@@ -19,7 +19,7 @@ function format(string_object) {
   case 'lessThanErrorOne':
    return `lessThanError: '${string_object.return_value}' is more than '${string_object.compared_to}'\n`;
   case 'regexErrorAll':
-   return `regex error: '${string_object.return_value}' does not pass '${string_object.compared_to} (index ${string_object.index})'\n`;
+   return `regex error: '${string_object.return_value}' did not pass any of the values in the array '${string_object.compared_to}'\n`;
   case 'regexErrorOne':
    return `regex error: '${string_object.return_value}' does not pass '${string_object.compared_to}'\n`;
   case 'valueErrorAll':

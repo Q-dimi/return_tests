@@ -12,6 +12,8 @@ var format = require('./helpers/stringFormatters');
 
 function test(test, return_value, i, j) { 
 
+    console.log(return_value);
+
  if(!type_test(
   test.unit.must_pass_regex, 
   test.unit.must_pass_regex.on, 
@@ -29,19 +31,19 @@ function test(test, return_value, i, j) {
  if(test.unit.must_pass_regex.on === true) {
 
   if(test.unit.must_pass_regex.index_exact === false) {
-   var es = '';
+   var found = false; 
    for(let k = 0; k < test.unit.must_pass_regex.values.length; k++) { 
-    if(testrg(test.unit.must_pass_regex.values[k], return_value) !== true) { 
-     es += format({
-      id: 'regexErrorAll', 
-      return_value: typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value, 
-      compared_to: test.unit.must_pass_regex.values[k], 
-      index: k
-     });
+    if(testrg(test.unit.must_pass_regex.values[k], return_value) === true) { 
+     found = true; 
+     break;
     }
    }
-   if(es.trim().length > 0) { 
-    return es;
+   if(found === false) { 
+    return format({
+     id: 'regexErrorAll', 
+     return_value: typeof(return_value) === 'object' ? JSON.stringify(return_value) : return_value, 
+     compared_to: test.unit.must_pass_regex.values, 
+    });
    } 
   }
 
