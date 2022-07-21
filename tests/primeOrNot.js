@@ -44,7 +44,7 @@ function test(test, return_value, i, j) {
   if(
    return_value > 2 && 
    return_value % 1 === 0
-   ) { 
+  ) { 
    for(let k = 2; k < return_value; k++) {
     if(return_value % k === 0) { 
      prime = false;
