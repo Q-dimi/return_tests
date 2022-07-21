@@ -30,10 +30,7 @@ function test(test, return_value, i, j) {
 
   var prime = null;
 
-  if(
-   return_value <= 0 || 
-   return_value === 1
-  ) { 
+  if(return_value < 2) { 
    prime = false;
   }
 
