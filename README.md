@@ -145,6 +145,11 @@ module.exports = [
         index_exact: false,
         values: [2, 2, 10, 22],
       },
+      must_be_prime_or_not_prime: {
+        on: true,
+        index_exact: false,
+        values: ["prime", "not prime", "prime", "not prime"],
+      },
     },
   },
 ];

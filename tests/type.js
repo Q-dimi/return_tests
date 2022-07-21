@@ -2,7 +2,7 @@ var type_test = require('./helpers/typeTest');
 var format = require('./helpers/stringFormatters');
 
 /**
- * makes sure the return value matches one or all of test.unit.must_be_type.values (array)
+ * makes sure the return value matches at least one of test.unit.must_be_type.values (array)
  * 
  * @param {object} test The object containing the function which was just tested
  * @param {Number} return_value The return value from the function which was just tested

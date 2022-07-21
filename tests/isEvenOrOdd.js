@@ -2,7 +2,7 @@ var type_test = require('./helpers/typeTest');
 var format = require('./helpers/stringFormatters');
 
 /**
- * makes sure the return value matches either all or one of the even or odd values in test.unit.must_be_even_or_odd.values (array)
+ * makes sure the return value matches at least one of the even or odd values in test.unit.must_be_even_or_odd.values (array)
  * 
  * @param {object} test The object containing the function which was just tested
  * @param {Number} return_value The return value from the function which was just tested
@@ -50,8 +50,8 @@ function test(test, return_value, i, j) {
 
   if(test.unit.must_be_even_or_odd.index_exact === true) { 
    if(
-    return_value % 2 === 0 && test.unit.must_be_even_or_odd.values[j] !== 'even' ||
-    return_value % 2 !== 0 && test.unit.must_be_even_or_odd.values[j] !== 'odd'
+    return_value % 2 === 0 && test.unit.must_be_even_or_odd.values[j] === 'odd' ||
+    return_value % 2 !== 0 && test.unit.must_be_even_or_odd.values[j] === 'even'
    ) { 
     return format({ 
      id: 'evenOrOddErrorOne', 

@@ -42,6 +42,10 @@ function format(string_object) {
     return `divisible error: '${string_object.return_value}' is not divisible by any of the values in the array '${string_object.compared_to}'\n`;
   case 'divisibleByErrorOne':
     return `divisible error: '${string_object.return_value}' is not divisible by '${string_object.compared_to}'\n`;
+  case 'primeErrorAll':
+    return `prime error: '${string_object.return_value}', a ${string_object.isPrime}, was compared to the opposite string in '${string_object.compared_to}'\n`;
+  case 'primeErrorOne': 
+    return `prime error: '${string_object.return_value}', a ${string_object.isPrime}, was compared to a '${string_object.compared_to}' string\n`;
   }
 }
 module.exports = format;

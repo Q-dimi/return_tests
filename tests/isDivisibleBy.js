@@ -2,7 +2,7 @@ var type_test = require('./helpers/typeTest');
 var format = require('./helpers/stringFormatters');
 
 /**
- * makes sure the return value is divisible by one or all the values in test.unit.must_be_divisible_by.values (array)
+ * makes sure the return value is divisible by at least one of the values in test.unit.must_be_divisible_by.values (array)
  * 
  * @param {object} test The object containing the function which was just tested
  * @param {Number} return_value The return value from the function which was just tested
