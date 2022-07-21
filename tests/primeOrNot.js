@@ -41,7 +41,7 @@ function test(test, return_value, i, j) {
    prime = true;
   }
 
-  if(return_value > 2) { 
+  if(return_value > 2 && return_value % 1 === 0) { 
    for(let k = 2; k < return_value; k++) {
     if(return_value % k === 0) { 
      prime = false;
@@ -54,6 +54,10 @@ function test(test, return_value, i, j) {
    if(prime === null) { 
     prime = true;
    }
+  }
+
+  if(return_value % 1 !== 0) { 
+    prime = false;
   }
  
   if(test.unit.must_be_prime_or_not_prime.index_exact === false) { 
