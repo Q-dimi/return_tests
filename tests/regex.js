@@ -12,8 +12,6 @@ var format = require('./helpers/stringFormatters');
 
 function test(test, return_value, i, j) { 
 
-    console.log(return_value);
-
  if(!type_test(
   test.unit.must_pass_regex, 
   test.unit.must_pass_regex.on, 
