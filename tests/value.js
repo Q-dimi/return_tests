@@ -65,7 +65,7 @@ function test(test, return_value, i, j) {
     var found = false;
     for(let k = 0; k < test.unit.must_be_value.values.length; k++) { 
      if(typeof(test.unit.must_be_value.values[k]) === 'object') { 
-      if(JSON.stringify(test.unit.must_be_value.values[k]) === JSON.stringify(return_value)) { //will change
+      if(compare(test.unit.must_be_value.values[k], return_value) === true) { //will change JSON.stringify(test.unit.must_be_value.values[k]) === JSON.stringify(return_value)
        found = true;
        break;
       }
@@ -82,7 +82,7 @@ function test(test, return_value, i, j) {
 
    if(
     test.unit.must_be_value.index_exact === true && 
-    JSON.stringify(test.unit.must_be_value.values[j]) !== JSON.stringify(return_value)
+    compare(test.unit.must_be_value.values[j], return_value) === false  //JSON.stringify(test.unit.must_be_value.values[j]) !== JSON.stringify(return_value)
    ) { 
     return format({
      id: 'valueErrorOneObject', 
@@ -101,11 +101,24 @@ function test(test, return_value, i, j) {
 
 }
 
-//this is my own probably not so good function for deep checking. i will probably use a library but worth a shot... have not run yet
+/**
+ * deep comparing two objects. 
+ * recursively going in on objects and arrays 
+ * pushing values to the components array, iterating and comparing.
+ * There are more types to check in the else statement...
+ * if you want to add to this just pull and 
+ * say what to do. (worked on first try... huh, no kiddin)
+*/
 
 var components = [];
 
 function compare(av, rv) { 
+
+ components = [];
+
+ if(av === rv) { 
+  return true;
+ }
 
  if(
   typeof(av) !== 'object' || 
@@ -115,21 +128,31 @@ function compare(av, rv) {
  }
 
  if(
-  av === null || 
-  Array.isArray(av) === true
+  (Array.isArray(av) === true && Array.isArray(rv) === false) || 
+  (Array.isArray(av) === false && Array.isArray(rv) === true)
  ) { 
   return false;
- }
+ } 
+
+ /*
+  making sure to always pass in two objects 
+  the only things that should come in here is an object or array... 
+  if something else then ill have to check for that later
+ */
 
  if(
-  rv === null || 
+  Array.isArray(av) === true &&
   Array.isArray(rv) === true
  ) { 
-  return false;
- }
 
- if(av === rv) { 
-  return true;
+  av = { 
+   array: av
+  }
+
+  rv = { 
+   array: rv
+  }
+
  }
 
  var avkeys = Object.keys(av);
@@ -166,6 +189,7 @@ function deep_check_object(obj, keys) {
    obj[key] !== null
   ) {
    components.push(`${key}-object-${obj[key]}`);
+   push_proto(obj[key]);
    deep_check_object(obj[key], Object.keys(obj[key]));
   }
 
@@ -174,11 +198,13 @@ function deep_check_object(obj, keys) {
    Array.isArray(obj[key]) === true
   ) {
    components.push(`${key}-array-${obj[key]}`);
+   push_proto(obj[key]);
    deep_array_check(key, obj[key]);
   }
 
   else { 
    components.push(`${key}-single-${obj[key]}`);
+   push_proto(obj[key]);
   }
 
  });
@@ -197,6 +223,7 @@ function deep_array_check(key, arr) {
    arr[i] !== null
   ) { 
    components.push(`${key}-object-${arr[i]}`);
+   push_proto(arr[i]);
    deep_check_object(arr[i], Object.keys(arr[i]));
   }
 
@@ -205,15 +232,21 @@ function deep_array_check(key, arr) {
    Array.isArray(arr[i]) === true
   ) {
    components.push(`${key}-array-${arr[i]}`);
+   push_proto(arr[i]);
    deep_array_check(key, arr[i]);
   }
 
   else { 
    components.push(`${key}-single-${arr[i]}`);
+   push_proto(arr[i]);
   }
 
  }
 
 } 
+
+function push_proto(v) { //if there are some attachments, go through and push
+ return;
+}
 
 module.exports = test;
