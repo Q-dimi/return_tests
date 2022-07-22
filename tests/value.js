@@ -28,7 +28,10 @@ function test(test, return_value, i, j) {
 
  if(test.unit.must_be_value.on === true) {
 
-  if(return_value === null || typeof(return_value) !== 'object') { //check types in all files and redo this files top portion like the rest of them
+  if(
+    return_value === null || 
+    typeof(return_value) !== 'object'
+   ) {
 
    if(
     test.unit.must_be_value.index_exact === false && 
@@ -62,7 +65,7 @@ function test(test, return_value, i, j) {
     var found = false;
     for(let k = 0; k < test.unit.must_be_value.values.length; k++) { 
      if(typeof(test.unit.must_be_value.values[k]) === 'object') { 
-      if(JSON.stringify(test.unit.must_be_value.values[k]) === JSON.stringify(return_value)) { //change this
+      if(JSON.stringify(test.unit.must_be_value.values[k]) === JSON.stringify(return_value)) { //will change
        found = true;
        break;
       }
@@ -79,7 +82,7 @@ function test(test, return_value, i, j) {
 
    if(
     test.unit.must_be_value.index_exact === true && 
-    JSON.stringify(test.unit.must_be_value.values[j]) !== JSON.stringify(return_value) //change this
+    JSON.stringify(test.unit.must_be_value.values[j]) !== JSON.stringify(return_value)
    ) { 
     return format({
      id: 'valueErrorOneObject', 
@@ -97,5 +100,121 @@ function test(test, return_value, i, j) {
  return 'PASSED';
 
 }
+
+//this is my own crappy function for deep checking. i will probably use a library but worth a shot... have not run
+
+var components = [];
+
+function compare(av, rv) { 
+
+ if(
+  typeof(av) !== 'object' || 
+  typeof(rv) !== 'object'
+ ) { 
+  return false;
+ }
+
+ if(
+  av === null || 
+  Array.isArray(av) === true
+ ) { 
+  return false;
+ }
+
+ if(
+  rv === null || 
+  Array.isArray(rv) === true
+ ) { 
+  return false;
+ }
+
+ if(av === rv) { 
+  return true;
+ }
+
+ var avkeys = Object.keys(av);
+ var rvkeys = Object.keys(rv);
+
+ if(avkeys.length !== rvkeys.length) { 
+  return false;
+ }
+
+ const compare_av = deep_check_object(av, avkeys);
+ const compare_rv = deep_check_object(rv, rvkeys);
+
+ if(compare_av.length !== compare_rv.length) { 
+  return false; 
+ }
+
+ for(let i = 0; i < compare_av.length; i++) { 
+  if(compare_av[i] !== compare_rv[i]) { 
+   return false;
+  }
+ }
+
+ return true;
+
+}
+
+function deep_check_object(obj, keys) { 
+
+ keys.forEach((key, index) => {
+
+  if(
+   typeof(obj[key]) === 'object' && 
+   Array.isArray(obj[key]) === false && 
+   obj[key] !== null
+  ) {
+   components.push(obj[key]); ///add the name somewhere here and below
+   deep_check_object(obj[key], Object.keys(obj[key]));
+  }
+
+  else if(
+   typeof(obj[key]) === 'object' && 
+   Array.isArray(obj[key]) === true
+  ) {
+   deep_array_check(obj[key]);
+  }
+
+  else { 
+   //check everything here and do whats necesseary
+   components.push(obj[key])
+  }
+
+  components = [];
+
+ });
+
+}
+
+function deep_array_check(arr) { 
+
+ for(let i = 0; i < arr.length; i++) { 
+
+  if(
+   typeof(arr[i]) === 'object' && 
+   Array.isArray(arr[i]) === false && 
+   arr[i] !== null
+  ) { 
+   components.push(arr[i]);
+   deep_check_object(arr[i], Object.keys(arr[i]));
+  }
+
+  else if(
+   typeof(arr[i]) === 'object' && 
+   Array.isArray(arr[i]) === true
+  ) {
+   components.push(arr[i]);
+   deep_array_check(arr[i])
+  }
+
+  else { 
+   //check everything here and do whats necessary
+   components.push(arr[i])
+  }
+
+ }
+
+} 
 
 module.exports = test;
