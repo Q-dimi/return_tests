@@ -65,7 +65,7 @@ function test(test, return_value, i, j) {
     var found = false;
     for(let k = 0; k < test.unit.must_be_value.values.length; k++) { 
      if(typeof(test.unit.must_be_value.values[k]) === 'object') { 
-      if(compare(test.unit.must_be_value.values[k], return_value) === true) { //will change JSON.stringify(test.unit.must_be_value.values[k]) === JSON.stringify(return_value)
+      if(compare(test.unit.must_be_value.values[k], return_value) === true) {
        found = true;
        break;
       }
@@ -82,7 +82,7 @@ function test(test, return_value, i, j) {
 
    if(
     test.unit.must_be_value.index_exact === true && 
-    compare(test.unit.must_be_value.values[j], return_value) === false  //JSON.stringify(test.unit.must_be_value.values[j]) !== JSON.stringify(return_value)
+    compare(test.unit.must_be_value.values[j], return_value) === false
    ) { 
     return format({
      id: 'valueErrorOneObject', 
