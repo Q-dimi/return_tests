@@ -173,11 +173,12 @@ function deep_check_object(obj, keys) {
    typeof(obj[key]) === 'object' && 
    Array.isArray(obj[key]) === true
   ) {
+   components.push(`${key}-${obj[key]}`);
    deep_array_check(key, obj[key]);
   }
 
   else { 
-   components.push(`${key}-${obj[key]}`)
+   components.push(`${key}-${obj[key]}`);
   }
 
  });
