@@ -205,7 +205,7 @@ function deep_array_check(key, arr) {
    Array.isArray(arr[i]) === true
   ) {
    components.push(`${key}-${arr[i]}`);
-   deep_array_check(arr[i])
+   deep_array_check(key, arr[i]);
   }
 
   else { 
