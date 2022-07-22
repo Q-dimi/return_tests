@@ -101,7 +101,7 @@ function test(test, return_value, i, j) {
 
 }
 
-//this is my own crappy function for deep checking. i will probably use a library but worth a shot... have not run
+//this is my own probably not so good function for deep checking. i will probably use a library but worth a shot... have not run yet
 
 var components = [];
 
@@ -139,7 +139,7 @@ function compare(av, rv) {
   return false;
  }
 
- const compare_av = deep_check_object(av, avkeys);
+ const compare_av = deep_check_object(av, avkeys); components = [];
  const compare_rv = deep_check_object(rv, rvkeys);
 
  if(compare_av.length !== compare_rv.length) { 
@@ -165,7 +165,7 @@ function deep_check_object(obj, keys) {
    Array.isArray(obj[key]) === false && 
    obj[key] !== null
   ) {
-   components.push(obj[key]); ///add the name somewhere here and below
+   components.push(`${key}-${obj[key]}`);
    deep_check_object(obj[key], Object.keys(obj[key]));
   }
 
@@ -173,21 +173,20 @@ function deep_check_object(obj, keys) {
    typeof(obj[key]) === 'object' && 
    Array.isArray(obj[key]) === true
   ) {
-   deep_array_check(obj[key]);
+   deep_array_check(key, obj[key]);
   }
 
   else { 
-   //check everything here and do whats necesseary
-   components.push(obj[key])
+   components.push(`${key}-${obj[key]}`)
   }
-
-  components = [];
 
  });
 
+ return components;
+
 }
 
-function deep_array_check(arr) { 
+function deep_array_check(key, arr) { 
 
  for(let i = 0; i < arr.length; i++) { 
 
@@ -196,7 +195,7 @@ function deep_array_check(arr) {
    Array.isArray(arr[i]) === false && 
    arr[i] !== null
   ) { 
-   components.push(arr[i]);
+   components.push(`${key}-${arr[i]}`);
    deep_check_object(arr[i], Object.keys(arr[i]));
   }
 
@@ -204,13 +203,12 @@ function deep_array_check(arr) {
    typeof(arr[i]) === 'object' && 
    Array.isArray(arr[i]) === true
   ) {
-   components.push(arr[i]);
+   components.push(`${key}-${arr[i]}`);
    deep_array_check(arr[i])
   }
 
   else { 
-   //check everything here and do whats necessary
-   components.push(arr[i])
+   components.push(`${key}-${arr[i]}`);
   }
 
  }
