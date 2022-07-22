@@ -106,8 +106,7 @@ function test(test, return_value, i, j) {
  * recursively going in on objects and arrays 
  * pushing values to the components array, iterating and comparing.
  * There are more types to check in the else statement...
- * if you want to add to this just pull and 
- * say what to do. (worked on first try... huh, no kiddin)
+ * also some other things
 */
 
 var components = [];
@@ -133,12 +132,6 @@ function compare(av, rv) {
  ) { 
   return false;
  } 
-
- /*
-  making sure to always pass in two objects 
-  the only things that should come in here is an object or array... 
-  if something else then ill have to check for that later
- */
 
  if(
   Array.isArray(av) === true &&
