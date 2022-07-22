@@ -105,8 +105,8 @@ function test(test, return_value, i, j) {
  * deep comparing two objects. 
  * recursively going in on objects and arrays 
  * pushing values to the components array, iterating and comparing.
- * There are more types to check in the else statement...
- * also some other things
+ * There are more types to check in the else statements...
+ * also some other things.. (will change to lib function if not working)
 */
 
 var components = [];
@@ -182,7 +182,7 @@ function deep_check_object(obj, keys) {
    obj[key] !== null
   ) {
    components.push(`${key}-object-${obj[key]}`);
-   push_proto(obj[key]);
+   push_proto(key, 'object', obj[key]);
    deep_check_object(obj[key], Object.keys(obj[key]));
   }
 
@@ -191,13 +191,13 @@ function deep_check_object(obj, keys) {
    Array.isArray(obj[key]) === true
   ) {
    components.push(`${key}-array-${obj[key]}`);
-   push_proto(obj[key]);
+   push_proto(key, 'array', obj[key]);
    deep_array_check(key, obj[key]);
   }
 
   else { 
    components.push(`${key}-single-${obj[key]}`);
-   push_proto(obj[key]);
+   push_proto(key, 'single', obj[key]);
   }
 
  });
@@ -216,7 +216,7 @@ function deep_array_check(key, arr) {
    arr[i] !== null
   ) { 
    components.push(`${key}-object-${arr[i]}`);
-   push_proto(arr[i]);
+   push_proto(key, 'object', arr[i]);
    deep_check_object(arr[i], Object.keys(arr[i]));
   }
 
@@ -225,20 +225,20 @@ function deep_array_check(key, arr) {
    Array.isArray(arr[i]) === true
   ) {
    components.push(`${key}-array-${arr[i]}`);
-   push_proto(arr[i]);
+   push_proto(key, 'array', arr[i]);
    deep_array_check(key, arr[i]);
   }
 
   else { 
    components.push(`${key}-single-${arr[i]}`);
-   push_proto(arr[i]);
+   push_proto(key, 'single', arr[i]);
   }
 
  }
 
 } 
 
-function push_proto(v) { //if there are some attachments, go through and push
+function push_proto(k, t, v) {
  return;
 }
 
