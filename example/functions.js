@@ -24,10 +24,10 @@ module.exports = [
     function_called: {
       on: true,
       description: 'filepath is... and',
-      parameters: [[{ a: [1,2,3], b: { a: 'hello world', d: [1,2,3, {a: 2, c: 3}]}}], [3,2]], //(fail, fail, fail, pass) \|/
-      function: function (a) {
+      parameters: [[2,2], [3,2]], //(fail, fail, fail, pass) \|/
+      function: function (a, b) {
         try { 
-          return a; 
+          return a + b; 
         } catch(err) { 
           throw new Error('something went wrong');
         } 
@@ -36,8 +36,8 @@ module.exports = [
     unit: { 
       must_be_value: {
         on: true,
-        index_exact: false,
-        values: [{ a: [1,2,3], b: { a: 'hello worl', d: [1,2,3, {a: 2, c: 3}]}}, 3] //(fail, fail, fail, pass) /|\
+        index_exact: true,
+        values: [4, 5] //(fail, fail, fail, pass) /|\
       },
     }, 
   }

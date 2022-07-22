@@ -107,6 +107,7 @@ function test(test, return_value, i, j) {
  * pushing values to the components array, iterating and comparing.
  * There are more types to check in the else statements...
  * also some other things.. (will change to lib function if not working)
+ * if you want to change/add to this, fork this
 */
 
 var components = [];
@@ -163,7 +164,7 @@ function compare(av, rv) {
  }
 
  for(let i = 0; i < compare_av.length; i++) { 
-  if(compare_av[i] !== compare_rv[i]) { 
+  if(compare_av[i] !== compare_rv[i]) {
    return false;
   }
  }
