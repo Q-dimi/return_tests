@@ -1,18 +1,11 @@
-/**
- * deep comparing two objects. 
- * recursively going in on objects and arrays,
- * pushing values to the components array, copying from components array, iterating and comparing.
-*/
+/*
+ turning deep objects into an array and comparing.
+ recursing on objects and arrays
+*/ 
 
 var components = [];
 
 function compare(av, rv) { 
-
- components = [];
-
- if(av === rv) { 
-  return true;
- }
 
  if(
   typeof(av) !== 'object' || 
@@ -51,14 +44,14 @@ function compare(av, rv) {
  }
 
  const compare_av = deep_check_object(av, avkeys); components = [];
- const compare_rv = deep_check_object(rv, rvkeys);
+ const compare_rv = deep_check_object(rv, rvkeys); components = [];
 
  if(compare_av.length !== compare_rv.length) { 
   return false; 
  }
 
  for(let i = 0; i < compare_av.length; i++) { 
-  if(compare_av[i] !== compare_rv[i]) {
+  if(compare_av[i] != compare_rv[i]) {
    return false;
   }
  }
@@ -76,7 +69,7 @@ function deep_check_object(obj, keys) {
    Array.isArray(obj[key]) === false && 
    obj[key] !== null
   ) {
-   components.push(`${key}-object-${obj[key]}`);
+   components.push(key);
    push_proto(key, 'object', obj[key]);
    deep_check_object(obj[key], Object.keys(obj[key]));
   }
@@ -85,13 +78,14 @@ function deep_check_object(obj, keys) {
    typeof(obj[key]) === 'object' && 
    Array.isArray(obj[key]) === true
   ) {
-   components.push(`${key}-array-${obj[key]}`);
+   components.push(key);
    push_proto(key, 'array', obj[key]);
    deep_array_check(key, obj[key]);
   }
 
   else { 
-   components.push(`${key}-single-${obj[key]}`);
+   components.push(key);
+   components.push(typeof(obj[key]) === 'function' ? `${obj[key]}`.replace(/\s+/g, '').toLowerCase() : `${obj[key]}`);
    push_proto(key, 'single', obj[key]);
   }
 
@@ -110,7 +104,7 @@ function deep_array_check(key, arr) {
    Array.isArray(arr[i]) === false && 
    arr[i] !== null
   ) { 
-   components.push(`${key}-object-${arr[i]}`);
+   components.push(key);
    push_proto(key, 'object', arr[i]);
    deep_check_object(arr[i], Object.keys(arr[i]));
   }
@@ -119,13 +113,14 @@ function deep_array_check(key, arr) {
    typeof(arr[i]) === 'object' && 
    Array.isArray(arr[i]) === true
   ) {
-   components.push(`${key}-array-${arr[i]}`);
+   components.push(key);
    push_proto(key, 'array', arr[i]);
    deep_array_check(key, arr[i]);
   }
 
   else { 
-   components.push(`${key}-single-${arr[i]}`);
+   components.push(key);
+   components.push(typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : `${arr[i]}`);
    push_proto(key, 'single', arr[i]);
   }
 

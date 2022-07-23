@@ -8,7 +8,7 @@ module.exports = [
       parameters: [[2,2], [3,2]],
       function: function (a, b) {
         try { 
-          return a + b; 
+          return { a: 3, c: 6, d: { a: 3, t: 55, wow: function(){ return 'awesome'} } } 
         } catch(err) { 
           throw new Error('something went wrong');
         } 
@@ -18,7 +18,7 @@ module.exports = [
       must_be_value: {
         on: true,
         index_exact: true,
-        values: [4, 6]
+        values: [{ a: 3, c: 6, d: { a: 3, t: 55, wow: function(){ return 'awesome'} } } , 6]
       },
     }, 
   }
