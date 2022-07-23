@@ -88,7 +88,7 @@ function deep_check_object(obj, keys) {
   ) {
    components.push(key);
    components.push(`${obj[key]}`);
-   deep_array_check(key, obj[key]);
+   deep_check_array(key, obj[key]);
   }
 
   else { 
@@ -102,7 +102,7 @@ function deep_check_object(obj, keys) {
 
 }
 
-function deep_array_check(key, arr) { 
+function deep_check_array(key, arr) { 
 
  for(let i = 0; i < arr.length; i++) { 
 
@@ -122,7 +122,7 @@ function deep_array_check(key, arr) {
   ) {
    components.push(key);
    components.push(`${arr[i]}`);
-   deep_array_check(key, arr[i]);
+   deep_check_array(key, arr[i]);
   }
 
   else { 
