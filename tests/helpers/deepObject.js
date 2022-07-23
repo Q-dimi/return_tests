@@ -1,6 +1,7 @@
 /*
  turning deep objects into arrays and comparing.
  recursing on objects and arrays
+ will replace with lib function if not good enough but works
 */ 
 
 var components = [];
@@ -10,6 +11,13 @@ function compare(av, rv) {
  if(
   typeof(av) !== 'object' || 
   typeof(rv) !== 'object'
+ ) { 
+  return false;
+ }
+
+ if(
+  av === null || 
+  rv === null
  ) { 
   return false;
  }
