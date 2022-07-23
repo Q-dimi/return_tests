@@ -78,6 +78,7 @@ function deep_check_object(obj, keys) {
    obj[key] !== null
   ) {
    components.push(key);
+   components.push(typeof(obj[key]));
    components.push(`${obj[key]}`);
    deep_check_object(obj[key], Object.keys(obj[key]));
   }
@@ -87,12 +88,14 @@ function deep_check_object(obj, keys) {
    Array.isArray(obj[key]) === true
   ) {
    components.push(key);
+   components.push(typeof(obj[key]));
    components.push(`${obj[key]}`);
    deep_check_array(key, obj[key]);
   }
 
   else { 
    components.push(key);
+   components.push(typeof(obj[key]));
    components.push(typeof(obj[key]) === 'function' ? `${obj[key]}`.replace(/\s+/g, '').toLowerCase() : `${obj[key]}`);
   }
 
@@ -112,6 +115,7 @@ function deep_check_array(key, arr) {
    arr[i] !== null
   ) { 
    components.push(key);
+   components.push(typeof(arr[i]));
    components.push(`${arr[i]}`);
    deep_check_object(arr[i], Object.keys(arr[i]));
   }
@@ -121,12 +125,14 @@ function deep_check_array(key, arr) {
    Array.isArray(arr[i]) === true
   ) {
    components.push(key);
+   components.push(typeof(arr[i]));
    components.push(`${arr[i]}`);
    deep_check_array(key, arr[i]);
   }
 
   else { 
    components.push(key);
+   components.push(typeof(arr[i]));
    components.push(typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : `${arr[i]}`);
   }
 
