@@ -6,23 +6,43 @@
  key sets for building back up..if iterating over you should be able to build the object back up
  components are the definitions (with the key set)
  will add to it..
+ right when i put an object in the array key_set resets to []
 
  output...
 
 [
-  '{ key_set: "[]", key: "a", type: "number", value: "3" }',
-  '{ key_set: "[b]", key: "b", type: "object", value: "[object Object]" }',    
-  '{ key_set: "[b]", key: "d", type: "number", value: "4" }',
-  '{ key_set: "[b]", key: "h", type: "number", value: "55" }',
-  '{ key_set: "[b]", key: "l", type: "string", value: "string" }',
-  '{ key_set: "[b,v,c]", key: "c", type: "object", value: "[object Object]" }',
-  '{ key_set: "[b,v,c]", key: "d", type: "number", value: "5" }',
+  '{ key_set: "[]", key: "a", type: "number", value: "3", type_of: "single" }',
+  '{ key_set: "[b]", key: "b", type: "object", value: "[object Object]", type_of: "object" }',        
+  '{ key_set: "[b]", key: "d", type: "number", value: "4", type_of: "single" }',
+  '{ key_set: "[b]", key: "h", type: "number", value: "55", type_of: "single" }',
+  '{ key_set: "[b]", key: "l", type: "string", value: "string", type_of: "single" }',
+  '{ key_set: "[b,v]", key: "v", type: "object", value: "[object Object]", type_of: "object" }',      
+  '{ key_set: "[b,v]", key: "a", type: "number", value: "5", type_of: "single" }',
+  '{ key_set: "[b,v]", key: "h", type: "object", value: 1,2,[object Object],4,5", type_of: "array" }',
+  '{ key_set: "[b,v]", key: "h", type: "number, value: "1", type_of: "single" }',
+  '{ key_set: "[b,v]", key: "h", type: "number, value: "2", type_of: "single" }',
+  '{ key_set: "[b,v,h]", key: "h", type: "object", value: "[object Object]", type_of: "object" }',    
+  '{ key_set: "[b,v,h]", key: "a", type: "number", value: "44", type_of: "single" }',
+  '{ key_set: "[b,v,h,cs]", key: "cs", type: "object", value: "[object Object]", type_of: "object" }',
+  '{ key_set: "[b,v,h,cs]", key: "a", type: "number", value: "3", type_of: "single" }',
+  '{ key_set: "[]", key: "d", type: "number", value: "44", type_of: "single" }',
+  '{ key_set: "[]", key: "e", type: "object", value: 1,2,3", type_of: "array" }',
+  '{ key_set: "[]", key: "e", type: "number, value: "1", type_of: "single" }',
+  '{ key_set: "[]", key: "e", type: "number, value: "2", type_of: "single" }',
+  '{ key_set: "[]", key: "e", type: "number, value: "3", type_of: "single" }',
+  '{ key_set: "[]", key: "h", type: "number, value: "4", type_of: "single" }',
+  '{ key_set: "[]", key: "h", type: "number, value: "5", type_of: "single" }',
+  '{ key_set: "[c]", key: "c", type: "object", value: "[object Object]", type_of: "object" }',
+  '{ key_set: "[c]", key: "d", type: "number", value: "5", type_of: "single" }',
+  '{ key_set: "[c]", key: "g", type: "number", value: "6", type_of: "single" }'
 ]
+
 
 */ 
 
 var components = [];
 var key_set = [];
+var k_array = [];
 
 function compare(av, rv) { 
 
@@ -72,6 +92,11 @@ function compare(av, rv) {
  const compare_av = deep_check_object(av, avkeys); components = [];
  const compare_rv = deep_check_object(rv, rvkeys); components = [];
 
+ console.log(k_array);
+ console.log('---------------------');
+
+ console.log(compare_rv);
+
  if(compare_av.length !== compare_rv.length) { 
   return false; 
  }
@@ -95,8 +120,8 @@ function deep_check_object(obj, keys) {
    Array.isArray(obj[key]) === false && 
    obj[key] !== null
   ) {
-   `${obj[key]}` === "[object Object]" ?  key_set.push(key) : '';
-   components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(obj[key])}", value: "${obj[key]}" }`);
+   `${obj[key]}` === "[object Object]" ? key_set.push(key) : '';
+   components.push(`{ key: "${key}", type: "${typeof(obj[key])}", value: "${obj[key]}", type_of: "object" }`);
    deep_check_object(obj[key], Object.keys(obj[key]));
   }
 
@@ -104,19 +129,21 @@ function deep_check_object(obj, keys) {
    typeof(obj[key]) === 'object' && 
    Array.isArray(obj[key]) === true
   ) {
-   components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(obj[key])}, value: ${obj[key]}" }`);
+   components.push(`{ key: "${key}", type: "${typeof(obj[key])}", value: ${obj[key]}", type_of: "array" }`);
+   k_array.push(key_set);
    deep_check_array(key, obj[key]);
   }
 
   else { 
-    components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(obj[key])}", value: "${typeof(obj[key]) === 'function' ? `${obj[key]}`.replace(/\s+/g, '').toLowerCase() : `${obj[key]}`}" }`);
+    components.push(`{ key: "${key}", type: "${typeof(obj[key])}", value: "${typeof(obj[key]) === 'function' ? `${obj[key]}`.replace(/\s+/g, '').toLowerCase() : `${obj[key]}`}", type_of: "single" }`);
   }
 
  });
 
- key_set = [];
 
- return components;
+key_set = [];
+ 
+return components;
 
 }
 
@@ -129,8 +156,8 @@ function deep_check_array(key, arr) {
    Array.isArray(arr[i]) === false && 
    arr[i] !== null
   ) { 
-   `${obj[key]}` === "[object Object]" ?  key_set.push(key) : '';
-   components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(arr[i])}", value: "${arr[i]}" }`);
+   `${arr[i]}` === "[object Object]" ?  key_set.push(key) : '';
+   components.push(`{ key: "${key}", type: "${typeof(arr[i])}", value: "${arr[i]}", type_of: "object" }`);
    deep_check_object(arr[i], Object.keys(arr[i]));
   }
 
@@ -138,12 +165,13 @@ function deep_check_array(key, arr) {
    typeof(arr[i]) === 'object' && 
    Array.isArray(arr[i]) === true
   ) {
-   components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(arr[i])}", value: "${arr[i]}" }`);
+   components.push(`{ key: "${key}", type: "${typeof(arr[i])}", value: "${arr[i]}", type_of: "array" }`);
+   k_array.push(key_set);
    deep_check_array(key, arr[i]);
   }
 
   else { 
-   components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(arr[i])}, value: ${typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : `${arr[i]}`}" }`);
+   components.push(`{ key: "${key}", type: "${typeof(arr[i])}, value: "${typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : `${arr[i]}`}", type_of: "single" }`);
   }
 
  }
