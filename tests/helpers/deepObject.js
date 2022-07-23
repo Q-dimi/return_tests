@@ -1,10 +1,15 @@
 /*
  turning deep objects into arrays and comparing.
  recursing on objects and arrays
- will replace with lib function if not good enough but works
+ pushing key, type and value
+ 'compressing functions' 
+ key sets for building back up
+ components are the definitions (with the key set)
+ will add to it
 */ 
 
 var components = [];
+var key_set = [];
 
 function compare(av, rv) { 
 
@@ -54,6 +59,8 @@ function compare(av, rv) {
  const compare_av = deep_check_object(av, avkeys); components = [];
  const compare_rv = deep_check_object(rv, rvkeys); components = [];
 
+ console.log(compare_rv);
+
  if(compare_av.length !== compare_rv.length) { 
   return false; 
  }
@@ -77,9 +84,8 @@ function deep_check_object(obj, keys) {
    Array.isArray(obj[key]) === false && 
    obj[key] !== null
   ) {
-   components.push(key);
-   components.push(typeof(obj[key]));
-   components.push(`${obj[key]}`);
+   `${obj[key]}` === "[object Object]" ?  key_set.push(key) : '';
+   components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(obj[key])}", value: "${obj[key]}" }`);
    deep_check_object(obj[key], Object.keys(obj[key]));
   }
 
@@ -87,19 +93,17 @@ function deep_check_object(obj, keys) {
    typeof(obj[key]) === 'object' && 
    Array.isArray(obj[key]) === true
   ) {
-   components.push(key);
-   components.push(typeof(obj[key]));
-   components.push(`${obj[key]}`);
+   components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(obj[key])}, value: ${obj[key]}" }`);
    deep_check_array(key, obj[key]);
   }
 
   else { 
-   components.push(key);
-   components.push(typeof(obj[key]));
-   components.push(typeof(obj[key]) === 'function' ? `${obj[key]}`.replace(/\s+/g, '').toLowerCase() : `${obj[key]}`);
+    components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(obj[key])}", value: "${typeof(obj[key]) === 'function' ? `${obj[key]}`.replace(/\s+/g, '').toLowerCase() : `${obj[key]}`}" }`);
   }
 
  });
+
+ key_set = [];
 
  return components;
 
@@ -114,9 +118,8 @@ function deep_check_array(key, arr) {
    Array.isArray(arr[i]) === false && 
    arr[i] !== null
   ) { 
-   components.push(key);
-   components.push(typeof(arr[i]));
-   components.push(`${arr[i]}`);
+   `${obj[key]}` === "[object Object]" ?  key_set.push(key) : '';
+   components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(arr[i])}", value: "${arr[i]}" }`);
    deep_check_object(arr[i], Object.keys(arr[i]));
   }
 
@@ -124,16 +127,12 @@ function deep_check_array(key, arr) {
    typeof(arr[i]) === 'object' && 
    Array.isArray(arr[i]) === true
   ) {
-   components.push(key);
-   components.push(typeof(arr[i]));
-   components.push(`${arr[i]}`);
+   components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(arr[i])}", value: "${arr[i]}" }`);
    deep_check_array(key, arr[i]);
   }
 
   else { 
-   components.push(key);
-   components.push(typeof(arr[i]));
-   components.push(typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : `${arr[i]}`);
+   components.push(`{ key_set: "[${key_set}]", key: "${key}", type: "${typeof(arr[i])}, value: ${typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : `${arr[i]}`}" }`);
   }
 
  }
