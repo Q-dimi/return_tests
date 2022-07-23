@@ -1,5 +1,5 @@
 /*
- turning deep objects into an array and comparing.
+ turning deep objects into arrays and comparing.
  recursing on objects and arrays
 */ 
 
@@ -51,7 +51,7 @@ function compare(av, rv) {
  }
 
  for(let i = 0; i < compare_av.length; i++) { 
-  if(compare_av[i] != compare_rv[i]) {
+  if(compare_av[i] !== compare_rv[i]) {
    return false;
   }
  }
