@@ -70,6 +70,7 @@ function deep_check_object(obj, keys) {
    obj[key] !== null
   ) {
    components.push(key);
+   components.push(`${obj[key]}`);
    deep_check_object(obj[key], Object.keys(obj[key]));
   }
 
@@ -78,6 +79,7 @@ function deep_check_object(obj, keys) {
    Array.isArray(obj[key]) === true
   ) {
    components.push(key);
+   components.push(`${obj[key]}`);
    deep_array_check(key, obj[key]);
   }
 
@@ -102,6 +104,7 @@ function deep_array_check(key, arr) {
    arr[i] !== null
   ) { 
    components.push(key);
+   components.push(`${arr[i]}`);
    deep_check_object(arr[i], Object.keys(arr[i]));
   }
 
@@ -110,6 +113,7 @@ function deep_array_check(key, arr) {
    Array.isArray(arr[i]) === true
   ) {
    components.push(key);
+   components.push(`${arr[i]}`);
    deep_array_check(key, arr[i]);
   }
 
