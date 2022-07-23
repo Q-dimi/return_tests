@@ -2,9 +2,6 @@
  * deep comparing two objects. 
  * recursively going in on objects and arrays,
  * pushing values to the components array, copying from components array, iterating and comparing.
- * There are more types to check in the else statements...
- * also some other things.. (will change to a lib function if necessary)
- * if you want to change/add to this, fork this
 */
 
 var components = [];
