@@ -2,16 +2,12 @@
  turning deep objects into arrays and comparing.
  recursing on objects and arrays
  pushing key, type and value
- 'compressing functions' 
  key sets for building back up..if iterating over you should be able to build the object back up
  components are the definitions (with the key set)
  will add to it.. trying to figure out key sets
-
 */ 
 
 var components = [];
-var key_set = [];
-var k_array = [];
 
 function compare(av, rv) { 
 
@@ -61,6 +57,8 @@ function compare(av, rv) {
  const compare_av = deep_check_object(av, avkeys); components = [];
  const compare_rv = deep_check_object(rv, rvkeys); components = [];
 
+ console.log(compare_rv);
+
  if(compare_av.length !== compare_rv.length) { 
   return false; 
  }
@@ -84,7 +82,6 @@ function deep_check_object(obj, keys) {
    Array.isArray(obj[key]) === false && 
    obj[key] !== null
   ) {
-   `${obj[key]}` === "[object Object]" ? key_set.push(key) : '';
    components.push(`{ key: "${key}", type: "${typeof(obj[key])}", value: "${obj[key]}", type_of: "object" }`);
    deep_check_object(obj[key], Object.keys(obj[key]));
   }
@@ -102,11 +99,8 @@ function deep_check_object(obj, keys) {
   }
 
  });
-
-
-key_set = [];
- 
-return components;
+    
+ return components;
 
 }
 
@@ -119,7 +113,6 @@ function deep_check_array(key, arr) {
    Array.isArray(arr[i]) === false && 
    arr[i] !== null
   ) { 
-   `${arr[i]}` === "[object Object]" ?  key_set.push(key) : '';
    components.push(`{ key: "${key}", type: "${typeof(arr[i])}", value: "${arr[i]}", type_of: "object" }`);
    deep_check_object(arr[i], Object.keys(arr[i]));
   }
