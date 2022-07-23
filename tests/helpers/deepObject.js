@@ -3,9 +3,22 @@
  recursing on objects and arrays
  pushing key, type and value
  'compressing functions' 
- key sets for building back up
+ key sets for building back up..if iterating over you should be able to build the object back up
  components are the definitions (with the key set)
- will add to it
+ will add to it..
+
+ output...
+
+[
+  '{ key_set: "[]", key: "a", type: "number", value: "3" }',
+  '{ key_set: "[b]", key: "b", type: "object", value: "[object Object]" }',    
+  '{ key_set: "[b]", key: "d", type: "number", value: "4" }',
+  '{ key_set: "[b]", key: "h", type: "number", value: "55" }',
+  '{ key_set: "[b]", key: "l", type: "string", value: "string" }',
+  '{ key_set: "[b,v,c]", key: "c", type: "object", value: "[object Object]" }',
+  '{ key_set: "[b,v,c]", key: "d", type: "number", value: "5" }',
+]
+
 */ 
 
 var components = [];
@@ -58,8 +71,6 @@ function compare(av, rv) {
 
  const compare_av = deep_check_object(av, avkeys); components = [];
  const compare_rv = deep_check_object(rv, rvkeys); components = [];
-
- console.log(compare_rv);
 
  if(compare_av.length !== compare_rv.length) { 
   return false; 
