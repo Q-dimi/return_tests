@@ -2,9 +2,7 @@
  turning deep objects into arrays and comparing.
  recursing on objects and arrays
  pushing key, type and value
- key sets for building back up..if iterating over you should be able to build the object back up
- components are the definitions (with the key set)
- will add to it.. trying to figure out key sets
+ will use lib function...
 */ 
 
 var components = [];
@@ -54,14 +52,14 @@ function compare(av, rv) {
   return false;
  }
 
- const compare_av = deep_check_object(av, avkeys); components = [];
- const compare_rv = deep_check_object(rv, rvkeys); components = [];
+ const compare_av = deep_check_object(av, avkeys); components = []; key_set = [];
+ const compare_rv = deep_check_object(rv, rvkeys); components = []; key_set = [];
 
  if(compare_av.length !== compare_rv.length) { 
   return false; 
  }
 
- for(let i = 0; i < compare_av.length; i++) { 
+ for(let i = 0; i < compare_av.length; i++) {  //will add ancestor set for n^2 comparison
   if(compare_av[i] !== compare_rv[i]) {
    return false;
   }
