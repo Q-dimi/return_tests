@@ -91,7 +91,7 @@ function deep_check_object(obj, keys, should_pop) {
    Array.isArray(obj[key]) === false && 
    obj[key] !== null
   ) {
-   key_set.push(key);
+   `${key}` === "[object Object]" ? key_set.push(`{ ${key}: object }`) : '';
    components.push(`{ path: "[${key_set}]", key: "${key}", type: "${typeof(obj[key])}", value: "${obj[key]}" }`);
    deep_check_object(obj[key], Object.keys(obj[key]), true);
   }
@@ -100,7 +100,7 @@ function deep_check_object(obj, keys, should_pop) {
    typeof(obj[key]) === 'object' && 
    Array.isArray(obj[key]) === true
   ) {
-   key_set.push(key);
+   key_set.push(`{ ${key}: array }`);
    components.push(`{ path: "[${key_set}]", key: "${key}", type: "array", value: "${obj[key]}" }`);
    deep_check_array(key, obj[key], true);
   }
