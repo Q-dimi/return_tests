@@ -2,18 +2,11 @@
  turning deep objects into arrays and comparing.
  recursing on objects and arrays
  pushing key, type and value
- will use lib function...
- have not checked yet but 
- for should_pop, im checking if i am either 
- in an array with an object WITHOUT  key OR 
- I am at the end of an array. In those two situations 
- POP. have not checked though for those reading which i assume is none...
- other than you david.. 
- haha
- ...doo doo doo loo loo doo doo
- ...yeah! HAHA YAH
- umm yaaah
- umm yaaah
+ will use lib function if i find an error...
+ for should_pop, im
+ making sure I am in an object AND at the end of an object OR 
+ in an object and at the end of an array 
+ and popping so the last reference matches the current value.
 */ 
 
 var components = [];
@@ -60,21 +53,26 @@ function compare(av, rv) {
  var avkeys = Object.keys(av);
  var rvkeys = Object.keys(rv);
 
-//  if(avkeys.length !== rvkeys.length) { 
-//   return false;
-//  }
+ if(avkeys.length !== rvkeys.length) { 
+  return false;
+ }
 
  const compare_av = deep_check_object(av, avkeys, true); components = []; key_set = [];
  const compare_rv = deep_check_object(rv, rvkeys, true); components = []; key_set = [];
-
- console.log(compare_rv);
 
  if(compare_av.length !== compare_rv.length) { 
   return false; 
  }
 
- for(let i = 0; i < compare_av.length; i++) {  //will add ancestor set for n^2 comparison
-  if(compare_av[i] !== compare_rv[i]) {
+ for(let i = 0; i < compare_av.length; i++) { 
+  var i_found = false;
+  for(let j = 0; j < compare_av.length; j++) { 
+   if(compare_av[i] === compare_rv[j]) { 
+    i_found = true;
+    break;
+   }
+  }
+  if(i_found === false) { 
    return false;
   }
  }
@@ -111,8 +109,6 @@ function deep_check_object(obj, keys, should_pop) {
   }
 
  });
-
- console.log(should_pop);
  
  if(should_pop === true) {
   key_set.pop();
@@ -144,7 +140,7 @@ function deep_check_array(key, arr, should_pop) {
   }
 
   else { 
-   components.push(`{ [${key_set}] key: "${key}", type: "${typeof(arr[i])}, value: "${typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : `${arr[i]}`}" }`);
+   components.push(`{ [${key_set}] key: "${key}", type: "${typeof(arr[i])}", value: "${typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : `${arr[i]}`}" }`);
   }
 
  }
