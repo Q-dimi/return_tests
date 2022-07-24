@@ -8,7 +8,6 @@
 */ 
 
 var components = [];
-var previous_key = 'xxx';
 
 function compare(av, rv) { 
 
@@ -58,8 +57,6 @@ function compare(av, rv) {
  const compare_av = deep_check_object(av, avkeys); components = [];
  const compare_rv = deep_check_object(rv, rvkeys); components = [];
 
- console.log(compare_rv);
-
  if(compare_av.length !== compare_rv.length) { 
   return false; 
  }
@@ -75,7 +72,7 @@ function compare(av, rv) {
 }
 
 function deep_check_object(obj, keys) { 
-
+ 
  keys.forEach((key, index) => {
 
   if(
@@ -91,7 +88,7 @@ function deep_check_object(obj, keys) {
    typeof(obj[key]) === 'object' && 
    Array.isArray(obj[key]) === true
   ) {
-   components.push(`{ key: "${key}", type: "array", value: ${obj[key]}" }`);
+   components.push(`{ key: "${key}", type: "array", value: "${obj[key]}" }`);
    deep_check_array(key, obj[key]);
   }
 
