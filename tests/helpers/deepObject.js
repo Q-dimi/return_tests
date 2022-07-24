@@ -6,7 +6,8 @@
  for should_pop, im
  making sure I am in an object AND at the end of an object OR 
  in an object and at the end of an array 
- and popping so the last reference matches the current value.
+ THEN popping so the last reference points to the correct value
+ so I can compare in n^2
 */ 
 
 var components = [];
@@ -91,7 +92,7 @@ function deep_check_object(obj, keys, should_pop) {
    obj[key] !== null
   ) {
    key_set.push(key);
-   components.push(`{ [${key_set}] key: "${key}", type: "${typeof(obj[key])}", value: "${obj[key]}" }`);
+   components.push(`{ path: "[${key_set}]", key: "${key}", type: "${typeof(obj[key])}", value: "${obj[key]}" }`);
    deep_check_object(obj[key], Object.keys(obj[key]), true);
   }
 
@@ -100,12 +101,12 @@ function deep_check_object(obj, keys, should_pop) {
    Array.isArray(obj[key]) === true
   ) {
    key_set.push(key);
-   components.push(`{ [${key_set}] key: "${key}", type: "array", value: "${obj[key]}" }`);
+   components.push(`{ path: "[${key_set}]", key: "${key}", type: "array", value: "${obj[key]}" }`);
    deep_check_array(key, obj[key], true);
   }
 
   else { 
-   components.push(`{ [${key_set}] key: "${key}", type: "${typeof(obj[key])}", value: "${typeof(obj[key]) === 'function' ? `${obj[key]}`.replace(/\s+/g, '').toLowerCase() : `${obj[key]}`}" }`);
+   components.push(`{ path: "[${key_set}]", key: "${key}", type: "${typeof(obj[key])}", value: "${typeof(obj[key]) === 'function' ? `${obj[key]}`.replace(/\s+/g, '').toLowerCase() : `${obj[key]}`}" }`);
   }
 
  });
@@ -127,7 +128,7 @@ function deep_check_array(key, arr, should_pop) {
    Array.isArray(arr[i]) === false && 
    arr[i] !== null
   ) { 
-   components.push(`{ [${key_set}] key: "${key}", type: "${typeof(arr[i])}", value: "${arr[i]}" }`);
+   components.push(`{ path: "[${key_set}]", key: "${key}", type: "${typeof(arr[i])}", value: "${arr[i]}" }`);
    deep_check_object(arr[i], Object.keys(arr[i]), false);
   }
 
@@ -135,12 +136,12 @@ function deep_check_array(key, arr, should_pop) {
    typeof(arr[i]) === 'object' && 
    Array.isArray(arr[i]) === true
   ) {
-   components.push(`{ [${key_set}] key: "${key}", type: "array", value: "${arr[i]}" }`);
+   components.push(`{ path: "[${key_set}]", key: "${key}", type: "array", value: "${arr[i]}" }`);
    deep_check_array(key, arr[i], false);
   }
 
   else { 
-   components.push(`{ [${key_set}] key: "${key}", type: "${typeof(arr[i])}", value: "${typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : `${arr[i]}`}" }`);
+   components.push(`{ path: "[${key_set}]", key: "${key}", type: "${typeof(arr[i])}", value: "${typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : `${arr[i]}`}" }`);
   }
 
  }
