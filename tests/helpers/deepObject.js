@@ -3,6 +3,17 @@
  recursing on objects and arrays
  pushing key, type and value
  will use lib function...
+ have not checked yet but 
+ for should_pop, im checking if i am either 
+ in an array with an object WITHOUT  key OR 
+ I am at the end of an array. In those two situations 
+ POP. have not checked though for those reading which i assume is none...
+ other than you david.. 
+ haha
+ ...doo doo doo loo loo doo doo
+ ...yeah! HAHA YAH
+ umm yaaah
+ umm yaaah
 */ 
 
 var components = [];
@@ -49,12 +60,12 @@ function compare(av, rv) {
  var avkeys = Object.keys(av);
  var rvkeys = Object.keys(rv);
 
- if(avkeys.length !== rvkeys.length) { 
-  return false;
- }
+//  if(avkeys.length !== rvkeys.length) { 
+//   return false;
+//  }
 
- const compare_av = deep_check_object(av, avkeys); components = []; key_set = [];
- const compare_rv = deep_check_object(rv, rvkeys); components = []; key_set = [];
+ const compare_av = deep_check_object(av, avkeys, true); components = []; key_set = [];
+ const compare_rv = deep_check_object(rv, rvkeys, true); components = []; key_set = [];
 
  console.log(compare_rv);
 
@@ -72,7 +83,7 @@ function compare(av, rv) {
 
 }
 
-function deep_check_object(obj, keys) { 
+function deep_check_object(obj, keys, should_pop) { 
  
  keys.forEach((key, index) => {
 
@@ -83,7 +94,7 @@ function deep_check_object(obj, keys) {
   ) {
    key_set.push(key);
    components.push(`{ [${key_set}] key: "${key}", type: "${typeof(obj[key])}", value: "${obj[key]}" }`);
-   deep_check_object(obj[key], Object.keys(obj[key]));
+   deep_check_object(obj[key], Object.keys(obj[key]), true);
   }
 
   else if(
@@ -92,7 +103,7 @@ function deep_check_object(obj, keys) {
   ) {
    key_set.push(key);
    components.push(`{ [${key_set}] key: "${key}", type: "array", value: "${obj[key]}" }`);
-   deep_check_array(key, obj[key]);
+   deep_check_array(key, obj[key], true);
   }
 
   else { 
@@ -101,14 +112,18 @@ function deep_check_object(obj, keys) {
 
  });
 
- key_set.pop();
-    
+ console.log(should_pop);
+ 
+ if(should_pop === true) {
+  key_set.pop();
+ }
+ 
  return components;
 
 }
 
-function deep_check_array(key, arr) { 
-
+function deep_check_array(key, arr, should_pop) { 
+ 
  for(let i = 0; i < arr.length; i++) { 
 
   if(
@@ -117,7 +132,7 @@ function deep_check_array(key, arr) {
    arr[i] !== null
   ) { 
    components.push(`{ [${key_set}] key: "${key}", type: "${typeof(arr[i])}", value: "${arr[i]}" }`);
-   deep_check_object(arr[i], Object.keys(arr[i]));
+   deep_check_object(arr[i], Object.keys(arr[i]), false);
   }
 
   else if(
@@ -125,13 +140,17 @@ function deep_check_array(key, arr) {
    Array.isArray(arr[i]) === true
   ) {
    components.push(`{ [${key_set}] key: "${key}", type: "array", value: "${arr[i]}" }`);
-   deep_check_array(key, arr[i]);
+   deep_check_array(key, arr[i], false);
   }
 
   else { 
    components.push(`{ [${key_set}] key: "${key}", type: "${typeof(arr[i])}, value: "${typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : `${arr[i]}`}" }`);
   }
 
+ }
+
+ if(should_pop === true) { 
+  key_set.pop();
  }
 
 } 
