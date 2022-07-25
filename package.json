@@ -1,6 +1,6 @@
 {
   "name": "return-tests",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "package that tests the return values of functions",
   "main": "index.js",
   "scripts": {

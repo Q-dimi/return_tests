@@ -1,6 +1,5 @@
 var type_test = require('./helpers/typeTest');
 var format = require('./helpers/stringFormatters');
-// var compare = require('./helpers/deepObject');
 var compare = require('compare-an-object');
 
 /**
