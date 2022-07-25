@@ -1,7 +1,8 @@
 # return-tests
 
 return-tests loops through functions and runs as many parameterized tests per function that you add ([[4, 8], [10, 2]]). After a function executes a test case, its return value is compared against any of the chosen
-unit tests you have added. The tests are listed below in the unit object with more to come.
+unit tests you have added. The tests are listed below in the unit object with more to come. When testing deep objects and inputing a
+map or set, make sure the syntax of the map or set is set correctly ( new Map([['a', 'b']]) new Set([['a'], ['b']]) ) or else an error will be thrown.
 
 ```sh
 npm i return-tests
