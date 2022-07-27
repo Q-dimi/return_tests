@@ -1,6 +1,6 @@
 {
   "name": "return-tests",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "package that tests the return values of functions",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "Alexander Eatman",
   "license": "ISC",
   "dependencies": {
-    "compare-an-object": "^1.1.2",
+    "compare-an-object": "^1.1.4",
     "file-system": "^2.2.2"
   },
   "repository": {

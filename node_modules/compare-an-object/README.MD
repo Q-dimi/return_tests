@@ -126,4 +126,4 @@ var result = compare(a, b); //make sure all values are formatted correctly
 console.log(result); //returns true
 ```
 
-(Does not support WeakSet and WeakMap)
+(Does not support WeakSet and WeakMap) Sets are converted to arrays. Maps converted to objects.
