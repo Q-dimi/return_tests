@@ -40,17 +40,13 @@ function compare(av, rv) {
 
  if(`${av}` === "[object Map]") { 
   av = Object.fromEntries(av);
- }
-
- if(`${av}` === "[object Set]") { 
+ } else if(`${av}` === "[object Set]") { 
   av = Array.from(av);
  }
 
  if(`${rv}` === "[object Map]") { 
   rv = Object.fromEntries(rv);
- }
-
- if(`${rv}` === "[object Set]") { 
+ } else if(`${rv}` === "[object Set]") { 
   rv = Array.from(rv);
  }
 
@@ -65,15 +61,12 @@ function compare(av, rv) {
   Array.isArray(av) === true &&
   Array.isArray(rv) === true
  ) { 
-
   av = { 
    array: av
   }
-
   rv = { 
    array: rv
   }
-
  }
 
  var avkeys = Object.keys(av);
@@ -129,7 +122,9 @@ function deep_check_object(obj, keys, should_pop) {
     obj[key] = Object.fromEntries(obj[key]);
    }
 
-   `${obj[key]}` === "[object Object]" ? key_set.push(`(${key},object)`) : '';
+   if(`${obj[key]}` === "[object Object]"){
+    key_set.push(`(${key},object)`);
+   }
 
    components.push(format_string(
     key_set, 
@@ -209,7 +204,8 @@ function deep_check_array(key, arr, should_pop) {
     key_set, 
     key, 
     typeof(arr[i]), 
-    arr[i]
+    arr[i],
+    i
    ));
 
    deep_check_object(
@@ -232,7 +228,8 @@ function deep_check_array(key, arr, should_pop) {
    key_set, 
    key, 
    'array', 
-   arr[i]
+   arr[i],
+   i
   ));
 
   deep_check_array(
@@ -247,7 +244,8 @@ function deep_check_array(key, arr, should_pop) {
     key_set, 
     key, 
     typeof(arr[i]), 
-    typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : arr[i]
+    typeof(arr[i]) === 'function' ? `${arr[i]}`.replace(/\s+/g, '').toLowerCase() : arr[i],
+    i
    ));
 
   }
@@ -260,8 +258,8 @@ function deep_check_array(key, arr, should_pop) {
 
 } 
 
-function format_string(key_set, key, type, value) { 
- return `{ path: "[${key_set}]", key: "${key}", type: "${type}", value: "${value}" }`;
+function format_string(key_set, key, type, value, index) { 
+ return `{ path: "[${key_set}]", key: "${key}", type: "${type}", value: "${value}", index: "${typeof(index) !== 'undefined' ? index : -1}" }`;
 }
 
 module.exports = compare;

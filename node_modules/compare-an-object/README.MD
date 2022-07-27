@@ -12,13 +12,13 @@ const compare = require("./index");
 var a = {
   cmn: new Date("10-12-23"),
   ll: new Map([
-    ["dsdsd", "awesome"],
-    ["ssd", "sweer"],
+    ["dsdsd", "awesomep"],
+    ["ssd", { a: [123] }],
   ]),
   a: 3,
   b: {
     c: 4,
-    we: new Set([["cool"], ["awesome"]]),
+    we: new Set(["cool", "awesome", "sd"]),
     d: 55,
     e: "cool",
     f: {
@@ -65,10 +65,11 @@ var a = {
   },
   zzz: 4,
 };
+
 var b = {
   ll: new Map([
-    ["dsdsd", "awesome"],
-    ["ssd", "sweer"],
+    ["dsdsd", "awesomep"],
+    ["ssd", { a: [123] }],
   ]),
   zzz: 4,
   cmn: new Date("10-12-23"),
@@ -77,7 +78,7 @@ var b = {
     c: 4,
     d: 55,
     e: "cool",
-    we: new Set([["cool"], ["awesome"]]),
+    we: new Set(["cool", "awesome", "sd"]),
     f: {
       g: 5,
       h: [
@@ -100,7 +101,7 @@ var b = {
               2,
               3,
               4,
-              { s: 4, f: { g: [123, { d: 78, k: 90, h: new Boolean(true) }] } },
+              { s: 4, f: { g: [123, { k: 90, d: 78, h: new Boolean(true) }] } },
               { ss: 00 },
               { m: 4 },
             ],
