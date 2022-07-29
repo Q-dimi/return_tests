@@ -1,0 +1,1 @@
+If compare-an-object works for you, great! If it doens't, please submit your feedback to johneatman446@gmail.com. If you find a bug or know a way to make it work better, please don't hesitste to contribute! Thanks!

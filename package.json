@@ -9,7 +9,7 @@
   "author": "Alexander Eatman",
   "license": "ISC",
   "dependencies": {
-    "compare-an-object": "^1.1.5",
+    "compare-an-object": "^1.2.7",
     "file-system": "^2.2.2"
   },
   "repository": {
