@@ -108,7 +108,7 @@ module.exports = [
       must_be_value: {
         on: true,
         index_exact: false,
-        values: [12, 12], //objects use the library compare-an-object for a deep comparison only returning true or false. If you need to track changes, type npm i compare-an-object and use the other features they offer.
+        values: [12, 12], //objects use the library compare-an-object for a deep comparison only returning true or false. If you need to track changes, type npm i compare-an-object and use the other features offered like added, deleted and changed properties.
       },
       must_pass_regex: {
         on: false,
@@ -148,6 +148,11 @@ module.exports = [
         on: true,
         index_exact: false,
         values: ["prime", "not prime", "prime", "not prime"],
+      },
+      must_be_log_of: {
+        on: true,
+        index_exact: true,
+        values: [[4, 16]], //base^return_value=right hand value (return value is exponent)
       },
     },
   },

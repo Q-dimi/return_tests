@@ -94,7 +94,7 @@ function run_tests(tests) {
    ) { 
     throw new Error(`
      function index: ${i} \n 
-     parameter index: ${i} \n 
+     parameter index: ${j} \n 
      error: the parameters passed must be an array
     `);
    }
@@ -190,6 +190,11 @@ function run_tests(tests) {
 
    if(test_suite.primeOrNot !== 'PASSED') { 
     error_string += test_suite.primeOrNot;
+    error_count++;
+   }
+
+   if(test_suite.logOf !== 'PASSED') { 
+    error_string += test_suite.logOf;
     error_count++;
    }
 
