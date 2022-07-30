@@ -66,8 +66,7 @@ function test(test, return_value, i, j) {
     var found = false;
     for(let k = 0; k < test.unit.must_be_value.values.length; k++) { 
      if(typeof(test.unit.must_be_value.values[k]) === 'object') { 
-      var check = c(test.unit.must_be_value.values[k], return_value);
-      if(check.same === true) {
+      if(c(test.unit.must_be_value.values[k], return_value).same === true) {
        found = true;
        break;
       }
@@ -78,21 +77,18 @@ function test(test, return_value, i, j) {
       id: 'valueErrorAllObject', 
       return_value: JSON.stringify(return_value), 
       compared_to: JSON.stringify(test.unit.must_be_value.values),
-      changes: check
      });
     }
    }
 
    if(test.unit.must_be_value.index_exact === true) { 
-    var check = c(test.unit.must_be_value.values[j], return_value);
-    if(check.same === false) {
+    if(c(test.unit.must_be_value.values[j], return_value).same === false) {
      return format({
       id: 'valueErrorOneObject', 
       return_value: JSON.stringify(return_value), 
       compared_to: typeof(test.unit.must_be_value.values[j]) === 'object' ? 
       JSON.stringify(test.unit.must_be_value.values[j]) : 
       test.unit.must_be_value.values[j], 
-      changes: check
      });
     }
    }

@@ -108,7 +108,7 @@ module.exports = [
       must_be_value: {
         on: true,
         index_exact: false,
-        values: [12, 12],
+        values: [12, 12], //objects use the library compare-an-object for a deep comparison only returning true or false. If you need to track changes, type npm i compare-an-object and use the other features they offer.
       },
       must_pass_regex: {
         on: false,

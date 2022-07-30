@@ -48,4 +48,5 @@ function format(string_object) {
     return `prime error: '${string_object.return_value}', a ${string_object.isPrime}, was compared to a '${string_object.compared_to}' string\n`;
   }
 }
+
 module.exports = format;
