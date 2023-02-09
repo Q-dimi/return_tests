@@ -1,6 +1,23 @@
 var suite = require('./suite');
 var format = require('./tests/helpers/stringFormatters');
 
+// var return_value;
+// var error_count = 0;
+
+// var value = test_suite.value;
+// var type = test_suite.type;
+// var regex = test_suite.regex;
+// var greaterThan = test_suite.greaterThan;
+// var lessThan = test_suite.lessThan;
+// var inRange = test_suite.inRange;
+// var isEvenOrOdd = test_suite.isEvenOrOdd;
+// var isDivisibleBy = test_suite.isDivisibleBy;
+// var isOfLength = test_suite.isOfLength;
+// var lengthGreaterThan = test_suite.lengthGreaterThan;
+// var lengthLessThan = test_suite.lengthLessThan;
+// var primeOrNot = test_suite.primeOrNot;
+// var logOf = test_suite = test_suite.logOf;
+
 /**
  * runs tests
  *
@@ -133,19 +150,19 @@ function run_tests(tests) {
     description: tests[i].function_called.description
    });
 
-   const value = test_suite.value;
-   const type = test_suite.type;
-   const regex = test_suite.regex;
-   const greaterThan = test_suite.greaterThan;
-   const lessThan = test_suite.lessThan;
-   const inRange = test_suite.inRange;
-   const isEvenOrOdd = test_suite.isEvenOrOdd;
-   const isDivisibleBy = test_suite.isDivisibleBy;
-   const isOfLength = test_suite.isOfLength;
-   const lengthGreaterThan = test_suite.lengthGreaterThan;
-   const lengthLessThan = test_suite.lengthLessThan;
-   const primeOrNot = test_suite.primeOrNot;
-   const logOf = test_suite = test_suite.logOf;
+   var value = test_suite.value;
+   var type = test_suite.type;
+   var regex = test_suite.regex;
+   var greaterThan = test_suite.greaterThan;
+   var lessThan = test_suite.lessThan;
+   var inRange = test_suite.inRange;
+   var isEvenOrOdd = test_suite.isEvenOrOdd;
+   var isDivisibleBy = test_suite.isDivisibleBy;
+   var isOfLength = test_suite.isOfLength;
+   var lengthGreaterThan = test_suite.lengthGreaterThan;
+   var lengthLessThan = test_suite.lengthLessThan;
+   var primeOrNot = test_suite.primeOrNot;
+   var logOf = test_suite.logOf;
 
    if(value !== 'PASSED') { 
     error_string += value;
