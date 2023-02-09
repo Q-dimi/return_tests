@@ -1,23 +1,6 @@
 var suite = require('./suite');
 var format = require('./tests/helpers/stringFormatters');
 
-// var return_value;
-// var error_count = 0;
-
-// var value = test_suite.value;
-// var type = test_suite.type;
-// var regex = test_suite.regex;
-// var greaterThan = test_suite.greaterThan;
-// var lessThan = test_suite.lessThan;
-// var inRange = test_suite.inRange;
-// var isEvenOrOdd = test_suite.isEvenOrOdd;
-// var isDivisibleBy = test_suite.isDivisibleBy;
-// var isOfLength = test_suite.isOfLength;
-// var lengthGreaterThan = test_suite.lengthGreaterThan;
-// var lengthLessThan = test_suite.lengthLessThan;
-// var primeOrNot = test_suite.primeOrNot;
-// var logOf = test_suite = test_suite.logOf;
-
 /**
  * runs tests
  *
