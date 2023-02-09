@@ -133,68 +133,82 @@ function run_tests(tests) {
     description: tests[i].function_called.description
    });
 
-   if(test_suite.value !== 'PASSED') { 
-    error_string += test_suite.value;
+   const value = test_suite.value;
+   const type = test_suite.type;
+   const regex = test_suite.regex;
+   const greaterThan = test_suite.greaterThan;
+   const lessThan = test_suite.lessThan;
+   const inRange = test_suite.inRange;
+   const isEvenOrOdd = test_suite.isEvenOrOdd;
+   const isDivisibleBy = test_suite.isDivisibleBy;
+   const isOfLength = test_suite.isOfLength;
+   const lengthGreaterThan = test_suite.lengthGreaterThan;
+   const lengthLessThan = test_suite.lengthLessThan;
+   const primeOrNot = test_suite.primeOrNot;
+   const logOf = test_suite = test_suite.logOf;
+
+   if(value !== 'PASSED') { 
+    error_string += value;
     error_count++;
    }
 
-   if(test_suite.type !== 'PASSED') { 
-    error_string += test_suite.type;
+   if(type !== 'PASSED') { 
+    error_string += type;
     error_count++;
    }
 
-   if(test_suite.regex !== 'PASSED') { 
-    error_string += test_suite.regex;
+   if(regex !== 'PASSED') { 
+    error_string += regex;
     error_count++;
    }
 
-   if(test_suite.greaterThan !== 'PASSED') { 
-    error_string += test_suite.greaterThan;
+   if(greaterThan !== 'PASSED') { 
+    error_string += greaterThan;
     error_count++;
    }
 
-   if(test_suite.lessThan !== 'PASSED') { 
-    error_string += test_suite.lessThan;
+   if(lessThan !== 'PASSED') { 
+    error_string += lessThan;
     error_count++;
    }
 
-   if(test_suite.inRange !== 'PASSED') { 
-    error_string += test_suite.inRange;
+   if(inRange !== 'PASSED') { 
+    error_string += inRange;
     error_count++;
    }
 
-   if(test_suite.isEvenOrOdd !== 'PASSED') { 
-    error_string += test_suite.isEvenOrOdd;
+   if(isEvenOrOdd !== 'PASSED') { 
+    error_string += isEvenOrOdd;
     error_count++;
    }
 
-   if(test_suite.isDivisibleBy !== 'PASSED') { 
-    error_string += test_suite.isDivisibleBy;
+   if(isDivisibleBy !== 'PASSED') { 
+    error_string += isDivisibleBy;
     error_count++;
    }
 
-   if(test_suite.isOfLength !== 'PASSED') { 
-    error_string += test_suite.isOfLength ;
+   if(isOfLength !== 'PASSED') { 
+    error_string += isOfLength ;
     error_count++;
    }
 
-   if(test_suite.lengthGreaterThan !== 'PASSED') { 
-    error_string += test_suite.lengthGreaterThan;
+   if(lengthGreaterThan !== 'PASSED') { 
+    error_string += lengthGreaterThan;
     error_count++;
    }
 
-   if(test_suite.lengthLessThan !== 'PASSED') { 
-    error_string += test_suite.lengthLessThan;
+   if(lengthLessThan !== 'PASSED') { 
+    error_string += lengthLessThan;
     error_count++;
    }
 
-   if(test_suite.primeOrNot !== 'PASSED') { 
-    error_string += test_suite.primeOrNot;
+   if(primeOrNot !== 'PASSED') { 
+    error_string += primeOrNot;
     error_count++;
    }
 
-   if(test_suite.logOf !== 'PASSED') { 
-    error_string += test_suite.logOf;
+   if(logOf !== 'PASSED') { 
+    error_string += logOf;
     error_count++;
    }
 
