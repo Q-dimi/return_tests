@@ -121,8 +121,6 @@ function run_tests(tests) {
     return_value = err.message;
    }
 
-   const test_suite = suite(tests[i], return_value, i, j);
-
    error_string += format({ 
     id: 'executionTime',
     ms: Date.now() - time_taken
@@ -133,19 +131,19 @@ function run_tests(tests) {
     description: tests[i].function_called.description
    });
 
-   var value = test_suite.value;
-   var type = test_suite.type;
-   var regex = test_suite.regex;
-   var greaterThan = test_suite.greaterThan;
-   var lessThan = test_suite.lessThan;
-   var inRange = test_suite.inRange;
-   var isEvenOrOdd = test_suite.isEvenOrOdd;
-   var isDivisibleBy = test_suite.isDivisibleBy;
-   var isOfLength = test_suite.isOfLength;
-   var lengthGreaterThan = test_suite.lengthGreaterThan;
-   var lengthLessThan = test_suite.lengthLessThan;
-   var primeOrNot = test_suite.primeOrNot;
-   var logOf = test_suite.logOf;
+   var value = suite(tests[i], return_value, i, j).value;
+   var type = suite(tests[i], return_value, i, j).type;
+   var regex = suite(tests[i], return_value, i, j).regex;
+   var greaterThan = suite(tests[i], return_value, i, j).greaterThan;
+   var lessThan = suite(tests[i], return_value, i, j).lessThan;
+   var inRange = suite(tests[i], return_value, i, j).inRange;
+   var isEvenOrOdd = suite(tests[i], return_value, i, j).isEvenOrOdd;
+   var isDivisibleBy = suite(tests[i], return_value, i, j).isDivisibleBy;
+   var isOfLength = suite(tests[i], return_value, i, j).isOfLength;
+   var lengthGreaterThan = suite(tests[i], return_value, i, j).lengthGreaterThan;
+   var lengthLessThan = suite(tests[i], return_value, i, j).lengthLessThan;
+   var primeOrNot = suite(tests[i], return_value, i, j).primeOrNot;
+   var logOf = suite(tests[i], return_value, i, j).logOf;
 
    if(value !== 'PASSED') { 
     error_string += value;
