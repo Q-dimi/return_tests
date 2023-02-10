@@ -37,11 +37,11 @@ function test(test, return_value, i, j) {
    prime = false;
   }
 
-  if(return_value === 2) { 
+  else if(return_value === 2) { 
    prime = true;
   }
 
-  if(
+  else if(
    return_value > 2 && 
    return_value % 1 === 0
   ) { 
