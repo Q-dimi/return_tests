@@ -1,12 +1,11 @@
 module.exports = [ 
-
-  { 
-    index: '1',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 61',
-    parameters: [],
-    function: function test(test, return_value, i, j) { 
+{
+index: '1',
+function_called: {
+on: true,
+description: 'filepath is tests\greaterThan.js AND line number is 12',
+parameters: [], 
+function: function test(test, return_value, i, j) { 
 
  if(!type_test(
   test.unit.must_be_greater_than, 
@@ -56,24 +55,24 @@ module.exports = [
  return 'PASSED';
 
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
-  { 
-    index: '1',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 67',
-    parameters: [],
-    function: function test(test, return_value, i, j) { 
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+{
+index: '1',
+function_called: {
+on: true,
+description: 'filepath is tests\inRange.js AND line number is 12',
+parameters: [], 
+function: function test(test, return_value, i, j) { 
 
  if(!type_test(
   test.unit.must_be_in_range, 
@@ -129,24 +128,24 @@ module.exports = [
  return 'PASSED';
 
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
-  { 
-    index: '1',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 61',
-    parameters: [],
-    function: function test(test, return_value, i, j) {
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+{
+index: '1',
+function_called: {
+on: true,
+description: 'filepath is tests\isDivisibleBy.js AND line number is 12',
+parameters: [], 
+function: function test(test, return_value, i, j) {
 
  if(!type_test(
   test.unit.must_be_divisible_by, 
@@ -196,24 +195,24 @@ module.exports = [
  return 'PASSED';
 
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
-  { 
-    index: '1',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 67',
-    parameters: [],
-    function: function test(test, return_value, i, j) {
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+{
+index: '1',
+function_called: {
+on: true,
+description: 'filepath is tests\isEvenOrOdd.js AND line number is 12',
+parameters: [], 
+function: function test(test, return_value, i, j) {
 
  if(!type_test(
   test.unit.must_be_even_or_odd, 
@@ -269,24 +268,24 @@ module.exports = [
  return 'PASSED';
 
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
-  { 
-    index: '1',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 61',
-    parameters: [],
-    function: function test(test, return_value, i, j) { 
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+{
+index: '1',
+function_called: {
+on: true,
+description: 'filepath is tests\lessThan.js AND line number is 12',
+parameters: [], 
+function: function test(test, return_value, i, j) { 
     
  if(!type_test(
   test.unit.must_be_less_than, 
@@ -336,24 +335,24 @@ module.exports = [
  return 'PASSED';
 
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
-  { 
-    index: '1',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 62',
-    parameters: [],
-    function: function test(test, return_value, i, j) { 
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+{
+index: '1',
+function_called: {
+on: true,
+description: 'filepath is tests\logOf.js AND line number is 12',
+parameters: [], 
+function: function test(test, return_value, i, j) { 
 
  if(!type_test(
   test.unit.must_be_log_of, 
@@ -404,24 +403,24 @@ module.exports = [
  return 'PASSED';
 
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
-  { 
-    index: '1',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 100',
-    parameters: [],
-    function: function test(test, return_value, i, j) {
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+{
+index: '1',
+function_called: {
+on: true,
+description: 'filepath is tests\primeOrNot.js AND line number is 12',
+parameters: [], 
+function: function test(test, return_value, i, j) {
 
  if(!type_test(
   test.unit.must_be_prime_or_not_prime, 
@@ -510,24 +509,24 @@ module.exports = [
  return 'PASSED';
 
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
-  { 
-    index: '1',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 61',
-    parameters: [],
-    function: function test(test, return_value, i, j) { 
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+{
+index: '1',
+function_called: {
+on: true,
+description: 'filepath is tests\regex.js AND line number is 12',
+parameters: [], 
+function: function test(test, return_value, i, j) { 
 
  if(!type_test(
   test.unit.must_pass_regex, 
@@ -577,48 +576,48 @@ module.exports = [
  return 'PASSED';
 
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
-  { 
-    index: '2',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 69',
-    parameters: [],
-    function: function testrg(regular_expression, return_value) { 
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+{
+index: '2',
+function_called: {
+on: true,
+description: 'filepath is tests\regex.js AND line number is 63',
+parameters: [], 
+function: function testrg(regular_expression, return_value) { 
  try {
   return regular_expression.test(return_value);
  } catch(err) { 
   return false;
  } 
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
-  { 
-    index: '1',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 56',
-    parameters: [],
-    function: function test(test, return_value, i, j) { 
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+{
+index: '1',
+function_called: {
+on: true,
+description: 'filepath is tests\type.js AND line number is 12',
+parameters: [], 
+function: function test(test, return_value, i, j) { 
 
  if(!type_test(
   test.unit.must_be_type, 
@@ -663,24 +662,24 @@ module.exports = [
  return 'PASSED';
 
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
-  { 
-    index: '1',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 101',
-    parameters: [],
-    function: function test(test, return_value, i, j) { 
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+{
+index: '1',
+function_called: {
+on: true,
+description: 'filepath is tests\value.js AND line number is 13',
+parameters: [], 
+function: function test(test, return_value, i, j) { 
 
  if(!type_test(
   test.unit.must_be_value, 
@@ -769,24 +768,24 @@ module.exports = [
  return 'PASSED';
 
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
-  { 
-    index: '2',
-    function_called: {
-    on: true,
-    description: 'filepath is  AND line number is 111',
-    parameters: [],
-    function: function c(av, rv) { 
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+{
+index: '2',
+function_called: {
+on: true,
+description: 'filepath is tests\value.js AND line number is 103',
+parameters: [], 
+function: function c(av, rv) { 
  var o = {};
  try { 
   o = compare(av, rv);
@@ -795,15 +794,16 @@ module.exports = [
  }
  return o;
 }
-   }, 
-    unit: { 
-     
-     must_be_value: {
-     on: true,
-     index_exact: true,
-     values: []
-    },
-    }, 
-   },
- 
+},
+unit: {
+must_be_value:{
+ on: true,
+ index_exact: true,
+ values: []
+},
+},
+},
+
+
+
  ];
