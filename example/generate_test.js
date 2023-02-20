@@ -1,7 +1,7 @@
-const generate = require("generate");
+const generate = require("../lib/generate");
 
 const folders = [
-  { folder: "./tests", files: "all" },
+  { folder: "./tests", files: ['inRange.js'] }, // "all" for all
 ];
 
 const file_to_generate = './example/generated/generated_functions.js';
