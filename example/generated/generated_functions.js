@@ -6,7 +6,7 @@ module.exports = [
     on: true,
     description: 'filepath is  AND line number is 67',
     parameters: [],
-    function: functionfunction test(test, return_value, i, j) { 
+    function: function test(test, return_value, i, j) { 
 
  if(!type_test(
   test.unit.must_be_in_range, 
