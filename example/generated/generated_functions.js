@@ -3,7 +3,7 @@ module.exports = [
 index: '1',
 function_called: {
 on: true,
-description: 'filepath is tests\greaterThan.js AND line number is 12',
+description: 'filepath is tests\greaterThan.js AND line number is 13',
 parameters: [], 
 function: function test(test, return_value, i, j) { 
 
@@ -67,10 +67,10 @@ must_be_value:{
 
 
 {
-index: '1',
+index: '2',
 function_called: {
 on: true,
-description: 'filepath is tests\inRange.js AND line number is 12',
+description: 'filepath is tests\inRange.js AND line number is 13',
 parameters: [], 
 function: function test(test, return_value, i, j) { 
 
@@ -140,10 +140,10 @@ must_be_value:{
 
 
 {
-index: '1',
+index: '3',
 function_called: {
 on: true,
-description: 'filepath is tests\isDivisibleBy.js AND line number is 12',
+description: 'filepath is tests\isDivisibleBy.js AND line number is 13',
 parameters: [], 
 function: function test(test, return_value, i, j) {
 
@@ -207,10 +207,10 @@ must_be_value:{
 
 
 {
-index: '1',
+index: '4',
 function_called: {
 on: true,
-description: 'filepath is tests\isEvenOrOdd.js AND line number is 12',
+description: 'filepath is tests\isEvenOrOdd.js AND line number is 13',
 parameters: [], 
 function: function test(test, return_value, i, j) {
 
@@ -280,10 +280,10 @@ must_be_value:{
 
 
 {
-index: '1',
+index: '5',
 function_called: {
 on: true,
-description: 'filepath is tests\lessThan.js AND line number is 12',
+description: 'filepath is tests\lessThan.js AND line number is 13',
 parameters: [], 
 function: function test(test, return_value, i, j) { 
     
@@ -347,10 +347,10 @@ must_be_value:{
 
 
 {
-index: '1',
+index: '6',
 function_called: {
 on: true,
-description: 'filepath is tests\logOf.js AND line number is 12',
+description: 'filepath is tests\logOf.js AND line number is 13',
 parameters: [], 
 function: function test(test, return_value, i, j) { 
 
@@ -415,10 +415,10 @@ must_be_value:{
 
 
 {
-index: '1',
+index: '7',
 function_called: {
 on: true,
-description: 'filepath is tests\primeOrNot.js AND line number is 12',
+description: 'filepath is tests\primeOrNot.js AND line number is 13',
 parameters: [], 
 function: function test(test, return_value, i, j) {
 
@@ -521,10 +521,10 @@ must_be_value:{
 
 
 {
-index: '1',
+index: '8',
 function_called: {
 on: true,
-description: 'filepath is tests\regex.js AND line number is 12',
+description: 'filepath is tests\regex.js AND line number is 13',
 parameters: [], 
 function: function test(test, return_value, i, j) { 
 
@@ -588,10 +588,10 @@ must_be_value:{
 
 
 {
-index: '2',
+index: '9',
 function_called: {
 on: true,
-description: 'filepath is tests\regex.js AND line number is 63',
+description: 'filepath is tests\regex.js AND line number is 64',
 parameters: [], 
 function: function testrg(regular_expression, return_value) { 
  try {
@@ -612,10 +612,10 @@ must_be_value:{
 
 
 {
-index: '1',
+index: '10',
 function_called: {
 on: true,
-description: 'filepath is tests\type.js AND line number is 12',
+description: 'filepath is tests\type.js AND line number is 13',
 parameters: [], 
 function: function test(test, return_value, i, j) { 
 
@@ -674,10 +674,10 @@ must_be_value:{
 
 
 {
-index: '1',
+index: '11',
 function_called: {
 on: true,
-description: 'filepath is tests\value.js AND line number is 13',
+description: 'filepath is tests\value.js AND line number is 14',
 parameters: [], 
 function: function test(test, return_value, i, j) { 
 
@@ -780,10 +780,10 @@ must_be_value:{
 
 
 {
-index: '2',
+index: '12',
 function_called: {
 on: true,
-description: 'filepath is tests\value.js AND line number is 103',
+description: 'filepath is tests\value.js AND line number is 104',
 parameters: [], 
 function: function c(av, rv) { 
  var o = {};
