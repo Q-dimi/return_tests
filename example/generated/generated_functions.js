@@ -285,7 +285,7 @@ function_called: {
 on: true,
 description: 'filepath is tests\lessThan.js AND line number is 13',
 parameters: [], 
-function: function test(test, return_value, i, j) { 
+function: a = function(test, return_value, i, j) { 
     
  if(!type_test(
   test.unit.must_be_less_than, 
